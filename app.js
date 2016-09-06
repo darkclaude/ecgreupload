@@ -28,7 +28,8 @@ var configDB = require('./config/database.js');
 var Data = require('./config/models/data').Data;
 var Reach = require('./config/models/recharge');
 var mongoose = require('mongoose');
-var port = 2000;
+//var port = 2000;
+var port  = process.env.OPENSHIFT_NODEJS_PORT;
 mongoose.connect(configDB.url);
 reachdb = mongoose.createConnection("mongodb://127.0.0.1:27017/recharges");
 var client = express.Router();
@@ -54,6 +55,7 @@ app.get('/*',function(req, res){
         
  
 
-app.listen(port);
+//app.listen(port);
+app.listen(port, process.env.OPENSHIFT_NODEJS_IP);
 console.log("Server Started!");
 };
