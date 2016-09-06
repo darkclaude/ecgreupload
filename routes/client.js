@@ -211,19 +211,16 @@ var x = randomString({
             
         if(card){
             
-            if(card.used){
+            if(card.used==true){
                 if(card.usedby!=user && card.usedby!="nobody"){
                res.send('Card Already Used By Someone!');
                     
                 }
-                        else if(card.usedby==user){
+                         if(card.usedby==user){
                             
                             res.send('Card Already Used By You!');
                         }
-                        else{
-                            //DO NOTHING......
-                        }
-                
+                                  
             }
             
             
@@ -237,6 +234,7 @@ var x = randomString({
                  account.tempc = parseInt(account.tempc)+parseInt(card.value);
                   account.save(function(err){});
                   card.used = true;
+                  card.usedby = user;
                   card.save(function(err){});
                   res.send('Account Successfully Credited With '+card.value);
                   
