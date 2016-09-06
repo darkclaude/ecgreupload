@@ -22,7 +22,7 @@ reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges")
 var client = express.Router();
 var device = express.Router();
 var stat = express.Router();
-
+app.use(favicon(__dirname + '/views/favicon.ico'));
 app.use('/stat',stat);
 app.use('/device',device);
 app.use('/clientapp',client);
