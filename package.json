@@ -1,0 +1,18 @@
+{
+  "name": "ecg",
+  "version": "1.0.0",
+  "description": "Halik and Hamid Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hamid Ladan & Halik Alabi",
+  "license": "ISC",
+  "dependencies": {
+    "cluster": "^0.7.7",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.0",
+    "mongoose-delete": "^0.3.4",
+    "random-string": "^0.1.2"
+  }
+}
