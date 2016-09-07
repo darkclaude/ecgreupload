@@ -9,11 +9,12 @@ var user = req.params.user;
 var id = req.params.id;
 Data.findOne({ 'username' :  user}, function(err, account) {
     if(err){
+        res.send("Database Error!");
       throw err;  
     }
  else if(account){
         
-        res.send('3');
+        res.send('Account Already Exists!');
     }
     else{
         var newuser = new Data();
@@ -23,11 +24,11 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     newuser.tempc="0";
     newuser.save(function(err){
         if(err){
-            res.send('0');
+            res.send('Databsae Error!');
             throw err;
         }
         else{
-     res.send('1');
+     res.send('Account Created Succesfully!');
         }
         });
         
@@ -43,17 +44,17 @@ client.get('/getinfo/:user',function(req, res){  // Route for Getting User info
 
   Data.findOne({'username' : user}, function(err,account){
       if(err){
-          
+          res.send("Database Error");
           throw err;
       }
 else if(account){
         
-     res.send(account.username+','+account.balance+','+account.power);
+     res.send(account.username+","+account.balance+","+account.power);
         
     }
       else{
           
-          res.send('4');
+          res.send("Account Not Found!");
       }
       
       
@@ -69,6 +70,7 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
    
     Data.findOne({'username': user}, function(err,account){
         if(err){
+        res.send("Database Error!");
          throw err;   
             
         }
@@ -80,17 +82,17 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
             account.save(function(err){
                 
              if(err){
-                 res.send('0');
+                 res.send('Database Error');
                  throw err;
                  
              }
-                res.send('1');
+                res.send('Account Credited Succesfully!');
                 
             });
                         }
                 else{
                    
-                    res.send('3');
+                    res.send('Account Not Found!');
                     
                 }
                 
@@ -152,7 +154,7 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
                     else{
                         
                         
-                     res.send('Oftadne');
+                     res.send('One or Both Accounts Doesnt Exist!');
                         
                         
                     }
@@ -164,7 +166,7 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
             }
             else{
 
-            res.send('Oftadne');
+            res.send('One or Both Accounts Doesnt Exist!');
                 
             }
           
