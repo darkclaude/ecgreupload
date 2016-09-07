@@ -7,6 +7,7 @@ client.get('/createaccount/:user/:id', function(req, res){   // For Creating Use
 
 var user = req.params.user;
 var id = req.params.id;
+if(isNaN(id)==false){
 Data.findOne({ 'username' :  user}, function(err, account) {
     if(err){
         res.send("Database Error!");
@@ -35,6 +36,10 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     }
    
 });
+}
+else{
+  res.send("Invalid Amount!");
+}
 });
     
     
