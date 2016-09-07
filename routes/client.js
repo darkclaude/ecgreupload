@@ -71,8 +71,10 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
     
    var user = req.params.user;
    var amount = 0;
-   amount = parseInt(req.params.amount);
-   
+  
+   if(isNaN(req.params.amount)==false){
+     amount = parseInt(req.params.amount);
+  
     Data.findOne({'username': user}, function(err,account){
         if(err){
         res.send("Database Error!");
@@ -104,6 +106,11 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
             
        
                 });
+  }
+  else{
+
+    res.send("Invalid Amount!");
+  }
         
         
     });
@@ -121,11 +128,12 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
     
     
     client.get('/transfer/:user1/:user2/:amount',function(req,res){
-        var amount = parseInt(req.params.amount);
+       
         var user1 = req.params.user1;
         var user2 = req.params.user2;
         var checkpass = false;
-        
+        if(isNaN(req.params.amount)==false){
+           var amount = parseInt(req.params.amount);
         Data.findOne({'username':user1}, function(err,account1){
             
             if(err) throw err;
@@ -177,14 +185,19 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
           
         });
         
-        
+        }
+        else{
+
+          res.send("Invalid Amount!");
+        }
     });
     
     
     
     
-    client.get('/generatekey/:value', function(req, res){
-        
+ client.get('/generatekey/:value', function(req, res){
+  
+  if(isNaN(req.params.value)==false){     
         
 var x = randomString({
   length: 10,
@@ -201,7 +214,11 @@ var x = randomString({
         newcard.save(function(err){});
         res.send(x);
         
-        
+        }
+        else{
+
+          res.send("Invalid Amount!");
+        }
         
     });
     
