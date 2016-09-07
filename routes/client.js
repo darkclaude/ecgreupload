@@ -119,7 +119,14 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
         
         var user = req.params.user;
         
-       Data.findOne({ 'username':user }).remove().exec();
+       Data.findOne({ 'username':user }, function(err,r){
+                          
+                   if(err){
+                       res.send("Database Error!");
+                       throw err;
+                       
+                   }
+                }).remove().exec();
             
         res.send('6');
         
