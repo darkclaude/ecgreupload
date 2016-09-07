@@ -126,11 +126,14 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
                        throw err;
                        
                    }
-                   else{
-               res.send('Account Deleted Succesfully!);
-        
+              else  if(r){
+                  res.send("Account Deleted Succesfully!");
 
-                   }
+                }
+                else{
+
+                  res.send("Account Not Found!");
+                }
                 }).remove().exec();
             
        
