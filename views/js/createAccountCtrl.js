@@ -12,6 +12,8 @@ $http.get('ecg-ninjax.rhcloud.com/createaccount/'+user+'/'+amount).success(funct
 	
 	});
 
+}
+
 };
 
 
