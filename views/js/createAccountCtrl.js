@@ -1,14 +1,7 @@
-//accountCtrl
-
-var app = angular.module('ecgApp', ['ngRoute']);
-var accounts=[];
-app.controller('createAccountCtrl', ['$scope','$http', function($scope, $http){
-	
+﻿function AppCtrl($scope, $http, $interval,$timeout, $window) {
 
 
-	
-
-$scope.create = function(){
+scope.create = function(){
 var user = $scope.username;
 var amount = $scope.amount;
 $http.get('ecg-ninjax.rhcloud.com/createaccount/'+user+'/'+amount).success(function(data){
@@ -19,7 +12,7 @@ $http.get('ecg-ninjax.rhcloud.com/createaccount/'+user+'/'+amount).success(funct
 	
 	});
 
+};
 
-});
-	
-	
+
+
