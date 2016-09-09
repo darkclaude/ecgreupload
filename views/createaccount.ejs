@@ -11,28 +11,28 @@
 	
 		</head>
 		
-		<body data-ng-app="ecgApp">
+		<body ng-app="ecgApp">
 		
 		
 		
-		<form class="" data-ng-controller="createAccountCtrl">
+		<form class="" ng-controller="createAccountCtrl">
 		<legend class="btn btn-success">Create Account</legend>
 		
 		<div class="form-group">
 		<label for="name">Username</label>
 		<input class="form-control" type="text" name="name" id="name"
-		placeholder="name" data-ng-model="username"><br/>
+		placeholder="name" ng-model="username"><br/>
 		</div>
 		
 		<div class="form-group">
 		<label for="amount">Amount</label>
 		<input class="form-control" type="text" name="amount" id="amount"
-		placeholder="$" data-ng-model="amount"><br/>
+		placeholder="$" ng-model="amount"><br/>
 		</div>
 				
 		<div class="form-group btn btn-success">
 	<input  type="submit" class="btn btn-default pull-left" 
-	id="submit" value="create" data-ng-click="create()">
+	id="submit" value="create" ng-click="create()">
 		</div>
 				
 						
@@ -43,10 +43,8 @@
 			</div>
 		</div>
 		</container>
-			<script src="js/jquery.js"></script>
-		
 				<script src="_libs/angular.min.js"></script>
-		<script src="_libs/angular-route.min.js"></script>
+		
 			<script src="js/createAccountCtrl.js"></script>
 		</body>
 				
