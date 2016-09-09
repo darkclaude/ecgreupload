@@ -1,4 +1,4 @@
-﻿function AppCtrl($scope, $http, $interval,$timeout, $window) {
+﻿function createAccountCtrl($scope, $http, $interval,$timeout, $window) {
 
 
 $scope.create = function(){
