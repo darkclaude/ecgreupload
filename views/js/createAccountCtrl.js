@@ -1,12 +1,12 @@
-﻿function createAccountCtrl($scope, $http, $interval,$timeout, $window) {
+﻿function createAccountCtrl($scope, $http) {
 
 
 $scope.create = function(){
 var user = $scope.username;
 var amount = $scope.amount;
-$http.get('ecg-ninjax.rhcloud.com/createaccount/'+user+'/'+amount).success(function(data){
+$http.get('/createaccount/'+user+'/'+amount).success(function(data){
      
- alert(data);
+ console.log(data);
  $scope.username= "";
  $scope.amount="";
 	
