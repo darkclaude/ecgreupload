@@ -4,9 +4,9 @@ var app = angular.module('ecgApp', ['ngRoute']);
 var accounts=[];
 app.controller('createAccountCtrl', ['$scope','$http', function($scope, $http){
 	
-	
 
-} ])
+
+	
 
 $scope.create = function(){
 var user = $scope.username;
@@ -18,6 +18,8 @@ $http.get('ecg-ninjax.rhcloud.com/createaccount/'+user+'/'+amount).success(funct
  $scope.amount="";
 	
 	});
-}
+
+
+});
 	
 	
