@@ -16,7 +16,7 @@ var connection_string = '127.0.0.1:27017/nodekeyz';
   process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
   process.env.OPENSHIFT_APP_NAME;
-
+app.use('/createpage',express.static(__dirname + '/views'));
 mongoose.connect("mongodb://"+connection_string+"/ecg");
 datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
 reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges");
@@ -24,6 +24,7 @@ var client = express.Router();
 var device = express.Router();
 var stat = express.Router();
 //pp.use(favicon(__dirname + '/views/favicon.ico'));
+app.set('view engine','ejs');
 app.use('/stat',stat);
 app.use('/device',device);
 app.use('/clientapp',client);
@@ -32,6 +33,12 @@ require('./routes/stat')(stat);
 require('./routes/client')(client);
 require('./routes/device')(device);
 
+
+app.get('/createpage', function(req, res){
+
+res.render('createaccount.ejs');
+
+});
 app.get('/*',function(req, res){
    res.send('Route Doesnt Exist!'); 
     
