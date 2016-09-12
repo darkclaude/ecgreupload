@@ -118,24 +118,33 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
     client.get('/deleteaccount/:user', function(req, res){     //Route to Delete User
         
         var user = req.params.user;
-        
-       Data.findOne({ 'username':user }, function(err,r){
+         Data.findOne({ 'username':user }, function(err,r){
                           
                    if(err){
                        res.send("Database Error!");
                        throw err;
                        
                    }
-              else  if(r){
-                  res.send("Account Deleted Succesfully!");
+                if(r){
+
+                  
+                  Data.findOne({ 'username':user }).remove().exec();
+                   res.send("Account Deleted Succesfully!");
+       
 
                 }
                 else{
 
-                  res.send("Account Not Found!");
+                  res.send("Account not Found!");
                 }
-                }).remove().exec();
+
             
+            
+       
+            
+        });
+        
+           
        
             
         });
