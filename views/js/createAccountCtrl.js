@@ -73,7 +73,7 @@ alert(data);
 $scope.power1 = "";
 }
 
-}
+});
 
 
 }
