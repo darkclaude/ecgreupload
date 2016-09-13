@@ -56,12 +56,12 @@
 								 	<div class="tab-content">
 						    	<div role="tabpanel" class="tab-pane active text-center" id="create">
 						    		&nbsp;&nbsp;
-						    	  <div ng-bind-html="bootalert"></div>
 						    		<span id="login_fail" class="response_error" style="display: none;">Loggin failed, please try again.</span>
 						    		<div class="clearfix"></div>
 						    		<form>
 										<div class="form-group">
 									    	<div class="input-group">
+						 
 									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
 									      		<input  ng-model="username1" type="text" class="form-control" id="login_username" placeholder="Enter Your Username..">
 									    	</div>
@@ -157,6 +157,7 @@
 						    		<form>
 										<div class="form-group">
 									    	<div class="input-group">
+									    	            	<div ng-bind-html="bootalert"></div>
 									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
 									      		<input  ng-model="username3" type="text" class="form-control" id="username" placeholder="Enter Username">
 									    	</div>
