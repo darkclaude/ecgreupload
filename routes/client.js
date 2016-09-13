@@ -29,7 +29,7 @@ Data.findOne({ 'username' :  user}, function(err, account) {
             throw err;
         }
         else{
-     res.send('Account Created Succesfully!');
+     res.send('Account Created Successfully!');
         }
         });
         
@@ -119,7 +119,7 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
                  throw err;
                  
              }
-                res.send('Account Credited Succesfully!');
+                res.send('Account Credited Successfully!');
                 
             });
                         }
@@ -155,7 +155,7 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
 
                   
                   Data.findOne({ 'username':user }).remove().exec();
-                   res.send("Account Deleted Succesfully!");
+                   res.send("Account Deleted Successfully!");
        
 
                 }

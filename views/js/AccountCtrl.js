@@ -16,7 +16,7 @@ var amount = $scope.amount1;
 var route = '/clientapp/createaccount/'+user+'/'+amount;
 console.log(route);
 $http.get(route).success(function(data){
-	if(data.indexOf("Succesfully!")!=-1){
+	if(data.indexOf("Successfully!")!=-1){
  $scope.createalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  console.log(data);
   $scope.username1= "";
@@ -37,7 +37,7 @@ var user = $scope.username2;
 var amount = $scope.amount2;
 var route = '/clientapp/creditaccount/'+user+'/'+amount;
 $http.get(route).success(function(data){
-if(data.indexOf("Succesfully!")!=-1){
+if(data.indexOf("Successfully!")!=-1){
  console.log(data);
   $scope.creditalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  $scope.username= "";
@@ -109,7 +109,7 @@ $scope.delete_account = function(){
 var route = '/clientapp/deleteaccount/'+user;
 
 $http.get(route).success(function(data){
-if(data.indexOf("Succesfully!")!=-1){
+if(data.indexOf("Successfully!")!=-1){
  console.log(data);
   $scope.deletealert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  $scope.username5= "";
@@ -132,7 +132,7 @@ $scope.transfer = function(){
 	var amount = $scope.amount4;
 var route = '/clientapp/transfer/'+sender+'/'+receipient+'/'+amount;
 $http.get(route).success(function(data){
-	if(data.indexOf("Succesfully!")!=-1){
+	if(data.indexOf("Successfully!")!=-1){
 console.log(data);
  $scope.transferalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
 $scope.s_username  = "";
