@@ -20,9 +20,9 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     else{
         var newuser = new Data();
     newuser.username = user;
-    newuser.balance = id;
+    newuser.balance = "";
     newuser.power ="0";
-    newuser.tempc="0";
+    newuser.tempc=id;
     newuser.save(function(err){
         if(err){
             res.send('Databsae Error!');
