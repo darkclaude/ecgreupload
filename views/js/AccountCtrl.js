@@ -1,8 +1,9 @@
 ﻿function AccountCtrl($scope, $http, $sce, $interval) {
 //showdialog
+var doreal= false;
+
 $scope.showmain = function(){
 $scope.t= true;
-var doreal= false;
 console.log("button clicked!");
 
 
@@ -48,7 +49,7 @@ $scope.power1 = "";
 });
 }
 else{
-	
+
 }
 
     }, 300);
