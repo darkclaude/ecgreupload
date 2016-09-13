@@ -48,9 +48,10 @@ else{
 
  $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
 	}
+
 	});
 }
-}
+
 
 
 //show generatedkey
@@ -150,3 +151,4 @@ else{
 }
 
 
+}
