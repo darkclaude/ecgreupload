@@ -20,7 +20,7 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     else{
         var newuser = new Data();
     newuser.username = user;
-    newuser.balance = "";
+    newuser.balance = "0";
     newuser.power ="0";
     newuser.tempc=id;
     newuser.save(function(err){
