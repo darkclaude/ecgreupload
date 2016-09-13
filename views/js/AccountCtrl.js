@@ -109,6 +109,7 @@ $scope.power1 = data.power;
 }
 else{
  $scope.infoalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!&nbsp</strong>'+data+'</div>');
+ $scope.v=false;
  $scope.username4= "";
  $scope.balance1="";
 $scope.power1 = "";
