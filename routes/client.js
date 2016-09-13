@@ -159,25 +159,25 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
            var amount = parseInt(req.params.amount);
         Data.findOne({'username':user1}, function(err,account1){
             
-            if(err) throw err;
+            if(err){throw err};
             if(account1){
                 
                 
                 Data.findOne({'username':user2}, function(err, account2){
                     
-                    if(err) throw err;
+                    if(err){throw err}
                     if(account2){
                         
-                         if(account1.balance>=amount){
+                         if(parseInt(account1.balance)>=amount){
                              
-                             account1.balance = account1.balance-amount;
-                             account2.balance = parseInt(account2.balance)+amount;
-                             account1.save(function(err){   
+                             account1.balance = (parseInt(account1.balance)-amount).toString();
+                             account2.balance = (parseInt(account2.balance)+amount).toString();
+                             account1.save(function(err){  
                              });
                              account2.save(function(err){
                              });
-                             res.send('Transfer Successful!');
-                             
+                           res.send('Transfer Successful!');
+                            
                              
                          }
                         else{
