@@ -103,14 +103,14 @@ $http.get(route).success(function(data){
 $scope.v = true;
  if(isNaN(data.balance)==false){
  $scope.infoalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> Account Info Operation Succesfull!</div>');
- $scope.username4= data.username;
+
  $scope.balance1= data.balance;
 $scope.power1 = data.power;
 }
 else{
  $scope.infoalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!&nbsp</strong>'+data+'</div>');
  $scope.v=false;
- $scope.username4= "";
+
  $scope.balance1="";
 $scope.power1 = "";
 }
