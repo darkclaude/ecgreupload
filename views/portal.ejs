@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app ng-init="v='false'>
+<html lang="en" ng-app ng-init="v='false'">
   <head>
     <meta charset="utf-8">
      <script src="js/jquery.js"></script>
+	
+   <script src="js/showhide.js"></script>
 	
    
 	<script src="js/createAccountCtrl.js"></script>
@@ -279,26 +281,6 @@
  	</div>
  	<!-- Login Model Ends Here -->
 
-	 <script>
-	    $(document).ready(function(){
-	    	$(document).on('click','.signup-tab',function(e){
-	    		 e.preventDefault();
-	    		 $('#signup-taba').tab('show');
-	    	});	
 	
-	    	$(document).on('click','.signin-tab',function(e){
-	    		 e.preventDefault();
-	    		 $('#signin-taba').tab('show');
-	    	});
-	    	
-	   	$(document).on('click','.signup-tab',function(e){
-	    		 e.preventDefault();
-	    		 $('#signup-taba').tab('show');
-	    	});
-			
-	    });	
-    </script> 
-    
-   
   </body>
 </html>
