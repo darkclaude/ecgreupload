@@ -17,14 +17,14 @@ var route = '/clientapp/createaccount/'+user+'/'+amount;
 console.log(route);
 $http.get(route).success(function(data){
 	if(data.indexOf("Succesfully!")!=-1){
- $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
+ $scope.createalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  console.log(data);
   $scope.username1= "";
  $scope.amount1="";
 }
 else{
 
-	 $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
+	 $scope.createalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
 }
 
 	});
@@ -39,14 +39,14 @@ var route = '/clientapp/creditaccount/'+user+'/'+amount;
 $http.get(route).success(function(data){
 if(data.indexOf("Succesfully!")!=-1){
  console.log(data);
-  $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
+  $scope.creditalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  $scope.username= "";
  $scope.amount="";
 }
 else{
 
 
- $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
+ $scope.creditalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
 	}
 
 	});
@@ -62,12 +62,12 @@ $http.get(route).success(function(data){
 
 
  if(isNaN(data)==false){
- 	 $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
+ 	 $scope.genalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  $scope.show_generated_key= data;
  $scope.amount3 = "";
  }
  else{
- 	 $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
+ 	 $scope.genalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
   console.log(data);
  }
 
@@ -85,13 +85,13 @@ var route = '/clientapp/getinfo2/'+user;
 $http.get(route).success(function(data){
 $scope.v = true;
  if(isNaN(data.balance)==false){
- $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> Account Info Operation Succesfull!</div>');
+ $scope.infoalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> Account Info Operation Succesfull!</div>');
  $scope.username4= data.username;
  $scope.balance1= data.balance;
 $scope.power1 = data.power;
 }
 else{
- $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!&nbsp</strong>'+data+'</div>');
+ $scope.infoalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!&nbsp</strong>'+data+'</div>');
  $scope.username4= "";
  $scope.balance1="";
 $scope.power1 = "";
@@ -111,12 +111,12 @@ var route = '/clientapp/deleteaccount/'+user;
 $http.get(route).success(function(data){
 if(data.indexOf("Succesfully!")!=-1){
  console.log(data);
-  $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
+  $scope.deletealert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  $scope.username5= "";
 }
 else{
 
-	 $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
+	 $scope.deletealert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
 }
 
 });
@@ -134,14 +134,14 @@ var route = '/clientapp/tranfer/user1/user2/amount';
 $http.get(route).success(function(data){
 	if(data.indexOf("Succesfully!")!=-1){
 console.log(data);
- $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
+ $scope.transferalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
 $scope.s_username  = "";
 $scope.r_username = "";
 $scope.amount4 = "";
 }
 else{
 
- $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
+ $scope.transferalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
 
 }
 
