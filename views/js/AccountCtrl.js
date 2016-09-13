@@ -130,7 +130,7 @@ $scope.transfer = function(){
 	var sender = 	$scope.s_username;
 	var receipient = $scope.r_username;
 		var amount = $scope.amount4;
-var route = '/clientapp/tranfer/user1/user2/amount';
+var route = '/clientapp/transfer/user1/user2/amount';
 $http.get(route).success(function(data){
 	if(data.indexOf("Succesfully!")!=-1){
 console.log(data);
