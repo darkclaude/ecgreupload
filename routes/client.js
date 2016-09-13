@@ -202,7 +202,7 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
                              });
                              account2.save(function(err){
                              });
-                           res.send('Transfer Successful!');
+                           res.send('Transfer Successfully!');
                             
                              
                          }
