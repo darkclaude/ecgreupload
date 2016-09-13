@@ -28,7 +28,7 @@
 
 
 
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true" >
 		<div class="modal-dialog">
 	    	<div class="modal-content login-modal">
 	      		<div class="modal-header login-modal-header">
@@ -40,13 +40,13 @@
 		      			<div role="tabpanel" class="login-tab">
 						  	<!-- Nav tabs activation here -->
 						  	<ul class="nav nav-tabs" role="tablist">
-						    	<li role="presentation" class="active"><a id="signin-taba" href="#create" aria-controls="home" role="tab" data-toggle="tab">Create</a></li>
-								<li role="presentation"><a id="signin-taba" href="#credit" aria-controls="credit" role="tab" data-toggle="tab">Credit</a></li>
-								<li role="presentation"><a id="signin-taba" href="#show_generated_key" aria-controls="show_generated_key" role="tab" data-toggle="tab">Generate</a></li>
-						    	<li role="presentation"><a id="signin-taba" href="#user_profile" aria-controls="profile" role="tab" data-toggle="tab">User Profile</a></li>
-								<li role="presentation"><a id="signup-taba" href="#transfer" aria-controls="transfer" role="tab" data-toggle="tab">Transfer</a></li>
+						    	<li  ng-click="clear()" role="presentation" class="active"><a id="signin-taba" href="#create" aria-controls="home" role="tab" data-toggle="tab">Create</a></li>
+								<li ng-click="clear()" role="presentation"><a id="signin-taba" href="#credit" aria-controls="credit" role="tab" data-toggle="tab">Credit</a></li>
+								<li   ng-click="clear()" role="presentation"><a id="signin-taba" href="#show_generated_key" aria-controls="show_generated_key" role="tab" data-toggle="tab">Generate</a></li>
+						    	<li ng-click="clear()" role="presentation"><a id="signin-taba" href="#user_profile" aria-controls="profile" role="tab" data-toggle="tab">User Profile</a></li>
+								<li ng-click="clear()" role="presentation"><a id="signup-taba" href="#transfer" aria-controls="transfer" role="tab" data-toggle="tab">Transfer</a></li>
 								
-								<li role="presentation"><a id="signin-taba" href="#delete_account" aria-controls="delete_account" role="tab" data-toggle="tab">Delete Account</a></li>
+								<li ng-click="clear()" role="presentation"><a id="signin-taba" href="#delete_account" aria-controls="delete_account" role="tab" data-toggle="tab">Delete Account</a></li>
 						
 						  	</ul>
 						
@@ -82,12 +82,12 @@
 										<div class="clearfix"></div>
 							  			<div class="login-modal-footer">
 							  				<div class="row">
-												<div class="col-xs-8 col-sm-8 col-md-8">
+											<!--	<div class="col-xs-8 col-sm-8 col-md-8">
 									
 													<a href="javascript:;" class="signup-tab">User Profile</a>
 												
 												</div>
-												
+										-->	
 												<div class="col-xs-4 col-sm-4 col-md-4">
 													<i class="fa fa-check"></i>
 													<a href="javascript:;" class="signup-tab">Transfer </a>

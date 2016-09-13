@@ -7,6 +7,23 @@ console.log("button clicked!");
 
 
 }
+//Clear ALL by change
+
+$scope.clear()= function(){
+
+$scope.createalert ="";
+$scope.creditalert="";
+$scope.transferalert="";
+$scope.infoalert="";
+$scope.deletealert="":
+$scope.genalert="";
+
+
+
+
+
+
+}
 
 
 //create
