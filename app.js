@@ -17,7 +17,7 @@ var connection_string = '127.0.0.1:27017/nodekeyz';
   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
   process.env.OPENSHIFT_APP_NAME;
 app.use('/createpage',express.static(__dirname + '/views'));
-app.use('/*',express.static(__dirname + '/views'));
+//app.use('/*',express.static(__dirname + '/views'));
 mongoose.connect("mongodb://"+connection_string+"/ecg");
 datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
 reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges");
