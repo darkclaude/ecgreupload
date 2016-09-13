@@ -66,6 +66,32 @@ else if(account){
   });   
     
 });
+
+
+
+client.get('/getinfo2/:user',function(req, res){  // Route for Getting User info
+
+  var user = req.params.user;
+
+  Data.findOne({'username' : user}, function(err,account){
+      if(err){
+          res.send("Database Error");
+          throw err;
+      }
+else if(account){
+        
+     res.json(account);
+        
+    }
+      else{
+          
+          res.send("Account Not Found!");
+      }
+      
+      
+  });   
+    
+});
     
 client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to Credit User Account
     
