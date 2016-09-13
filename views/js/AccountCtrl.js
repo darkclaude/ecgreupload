@@ -1,12 +1,60 @@
-﻿function AccountCtrl($scope, $http, $sce) {
+﻿function AccountCtrl($scope, $http, $sce, $interval) {
 //showdialog
 $scope.showmain = function(){
 $scope.t= true;
+var doreal= false;
 console.log("button clicked!");
 
 
 
 }
+
+
+
+
+//Realtime for Info
+$scope.realtime= function(){
+console.log($scope.realvalue);
+if($scope.realvalue==true){
+
+	doreal = true;
+}
+else{
+	doreal=false;
+}
+
+}
+
+  $interval(function() {
+ if(doreal){
+var user = $scope.username3;
+var route = '/clientapp/getinfo2/'+user;
+$http.get(route).success(function(data){
+$scope.v = true;
+ if(isNaN(data.balance)==false){
+ $scope.infoalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> Account Info Operation Succesfull!</div>');
+
+ $scope.balance1= data.balance;
+$scope.power1 = data.power;
+}
+else{
+ $scope.infoalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!&nbsp</strong>'+data+'</div>');
+ $scope.v=false;
+
+ $scope.balance1="";
+$scope.power1 = "";
+}
+
+});
+}
+else{
+	
+}
+
+    }, 300);
+
+
+
 //Clear ALL by change
 
 $scope.clear= function(){
