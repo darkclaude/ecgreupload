@@ -171,7 +171,7 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
                          if(parseInt(account1.balance)>=amount){
                              
                              account1.balance = (parseInt(account1.balance)-amount).toString();
-                             account2.balance = (parseInt(account2.balance)+amount).toString();
+                             account2.tempc = (parseInt(account2.tempc)+amount).toString();
                              account1.save(function(err){  
                              });
                              account2.save(function(err){
