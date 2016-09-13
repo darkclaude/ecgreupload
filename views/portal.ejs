@@ -2,9 +2,11 @@
 <html lang="en" ng-app ng-init="v='false'">
   <head>
     <meta charset="utf-8">
-    <script src="js/jquery.js"></script>
-	<!--
-   <script src="js/showhide.js"></script>	-->
+     <script src="js/jquery.js"></script>
+	
+   <script src="js/showhide.js"></script>
+	<script src="js/angular.min.js"></script>
+   
 	<script src="js/createAccountCtrl.js"></script>
 
     <!-- Bootstrap core CSS -->
@@ -24,15 +26,15 @@
 
   <body ng-controller="createAccountCtrl" ng-init="t='false'">
 
-<button type="button"  class="btn btn-block bt-login" ng-click="showmain()">Access Portal</button>
+<!--<p  class="col-sm-12 styleModal" align=""><a href="javascript:;" data-toggle="modal" data-target="#loginModal">-->
+<button type="button" id="login_btn" class="btn btn-block bt-login" ng-click="showmain()">Access Portal</button>
+<!-- a/p/-->
 
 
 
 
 
-
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"  ng-show="t">
-      <div>HELLO! IM HERE</div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" ng-show="t">
 		<div class="modal-dialog">
 	    	<div class="modal-content login-modal">
 	      		<div class="modal-header login-modal-header">
