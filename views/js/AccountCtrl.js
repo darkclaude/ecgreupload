@@ -1,4 +1,4 @@
-﻿function createAccountCtrl($scope, $http, $sce) {
+﻿function AccountCtrl($scope, $http, $sce) {
 //showdialog
 $scope.showmain = function(){
 $scope.t= true;
@@ -16,11 +16,16 @@ var amount = $scope.amount1;
 var route = '/clientapp/createaccount/'+user+'/'+amount;
 console.log(route);
 $http.get(route).success(function(data){
-
+	if(data.indexOf("Succesfully!")!=-1){
+ $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  console.log(data);
- alert(data);
- $scope.username1= "";
+  $scope.username1= "";
  $scope.amount1="";
+}
+else{
+
+	 $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
+}
 
 	});
 
@@ -32,12 +37,19 @@ var user = $scope.username2;
 var amount = $scope.amount2;
 var route = '/clientapp/creditaccount/'+user+'/'+amount;
 $http.get(route).success(function(data){
-
+if(data.indexOf("Succesfully!")!=-1){
  console.log(data);
- alert(data);
+  $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  $scope.username= "";
  $scope.amount="";
+}
+else{
+
+
+ $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
+	}
 	});
+}
 }
 
 
@@ -49,13 +61,13 @@ $http.get(route).success(function(data){
 
 
  if(isNaN(data)==false){
- 	alert("Recharge Key Generated Succesfully!");
+ 	 $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  $scope.show_generated_key= data;
  $scope.amount3 = "";
  }
  else{
+ 	 $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
   console.log(data);
-   alert(data);
  }
 
 
@@ -78,7 +90,7 @@ $scope.v = true;
 $scope.power1 = data.power;
 }
 else{
- $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Failure!</strong>'+data+'</div>');
+ $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!&nbsp</strong>'+data+'</div>');
  $scope.username4= "";
  $scope.balance1="";
 $scope.power1 = "";
@@ -96,10 +108,15 @@ $scope.delete_account = function(){
 var route = '/clientapp/deleteaccount/'+user;
 
 $http.get(route).success(function(data){
-
+if(data.indexOf("Succesfully!")!=-1){
  console.log(data);
- alert(data);
+  $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  $scope.username5= "";
+}
+else{
+
+	 $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
+}
 
 });
 }
@@ -114,12 +131,19 @@ $scope.transfer = function(){
 		var amount = $scope.amount4;
 var route = '/clientapp/tranfer/user1/user2/amount';
 $http.get(route).success(function(data){
+	if(data.indexOf("Succesfully!")!=-1){
 console.log(data);
- alert(data);
-
+ $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
 $scope.s_username  = "";
 $scope.r_username = "";
 $scope.amount4 = "";
+}
+else{
+
+ $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
+
+}
+
 });
 
 }

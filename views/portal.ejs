@@ -18,7 +18,7 @@
  
   </head>
 
-  <body ng-controller="createAccountCtrl">
+  <body ng-controller="AccountCtrl">
 
 <p  class="col-sm-12 styleModal" align=""><a href="javascript:;" data-toggle="modal" data-target="#loginModal">
 <button type="button" id="login_btn" class="btn btn-block bt-login" data-loading-text="Initiating Account....">Access Portal</button>
@@ -60,6 +60,8 @@
 						    		<div class="clearfix"></div>
 						    		<form>
 										<div class="form-group">
+										<div ng-bind-html="createalert"></div>
+
 									    	<div class="input-group">
 						 
 									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
@@ -94,13 +96,15 @@
 							  			</div>
 									</form>
 						    	</div>
-					
+					<!--Credit Starts here-->
 								<div role="tabpanel" class="tab-pane text-center" id="credit">
 						    		&nbsp;&nbsp;
 						    		<span id="login_fail" class="response_error" style="display: none;">Loggin failed, please try again.</span>
 						    		<div class="clearfix"></div>
 						    		<form>
 										<div class="form-group">
+										<div ng-bind-html="creditalert"></div>
+
 									    	<div class="input-group">
 									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
 									      		<input  ng-model="username2" type="text" class="form-control" id="login_username" placeholder="Username">
@@ -127,6 +131,8 @@
 						    		<div class="clearfix"></div>
 						    		<form>
 										<div class="form-group">
+										<div ng-bind-html="genalert"></div>
+
 									    	<div class="input-group">
 									      		<div class="input-group-addon"><i class=""></i></div>
 									      		<input  ng-model="show_generated_key" type="text" class="form-control" id="" placeholder="the gen_key here">
@@ -156,7 +162,7 @@
 						    		<div class="clearfix"></div>
 						    		<form>
 										<div class="form-group">
-										<div ng-bind-html="bootalert"></div>
+										<div ng-bind-html="infoalert"></div>
 									    	<div class="input-group">
 
 									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
@@ -204,6 +210,8 @@
 										<div class="clearfix"></div>
 						    		<form>
 										<div class="form-group">
+										<div ng-bind-html="deletealert"></div>
+
 									    	<div class="input-group">
 									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
 									      		<input ng-model="username5"  type="text" class="form-control" id="username" placeholder="Username">
@@ -238,6 +246,8 @@
 						    		<div class="clearfix"></div>
 						    		<form>
 										<div class="form-group">
+										<div ng-bind-html="transferalert"></div>
+
 									    	<div class="input-group">
 									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
 									      		<input ng-model="s_username" type="text" class="form-control" id="login_username" placeholder="Enter Your Username..">
@@ -282,7 +292,7 @@
    <script   src="https://code.jquery.com/jquery-1.12.4.js"   integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="   crossorigin="anonymous"></script>
     <script src="js/angular.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="js/createAccountCtrl.js"></script>
+    <script src="js/AccountCtrl.js"></script>
 
 	 <script>
 	    $(document).ready(function(){
