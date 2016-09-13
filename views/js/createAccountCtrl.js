@@ -90,7 +90,7 @@ $http.get(route).success(function(data){
  alert(data);
  $scope.username5= "";
 
-}
+});
 }
 
 
@@ -109,7 +109,7 @@ console.log(data);
 $scope.s_username  = "";
 $scope.r_username = "";
 $scope.amount4 = "";
-}
+});
 
 }
 
