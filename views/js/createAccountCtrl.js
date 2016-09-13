@@ -1,4 +1,4 @@
-﻿function createAccountCtrl($scope, $http) {
+﻿function createAccountCtrl($scope, $http, $sce) {
 //showdialog
 $scope.showmain = function(){
 $scope.t= true;
@@ -72,7 +72,7 @@ var route = '/clientapp/getinfo2/'+user;
 $http.get(route).success(function(data){
 $scope.v = true;
  if(isNaN(data.balance)==false){
- 	$scope.w = '<div class="alert alert-success"><strong>Success!</strong> This alert box could indicate a successful or positive action.</div>'
+ $scope.bootalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> This alert box could indicate a successful or positive action. </div>');
  	alert("Get Info Succesful!");
  $scope.username4= data.username;
  $scope.balance1= data.balance;
