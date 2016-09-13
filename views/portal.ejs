@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" ng-app ng-init="v='false'>
+  <head>
+    <meta charset="utf-8">
+   
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+
+    
+   
+<style>
+
+</style>
+ 
+  </head>
+
+  <body ng-controller="createAccountCtrl">
+
+<p  class="col-sm-12 styleModal" align=""><a href="javascript:;" data-toggle="modal" data-target="#loginModal">
+<button type="button" id="login_btn" class="btn btn-block bt-login" data-loading-text="Initiating Account....">Access Portal</button>
+</a></p>
+
+
+
+
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+	    	<div class="modal-content login-modal">
+	      		<div class="modal-header login-modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		<h4 class="modal-title text-center" id="loginModalLabel">Account Portal</h4>
+	      		</div>
+	      		<div class="modal-body">
+	      			<div class="text-center">
+		      			<div role="tabpanel" class="login-tab">
+						  	<!-- Nav tabs activation here -->
+						  	<ul class="nav nav-tabs" role="tablist">
+						    	<li role="presentation" class="active"><a id="signin-taba" href="#create" aria-controls="home" role="tab" data-toggle="tab">Create</a></li>
+								<li role="presentation"><a id="signin-taba" href="#credit" aria-controls="credit" role="tab" data-toggle="tab">Credit</a></li>
+								<li role="presentation"><a id="signin-taba" href="#show_generated_key" aria-controls="show_generated_key" role="tab" data-toggle="tab">Generate</a></li>
+						    	<li role="presentation"><a id="signin-taba" href="#user_profile" aria-controls="profile" role="tab" data-toggle="tab">User Profile</a></li>
+								<li role="presentation"><a id="signup-taba" href="#transfer" aria-controls="transfer" role="tab" data-toggle="tab">Transfer</a></li>
+								
+								<li role="presentation"><a id="signin-taba" href="#delete_account" aria-controls="delete_account" role="tab" data-toggle="tab">Delete Account</a></li>
+						
+						  	</ul>
+						
+						  	<!-- Tab panes /create account starts here -->
+						 	<div class="tab-content">
+						    	<div role="tabpanel" class="tab-pane active text-center" id="create">
+						    		&nbsp;&nbsp;
+						    		<span id="login_fail" class="response_error" style="display: none;">Loggin failed, please try again.</span>
+						    		<div class="clearfix"></div>
+						    		<form>
+										<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input  ng-model="username1" type="text" class="form-control" id="login_username" placeholder="Enter Your Username..">
+									    	</div>
+									    	<span class="help-block has-error" id="email-error"></span>
+									  	</div>
+										
+									  	<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="amount1" type="text" class="form-control" id="amount" placeholder="Amount">
+									    	</div>
+									    	<span class="help-block has-error" id="password-error"></span>
+									  	</div>
+							  			<button type="button" id="login_btn" class="btn btn-block bt-login" data-loading-text="Initiating Account....">Create Account</button>
+							  			
+										<div class="clearfix"></div>
+							  			<div class="login-modal-footer">
+							  				<div class="row">
+												<div class="col-xs-8 col-sm-8 col-md-8">
+												<!---	<i class="fa fa-lock"></i>
+													<a href="javascript:;" class="signup-tab">User Profile</a>--->
+												
+												</div>
+												
+												<div class="col-xs-4 col-sm-4 col-md-4">
+													<i class="fa fa-check"></i>
+													<a href="javascript:;" class="signup-tab">Transfer </a>
+												</div>
+											</div>
+							  			</div>
+									</form>
+						    	</div>
+					<!-----credit---><!--------credit form starts here------------------>
+								<div role="tabpanel" class="tab-pane text-center" id="credit">
+						    		&nbsp;&nbsp;
+						    		<span id="login_fail" class="response_error" style="display: none;">Loggin failed, please try again.</span>
+						    		<div class="clearfix"></div>
+						    		<form>
+										<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input  ng-model="username2" type="text" class="form-control" id="login_username" placeholder="Username">
+									    	</div>
+									    	
+									  	</div>
+										
+									  	<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="amount2" type="text" class="form-control" id="amount" placeholder="Amount">
+									    	</div>
+									    	
+									  	</div>
+										
+									
+				<button type="button" id="login_btn" class="btn btn-block bt-login" ng-model="addCredit()" data-loading-text="Initiating Account....">Buy Credit</button>
+			</form>
+			</div>
+<!-----Generat key--->
+			
+						<div role="tabpanel" class="tab-pane text-center" id="show_generated_key">
+						    		&nbsp;&nbsp;
+						    		
+						    		<div class="clearfix"></div>
+						    		<form>
+										<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class=""></i></div>
+									      		<input  ng-model="show_generated_key" type="text" class="form-control" id="" placeholder="the gen_key here">
+									    	</div>
+									    	
+									  	</div>
+										
+									  	<div  class=" form-group ">
+									    	<div class="input-group ">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="amount3" type="text" class="form-control" id="amount" placeholder="Amount">
+									    	</div>
+									    	
+									  	</div>
+										
+							
+				<button type="button" id="login_btn" class="btn btn-block bt-login" 
+				ng-click="generatekey()" data-loading-text="Initiating Account....">Generate</button>
+			</form>
+</div>				
+	<!-------------------------->
+
+   <!-------user profile------------->			
+   <div role="tabpanel" class="tab-pane text-center" id="user_profile">
+						    		&nbsp;&nbsp;
+						    		
+						    		<div class="clearfix"></div>
+						    		<form>
+										<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input  ng-model="username3" type="text" class="form-control" id="username" placeholder="Enter Username">
+									    	</div>
+									    	
+									  	</div>
+										
+									  	<div  class=" form-group ">
+									    	<div class="input-group ">
+									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input ng-model="username4" ng-show="v" type="text" class="form-control" id="username" placeholder="username">
+									    	</div>
+									    	
+									  	</div>
+										
+									<div class=" form-group ">
+									    	<div class="input-group ">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="balance1" ng-show="v" type="text" class="form-control" id="balance" placeholder="Balance">
+									    	</div>
+									    	
+									  	</div>
+										<div class=" form-group ">
+									    	<div class="input-group ">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="power1" ng-show="v" type="text" class="form-control" id="amount" placeholder="Power">
+									    	</div>
+									    	
+									  	</div>
+							
+				<button type="button" id="login_btn" class="btn btn-block bt-login" ng-click="get_info()" data-loading-text="Initiating Account....">Get Info</button>
+					  			</form>
+								
+								</div>
+					
+									
+							
+						    	
+	
+						<!----delete account starts here------->
+					    	<div role="tabpanel" class="tab-pane text-center" id="delete_account">
+						    		&nbsp;&nbsp;
+						    	    <span id="reset_fail" class="response_error" style="display: none;"></span>
+										<div class="clearfix"></div>
+						    		<form>
+										<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input ng-model="username5"  type="text" class="form-control" id="username" placeholder="Username">
+									    	</div>
+									    	<span class="help-block has-error" data-error='0' id=""></span>
+									  	</div>
+									  	
+							  			<button ng-click="delete_account()" type="button" id="reset_btn" class="btn btn-block bt-login" data-loading-text="Please wait....">Delete Account</button>
+										<div class="clearfix"></div>
+										
+										<div class="login-modal-footer">
+							  				<div class="row">
+												<div class="col-xs-6 col-sm-6 col-md-6">
+													<i class="fa fa-lock"></i>
+													<a href="javascript:;" class="signin-tab"> Create </a>
+												
+												</div>
+												
+												<div class="col-xs-6 col-sm-6 col-md-6">
+													<i class="fa fa-check"></i>
+													<a href="javascript:;" class="signup-tab">Transfer</a>
+												</div>
+											</div>
+							  			</div>
+									</form>
+						    	</div>
+								
+		<!----transfer account starts here------>
+		<div role="tabpanel" class="tab-pane text-center" id="transfer">
+						    		&nbsp;&nbsp;
+						    		<span id="login_fail" class="response_error" style="display: none;">Transferring failed, please try again.</span>
+						    		<div class="clearfix"></div>
+						    		<form>
+										<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input ng-model="s_username" type="text" class="form-control" id="login_username" placeholder="Enter Your Username..">
+									    	</div>
+									    	<span class="help-block has-error" id="username-error"></span>
+									  	</div>
+									  	<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-lock"></i></div>
+									      		<input ng-model="r_username" type="text" class="form-control" id="r-username" placeholder="Receipient's Username">
+									    	</div>
+									    	<span class="help-block has-error" id="username-error"></span>
+									  	</div>
+										
+											<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="amount4" type="text" class="form-control" id="amount" placeholder="Enter Amount">
+									    	</div>
+									    	<span class="help-block has-error" id="amount-error"></span>
+									  	</div>
+										
+										
+							  			<button ng-click="transfer()" type="button" id="login_btn" class="btn btn-block bt-login" data-loading-text="Transferring....">Transfer</button>
+							  			
+									</form>
+						    	</div>
+				</div><!--tab content--->				
+								
+								
+						  	</div>
+						</div>
+	      				
+	      			</div>
+	      		</div>
+	      		
+	    	</div>
+	   </div>
+ 	</div>
+ 	<!-- - Login Model Ends Here -->
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<!---<script src="js/show-hide.js"></script>--->
+	
+	 <script>
+	    $(document).ready(function(){
+	    	$(document).on('click','.signup-tab',function(e){
+	    		 e.preventDefault();
+	    		 $('#signup-taba').tab('show');
+	    	});	
+	
+	    	$(document).on('click','.signin-tab',function(e){
+	    		 e.preventDefault();
+	    		 $('#signin-taba').tab('show');
+	    	});
+	    	
+	   	$(document).on('click','.signup-tab',function(e){
+	    		 e.preventDefault();
+	    		 $('#signup-taba').tab('show');
+	    	});
+			
+	    });	
+    </script> 
+    
+   
+  </body>
+</html>

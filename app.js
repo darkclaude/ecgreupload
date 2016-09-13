@@ -35,9 +35,9 @@ require('./routes/client')(client);
 require('./routes/device')(device);
 
 
-app.get('/createpage', function(req, res){
+app.get('/portal', function(req, res){
 
-res.render('createaccount.ejs');
+res.render('portal.ejs');
 
 });
 app.get('/*',function(req, res){
