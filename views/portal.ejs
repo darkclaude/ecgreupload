@@ -40,13 +40,13 @@
 		      			<div role="tabpanel" class="login-tab">
 						  	<!-- Nav tabs activation here -->
 						  	<ul class="nav nav-tabs" role="tablist">
-						    	<li  ng-click="clear()" role="presentation" class="active"><a id="signin-taba" href="#create" aria-controls="home" role="tab" data-toggle="tab">Create</a></li>
-								<li ng-click="clear()" role="presentation"><a id="signin-taba" href="#credit" aria-controls="credit" role="tab" data-toggle="tab">Credit</a></li>
-								<li   ng-click="clear()" role="presentation"><a id="signin-taba" href="#show_generated_key" aria-controls="show_generated_key" role="tab" data-toggle="tab">Generate</a></li>
-						    	<li ng-click="clear()" role="presentation"><a id="signin-taba" href="#user_profile" aria-controls="profile" role="tab" data-toggle="tab">User Profile</a></li>
-								<li ng-click="clear()" role="presentation"><a id="signup-taba" href="#transfer" aria-controls="transfer" role="tab" data-toggle="tab">Transfer</a></li>
+						    	<li  ng-click="clear()" role="presentation" class="active"><a id="signin-taba" href="#create" aria-controls="home" role="tab" data-toggle="tab"><b>Create</b></a></li>
+								<li ng-click="clear()" role="presentation"><a id="signin-taba" href="#credit" aria-controls="credit" role="tab" data-toggle="tab"><b>Credit</b></a></li>
+								<li   ng-click="clear()" role="presentation"><a id="signin-taba" href="#show_generated_key" aria-controls="show_generated_key" role="tab" data-toggle="tab"><b>Generate</b></a></li>
+						    	<li ng-click="clear()" role="presentation"><a id="signin-taba" href="#user_profile" aria-controls="profile" role="tab" data-toggle="tab"><b>User Profile</b></a></li>
+								<li ng-click="clear()" role="presentation"><a id="signup-taba" href="#transfer" aria-controls="transfer" role="tab" data-toggle="tab"><b>Transfer</b></a></li>
 								
-								<li ng-click="clear()" role="presentation"><a id="signin-taba" href="#delete_account" aria-controls="delete_account" role="tab" data-toggle="tab">Delete Account</a></li>
+								<li ng-click="clear()" role="presentation"><a id="signin-taba" href="#delete_account" aria-controls="delete_account" role="tab" data-toggle="tab"><b>Delete Account</b></a></li>
 						
 						  	</ul>
 						
@@ -137,7 +137,7 @@
 
 									    	<div class="input-group">
 									      		<div class="input-group-addon"><i class=""></i></div>
-									      		<input  ng-model="show_generated_key" type="text" class="form-control" id="" placeholder="the gen_key here">
+									      		<input  ng-model="show_generated_key" type="text" contenteditable="false" class="form-control" id="" placeholder="the gen_key here">
 									    	</div>
 									    	
 									  	</div>
@@ -177,14 +177,14 @@
 									<div class=" form-group ">
 									    	<div class="input-group ">
 									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
-									      		<input ng-model="balance1" ng-show="v" type="text" class="form-control" id="balance" placeholder="Balance">
+									      		<input ng-model="balance1" contenteditable="false" ng-show="v" type="text" class="form-control" id="balance" placeholder="Balance">
 									    	</div>
 									    	
 									  	</div>
 										<div class=" form-group ">
 									    	<div class="input-group ">
 									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
-									      		<input ng-model="power1" ng-show="v" type="text" class="form-control" id="amount" placeholder="Power">
+									      		<input ng-model="power1" contenteditable="false" ng-show="v" type="text" class="form-control" id="amount" placeholder="Power">
 									    	</div>
 									    	
 									  	</div>
