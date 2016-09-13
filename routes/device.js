@@ -108,10 +108,12 @@ module.exports = function(device){
            
            if(account){
                account.balance = ubalance;
+               account.power = power;
                account.save(function(err){
                    if(err) throw err;
                    
                });
+
                res.send('ok');
             
                }
