@@ -16,7 +16,7 @@ console.log("button clicked!");
 //Realtime for Info
 $scope.realtime= function(){
 console.log($scope.realvalue);
-if($scope.realvalue==true){
+if($scope.realvalue==false){
 
 	doreal = true;
 }
