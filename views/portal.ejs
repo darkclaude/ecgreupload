@@ -2,10 +2,10 @@
 <html lang="en" ng-app ng-init="v='false'">
   <head>
     <meta charset="utf-8">
-     <script src="js/jquery.js"></script>
+     <!--><script src="js/jquery.js"></script>
 	
    <script src="js/showhide.js"></script>
-	
+	-->
    
 	<script src="js/createAccountCtrl.js"></script>
 
@@ -24,17 +24,17 @@
  
   </head>
 
-  <body ng-controller="createAccountCtrl">
+  <body ng-controller="createAccountCtrl" ng-init="t='false'">
 
-<p  class="col-sm-12 styleModal" align=""><a href="javascript:;" data-toggle="modal" data-target="#loginModal">
-<button type="button" id="login_btn" class="btn btn-block bt-login" data-loading-text="Initiating Account....">Access Portal</button>
-</a></p>
-
-
+<!--<p  class="col-sm-12 styleModal" align=""><a href="javascript:;" data-toggle="modal" data-target="#loginModal">-->
+<button type="button" id="login_btn" class="btn btn-block bt-login" ng-click="showmain()">Access Portal</button>
+<!-- a/p/-->
 
 
 
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"  ng-show="t">
 		<div class="modal-dialog">
 	    	<div class="modal-content login-modal">
 	      		<div class="modal-header login-modal-header">

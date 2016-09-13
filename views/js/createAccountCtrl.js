@@ -1,4 +1,13 @@
 ﻿function createAccountCtrl($scope, $http) {
+//showdialog
+$scope.showmain = function(){
+$scope.t= true;
+
+
+
+
+}
+
 
 //create
 $scope.create = function(){
