@@ -129,8 +129,8 @@ else{
 $scope.transfer = function(){
 	var sender = 	$scope.s_username;
 	var receipient = $scope.r_username;
-		var amount = $scope.amount4;
-var route = '/clientapp/transfer/'+sender'/'+receipient+'/'+amount;
+	var amount = $scope.amount4;
+var route = '/clientapp/transfer/'+sender+'/'+receipient+'/'+amount;
 $http.get(route).success(function(data){
 	if(data.indexOf("Succesfully!")!=-1){
 console.log(data);
