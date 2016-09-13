@@ -2,7 +2,7 @@
 //showdialog
 $scope.showmain = function(){
 $scope.t= true;
-
+console.log("button clicked!");
 
 
 
