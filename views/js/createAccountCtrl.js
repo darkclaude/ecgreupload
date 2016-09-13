@@ -49,6 +49,7 @@ $http.get(route).success(function(data){
 
 
  if(isNaN(data)==false){
+ 	alert("Recharge Key Generated Succesfully!");
  $scope.show_generated_key= data;
  $scope.amount3 = "";
  }
@@ -71,6 +72,7 @@ var route = '/clientapp/getinfo2/'+user;
 $http.get(route).success(function(data){
 $scope.v = true;
  if(isNaN(data.balance)==false){
+ 	alert("Get Info Succesful!");
  $scope.username4= data.username;
  $scope.balance1= data.balance;
 $scope.power1 = data.power;
