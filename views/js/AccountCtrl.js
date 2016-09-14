@@ -30,7 +30,7 @@ else{
  if(doreal){
 var user = $scope.username3;
 var route = '/clientapp/getinfo2/'+user;
-$http.get(route).success(function(data){
+$http.post(route).success(function(data){
 $scope.v = true;
  if(isNaN(data.balance)==false){
  $scope.infoalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> Account Info Operation Succesfull!</div>');
