@@ -69,7 +69,7 @@ else if(account){
 
 
 
-client.get('/getinfo2/:user',function(req, res){  // Route for Getting User info
+client.post('/getinfo2/:user',function(req, res){  // Route for Getting User info
 
   var user = req.params.user;
 
