@@ -1,7 +1,7 @@
 ﻿function AccountCtrl($scope, $http, $sce, $interval) {
 //showdialog
 var doreal= false;
-
+$scope.realvalue=false;
 $scope.showmain = function(){
 $scope.t= true;
 console.log("button clicked!");
