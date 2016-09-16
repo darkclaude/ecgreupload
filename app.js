@@ -40,6 +40,18 @@ app.get('/portal', function(req, res){
 res.render('portal.ejs');
 
 });
+
+app.get('/testjson', function(req,res){
+var t = {
+  "__v": 0,
+  "_id": "57cec96a39f9ed6dcc526871",
+  "balance": "37043",
+  "power": "0",
+  "tempc": "0",
+  "username": "peter"
+};
+res.json(t);
+});
 app.get('/*',function(req, res){
    res.send('Route Doesnt Exist!'); 
     
