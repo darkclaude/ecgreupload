@@ -10,7 +10,7 @@ var MapData = require('./config/models/map');
 var mongoose = require('mongoose');
 //var port = 2000;
 var port  = process.env.OPENSHIFT_NODEJS_PORT;
-var connection_string = '127.0.0.1:27017/nodekeyz';
+var connection_string = ' ';
 // if OPENSHIFT env variables are present, use the available connection info:
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
   process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
@@ -18,6 +18,7 @@ var connection_string = '127.0.0.1:27017/nodekeyz';
   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
   process.env.OPENSHIFT_APP_NAME;
 app.use('/portal',express.static(__dirname + '/views'));
+app.use('/map', express.static(__dirname+ '/views'));
 //app.use('/*',express.static(__dirname + '/views'));
 mongoose.connect("mongodb://"+connection_string+"/ecg");
 datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
