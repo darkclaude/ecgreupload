@@ -1,4 +1,4 @@
-﻿function MapCtrl($scope, $http, $sce, $interval) {
+﻿function MapCtrl($scope, $http,  $interval) {
 var lt = 48.857;
 var lg = 2.295;
 var route = 'http://ecg-ninjax.rhcloud.com/clientapp/getmap/test';
@@ -9,13 +9,13 @@ var route = 'http://ecg-ninjax.rhcloud.com/clientapp/getmap/test';
 	});
 
 $interval(function() {
-$http.get(route).success(function(response){
+$http.get(route).success(function(data){
 mapObj.removeMarker(m);
-lt=response.lat;
-lg =response.lng;
+lt=parseInt(data.lat);
+lg =parseInt(data.lng);
  m = mapObj.addMarker({
-lat: response.lat,
-lng: response.lng,
+lat: data.lat,
+lng: data.lng,
 title: 'Phone',
 infoWindow: {
 	content: '<h4>Phone Location</h4><div>HERE</div>',
