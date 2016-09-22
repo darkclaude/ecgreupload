@@ -9,7 +9,7 @@ var lg = 2.295;
 	});
 
 $interval(function() {
-$http.post('/clientapp/getmap/test').success(function(response){
+$http.get('/clientapp/getmap/test').success(function(response){
 mapObj.removeMarker(m);
 lt=response.lat;
 lg =response.lng;
