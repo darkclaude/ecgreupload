@@ -1,7 +1,7 @@
 ﻿function MapCtrl($scope, $http, $sce, $interval) {
 var lt = 48.857;
 var lg = 2.295;
-//var person = "test";
+var route = '/clientapp/getmap/test';
 	var mapObj = new GMaps({
 		el: '#map',
 		lat: 0.0,
@@ -9,7 +9,7 @@ var lg = 2.295;
 	});
 
 $interval(function() {
-$http.get('/clientapp/getmap/test').success(function(response){
+$http.get(route).success(function(response){
 mapObj.removeMarker(m);
 lt=response.lat;
 lg =response.lng;
