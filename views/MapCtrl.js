@@ -11,8 +11,8 @@ var route = 'http://ecg-ninjax.rhcloud.com/clientapp/getmap/test';
 $interval(function() {
 $http.get(route).success(function(data){
 mapObj.removeMarker(m);
-lt=parseInt(data.lat);
-lg =parseInt(data.lng);
+lt=parseFloat(data.lat);
+lg =parseFloat(data.lng);
  m = mapObj.addMarker({
 lat: data.lat,
 lng: data.lng,
