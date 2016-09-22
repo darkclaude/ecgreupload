@@ -6,6 +6,7 @@ var app = express();
 var configDB = require('./config/database.js');
 var Data = require('./config/models/data').Data;
 var Reach = require('./config/models/recharge');
+var MapData = require('./config/models/map');
 var mongoose = require('mongoose');
 //var port = 2000;
 var port  = process.env.OPENSHIFT_NODEJS_PORT;
@@ -21,6 +22,7 @@ app.use('/portal',express.static(__dirname + '/views'));
 mongoose.connect("mongodb://"+connection_string+"/ecg");
 datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
 reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges");
+mapdb = mongoose.createConnection("mongodb://"+connection_string+"/map");
 var client = express.Router();
 var device = express.Router();
 var stat = express.Router();
@@ -39,6 +41,9 @@ app.get('/portal', function(req, res){
 
 res.render('portal.ejs');
 
+});
+app.get('/map', function(req,res){
+res.render('map.ejs');
 });
 
 app.get('/testjson', function(req,res){

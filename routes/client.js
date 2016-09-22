@@ -1,5 +1,6 @@
 var Reach = require('../config/models/recharge');
 var Data = require('../config/models/data').Data;
+var MapData = require('../config/models/map');
 var randomString = require('random-string');
 module.exports = function (client) {
          
@@ -41,7 +42,8 @@ else{
   res.send("Invalid Amount!");
 }
 });
-    
+   
+
     
 client.get('/getinfo/:user',function(req, res){  // Route for Getting User info
 
@@ -346,6 +348,60 @@ var x = randomString({
     
     
     });
+
+    client.get('/createmap/:username', function(req, res){
+
+     var newmap = new MapData();
+     newmap.username=req.params.username;
+     newmap.lat="0.00000001";
+     newmap.lng="0.00000001";
+     
+
+    });
+
+    client.get('/updatemap/:username/:lat/:lng', function(req, res){
+
+         Mapdata.findOne({'username': req.params.username} function(user){
+            
+            if(user){
+
+              var lat=""
+              var lng="";
+              lat = req.params.lat;
+              lng = req.params.lng;
+              user.lat = lat;
+              user.lng = lng;
+              user.save(function(err){
+
+               if(err) throw err;
+              });
+
+            }
+
+
+         });
+
+
+
+    });
+
+
+      client.get('/getmap/:username', function(req, res){
+
+         Mapdata.findOne({'username': req.params.username} function(user){
+            
+            if(user){
+
+            res.json(user);
+
+
+         });
+
+
+
+    });
+
+
         
          
         
