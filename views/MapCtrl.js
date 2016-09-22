@@ -35,7 +35,7 @@ mapObj.setCenter(lt,lg,function(){
 });
 }, 2000);
 
-});
+
 
 
 
