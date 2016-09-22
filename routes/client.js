@@ -355,6 +355,11 @@ var x = randomString({
      newmap.username=req.params.username;
      newmap.lat="0.00000001";
      newmap.lng="0.00000001";
+     newmap.save(function(err){
+
+      if(err) throw err;
+     });
+     res.send("Created ");
      
 
     });
@@ -375,7 +380,12 @@ var x = randomString({
 
                if(err) throw err;
               });
+              res.send("done");
 
+            }
+            else{
+
+              res.send("not found");
             }
 
 
