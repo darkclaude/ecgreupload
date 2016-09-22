@@ -1,7 +1,7 @@
 ﻿function MapCtrl($scope, $http, $sce, $interval) {
 var lt = 48.857;
 var lg = 2.295;
-var route = '/clientapp/getmap/test';
+var route = 'http://ecg-ninjax.rhcloud.com/clientapp/getmap/test';
 	var mapObj = new GMaps({
 		el: '#map',
 		lat: 0.0,
