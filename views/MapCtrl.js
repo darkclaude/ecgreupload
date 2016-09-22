@@ -27,7 +27,7 @@ infoWindow: {
 
 });
 
-$interval(function() {
+
 
 
 
