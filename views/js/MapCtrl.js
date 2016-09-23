@@ -45,7 +45,7 @@ lg =parseFloat(data.lng);
  console.log(lt);
  console.log(lg);
  mo  =   mapObj.drawOverlay({
-  lat: lt+0.000001,
+  lat: lt-0.000005,
   lng: lg,
   verticalAlign: top,
   content: '<div class="overlay"><h2><font color="red">'+lt+","+lg+'</font></h2></div>'
