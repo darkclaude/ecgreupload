@@ -14,7 +14,7 @@ $http.post(route).success(function(data){
 mapObj.removeMarker(m);
 lt=parseFloat(data.lat);
 lg =parseFloat(data.lng);
- m = mapObj.addMarker({
+ var m = mapObj.addMarker({
 lat: data.lat,
 lng: data.lng,
 title: 'Phone',
