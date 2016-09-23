@@ -40,12 +40,12 @@ $http.post(route).success(function(data){
 			pl=parseFloat(data.lng);
 mapObj.removeMarker(m);
 mapObj.removeOverlay(mo);
-lt=parseFloat(data.lat);
+lt=parseFloat(data.lat)+0.0005;
 lg =parseFloat(data.lng);
  console.log(lt);
  console.log(lg);
  mo  =   mapObj.drawOverlay({
-  lat: lt-0.00005,
+  lat: lt,
   lng: lg,
   verticalAlign: top,
   content: '<div class="overlay"><h2><font color="red">'+lt+","+lg+'</font></h2></div>'
