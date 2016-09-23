@@ -48,7 +48,7 @@ lg =parseFloat(data.lng);
   lat: lt,
   lng: lg,
   verticalAlign: top,
-  content: '<div class="overlay"><h2><font color="red">'+lt+","+lg+'</font></h2></div>'
+  content: '<div class="overlay"><h3><font color="red">'+lt+","+lg+'</font></h3></div>'
 });
 
   m = mapObj.addMarker({
