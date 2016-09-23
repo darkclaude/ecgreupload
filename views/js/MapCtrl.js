@@ -45,14 +45,14 @@ else{
 
 });
 
-}, 250);
+}, 500);
 
 
 
 
 $interval(function() {
-
-}, 2000);
+mapObj.setCenter(lt,lg,function(){});
+}, 3000);
 
 
 
