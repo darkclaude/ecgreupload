@@ -22,6 +22,12 @@ infoWindow: {
 	maxWidth: 100
 }
 });
+var mo=  mapObj.drawOverlay({
+  lat: -12.043333,
+  lng: -77.028333,
+  content: '<div class="overlay">Lima</div>'
+});
+
 
 $interval(function() {
 $http.post(route).success(function(data){
@@ -33,10 +39,17 @@ $http.post(route).success(function(data){
 			pr=parseFloat(data.lat);
 			pl=parseFloat(data.lng);
 mapObj.removeMarker(m);
+mapObj.removeOverlay(mo);
 lt=parseFloat(data.lat);
 lg =parseFloat(data.lng);
  console.log(lt);
  console.log(lg);
+ mo  =   mapObj.drawOverlay({
+  lat: lt,
+  lng: lg,
+  content: '<div class="overlay">'+lt+","+lg+'</div>'
+});
+
   m = mapObj.addMarker({
 lat: data.lat,
 lng: data.lng,
