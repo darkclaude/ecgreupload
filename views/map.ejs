@@ -20,6 +20,21 @@
      <script src="js/gmaps.js"></script>
       <script>
       /* Map Object */
+        var mapObj = new GMaps({
+    el: '#map',
+    lat: 0.0,
+    lng: 0.0
+  });
+var m = mapObj.addMarker({
+lat: 0.0,
+lng: 0.0,
+title: 'Phone',
+infoWindow: {
+  content: '<h4>Phone Location</h4><div>HERE</div>',
+  maxWidth: 100
+}
+});
+
   
     </script>
  
