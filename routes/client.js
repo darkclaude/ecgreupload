@@ -366,7 +366,8 @@ var x = randomString({
 
     client.get('/updatemap/:username/:lat/:lng', function(req, res){
 
-         MapData.findOne({'username': req.params.username} ,function(user){
+         MapData.findOne({'username': req.params.username} ,function(err,user){
+          if(err)  throw err;
             
             if(user){
 
@@ -398,7 +399,8 @@ var x = randomString({
 
       client.post('/getmap/:username', function(req, res){
 
-         MapData.findOne({'username': req.params.username},function(user){
+         MapData.findOne({'username': req.params.username},function(err,user){
+          if (err) throw err;
             
             if(user){
 
