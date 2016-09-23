@@ -26,12 +26,12 @@ infoWindow: {
 $interval(function() {
 $http.post(route).success(function(data){
 	if(data!="none"){
-		if(pr==parseFloat(data.lt) && pl == parseFloat(data.lg)){
+		if(pr==parseFloat(data.lat) && pl == parseFloat(data.lng)){
             
 		}
 		else{
-			pr=parseFloat(data.lt);
-			pl=parseFloat(data.lg);
+			pr=parseFloat(data.lat);
+			pl=parseFloat(data.lng);
 mapObj.removeMarker(m);
 lt=parseFloat(data.lat);
 lg =parseFloat(data.lng);
