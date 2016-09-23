@@ -5,6 +5,8 @@
 function MapCtrl($scope, $http,  $interval) {
 var lt = 48.857;
 var lg = 2.295;
+var pr=lt;
+var pl = lg;
 var route = '/clientapp/getmap/rest';
 	var mapObj = new GMaps({
 		el: '#map',
@@ -24,6 +26,12 @@ infoWindow: {
 $interval(function() {
 $http.post(route).success(function(data){
 	if(data!="none"){
+		if(pr==parseFloat(data.lt) && pl == parseFloat(data.lg)){
+            
+		}
+		else{
+			pr=parseFloat(data.lt);
+			pl=parseFloat(data.lg);
 mapObj.removeMarker(m);
 lt=parseFloat(data.lat);
 lg =parseFloat(data.lng);
@@ -38,6 +46,7 @@ infoWindow: {
 	maxWidth: 100
 }
 });
+}
 }
 else{
 
