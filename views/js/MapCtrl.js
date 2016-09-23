@@ -47,6 +47,7 @@ lg =parseFloat(data.lng);
  mo  =   mapObj.drawOverlay({
   lat: lt,
   lng: lg,
+  verticalAlign: top,
   content: '<div class="overlay">'+lt+","+lg+'</div>'
 });
 
