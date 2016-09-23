@@ -7,25 +7,19 @@
         
          <script src="js/MapCtrl.js"></script>
     <style>
-      #maphere {
+      #map {
         width: 100vw;
         height: 100vh;
       }
     </style>
   </head>
-  <body  >
-    <div id="maphere"></div>
-     <script src="http://maps.googleapis.com/maps/api/js"></script>
+  <body  ng-Controller="MapCtrl" >
+    <div id="map"></div>
+     <script  type="text/javascript"  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDyngLmBuOYL-9FHM3LlWCfkJNgan9YzFs"></script>
     <!-- GMaps Library -->
      <script src="js/gmaps.js"></script>
       <script>
       /* Map Object */
-        var map= new GMaps({
-    el: '#maphere',
-    lat: 0.0,
-    lng: 0.0
-  });
-
   
     </script>
  
