@@ -396,7 +396,7 @@ var x = randomString({
     });
 
 
-      client.get('/getmap/:username', function(req, res){
+      client.post('/getmap/:username', function(req, res){
 
          Mapdata.findOne({'username': req.params.username},function(user){
             
