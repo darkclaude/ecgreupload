@@ -1,7 +1,7 @@
 ﻿function MapCtrl($scope, $http,  $interval) {
 var lt = 48.857;
 var lg = 2.295;
-var route = '/clientapp/getmap/test';
+var route = '/clientapp/getmap/rest';
 	var mapObj = new GMaps({
 		el: '#map',
 		lat: 0.0,
@@ -25,12 +25,13 @@ infoWindow: {
 });
 }
 else{
-	
+
 }
+
+});
 
 }, 250);
 
-});
 
 
 
