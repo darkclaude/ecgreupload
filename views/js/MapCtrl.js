@@ -40,7 +40,7 @@ $http.post(route).success(function(data){
 			pl=parseFloat(data.lng);
 mapObj.removeMarker(m);
 mapObj.removeOverlay(mo);
-lt=parseFloat(data.lat)+0.0005;
+lt=parseFloat(data.lat);
 lg =parseFloat(data.lng);
  console.log(lt);
  console.log(lg);
