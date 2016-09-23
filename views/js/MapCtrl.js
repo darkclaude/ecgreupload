@@ -22,15 +22,11 @@ infoWindow: {
 });
 
 $interval(function() {
-
+console.log("me");
 }, 250);
 
 
 
-
-$interval(function() {
-
-}, 2000);
 
 
 
