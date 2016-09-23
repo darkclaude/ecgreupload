@@ -22,28 +22,6 @@ infoWindow: {
 });
 
 $interval(function() {
-$http.post(route).success(function(data){
-	if(data!="none"){
-mapObj.removeMarker(m);
-lt=parseFloat(data.lat);
-lg =parseFloat(data.lng);
- console.log(lt);
- console.log(lg);
-  m = mapObj.addMarker({
-lat: data.lat,
-lng: data.lng,
-title: 'Phone',
-infoWindow: {
-	content: '<h4>Phone Location</h4><div>HERE</div>',
-	maxWidth: 100
-}
-});
-}
-else{
-
-}
-
-});
 
 }, 250);
 
