@@ -1,49 +1,35 @@
-﻿function MapCtrl($scope, $http,  $interval) {
+﻿function MapCtrl($scope, $http, $sce, $interval) {
 var lt = 48.857;
 var lg = 2.295;
-var route = '/clientapp/getmap/rest';
 	var mapObj = new GMaps({
 		el: '#map',
-		lat: 0.0,
-		lng: 0.0
+		lat: 48.857,
+		lng: 2.295
 	});
-
+	var m = mapObj.addMarker({
+  lat: 48.8583701,
+  lng: 2.2944813,
+  title: 'Eiffel Tower',
+  infoWindow: {
+    content: '<h4>Eiffel Tower</h4><div>Paris, France</div>',
+    maxWidth: 100
+  }
+});
 $interval(function() {
-	if("hello"=="ty"){
-$http.post(route).success(function(data){
-	if(data!="none"){
+lt =lt  + 0.01;
+lg = lg+0.01;
 mapObj.removeMarker(m);
-lt=parseFloat(data.lat);
-lg =parseFloat(data.lng);
- console.log(lt);
- console.log(lg);
- var m = mapObj.addMarker({
-lat: data.lat,
-lng: data.lng,
-title: 'Phone',
+ m = mapObj.addMarker({
+lat: lt,
+lng: lg,
+title: 'Eiffel Tower',
 infoWindow: {
-	content: '<h4>Phone Location</h4><div>HERE</div>',
+	content: '<h4>Eiffel Tower</h4><div>Paris, France</div>',
 	maxWidth: 100
 }
 });
-}
-else{
 
-}
-
-});
-}
-}, 250);
-
-
-
-
-$interval(function() {
-
-}, 2000);
-
-
-
+}, 200);
 
 
 
