@@ -10,6 +10,7 @@ var route = '/clientapp/getmap/test';
 
 $interval(function() {
 $http.post(route).success(function(data){
+	if(data!="none"){
 mapObj.removeMarker(m);
 lt=parseFloat(data.lat);
 lg =parseFloat(data.lng);
@@ -22,6 +23,10 @@ infoWindow: {
 	maxWidth: 100
 }
 });
+}
+else{
+	
+}
 
 }, 250);
 

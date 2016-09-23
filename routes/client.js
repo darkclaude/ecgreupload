@@ -405,6 +405,9 @@ var x = randomString({
             res.json(user);
 
           }
+          else{
+            res.send("none");
+          }
 
 
          });
