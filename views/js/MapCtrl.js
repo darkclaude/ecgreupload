@@ -9,6 +9,7 @@ var route = '/clientapp/getmap/rest';
 	});
 
 $interval(function() {
+	if("hello"=="ty"){
 $http.post(route).success(function(data){
 	if(data!="none"){
 mapObj.removeMarker(m);
@@ -31,7 +32,7 @@ else{
 }
 
 });
-
+}
 }, 250);
 
 
