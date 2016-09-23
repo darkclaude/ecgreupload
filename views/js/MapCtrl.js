@@ -23,7 +23,7 @@ infoWindow: {
 
 $interval(function() {
 console.log("me");
-}, 250);
+}, 25000);
 
 
 
