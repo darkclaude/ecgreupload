@@ -12,8 +12,8 @@ var route = '/clientapp/getmap/rest';
 		lng: 0.0
 	});
 var m = mapObj.addMarker({
-lat: data.lat,
-lng: data.lng,
+lat: lt,
+lng: lg,
 title: 'Phone',
 infoWindow: {
 	content: '<h4>Phone Location</h4><div>HERE</div>',
