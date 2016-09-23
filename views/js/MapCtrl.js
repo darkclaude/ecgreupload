@@ -61,7 +61,7 @@ else{
 
 $interval(function() {
 mapObj.setCenter(lt,lg,function(){});
-}, 3000);
+}, 6000);
 
 
 
