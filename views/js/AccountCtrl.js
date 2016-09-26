@@ -129,7 +129,7 @@ $http.get(route).success(function(data){
 
  if(isNaN(data)==false){
  	 $scope.genalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
- $scope.show_generated_key= data;
+ //$scope.show_generated_key= data;
  $scope.amount3 = "";
  }
  else{
