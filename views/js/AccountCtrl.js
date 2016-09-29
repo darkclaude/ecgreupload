@@ -103,7 +103,8 @@ atype="Postpaid";
 $scope.create = function(){
 var user = $scope.username1;
 var amount = $scope.amount1;
-var route = '/clientapp/createaccount/'+user+'/'+amount;
+var at = $scope.type;
+var route = '/clientapp/createaccount/'+user+'/'+amount+'/'+at;
 console.log(route);
     console.log(atype);
 $http.get(route).success(function(data){
