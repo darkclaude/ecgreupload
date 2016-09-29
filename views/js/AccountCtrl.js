@@ -104,7 +104,7 @@ $scope.create = function(){
 var user = $scope.username1;
 var amount = $scope.amount1;
 var at = $scope.type;
-var route = '/clientapp/createaccount/'+user+'/'+amount+'/'+at;
+var route = '/clientapp/createaccount/'+user+'/'+amount+'/'+at.toLowerCase();
 console.log(route);
     console.log(atype);
 $http.get(route).success(function(data){
