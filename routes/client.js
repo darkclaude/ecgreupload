@@ -116,6 +116,7 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
           //  var total = parseInt(account.balance) + amount;
             if(account.atype=="postpaid"){
             res.send("Cannot Credit A Postpaid!");
+            }
             else{
             account.tempc = parseInt(account.tempc)+amount;
              
