@@ -77,6 +77,16 @@
 									    	</div>
 									    	<span class="help-block has-error" id="password-error"></span>
 									  	</div>
+                                        
+                                        <div class="dropdown">
+  <button class="btn btn-default dropdown-toggle btn btn-block" type="button" data-toggle="dropdown"><span class="caret"></span>&nbsp&nbsp Account Type
+<font color={{ct}}><b> <span class="glyphicon glyphicon-arrow-right"></span>{{type}}</b></font> </button>
+  <ul  class="dropdown-menu">
+      <li><a  ng-click="type1()" href="#"><font color="red"><b>Prepaid</b></font></a></li>
+      <li><a ng-click="type2()" href="#"><font color="blue"><b>Postpaid</b></font></a></li>
+
+  </ul>
+</div>
 							  			<button type="button" id="login_btn" class="btn btn-block bt-login"  ng-click=" create()">Create Account</button>
 							  			
 										<div class="clearfix"></div>
@@ -181,6 +191,16 @@
 									    	<div class="input-group ">
 									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
 									      		<input ng-model="power1" contenteditable="false" ng-show="v" type="text" class="form-control" id="amount" placeholder="Power">
+									    	</div>
+                                            <div class=" form-group ">
+									    	<div class="input-group ">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="tempc1" contenteditable="false" ng-show="v" type="text" class="form-control" id="tempc" placeholder="Tempc">
+									    	</div>
+									    	
+									  	</div>
+                                            	<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input ng-model="atype" contenteditable="false" ng-show="v" type="text" class="form-control" id="atype" placeholder="Atype">
 									    	</div>
 									    	
 									  	</div>

@@ -4,10 +4,11 @@ var MapData = require('../config/models/map');
 var randomString = require('random-string');
 module.exports = function (client) {
          
-client.get('/createaccount/:user/:id', function(req, res){   // For Creating User
+client.get('/createaccount/:user/:id/:atype', function(req, res){   // For Creating User
 
 var user = req.params.user;
 var id = req.params.id;
+var atype = req.params.atype;
 if(isNaN(id)==false){
 Data.findOne({ 'username' :  user}, function(err, account) {
     if(err){
@@ -24,6 +25,7 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     newuser.balance = "0";
     newuser.power ="0";
     newuser.tempc=id;
+    newuser.atype = atype;
     newuser.save(function(err){
         if(err){
             res.send('Databsae Error!');

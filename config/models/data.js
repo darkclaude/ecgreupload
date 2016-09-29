@@ -5,7 +5,8 @@ var userSchema = datadb.Schema({
 		username: String,
         balance: String,
         power: String,
-        tempc: String
+        tempc: String,
+        atype: String
 		
 });
 

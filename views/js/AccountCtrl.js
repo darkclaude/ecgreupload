@@ -1,6 +1,9 @@
-﻿function AccountCtrl($scope, $http, $sce, $interval) {
+function AccountCtrl($scope, $http, $sce, $interval) {
 //showdialog
 var doreal= false;
+var atype = "Prepaid";
+    $scope.type = atype;
+    $scope.ct="red";
 $scope.realvalue=false;
 $scope.showmain = function(){
 $scope.t= true;
@@ -37,6 +40,8 @@ $scope.v = true;
 
  $scope.balance1= data.balance;
 $scope.power1 = data.power;
+     $scope.tempc1= data.tempc;
+     $scope.atype = data.atype;
 }
 else{
  $scope.infoalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!&nbsp</strong>'+data+'</div>');
@@ -44,6 +49,8 @@ else{
 
  $scope.balance1="";
 $scope.power1 = "";
+    $scope.tempc1="";
+    $scope.atype ="";
 }
 
 });
@@ -75,12 +82,30 @@ $scope.genalert="";
 }
 
 
+//Prepaid event
+$scope.type1 = function(){
+atype="Prepaid";
+    $scope.ct="red";
+$scope.type=atype;
+//console.log("Prepaid selected");
+    
+
+}
+$scope.type2 = function(){
+atype="Postpaid";
+    $scope.ct="blue";
+    $scope.type=atype;
+//console.log("Postpiad Selected");
+
+}
+
 //create
 $scope.create = function(){
 var user = $scope.username1;
 var amount = $scope.amount1;
 var route = '/clientapp/createaccount/'+user+'/'+amount;
 console.log(route);
+    console.log(atype);
 $http.get(route).success(function(data){
 	if(data.indexOf("Successfully!")!=-1){
  $scope.createalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
@@ -155,6 +180,8 @@ $scope.v = true;
 
  $scope.balance1= data.balance;
 $scope.power1 = data.power;
+     $scope.tempc1 = data.tempc;
+     $scope.atype= data.atype;
 }
 else{
  $scope.infoalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!&nbsp</strong>'+data+'</div>');
@@ -162,6 +189,8 @@ else{
 
  $scope.balance1="";
 $scope.power1 = "";
+    $scope.tempc1 = "";
+    $scope.atype="";
 }
 
 });
