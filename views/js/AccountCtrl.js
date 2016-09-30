@@ -104,45 +104,16 @@ $scope.create = function(){
 var text1 = $scope.username1;
 var text2 = $scope.amount1;
 var text3 = $scope.type;
-// create an instance of the block cipher algorithm
-var key = aesjs.util.convertStringToBytes("Example128BitKey");
 
-// The initialization vector, which must be 16 bytes
-var iv = aesjs.util.convertStringToBytes("IVMustBe16Bytes.");
-
-var text1AsBytes = aesjs.util.convertStringToBytes(text1);
-var text2AsBytes = aesjs.util.convertStringToBytes(text2);
-var text3AsBytes = aesjs.util.convertStringToBytes(text3);
-console.log(text1AsBytes);
-console.log(text2AsBytes);
-console.log(text3AsBytes);
-// [65, 66, 108, 111, 99, 107, 73, 115, 49, 54, 66, 121, 116, 101, 115, 33]
-
-
-
-
-
-
-// encrypt...
-var aesCtr = new aesjs.ModeOfOperation.ctr(key,new aesjs.Counter(5));
-var user = aesCtr.encrypt(text1AsBytes);
-//var  aesCtr = new aesjs.ModeOfOperation.ofb(key, iv,8);
-//var amount =aesjs.util.convertBytesToString(aesCtr.encrypt(text2AsBytes));
-//var  aesCtr = new aesjs.ModeOfOperation.ofb(key, iv,8);
-//var at = aesjs.util.convertBytesToString(aesOfb.encrypt(text3AsBytes));
- var  aesCtr = new aesjs.ModeOfOperation.ctr(key,new aesjs.Counter(5));
-var decryptedBytes = aesCtr.decrypt(user);
-
-// Convert our bytes back into text
-var decryptedText = aesjs.util.convertBytesToString(decryptedBytes);
-console.log(decryptedText);
-var user1 = aesjs.util.convertBytesToString(user);
-
-// [136, 15, 199, 174, 118, 133, 233, 177, 143, 47, 42, 211, 96, 55, 107, 109] 
-
-
-
-var route = '/clientapp/createaccount/'+user1+'/'+"amount"+'/'+"at.toLowerCase()";
+// Encrypt 
+var ciphertext = CryptoJS.AES.encrypt(text1, 'secret key 123');
+ 
+// Decrypt 
+var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
+var user = bytes.toString(CryptoJS.enc.Utf8);
+ 
+console.log(user);
+var route = '/clientapp/createaccount/'+user+'/'+amount+'/'+at.toLowerCase();
 console.log(route);
     console.log(atype);
 $http.get(route).success(function(data){

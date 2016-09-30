@@ -2,30 +2,13 @@ var Reach = require('../config/models/recharge');
 var Data = require('../config/models/data').Data;
 var MapData = require('../config/models/map');
 var randomString = require('random-string');
-var aesjs = require('aes-js');
+var CryptoJS = require("crypto-js");
+ 
 module.exports = function (client) {
          
 client.get('/createaccount/:user/:id/:atype', function(req, res){   // For Creating User
+
     
-var key = aesjs.util.convertStringToBytes("Example128BitKey");
-
-// The initialization vector, which must be 16 bytes
-var iv = aesjs.util.convertStringToBytes("IVMustBe16Bytes.");
-
-var d1 = aesjs.util.convertStringToBytes(req.params.user);
-var d2 =  aesjs.util.convertStringToBytes(req.params.id);
-var d3 = aesjs.util.convertStringToBytes(req.params.atype);
-  var aesCtr = new aesjs.ModeOfOperation.ctr(key,new aesjs.Counter(5));
-var decryptedBytes1 = aesCtr.decrypt(d1);
-aesCtr = new aesjs.ModeOfOperation.ctr(key,new aesjs.Counter(5));
-var decryptedBytes2 = aesCtr.decrypt(d2);
-aesCtr = new aesjs.ModeOfOperation.ctr(key,new aesjs.Counter(5));
-var decryptedBytes3 = aesCtr.decrypt(d3);
-
-var user = aesjs.util.convertBytesToString(decryptedBytes1);
-var id = aesjs.util.convertBytesToString(decryptedBytes2);
-var atype = aesjs.util.convertBytesToString(decryptedBytes3);
-
 if(isNaN(id)==true){
 Data.findOne({ 'username' :  user}, function(err, account) {
     if(err){
