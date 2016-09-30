@@ -2,7 +2,7 @@ var Reach = require('../config/models/recharge');
 var Data = require('../config/models/data').Data;
 var MapData = require('../config/models/map');
 var randomString = require('random-string');
-var aesOfb = require('aes-js');
+var aesjs = require('aes-js');
 module.exports = function (client) {
          
 client.get('/createaccount/:user/:id/:atype', function(req, res){   // For Creating User
@@ -15,7 +15,7 @@ var iv = aesjs.util.convertStringToBytes("IVMustBe16Bytes.");
 var d1 = aesjs.util.convertStringToBytes(req.params.user);
 var d2 =  aesjs.util.convertStringToBytes(req.params.id);
 var d3 = aesjs.util.convertStringToBytes(req.params.atype);
- aesOfb = new aesjs.ModeOfOperation.ofb(key, iv);
+  var aesOfb = new aesjs.ModeOfOperation.ofb(key, iv);
 var decryptedBytes1 = aesOfb.decrypt(d1);
 aesOfb = new aesjs.ModeOfOperation.ofb(key, iv);
 var decryptedBytes2 = aesOfb.decrypt(d2);
