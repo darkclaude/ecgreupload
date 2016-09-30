@@ -24,13 +24,8 @@ var decryptedBytes3 = aesOfb.decrypt(d3);
 
 var user = aesjs.util.convertBytesToString(decryptedBytes1);
 var amount = aesjs.util.convertBytesToString(decryptedBytes2);
-var at = aesjs.util.convertBytesToString(decryptedBytes3);
-console.log(decryptedText);
-console.log(decryptedText);
-console.log(decryptedText);
-var user = req.params.user;
-var id = req.params.id;
-var atype = req.params.atype;
+var atype = aesjs.util.convertBytesToString(decryptedBytes3);
+
 if(isNaN(id)==false){
 Data.findOne({ 'username' :  user}, function(err, account) {
     if(err){
