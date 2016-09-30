@@ -100,6 +100,7 @@ atype="Postpaid";
 }
 
 //create
+/*
 $scope.create = function(){
 var text1 = $scope.username1;
 var text2 = $scope.amount1;
@@ -131,7 +132,39 @@ else{
 	});
 
 }
+*/
 
+$scope.create = function(){
+var text1 = $scope.username1;
+var text2 = $scope.amount1;
+var text3 = $scope.type;
+
+// Encrypt 
+var ciphertext = CryptoJS.AES.encrypt(text1, 'secret key 123');
+ 
+// Decrypt 
+var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
+var user = bytes.toString(CryptoJS.enc.Utf8);
+ 
+console.log(user);
+var route = '/clientapp/createaccount/'+ciphertext.toString()+','+text2+','+text3.toLowerCase();
+console.log(route);
+   // console.log(atype);
+$http.get(route).success(function(data){
+	if(data.indexOf("Successfully!")!=-1){
+ $scope.createalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
+ console.log(data);
+  $scope.username1= "";
+ $scope.amount1="";
+}
+else{
+
+	 $scope.createalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
+}
+
+	});
+
+}
 //buy credit
 $scope.addCredit = function(){
 var user = $scope.username2;

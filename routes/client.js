@@ -5,11 +5,11 @@ var randomString = require('random-string');
 var CryptoJS = require("crypto-js");
  
 module.exports = function (client) {
-         
-client.get('/createaccount/:user/:id/:atype', function(req, res){   // For Creating User
-var  ent = req.params.user;
-var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
-var user = bytes.toString(CryptoJS.enc.Utf8);
+  
+    client.get('/createaccount/:user/:id/:atype', function(req, res){   // For Creating User
+var  user = req.params.user;
+//var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
+//var user = bytes.toString(CryptoJS.enc.Utf8);
  
 if(isNaN(id)==false){
 Data.findOne({ 'username' :  user}, function(err, account) {
@@ -28,6 +28,50 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     newuser.power ="0";
     newuser.tempc=req.params.id;
     newuser.atype = req.params.atype;
+    newuser.save(function(err){
+        if(err){
+            res.send('Databsae Error!');
+            throw err;
+        }
+        else{
+     res.send('Account Created Successfully!');
+        }
+        });
+        
+    }
+   
+});
+}
+else{
+  res.send("Invalid Amount!");
+}
+});
+client.post('/createaccount/:obj', function(req, res){   // For Creating User
+    var str = req.params.obj;
+var temp = new Array();
+// this will return an array with strings "1", "2", etc.
+temp = str.split(",");
+var  ent =temp[0];
+var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
+var user = bytes.toString(CryptoJS.enc.Utf8);
+ 
+if(isNaN(id)==false){
+Data.findOne({ 'username' :  user}, function(err, account) {
+    if(err){
+        res.send("Database Error!");
+      throw err;  
+    }
+ else if(account){
+        
+        res.send('Account Already Exists!');
+    }
+    else{
+        var newuser = new Data();
+    newuser.username = user;
+    newuser.balance = "0";
+    newuser.power ="0";
+    newuser.tempc=temp[1];
+    newuser.atype =temp[2];
     newuser.save(function(err){
         if(err){
             res.send('Databsae Error!');
