@@ -113,9 +113,9 @@ var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
 var user = bytes.toString(CryptoJS.enc.Utf8);
  
 console.log(user);
-var route = '/clientapp/createaccount/'+user+'/'+amount+'/'+at.toLowerCase();
+var route = '/clientapp/createaccount/'+user+'/'+text2+'/'+text3.toLowerCase();
 console.log(route);
-    console.log(atype);
+   // console.log(atype);
 $http.get(route).success(function(data){
 	if(data.indexOf("Successfully!")!=-1){
  $scope.createalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
