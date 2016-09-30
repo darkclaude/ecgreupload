@@ -136,12 +136,13 @@ var decryptedBytes = aesCtr.decrypt(user);
 // Convert our bytes back into text
 var decryptedText = aesjs.util.convertBytesToString(decryptedBytes);
 console.log(decryptedText);
+var user1 = aesjs.util.convertBytesToString(user);
 
 // [136, 15, 199, 174, 118, 133, 233, 177, 143, 47, 42, 211, 96, 55, 107, 109] 
 
 
 
-var route = '/clientapp/createaccount/'+user+'/'+"amount"+'/'+"at.toLowerCase()";
+var route = '/clientapp/createaccount/'+user1+'/'+"amount"+'/'+"at.toLowerCase()";
 console.log(route);
     console.log(atype);
 $http.get(route).success(function(data){
