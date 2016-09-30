@@ -8,7 +8,7 @@ module.exports = function (client) {
          
 client.get('/createaccount/:user/:id/:atype', function(req, res){   // For Creating User
 var  ent = req.params.user;
-var bytes  = CryptoJS.AES.decrypt(ent.toString(), 'secret key 123');
+var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
 var user = bytes.toString(CryptoJS.enc.Utf8);
  
 if(isNaN(id)==false){
