@@ -104,6 +104,12 @@ $scope.create = function(){
 var text1 = $scope.username1;
 var text2 = $scope.amount1;
 var text3 = $scope.type;
+// create an instance of the block cipher algorithm
+var key = aesjs.util.convertStringToBytes("Example128BitKey");
+
+// The initialization vector, which must be 16 bytes
+var iv = aesjs.util.convertStringToBytes("IVMustBe16Bytes.");
+
 var text1AsBytes = aesjs.util.convertStringToBytes(text1);
 var text2AsBytes = aesjs.util.convertStringToBytes(text2);
 var text3AsBytes = aesjs.util.convertStringToBytes(text3);
@@ -113,15 +119,17 @@ console.log(text3AsBytes);
 // [65, 66, 108, 111, 99, 107, 73, 115, 49, 54, 66, 121, 116, 101, 115, 33]
 
 
-// create an instance of the block cipher algorithm
-var key = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3];
-var aes = new aesjs.AES(key);
+
+
 
 
 // encrypt...
-var user = aesjs.util.convertBytesToString(aes.encrypt(text1AsBytes));
-var amount =aesjs.util.convertBytesToString(aes.encrypt(text2AsBytes));
-var at = aesjs.util.convertBytesToString(aes.encrypt(text3AsBytes));
+var aesOfb = new aesjs.ModeOfOperation.ofb(key, iv);
+var user = aesjs.util.convertBytesToString(aesOfb.encrypt(text1AsBytes));
+ aesOfb = new aesjs.ModeOfOperation.ofb(key, iv);
+var amount =aesjs.util.convertBytesToString(aesOfb.encrypt(text2AsBytes));
+ aesOfb = new aesjs.ModeOfOperation.ofb(key, iv);
+var at = aesjs.util.convertBytesToString(aesOfb.encrypt(text3AsBytes));
 console.log(user);
 console.log(amount);
 console.log(at);
