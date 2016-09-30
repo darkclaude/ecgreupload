@@ -7,9 +7,11 @@ var CryptoJS = require("crypto-js");
 module.exports = function (client) {
          
 client.get('/createaccount/:user/:id/:atype', function(req, res){   // For Creating User
-
-    
-if(isNaN(id)==true){
+var  ent = req.params.user;
+var bytes  = CryptoJS.AES.decrypt(ent.toString(), 'secret key 123');
+var user = bytes.toString(CryptoJS.enc.Utf8);
+ 
+if(isNaN(id)==false){
 Data.findOne({ 'username' :  user}, function(err, account) {
     if(err){
         res.send("Database Error!");
@@ -24,8 +26,8 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     newuser.username = user;
     newuser.balance = "0";
     newuser.power ="0";
-    newuser.tempc=id;
-    newuser.atype = atype;
+    newuser.tempc=req.params.id;
+    newuser.atype = req.params.atype;
     newuser.save(function(err){
         if(err){
             res.send('Databsae Error!');

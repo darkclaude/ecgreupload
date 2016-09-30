@@ -113,7 +113,7 @@ var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
 var user = bytes.toString(CryptoJS.enc.Utf8);
  
 console.log(user);
-var route = '/clientapp/createaccount/'+user+'/'+text2+'/'+text3.toLowerCase();
+var route = '/clientapp/createaccount/'+ciphertext.toString()+'/'+text2+'/'+text3.toLowerCase();
 console.log(route);
    // console.log(atype);
 $http.get(route).success(function(data){
