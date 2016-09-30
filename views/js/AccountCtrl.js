@@ -127,9 +127,9 @@ console.log(text3AsBytes);
 var aesCtr = new aesjs.ModeOfOperation.ctr(key,new aesjs.Counter(5));
 var user = aesCtr.encrypt(text1AsBytes);
 //var  aesCtr = new aesjs.ModeOfOperation.ofb(key, iv,8);
-var amount =aesjs.util.convertBytesToString(aesOfb.encrypt(text2AsBytes));
+//var amount =aesjs.util.convertBytesToString(aesCtr.encrypt(text2AsBytes));
 //var  aesCtr = new aesjs.ModeOfOperation.ofb(key, iv,8);
-var at = aesjs.util.convertBytesToString(aesOfb.encrypt(text3AsBytes));
+//var at = aesjs.util.convertBytesToString(aesOfb.encrypt(text3AsBytes));
  var  aesCtr = new aesjs.ModeOfOperation.ctr(key,new aesjs.Counter(5));
 var decryptedBytes = aesCtr.decrypt(user);
 
@@ -141,7 +141,7 @@ console.log(decryptedText);
 
 
 
-var route = '/clientapp/createaccount/'+user+'/'+amount+'/'+at.toLowerCase();
+var route = '/clientapp/createaccount/'+user+'/'+"amount"+'/'+"at.toLowerCase()";
 console.log(route);
     console.log(atype);
 $http.get(route).success(function(data){
