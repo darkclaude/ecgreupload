@@ -101,9 +101,34 @@ atype="Postpaid";
 
 //create
 $scope.create = function(){
-var user = $scope.username1;
-var amount = $scope.amount1;
-var at = $scope.type;
+var text1 = $scope.username1;
+var text2 = $scope.amount1;
+var text3 = $scope.type;
+var text1AsBytes = aesjs.util.convertStringToBytes(text1);
+var text2AsBytes = aesjs.util.convertStringToBytes(text2);
+var text3AsBytes = aesjs.util.convertStringToBytes(text3);
+console.log(text1AsBytes);
+console.log(text2AsBytes);
+console.log(text3AsBytes);
+// [65, 66, 108, 111, 99, 107, 73, 115, 49, 54, 66, 121, 116, 101, 115, 33]
+
+
+// create an instance of the block cipher algorithm
+var key = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3];
+var aes = new aesjs.AES(key);
+
+
+// encrypt...
+var user = aesjs.util.convertBytesToString(aes.encrypt(text1AsBytes));
+var amount =aesjs.util.convertBytesToString(aes.encrypt(text2AsBytes));
+var at = aesjs.util.convertBytesToString(aes.encrypt(text3AsBytes));
+console.log(user);
+console.log(amount);
+console.log(at);
+// [136, 15, 199, 174, 118, 133, 233, 177, 143, 47, 42, 211, 96, 55, 107, 109] 
+
+
+
 var route = '/clientapp/createaccount/'+user+'/'+amount+'/'+at.toLowerCase();
 console.log(route);
     console.log(atype);

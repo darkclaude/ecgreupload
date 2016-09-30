@@ -2,10 +2,26 @@ var Reach = require('../config/models/recharge');
 var Data = require('../config/models/data').Data;
 var MapData = require('../config/models/map');
 var randomString = require('random-string');
+var aes = require('aes-js');
 module.exports = function (client) {
          
 client.get('/createaccount/:user/:id/:atype', function(req, res){   // For Creating User
+    
+var key = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3];
+var aes = new aesjs.AES(key);
+var d1 = aesjs.util.convertStringToBytes(req.params.user);
+var d2 =  aesjs.util.convertStringToBytes(req.params.id);
+var d3 = aesjs.util.convertStringToBytes(req.params.atype);
+var decryptedBytes1 = aes.decrypt(d1);
+var decryptedBytes2 = aes.decrypt(d2);
+var decryptedBytes3 = aes.decrypt(d3);
 
+var user = aesjs.util.convertBytesToString(decryptedBytes1);
+var amount = aesjs.util.convertBytesToString(decryptedBytes2);
+var at = aesjs.util.convertBytesToString(decryptedBytes3);
+console.log(decryptedText);
+console.log(decryptedText);
+console.log(decryptedText);
 var user = req.params.user;
 var id = req.params.id;
 var atype = req.params.atype;
