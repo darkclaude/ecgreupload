@@ -131,7 +131,7 @@ var amount =aesjs.util.convertBytesToString(aesOfb.encrypt(text2AsBytes));
  aesOfb = new aesjs.ModeOfOperation.ofb(key, iv);
 var at = aesjs.util.convertBytesToString(aesOfb.encrypt(text3AsBytes));
      aesOfb = new aesjs.ModeOfOperation.ofb(key, iv);
-var decryptedBytes = aesOfb.decrypt(user);
+var decryptedBytes = aesOfb.decrypt(text1AsBytes);
 
 // Convert our bytes back into text
 var decryptedText = aesjs.util.convertBytesToString(decryptedBytes);
