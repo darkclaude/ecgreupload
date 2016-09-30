@@ -26,7 +26,7 @@ var user = aesjs.util.convertBytesToString(decryptedBytes1);
 var id = aesjs.util.convertBytesToString(decryptedBytes2);
 var atype = aesjs.util.convertBytesToString(decryptedBytes3);
 
-if(isNaN(id)==false){
+if(isNaN(id)==true){
 Data.findOne({ 'username' :  user}, function(err, account) {
     if(err){
         res.send("Database Error!");
