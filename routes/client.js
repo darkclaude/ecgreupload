@@ -23,7 +23,7 @@ aesOfb = new aesjs.ModeOfOperation.ofb(key, iv);
 var decryptedBytes3 = aesOfb.decrypt(d3);
 
 var user = aesjs.util.convertBytesToString(decryptedBytes1);
-var amount = aesjs.util.convertBytesToString(decryptedBytes2);
+var id = aesjs.util.convertBytesToString(decryptedBytes2);
 var atype = aesjs.util.convertBytesToString(decryptedBytes3);
 
 if(isNaN(id)==false){
