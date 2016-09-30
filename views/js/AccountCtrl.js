@@ -125,12 +125,12 @@ console.log(text3AsBytes);
 
 // encrypt...
 var aesCtr = new aesjs.ModeOfOperation.ctr(key,new aesjs.Counter(5));
-var user = aesOfb.encrypt(text1AsBytes);
+var user = aesCtr.encrypt(text1AsBytes);
 //var  aesCtr = new aesjs.ModeOfOperation.ofb(key, iv,8);
 var amount =aesjs.util.convertBytesToString(aesOfb.encrypt(text2AsBytes));
 //var  aesCtr = new aesjs.ModeOfOperation.ofb(key, iv,8);
 var at = aesjs.util.convertBytesToString(aesOfb.encrypt(text3AsBytes));
- var  aesCtr = new aesjs.ModeOfOperation.cfb(key,new aesjs.Counter(5));
+ var  aesCtr = new aesjs.ModeOfOperation.ctr(key,new aesjs.Counter(5));
 var decryptedBytes = aesCtr.decrypt(user);
 
 // Convert our bytes back into text
