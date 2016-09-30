@@ -6,6 +6,7 @@ var CryptoJS = require("crypto-js");
  
 module.exports = function (client) {
   
+    /*
     client.get('/createaccount/:user/:id/:atype', function(req, res){   // For Creating User
 var  user = req.params.user;
 //var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
@@ -46,7 +47,8 @@ else{
   res.send("Invalid Amount!");
 }
 });
-client.post('/createaccount/:obj', function(req, res){   // For Creating User
+*/
+client.get('/createaccount/:obj', function(req, res){   // For Creating User
     var str = req.params.obj;
 var temp = new Array();
 // this will return an array with strings "1", "2", etc.
