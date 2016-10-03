@@ -59,7 +59,7 @@ var idb = CryptoJS.AES.decrypt(req.body.id,key);
 var id = idb.toString(CryptoJS.enc.Utf8);
 var atb = CryptoJS.AES.decrypt(req.body.atype,key);
 var atype =atb.toString(CryptoJS.enc.Utf8);
- res.send(user+','+id+','+atype);
+ //res.send(user+','+id+','+atype);
  
     
 if(isNaN(id)==false){
