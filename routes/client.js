@@ -48,9 +48,9 @@ else{
 }
 });
 */
-client.get('/createaccount', function(req, res){   // For Creating User
+client.get('/createaccount/:user', function(req, res){   // For Creating User
     
-    res.send(req.body.user);
+    res.send(req.params.user);
 /*
 var ent = req.body.user;
 
