@@ -147,13 +147,13 @@ var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
 var user = bytes.toString(CryptoJS.enc.Utf8);
  
 console.log(user);
-var route = '/clientapp/createaccount?user='+ciphertext.toString()+'&id='+text2+'&atype='+text3.toLowerCase();
+var route = '/clientapp/createaccount';//'?user='+ciphertext.toString()+'&id='+text2+'&atype='+text3.toLowerCase();
 
 console.log(route);
-
-   // console.log(atype);
-$http.get('/clientapp/createaccount').success(function(data){
-	if(data.indexOf("Successfully!")!=-1){
+var parameter = JSON.stringify({type:"user", username:user, id:text2});
+    $http.post(url, parameter).
+    success(function(data, status, headers, config) {
+    if(data.indexOf("Successfully!")!=-1){
  $scope.createalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  console.log(data);
   $scope.username1= "";
@@ -164,9 +164,18 @@ else{
 	 $scope.createalert = $sce.trustAsHtml('<div class="alert alert-danger"> <strong>Error!</strong> '+data+'</div>');
 }
 
-	});
+        console.log(data);
+      }).
+      error(function(data, status, headers, config) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+      });
+   // console.log(atype);
 
-}
+	
+	
+
+};
 //buy credit
 $scope.addCredit = function(){
 var user = $scope.username2;
