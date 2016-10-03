@@ -61,7 +61,7 @@ var atb = CryptoJS.AES.decrypt(req.body.atype,key);
 var atype =atb.toString(CryptoJS.enc.Utf8);
  res.send(user+','+id+','+atype);
  
-    /*
+    
 if(isNaN(id)==false){
 Data.findOne({ 'username' :  user}, function(err, account) {
     if(err){
@@ -96,7 +96,7 @@ Data.findOne({ 'username' :  user}, function(err, account) {
 else{
   res.send("Invalid Amount!");
 }
-*/
+
 });
    
 
