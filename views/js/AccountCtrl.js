@@ -151,7 +151,7 @@ var route = '/clientapp/createaccount';//'?user='+ciphertext.toString()+'&id='+t
 
 console.log(route);
 var parameter = JSON.stringify({type:"user", username:user, id:text2});
-    $http.post(url, parameter).
+    $http.post(route, parameter).
     success(function(data, status, headers, config) {
     if(data.indexOf("Successfully!")!=-1){
  $scope.createalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
