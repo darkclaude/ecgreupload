@@ -56,7 +56,7 @@ var key = 'secret key 123';
 var bytes  = CryptoJS.AES.decrypt(req.body.username, key);
 var user = bytes.toString(CryptoJS.enc.Utf8);
 var idb = CryptoJS.AES.decrypt(req.body.id,key);
-var id = idb.toString(cry.enc.Utf);
+var id = idb.toString(CryptoJS.enc.Utf);
 var atb = CryptoJS.AES.decrypt(req.body.atype,key);
 var atype =atb.toString(CryptoJS.enc.Utf8);
  res.send(user+','+id+','+atype);
@@ -77,8 +77,8 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     newuser.username = user;
     newuser.balance = "0";
     newuser.power ="0";
-    newuser.tempc=req.body.id;
-    newuser.atype =req.body.atype;
+    newuser.tempc=id;
+    newuser.atype =atype;
     newuser.save(function(err){
         if(err){
             res.send('Databsae Error!');
