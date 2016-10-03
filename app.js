@@ -13,6 +13,11 @@ var port  = process.env.OPENSHIFT_NODEJS_PORT;
 var connection_string = ' ';
 // if OPENSHIFT env variables are present, use the available connection info:
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":"+process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +process.env.OPENSHIFT_APP_NAME;
+var bodyParser = require('body-parser');
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 app.use('/portal',express.static(__dirname + '/views'));
 app.use('/map', express.static(__dirname+ '/views'));
 //app.use('/*',express.static(__dirname + '/views'));

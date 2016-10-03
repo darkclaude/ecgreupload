@@ -48,12 +48,11 @@ else{
 }
 });
 */
-client.get('/createaccount/:obj', function(req, res){   // For Creating User
-    var str = req.params.obj;
+client.get('/createaccount', function(req, res){   // For Creating User
+    
 
-// this will return an array with strings "1", "2", etc.
-var temp = str.split(",");
-var  ent =temp[0];
+var ent = req.params.user;
+
 var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
 var user = bytes.toString(CryptoJS.enc.Utf8);
  
@@ -72,8 +71,8 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     newuser.username = user;
     newuser.balance = "0";
     newuser.power ="0";
-    newuser.tempc=temp[1];
-    newuser.atype =temp[2];
+    newuser.tempc=req.params.tempc;
+    newuser.atype =req.params.atype;
     newuser.save(function(err){
         if(err){
             res.send('Databsae Error!');
