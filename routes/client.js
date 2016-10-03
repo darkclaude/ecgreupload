@@ -50,7 +50,7 @@ else{
 */
 client.get('/createaccount', function(req, res){   // For Creating User
     
-    res.send("HELLO!");
+    res.send(req.params);
 /*
 var ent = req.body.user;
 
