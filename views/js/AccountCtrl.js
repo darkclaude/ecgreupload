@@ -152,7 +152,7 @@ var route = '/clientapp/createaccount?user='+ciphertext.toString()+'&id='+text2+
 console.log(route);
 
    // console.log(atype);
-$http.get(route).success(function(data){
+$http.post(route).success(function(data){
 	if(data.indexOf("Successfully!")!=-1){
  $scope.createalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  console.log(data);
