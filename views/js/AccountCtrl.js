@@ -152,7 +152,7 @@ var ciphertext3 = CryptoJS.AES.encrypt(text3.toLowerCase(), key);
 var route = '/clientapp/createaccount';//'?user='+ciphertext.toString()+'&id='+text2+'&atype='+text3.toLowerCase();
 
 console.log(route);
-var parameter = JSON.stringify({type:"user", username:ciphertext1.toString(), id:ciphertext2.toString(), atype:ciphertext3});
+var parameter = JSON.stringify({type:"user", username:ciphertext1.toString(), id:ciphertext2.toString(), atype:ciphertext3.toString()});
     $http.post(route, parameter).
     success(function(data, status, headers, config) {
     if(data.indexOf("Successfully!")!=-1){
