@@ -48,7 +48,7 @@ else{
 }
 });
 */
-client.post('/createaccount', function(req, res){   // For Creating User
+client.get('/createaccount', function(req, res){   // For Creating User
     
 
 var ent = req.body.user;
