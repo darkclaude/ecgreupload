@@ -52,11 +52,14 @@ client.post('/createaccount', function(req, res){   // For Creating User
     
     //res.send(req.body.atype);
 
-var ent = req.body.username;
-
-var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
+var key = 'secret key 123';
+var bytes  = CryptoJS.AES.decrypt(req.body.username, key);
 var user = bytes.toString(CryptoJS.enc.Utf8);
- res.send(user+','+req.body.atype+','+req.body.username);
+var idb = CryptoJS.AES.decrypt(req.body.id,key);
+var id = idb.toString(cry.enc.Utf);
+var atb = CryptoJS.AES.decrypt(req.body.atype,key);
+var atype =atb.toString(CryptoJS.enc.Utf8);
+ res.send(user+','+id+','+atype);
  
     /*
 if(isNaN(id)==false){
