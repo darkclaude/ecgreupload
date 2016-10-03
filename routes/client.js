@@ -50,14 +50,14 @@ else{
 */
 client.post('/createaccount', function(req, res){   // For Creating User
     
-    res.send(req.body.username);
-/*
-var ent = req.body.user;
+    //res.send(req.body.atype);
+
+var ent = req.body.username;
 
 var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
 var user = bytes.toString(CryptoJS.enc.Utf8);
- res.send(req.body.user+','+req.params.user);
- */
+ res.send(req.body.user+','+req.body.atype);
+ 
     /*
 if(isNaN(id)==false){
 Data.findOne({ 'username' :  user}, function(err, account) {

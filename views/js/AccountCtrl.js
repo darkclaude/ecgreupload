@@ -150,7 +150,7 @@ console.log(user);
 var route = '/clientapp/createaccount';//'?user='+ciphertext.toString()+'&id='+text2+'&atype='+text3.toLowerCase();
 
 console.log(route);
-var parameter = JSON.stringify({type:"user", username:user, id:text2});
+var parameter = JSON.stringify({type:"user", username:user, id:text2, atype:text3.toLowerCase()});
     $http.post(route, parameter).
     success(function(data, status, headers, config) {
     if(data.indexOf("Successfully!")!=-1){
