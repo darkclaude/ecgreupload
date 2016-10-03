@@ -71,7 +71,7 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     newuser.username = user;
     newuser.balance = "0";
     newuser.power ="0";
-    newuser.tempc=req.params.tempc;
+    newuser.tempc=req.params.id;
     newuser.atype =req.params.atype;
     newuser.save(function(err){
         if(err){
