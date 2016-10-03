@@ -144,7 +144,7 @@ var ciphertext = CryptoJS.AES.encrypt(text1, 'secret key 123');
  
 // Decrypt 
 var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
-var user = bytes.toString(CryptoJS.enc.Utf8);
+var user = bytes// bytes.toString(CryptoJS.enc.Utf8);
  
 console.log(user);
 var route = '/clientapp/createaccount';//'?user='+ciphertext.toString()+'&id='+text2+'&atype='+text3.toLowerCase();
