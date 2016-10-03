@@ -51,7 +51,7 @@ else{
 client.get('/createaccount', function(req, res){   // For Creating User
     
 
-var ent = req.params.user;
+var ent = req.body.user;
 
 var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
 var user = bytes.toString(CryptoJS.enc.Utf8);
@@ -71,8 +71,8 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     newuser.username = user;
     newuser.balance = "0";
     newuser.power ="0";
-    newuser.tempc=req.params.id;
-    newuser.atype =req.params.atype;
+    newuser.tempc=req.body.id;
+    newuser.atype =req.body.atype;
     newuser.save(function(err){
         if(err){
             res.send('Databsae Error!');
