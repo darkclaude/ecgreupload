@@ -138,19 +138,21 @@ $scope.create = function(){
 var text1 = $scope.username1;
 var text2 = $scope.amount1;
 var text3 = $scope.type;
-
+var key = 'secret key 123';
 // Encrypt 
-var ciphertext = CryptoJS.AES.encrypt(text1, 'secret key 123');
+var ciphertext1 = CryptoJS.AES.encrypt(text1, key);
+var ciphertext2 = CryptoJS.AES.encrypt(text2, key);
+var ciphertext3 = CryptoJS.AES.encrypt(text3.toLowerCase(), key);
 
-// Decrypt 
-var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
-var user = bytes// bytes.toString(CryptoJS.enc.Utf8);
+// Decrypt TEST 
+//var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
+//var user = bytes// bytes.toString(CryptoJS.enc.Utf8);
  
 console.log(user);
 var route = '/clientapp/createaccount';//'?user='+ciphertext.toString()+'&id='+text2+'&atype='+text3.toLowerCase();
 
 console.log(route);
-var parameter = JSON.stringify({type:"user", username:ciphertext.toString(), id:text2, atype:text3.toLowerCase()});
+var parameter = JSON.stringify({type:"user", username:ciphertext1.toString(), id:ciphertext2.toString(), atype:ciphertext3.toLowerCase()});
     $http.post(route, parameter).
     success(function(data, status, headers, config) {
     if(data.indexOf("Successfully!")!=-1){
