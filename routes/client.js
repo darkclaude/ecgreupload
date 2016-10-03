@@ -48,14 +48,14 @@ else{
 }
 });
 */
-client.get('/createaccount', function(req, res){   // For Creating User
+client.post('/createaccount', function(req, res){   // For Creating User
     
 
 var ent = req.body.user;
 
 var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
 var user = bytes.toString(CryptoJS.enc.Utf8);
- 
+ res.send(req.body.user+','+req.params.user);
 if(isNaN(id)==false){
 Data.findOne({ 'username' :  user}, function(err, account) {
     if(err){
