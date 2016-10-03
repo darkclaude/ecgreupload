@@ -56,7 +56,7 @@ var ent = req.body.username;
 
 var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
 var user = bytes.toString(CryptoJS.enc.Utf8);
- res.send(req.body.user+','+req.body.atype);
+ res.send(user+','+req.body.atype);
  
     /*
 if(isNaN(id)==false){
