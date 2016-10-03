@@ -136,7 +136,7 @@ else{
 
 $scope.create = function(){
 var text1 = $scope.username1;
-var text2 = $scope.amount1;
+var text2 = 'a'+$scope.amount1+'z';
 var text3 = $scope.type;
 var key = 'secret key 123';
 // Encrypt 
