@@ -50,9 +50,9 @@ else{
 */
 client.get('/createaccount/:obj', function(req, res){   // For Creating User
     var str = req.params.obj;
-var temp = new Array();
+
 // this will return an array with strings "1", "2", etc.
-temp = str.split(",");
+var temp = str.split(",");
 var  ent =temp[0];
 var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
 var user = bytes.toString(CryptoJS.enc.Utf8);
