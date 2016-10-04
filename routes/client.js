@@ -101,6 +101,60 @@ else{
 }
 
 });
+    client.get('/createaccount/:username/:id/:a', function(req, res){   // For Creating User
+    
+    //res.send(req.body.atype);
+
+var key = 'secret key 123';
+var bytes  = req.params.username;
+var user = bytes
+var idb = req.params.id;
+var id = idb;
+var atb = req.body.a;
+var atype =atb;
+ //res.send(user+','+id+','+atype);
+ 
+    
+if(isNaN(id)==false){
+Data.findOne({ 'username' :  user}, function(err, account) {
+    if(err){
+        var em = "Database Error!";
+        res.send(em);
+      throw err;  
+    }
+ else if(account){
+        var em2 = 'Account Already Exists!';
+        res.send(em);
+    }
+    else{
+        var newuser = new Data();
+    newuser.username = user;
+    newuser.balance = "0";
+    newuser.power ="0";
+    newuser.tempc=id;
+    newuser.atype =atype;
+    newuser.save(function(err){
+        if(err){
+            var em3 = 'Database Error!';
+            res.send(em3);
+            throw err;
+        }
+        else{
+      var em4 = 'Account Created Successfully!';
+     res.send(em4);
+        }
+        });
+        
+    }
+   
+});
+}
+else{
+  res.send("Invalid Amount!");
+}
+
+});
+   
    
 
     
