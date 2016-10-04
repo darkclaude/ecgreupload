@@ -87,7 +87,7 @@ Data.findOne({ 'username' :  user}, function(err, account) {
             throw err;
         }
         else{
-      var em4 = 'Account Created Succesfully!';
+      var em4 = 'Account Created Successfully!';
      res.send(CryptoJS.AES.encrypt(em4, key).toString());
         }
         });
