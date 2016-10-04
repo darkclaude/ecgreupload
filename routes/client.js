@@ -123,7 +123,7 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     }
  else if(account){
         var em2 = 'Account Already Exists!';
-        res.send(em);
+        res.send(em2);
     }
     else{
         var newuser = new Data();
