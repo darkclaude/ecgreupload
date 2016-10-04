@@ -154,7 +154,9 @@ var route = '/clientapp/createaccount';//'?user='+ciphertext.toString()+'&id='+t
 console.log(route);
 var parameter = JSON.stringify({type:"user", username:ciphertext1.toString(), id:ciphertext2.toString(), atype:ciphertext3.toString()});
     $http.post(route, parameter).
-    success(function(data, status, headers, config) {
+    success(function(response, status, headers, config) {
+    var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
+    var Data =  bytes.toString(CryptoJS.enc.Utf8);
     if(data.indexOf("Successfully!")!=-1){
  $scope.createalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  console.log(data);

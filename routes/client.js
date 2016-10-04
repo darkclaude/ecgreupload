@@ -65,12 +65,13 @@ var atype =atb.toString(CryptoJS.enc.Utf8);
 if(isNaN(id)==false){
 Data.findOne({ 'username' :  user}, function(err, account) {
     if(err){
-        res.send("Database Error!");
+        var em = "Database Error!";
+        res.send(CryptoJS.AES.encrypt(em, key).toString());
       throw err;  
     }
  else if(account){
-        
-        res.send('Account Already Exists!');
+        var em2 = 'Account Already Exists!';
+        res.send(CryptoJS.AES.encrypt(em2, key).toString());
     }
     else{
         var newuser = new Data();
@@ -81,11 +82,13 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     newuser.atype =atype;
     newuser.save(function(err){
         if(err){
-            res.send('Databsae Error!');
+            var em3 = 'Database Error!';
+            res.send(CryptoJS.AES.encrypt(em3, key).toString());
             throw err;
         }
         else{
-     res.send('Account Created Successfully!');
+      var em4 = 'Account Created Succesfully!';
+     res.send(CryptoJS.AES.encrypt(em4, key).toString());
         }
         });
         
