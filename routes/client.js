@@ -101,17 +101,16 @@ else{
 }
 
 });
-    client.get('/createaccount/:username/:id/:a', function(req, res){   // For Creating User
+client.get('/createaccount/:username/:id/:atype', function(req, res){   // For Creating User
     
     //res.send(req.body.atype);
 
-var key = 'secret key 123';
-var bytes  = req.params.username;
-var user = bytes
-var idb = req.params.id;
-var id = idb;
-var atb = req.body.a;
-var atype =atb;
+//var key = 'secret key 123';
+var user  = req.params.username;
+var id = req.params.id;
+
+//var atb = req.body.a;
+//var atype =atb;
  //res.send(user+','+id+','+atype);
  
     
@@ -132,7 +131,7 @@ Data.findOne({ 'username' :  user}, function(err, account) {
     newuser.balance = "0";
     newuser.power ="0";
     newuser.tempc=id;
-    newuser.atype =atype;
+    newuser.atype =req.params.atype;
     newuser.save(function(err){
         if(err){
             var em3 = 'Database Error!';
