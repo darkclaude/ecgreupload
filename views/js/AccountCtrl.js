@@ -156,7 +156,7 @@ var parameter = JSON.stringify({type:"user", username:ciphertext1.toString(), id
     $http.post(route, parameter).
     success(function(response, status, headers, config) {
     var bytes  = CryptoJS.AES.decrypt(response.toString(), 'secret key 123');
-    var Data =  bytes.toString(CryptoJS.enc.Utf8);
+    var data =  bytes.toString(CryptoJS.enc.Utf8);
     if(data.indexOf("Successfully!")!=-1){
  $scope.createalert = $sce.trustAsHtml('<div class="alert alert-success"> <strong>Success!</strong> '+data+'</div>');
  console.log(data);
