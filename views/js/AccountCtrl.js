@@ -138,7 +138,7 @@ $scope.create = function(){
 var text1 = $scope.username1;
 var text2 = $scope.amount1;
 var text3 = $scope.type;
-var key = 'secret key 123';
+var key = 'my secretkey 123';
 // Encrypt 
 var ciphertext1 = CryptoJS.AES.encrypt(text1, key);
 var ciphertext2 = CryptoJS.AES.encrypt(text2, key);
