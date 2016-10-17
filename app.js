@@ -1,8 +1,5 @@
 
 
-
-
-
 var express = require('express');
 var app = express();
 var configDB = require('./config/database.js');
