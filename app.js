@@ -1,6 +1,8 @@
 
 
 
+
+
 var express = require('express');
 var app = express();
 var configDB = require('./config/database.js');
@@ -74,3 +76,4 @@ app.get('/*',function(req, res){
 //app.listen(port);
 console.log("started");
 app.listen(port, process.env.OPENSHIFT_NODEJS_IP);
+
