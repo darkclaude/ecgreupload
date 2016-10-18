@@ -52,7 +52,7 @@ client.post('/createaccount', function(req, res){   // For Creating User
     
     //res.send(req.body.atype);
 
-var key = 'my secretkey 123';
+var key = 'secret key 123';
 var bytes  = CryptoJS.AES.decrypt(req.body.username, key);
 var user = bytes.toString(CryptoJS.enc.Utf8);
 var idb = CryptoJS.AES.decrypt(req.body.id,key);
