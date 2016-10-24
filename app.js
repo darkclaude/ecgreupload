@@ -16,7 +16,7 @@ var bodyParser = require('body-parser');
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: false
+  extended: true
 })); 
 app.use('/portal',express.static(__dirname + '/views'));
 app.use('/map', express.static(__dirname+ '/views'));
