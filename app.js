@@ -48,8 +48,8 @@ res.render('map.ejs');
 
 var urlp = bodyParser.urlencoded({ extended: false});
 app.post('/testjson', urlp ,function(req,res){
-var action = req.params.action || req.body.action;
-res.send(req.body.action);
+
+res.json(req.body);
 });
 app.get('/*',function(req, res){
    res.send('Route Doesnt Exist!'); 
