@@ -48,16 +48,9 @@ app.get('/map', function(req,res){
 res.render('map.ejs');
 });
 
-app.get('/testjson', function(req,res){
-var t = {
-  "__v": 0,
-  "_id": "57cec96a39f9ed6dcc526871",
-  "balance": "37043",
-  "power": "0",
-  "tempc": "0",
-  "username": "peter"
-};
-res.json(t);
+app.post('/testjson', function(req,res){
+
+res.send('What i got '+req.params.action+','+req.params.name+','+req.params.passwd);
 });
 app.get('/*',function(req, res){
    res.send('Route Doesnt Exist!'); 
