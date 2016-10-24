@@ -50,7 +50,7 @@ res.render('map.ejs');
 
 app.post('/testjson', function(req,res){
 
-res.send('What i got '+req.params.action+','+req.params.name+','+req.params.passwd);
+res.send('What i got '+req.body.action+','+req.params.name+','+req.params.passwd);
 });
 app.get('/*',function(req, res){
    res.send('Route Doesnt Exist!'); 
