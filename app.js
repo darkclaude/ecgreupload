@@ -13,9 +13,7 @@ var connection_string = ' ';
 // if OPENSHIFT env variables are present, use the available connection info:
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":"+process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +process.env.OPENSHIFT_APP_NAME;
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: false
-})); 
+app.use(bodyParser.urlencoded()); 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 
 app.use('/portal',express.static(__dirname + '/views'));
@@ -49,7 +47,7 @@ res.render('map.ejs');
 });
 
 app.post('/testjson', function(req,res){
-var action = req.params.action || req.body.name;
+var action = req.params.action || req.body.action;
 res.send(action);
 });
 app.get('/*',function(req, res){
