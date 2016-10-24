@@ -51,7 +51,7 @@ else{
     
     
  client.post('/testjson', function(req,res){
-var name = req.body.name;
+var name = req.params.name;
 res.send('Hello : '+name);
 });
 client.post('/createaccount', function(req, res){   // For Creating User
