@@ -46,9 +46,10 @@ app.get('/map', function(req,res){
 res.render('map.ejs');
 });
 
-app.post('/testjson', function(req,res){
+var urlp = bodyParser.urlencoded({ extended: false});
+app.post('/testjson', urlp ,function(req,res){
 var action = req.params.action || req.body.action;
-res.send(req.body+','+req.params);
+res.send(req.body.action);
 });
 app.get('/*',function(req, res){
    res.send('Route Doesnt Exist!'); 
