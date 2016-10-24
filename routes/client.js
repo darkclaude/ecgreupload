@@ -48,6 +48,12 @@ else{
 }
 });
 */
+    
+    
+ client.post('/testjson', function(req,res){
+var name = req.body.name;
+res.send('Hello : '+name);
+});
 client.post('/createaccount', function(req, res){   // For Creating User
     
     //res.send(req.body.atype);
