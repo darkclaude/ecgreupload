@@ -2,11 +2,12 @@ var Reach = require('../config/models/recharge');
 var Data = require('../config/models/data').Data;
 var MapData = require('../config/models/map');
 var randomString = require('random-string');
-var CryptoJS = require("crypto-js");
+var CryptoJS = require("crypto-js"); 
  
 module.exports = function (client) {
   
     /*
+    as in dick
     client.get('/createaccount/:user/:id/:atype', function(req, res){   // For Creating User
 var  user = req.params.user;
 //var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
