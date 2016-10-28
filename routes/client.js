@@ -360,6 +360,61 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
         
     });
     
+    
+        
+client.post('/creditaccount', function(req, res){       //Route  to Credit User Account
+    
+   var user = req.body.user;
+   var amount = 0;
+  
+   if(isNaN(req.body.amount)==false){
+     amount = parseInt(req.body.amount);
+  
+    Data.findOne({'username': user}, function(err,account){
+        if(err){
+        res.send("Database Error!");
+         throw err;   
+            
+        }
+        if(account){
+            
+          //  var total = parseInt(account.balance) + amount;
+            if(account.atype=="postpaid"){
+            res.send("Cannot Credit A Postpaid!");
+            }
+            else{
+            account.tempc = parseInt(account.tempc)+amount;
+             
+            account.save(function(err){
+                
+             if(err){
+                 res.send('Database Error');
+                 throw err;
+                 
+             }
+                res.send('Account Credited Successfully!');
+            
+                
+            });
+                        }
+                        }
+                else{
+                   
+                    res.send('Account Not Found!');
+                    
+                }
+                
+            
+       
+                });
+  }
+  else{
+
+    res.send("Invalid Amount!");
+  }
+        
+        
+    });
     client.get('/deleteaccount/:user', function(req, res){     //Route to Delete User
         
         var user = req.params.user;
