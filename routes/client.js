@@ -640,7 +640,7 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
     
     
        
- client.get('/generatekey', function(req, res){
+ client.post('/generatekey', function(req, res){
   
   if(isNaN(req.body.amount)==false){     
         
