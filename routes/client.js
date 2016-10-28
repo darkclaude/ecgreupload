@@ -160,7 +160,7 @@ else{
       
  client.post('/halik', function(req,res){
 var name = req.body.tonga;
-res.send(name);
+res.json(req.body);
 });
 
     
