@@ -485,6 +485,75 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
         });
     
     
+    client.post('/transfer',function(req,res){
+       
+        var user1 = req.params.sender;
+        var user2 = req.params.receiver;
+        var checkpass = false;
+        if(isNaN(req.params.amount)==false){
+           var amount = parseInt(req.params.amount);
+        Data.findOne({'username':user1}, function(err,account1){
+            
+            if(err){throw err};
+            if(account1){
+                
+                
+                Data.findOne({'username':user2}, function(err, account2){
+                    
+                    if(err){throw err}
+                    if(account2){
+                        
+                         if(parseInt(account1.balance)>=amount){
+                             
+                             account1.balance = (parseInt(account1.balance)-amount).toString();
+                             account2.tempc = (parseInt(account2.tempc)+amount).toString();
+                             account1.save(function(err){  
+                             });
+                             account2.save(function(err){
+                             });
+                           res.send('Transfer Successfully!');
+                            
+                             
+                         }
+                        else{
+                            res.send('Insufficient Balance');
+                            
+                        }
+                        
+                    }
+                    
+                    else{
+                        
+                        
+                     res.send('One or Both Accounts Doesnt Exist!');
+                        
+                        
+                    }
+                    
+                    
+                });
+           
+                
+            }
+            else{
+
+            res.send('One or Both Accounts Doesnt Exist!');
+                
+            }
+          
+        });
+        
+        }
+        else{
+
+          res.send("Invalid Amount!");
+        }
+    });
+    
+    
+    
+    
+    
     client.get('/transfer/:user1/:user2/:amount',function(req,res){
        
         var user1 = req.params.user1;
