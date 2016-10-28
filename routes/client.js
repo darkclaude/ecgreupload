@@ -639,6 +639,33 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
     });
     
     
+       
+ client.get('/generatekey', function(req, res){
+  
+  if(isNaN(req.body.amount)==false){     
+        
+var x = randomString({
+  length: 10,
+  numeric: true,
+  letters: false,
+  special: false
+});
+    
+        var newcard = new Reach();
+        newcard.key = x;
+        newcard.value = req.amount.value;
+        newcard.used = false;
+        newcard.usedby= "nobody";
+        newcard.save(function(err){});
+        res.send(x);
+        
+        }
+        else{
+
+          res.send("Invalid Amount!");
+        }
+        
+    });
     
     
  client.get('/generatekey/:value', function(req, res){
