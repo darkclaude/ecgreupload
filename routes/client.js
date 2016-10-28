@@ -511,12 +511,31 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
                              });
                              account2.save(function(err){
                              });
-                           res.send('Transfer Successfully!');
+                           res.send('Transferred Successfully!');
                             
                              
                          }
                         else{
-                            res.send('Insufficient Balance');
+                            if(parseInt(account1.tempc)>=amount){
+                                account1.tempc = (parseInt(account1.tempc)-amount).toString();
+                                account2.tempc = (parseInt(account2.tempc)+amount).toString();
+                                
+                                account1.save(function(err){
+                                });
+                                account2.save(function(err){
+                                    
+                                });
+                                res.send('Transferred Successfully!');
+                                
+                                
+                            }
+                            else{
+                                
+                                
+                               res.send('Insufficient Balance');  
+                                
+                            }
+                           
                             
                         }
                         
