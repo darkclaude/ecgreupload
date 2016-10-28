@@ -242,8 +242,8 @@ client.post('/getinfo',function(req, res){  // Route for Getting User info
       }
 else if(account){
         
-     res.send(account.username+","+account.balance+","+account.power);
-        
+    // res.send(account.username+","+account.balance+","+account.power);
+       res.json(account); 
     }
       else{
           
