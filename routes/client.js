@@ -364,7 +364,7 @@ client.get('/creditaccount/:user/:amount', function(req, res){       //Route  to
         
 client.post('/creditaccount', function(req, res){       //Route  to Credit User Account
     
-   var user = req.body.user;
+   var user = req.body.username;
    var amount = 0;
   
    if(isNaN(req.body.amount)==false){
