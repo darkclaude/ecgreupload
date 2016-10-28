@@ -452,7 +452,7 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
     
      client.post('/deleteaccount', function(req, res){     //Route to Delete User
         
-        var user = req.params.username;
+        var user = req.body.username;
          Data.findOne({ 'username':user }, function(err,r){
                           
                    if(err){
