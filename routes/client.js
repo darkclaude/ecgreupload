@@ -230,6 +230,31 @@ var name = req.body.name;
 res.send("Hello "+name);
 });
 
+   
+client.post('/getinfo',function(req, res){  // Route for Getting User info
+
+  var user = req.body.username;
+
+  Data.findOne({'username' : user}, function(err,account){
+      if(err){
+          res.send("Database Error");
+          throw err;
+      }
+else if(account){
+        
+     res.send(account.username+","+account.balance+","+account.power);
+        
+    }
+      else{
+          
+          res.send("Account Not Found!");
+      }
+      
+      
+  });   
+    
+});
+    
     
 client.get('/getinfo/:user',function(req, res){  // Route for Getting User info
 
