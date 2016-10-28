@@ -50,7 +50,7 @@ else{
 });
 */
     
- 
+
 client.post('/createaccount', function(req, res){   // For Creating User
     
     //res.send(req.body.atype);
@@ -100,10 +100,77 @@ Data.findOne({ 'username' :  user}, function(err, account) {
 });
 }
 else{
+    var em5 = 'Invalid Amount!';
+  res.send(CryptoJS.AES.encrypt(em5, key).toString());
+}
+
+});
+    
+   
+client.post('/createaccount2', function(req, res){   // For Creating User
+    
+    //res.send(req.body.atype);
+/*
+var key = 'secret key 123';
+var bytes  = CryptoJS.AES.decrypt(req.body.username, key);
+var user = bytes.toString(CryptoJS.enc.Utf8);
+var idb = CryptoJS.AES.decrypt(req.body.id,key);
+var id = idb.toString(CryptoJS.enc.Utf8);
+var atb = CryptoJS.AES.decrypt(req.body.atype,key);
+var atype =atb.toString(CryptoJS.enc.Utf8);
+ //res.send(user+','+id+','+atype);
+ 
+    */
+    
+    var  user = req.body.username;
+    var  id = req.body.id;
+    var  atype = req.body.atype;
+    
+if(isNaN(id)==false){
+Data.findOne({ 'username' :  user}, function(err, account) {
+    if(err){
+        var em = "Database Error!";
+      //  res.send(CryptoJS.AES.encrypt(em, key).toString());
+        res.send(em);
+      throw err;  
+    }
+ else if(account){
+        var em2 = 'Account Already Exists!';
+      //  res.send(CryptoJS.AES.encrypt(em2, key).toString());
+     res.send(em2);
+    }
+    else{
+        var newuser = new Data();
+    newuser.username = user;
+    newuser.balance = "0";
+    newuser.power ="0";
+    newuser.tempc=id;
+    newuser.atype =atype;
+    newuser.save(function(err){
+        if(err){
+            var em3 = 'Database Error!';
+        //    res.send(CryptoJS.AES.encrypt(em3, key).toString());
+            res.send(em3);
+            throw err;
+        }
+        else{
+      var em4 = 'Account Created Successfully!';
+   //  res.send(CryptoJS.AES.encrypt(em4, key).toString());
+            res.send(em4);
+        }
+        });
+        
+    }
+   
+});
+}
+else{
   res.send("Invalid Amount!");
 }
 
 });
+    
+    
 client.get('/createaccount/:username/:id/:atype', function(req, res){   // For Creating User
     
     //res.send(req.body.atype);
