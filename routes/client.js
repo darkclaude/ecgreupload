@@ -159,7 +159,7 @@ else{
    
       
  client.post('/testjson', function(req,res){
-var name = req.body.tonga;
+var name = req.body.name;
 res.send("Hello "+name);
 });
 
