@@ -450,6 +450,41 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
         });
     
     
+     client.post('/deleteaccount', function(req, res){     //Route to Delete User
+        
+        var user = req.params.username;
+         Data.findOne({ 'username':user }, function(err,r){
+                          
+                   if(err){
+                       res.send("Database Error!");
+                       throw err;
+                       
+                   }
+                if(r){
+
+                  
+                  Data.findOne({ 'username':user }).remove().exec();
+                   res.send("Account Deleted Successfully!");
+       
+
+                }
+                else{
+
+                  res.send("Account not Found!");
+                }
+
+            
+            
+       
+            
+        });
+        
+           
+       
+            
+        });
+    
+    
     client.get('/transfer/:user1/:user2/:amount',function(req,res){
        
         var user1 = req.params.user1;
