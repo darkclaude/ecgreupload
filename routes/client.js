@@ -487,11 +487,11 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
     
     client.post('/transfer',function(req,res){
        
-        var user1 = req.params.sender;
-        var user2 = req.params.receiver;
+        var user1 = req.body.sender;
+        var user2 = req.body.receiver;
         var checkpass = false;
-        if(isNaN(req.params.amount)==false){
-           var amount = parseInt(req.params.amount);
+        if(isNaN(req.body.amount)==false){
+           var amount = parseInt(req.body.amount);
         Data.findOne({'username':user1}, function(err,account1){
             
             if(err){throw err};
