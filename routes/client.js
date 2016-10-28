@@ -158,9 +158,9 @@ else{
 });
    
       
- client.post('/halik', function(req,res){
+ client.post('/testjson', function(req,res){
 var name = req.body.tonga;
-res.json(req.body);
+res.send("Hello "+name);
 });
 
     
