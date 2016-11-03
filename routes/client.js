@@ -243,12 +243,13 @@ client.post('/getinfo',function(req, res){  // Route for Getting User info
     if(account){
         
     // res.send(account.username+","+account.balance+","+account.power);
-        account.format  = "json";
-       res.json(account); 
+    var result= {};
+        account["format"] = "json";
+        res.json(account); 
     }
       else{
           var f = {};
-          f.format="Account Not Found!";
+          f["format"]="Account Not Found!";
           res.json(f);
       }
       
