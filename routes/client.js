@@ -653,10 +653,10 @@ var x = randomString({
     
         var newcard = new Reach();
         newcard.key = x;
-        newcard.value = req.amount.value;
+        newcard.value = req.body.amount;
         newcard.used = false;
         newcard.usedby= "nobody";
-        newcard.save(function(err){});
+        newcard.save(function(err){if(err} throw err);
         res.send(x);
         
         }
@@ -673,7 +673,7 @@ var x = randomString({
   if(isNaN(req.params.value)==false){     
         
 var x = randomString({
-  length: 10,
+  length: 12,
   numeric: true,
   letters: false,
   special: false

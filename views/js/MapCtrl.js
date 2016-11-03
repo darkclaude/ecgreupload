@@ -1,6 +1,6 @@
-﻿
 
 
+// Map Function is supposed to be Moved to Another Server . I>E SHA-256 AES-512, HMAC ECDHE , Deprecated!
 
 function MapCtrl($scope, $http,  $interval) {
 var lt = 48.857;
