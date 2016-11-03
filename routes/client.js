@@ -656,7 +656,7 @@ var x = randomString({
         newcard.value = req.body.amount;
         newcard.used = false;
         newcard.usedby= "nobody";
-        newcard.save(function(err){if(err} throw err);
+        newcard.save(function(err){if(err) throw err;});
         res.send(x);
         
         }
