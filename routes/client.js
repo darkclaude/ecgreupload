@@ -244,8 +244,13 @@ client.post('/getinfo',function(req, res){  // Route for Getting User info
         
     // res.send(account.username+","+account.balance+","+account.power);
     var result= {};
-        result = account;
-        result["format"] = "json";
+        result.username = account.username;
+        result.balance= account.balance;
+        result.power = account.power;
+        result.tempc = account.tempc;
+        result.atype = account.atype;
+        result.format = "json";
+       // result["format"] = "json";
         res.json(account); 
     }
       else{
