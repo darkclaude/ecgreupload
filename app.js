@@ -12,7 +12,7 @@ var session = require('express-session');
 var pasport = require('passport');
 var flash = require('connect-flash');
 
-
+require('./config/passport')(passport);
 //var port = 2000;
 var port  = process.env.OPENSHIFT_NODEJS_PORT;
 var connection_string = ' ';
@@ -26,8 +26,12 @@ app.use(session({secret: 'sha256', saveUninitialized:true, resave: true, store: 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use('/auth',express.static(__dirname + '/views'));
 app.use('/portal',express.static(__dirname + '/views'));
 app.use('/map', express.static(__dirname+ '/views'));
+app.use('/dashboard', express.static(__dirname + '/views'));
+app.use('/dash', express.static(__dirname + '/views'));
+app.use('/', express.static(__dirname + 'views'));
 //app.use('/*',express.static(__dirname + '/views'));
 mongoose.connect("mongodb://"+connection_string+"/ecg");
 datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
