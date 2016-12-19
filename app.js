@@ -69,6 +69,104 @@ require('./routes/client')(client);
 require('./routes/device')(device);
 
 
+
+app.all('/ussd', function(req,res){
+ var haze = "No";
+ var raze1 = "No";
+ var raze2 = "No";
+   res.header("Access-Control-Allow-Origin", "http://apps.smsgh.com");
+  res.header("Access-Control-Allow-Headers",  req.get("Access-Control-Request-Headers"));
+  res.header("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+  var top = {};
+  top.Type="Response";
+  //top.Message="Welcome!";
+   var userfone = req.body.Mobile;
+   var msg = req.body.Message;
+   if(req.body.Type=="Initiation"){
+    top.Message="Welcome to SmartECG-GH: \nNano Addo For 4 Life!";
+    top.Type="Release";
+    res.json(top);
+   }
+    /*
+   else{
+   Driver.findOne({'phonenumber':userfone}, function(err, account){
+if(err){
+  throw err;
+}
+if(account){
+ if(account.expired==true){
+                    haze = "Yes";
+                  }
+                  if(account.reneweda==true){
+                    raze1 = "Yes";
+                  }
+                  if(account.renewedb==true){
+                    raze2= "Yes";
+                  }
+         if(msg=="1"){
+      top.Message="Hello "+account.name+"\n"+"License Expired: "+haze+"\n"+"1st Renewal Done: "+raze1+"\n2nd Renewal Done: "+raze2;
+      top.Type="Release";
+      res.json(top);
+    }
+    else if(msg =="2"){
+      var infojson = {};
+       today = moment.tz(new Date(), "Africa/Accra");
+      // var  td = new Date(k1.format());
+       exp= moment.tz(account.expiry, "Africa/Accra");
+     //  var  td2 = new Date(k2.format());
+         if(today<exp){
+     var diff = new DateDiff(exp, today);
+       var minutes = Math.floor(diff.seconds()/ 60); 
+var seconds = diff.seconds() % 60; 
+
+        infojson.leftm = minutes.toString();
+           var tom  =   seconds.toFixed(0);
+           var toms = tom;
+           if(toms.length<2){
+            toms="0"+toms;
+           }
+           infojson.lefts=toms;
+         }
+         else{
+        infojson.leftm="0";
+        infojson.lefts="0";
+         }
+                   //res.json(infojson);
+                   if(account.expired==true){
+                    haze = "Yes";
+                  }
+                  if(account.reneweda==true){
+                    raze1 = "Yes";
+                  }
+                  if(account.renewedb==true){
+                    raze2= "Yes";
+                  }
+      top.Message= "Hello "+account.name+"\n"+"License Expires On: "+exp.toString()+"\n(Min:Sec): "+infojson.leftm+" : "+infojson.lefts+"\nHas Expired: "+haze;
+      top.Type="Release";
+      res.json(top);
+    }
+    else{
+    //top.Message="Welcome to DriverNoTIF-GH:\n;
+      top.Message="Sorry Invalid Option!\n1. Check Status\n2. Check Expiration";
+      top.Type="Response";
+      res.json(top);
+    }
+
+
+
+}
+else{
+  top.Message="Sorry This Number is Not Registered for DriverNoTIF-GH";
+  top.Type="Release";
+  res.json(top);
+}
+
+   });
+  }
+  */
+});
+
+
 app.get('/portal', function(req, res){
 
 res.render('portal.ejs');
