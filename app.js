@@ -40,8 +40,9 @@ var stat = express.Router();
 
 var secure = express.Router();
 var auth= express.Router();
-app.use('/auth',auth);
+require('./routes/auth.js')(auth, passport,app);
 
+app.use('/auth',auth);
 require('./routes/secure.js')(secure,app, passport);
 app.set('view engine','ejs');
 app.use('/stat',stat);
