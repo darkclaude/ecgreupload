@@ -156,7 +156,7 @@ res.render('portal.ejs');
 
 });
 
-
+app.use('/',secure);
 app.get('/*',function(req, res){
    res.redirect('/auth'); 
     

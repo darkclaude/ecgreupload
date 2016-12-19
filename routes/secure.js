@@ -18,17 +18,17 @@ router.get('/dash', function(req, res){
 	//app.use('/dash', express.static(__dirname + '/views'));
 	res.render('dash.ejs');
 });
-app.get('/dashboard', function(req, res){
+router.get('/dashboard', function(req, res){
 	console.log(req.session);
 	//app.use('/profile', express.static(__dirname + '/views'));
 	res.render('dashboard.ejs');
 });
-     app.get('/topup', function(req, res){
+     router.get('/topup', function(req, res){
 	console.log(req.session);
 	//app.use('/profile', express.static(__dirname + '/views'));
 	res.render('topup.ejs');
 });
-     app.get('/topupr', function(req, res){
+     router.get('/topupr', function(req, res){
 	console.log(req.session);
 	//app.use('/profile', express.static(__dirname + '/views'));
 	res.render('topupr.ejs');
