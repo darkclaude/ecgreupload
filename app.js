@@ -9,11 +9,12 @@ var MapData = require('./config/models/map');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var pasport = require('passport');
+var MongoStore = require('connect-mongo/es5')(session);
+var passport = require('passport');
 var flash = require('connect-flash');
 
 require('./config/passport')(passport);
-//var port = 2000;
+//var port = 2500;
 var port  = process.env.OPENSHIFT_NODEJS_PORT;
 var connection_string = ' ';
 // if OPENSHIFT env variables are present, use the available connection info:
@@ -22,7 +23,7 @@ var connection_string = ' ';
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
  extended: true })); 
-app.use(session({secret: 'sha256', saveUninitialized:true, resave: true, store: new MongoStore({  url:"mongodb://"+connection_string+"/sessions"})}));
+app.use(session({secret: 'sha256512', saveUninitialized:true, resave: true, store: new MongoStore({  url:"mongodb://"+connection_string+"/sessions"})}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -33,10 +34,16 @@ app.use('/dashboard', express.static(__dirname + '/views'));
 app.use('/dash', express.static(__dirname + '/views'));
 app.use('/', express.static(__dirname + 'views'));
 //app.use('/*',express.static(__dirname + '/views'));
+//mongoose.connect(configDB.url);
+//datadb = mongoose.createConnection("mongodb://127.0.0.1:27017/data");
+
 mongoose.connect("mongodb://"+connection_string+"/ecg");
 datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
+
+/*
 reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges");
 mapdb = mongoose.createConnection("mongodb://"+connection_string+"/map");
+*/
 var client = express.Router();
 var device = express.Router();
 var stat = express.Router();
@@ -54,7 +61,7 @@ app.use('/device',device);
 app.use('/clientapp',client);
 
 require('./routes/stat')(stat);
-require('./routes/routes.js')(app,passport);
+//require('./routes/routes.js')(app,passport);
 require('./routes/client')(client);
 require('./routes/device')(device);
 

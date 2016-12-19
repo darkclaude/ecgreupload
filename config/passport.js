@@ -5,8 +5,8 @@ var jwt = require('jsonwebtoken');
 
 var LocalStrategy   = require('passport-local').Strategy;
 
-var Data = require('../app/models/data').Data;
-var sendgrid  = require('sendgrid')('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');
+var Data = require('./models/data').Data;
+//var sendgrid  = require('sendgrid')('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');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
