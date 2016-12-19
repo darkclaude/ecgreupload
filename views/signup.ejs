@@ -33,16 +33,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		<div class="login-body">
 			<div class="login-heading">
 				<h1>Sign up</h1>
+                                 <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %>
 			</div>
 			<div class="login-info">
-				<form>
-					<input type="text" class="user" name="email" placeholder="Name" required="">
+				<form action="/auth/signup" method="POST">
+					<input type="text" class="user" name="username" placeholder="Name" required="">
 					<input type="text" class="user" name="email" placeholder="Email" required="">
 					<input type="password" name="password" class="lock" placeholder="Password">
-					<input type="password" name="password" class="lock" placeholder="Confirm Password">
+					<input type="password" name="passwordc" class="lock" placeholder="Confirm Password">
 					<input type="submit" name="Sign In" value="Sign up">
 					<div class="signup-text">
-						<a href="login.html">Already have an account? Login here.</a>
+						<a href="/auth/login">Already have an account? Login here.</a>
 					</div>
 				</form>
 			</div>

@@ -1,9 +1,4 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -32,10 +27,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <body class="login-bg">
 		<div class="login-body">
 			<div class="login-heading">
-                 <% if (message.length > 0) { %>
+
+				<h1>Login</h1>
+                                 <% if (message.length > 0) { %>
         <div class="alert alert-danger"><%= message %></div>
     <% } %>
-				<h1>Login</h1>
 			</div>
 			<div class="login-info">
 				<form action="/auth/login/" method="POST">
@@ -57,7 +53,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<input type="submit" name="Sign In" value="Login">
 					<div class="signup-text">
-						<a href="signup.html">Don't have an account? Create one now</a>
+						<a href="/auth/signup">Don't have an account? Create one now</a>
 					</div>
 					<hr>
 					

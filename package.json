@@ -21,7 +21,7 @@
     "express-session": "^1.14.2",
     "js-base64": "^2.1.9",
     "jsonwebtoken": "^7.2.1",
-    "mongoose": "^4.6.0",
+    "mongoose": "^4.7.3",
     "mongoose-delete": "^0.3.4",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",

@@ -25,7 +25,7 @@ module.exports = function(passport) {
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
 
-    User.findById(id, function(err, user) {
+    Data.findById(id, function(err, user) {
             done(err, user);
         });
 
@@ -41,14 +41,14 @@ module.exports = function(passport) {
     // =========================================================================
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
-/*
+
     passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
-        usernameField : 'email',
+        usernameField : 'username',
         passwordField : 'password',
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
-    function(req, email, password, done) {
+    function(req, username, password, done) {
 
         // asynchronous
         // User.findOne wont fire unless data is sent back
@@ -60,7 +60,7 @@ module.exports = function(passport) {
         var b = password.length;
         var c =  a+b;
 
-        User.findOne({ 'local.username' :  email }, function(err, user) {
+        Data.findOne({ 'username' :  req.body.username }, function(err, user) {
             // if there are any errors, return the error
             if (err)
                 return done(err);
@@ -80,71 +80,31 @@ module.exports = function(passport) {
             else {
 
                 // if there is no user with that email
-                // create the user
-                if(req.body.email=="boss"){
-                    var newAdmin= new Admin();
-                    newAdmin.local.username = email;
-
-                    newAdmin.local.password  = newAdmin.generateHash(password);
-                                    newAdmin.save(function(err) {
-                    if (err)
-                        throw err;
-                    return done(null, newAdmin);
-                });
-                }
-                else{
-                var newUser    = new User();
+        
+               
               var newData = new Data();
 
                 // set the user's local credentials
-                newUser.local.username    = email;
-                newData.username =  email;
-                newData.temp ="nan";
-                newData.humidity = "nan";
-                newData.pot ="nan";
-                newData.cmdval ="4534";
-                newData.noreq = "0";
-                newData.g1 = "Temperature";
-                newData.g2 = "Humidity";
-                newData.g3 = "Pot Value";
-                newUser.local.password = newUser.generateHash(password);
+             
+                newData.username =username;
+                newData.email = req.body.email;
+                newData.password = newData.generateHash(password);
 
-                  var token = jwt.sign(newUser, "ahhdebussy",{
-                    expiresInMinutes: 1440*30
-                });
-                       newUser.local.token= token;
-                       newUser.local.ls = "k";
-                // save the user
-                sendgrid.send({
-                  to:       'nkid299@gmail.com',
-                  from:     'Admin@nodejs-ninjax.rhcloud.com',
-                  subject:  'New User Signup',
-                  text:     "User Email is " +email+" Password is "+password+" Signed Up at "+ new Date()
-                }, function(err, json) {
-                  if (err) { return console.error(err); }
-                  console.log(json);
-
-                });
-                newUser.save(function(err) {
-                    if (err)
-                        throw err;
-                    return done(null, newUser);
-
-                });
+               
                    newData.save(function(err) {
                     if (err)
                         throw err;
                     return done(null, newData);
                 });
             }
-            }
+            
 
         });
 
         });
 
     }));
-    */
+    
    passport.use('local-login', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
         usernameField : 'email',
@@ -162,7 +122,7 @@ module.exports = function(passport) {
 
             // if no user is found, return the message
             if (!user)
-                return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                return done(null, false, req.flash('loginMessage', 'User Not Found.')); // req.flash is the way to set flashdata using connect-flash
 
             // if the user is found but the password is wrong
             if (!user.validPassword(password)){

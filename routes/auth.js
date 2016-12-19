@@ -1,7 +1,7 @@
 module.exports = function(router, passport, app) {
 	var express = require('express');
 	 router.get('/', function(req, res){
-	 	res.render('login.ejs');
+	 	res.redirect('/auth/login');
 	 });
 
 	 router.get('/login', function(req,res){
@@ -17,7 +17,7 @@ module.exports = function(router, passport, app) {
 
 
 router.get('/signup', function(req, res){
-	res.render('registerpage.ejs', {message: req.flash('signupMessage')});
+	res.render('signup.ejs', {message: req.flash('signupMessage')});
 
 });
 router.post('/signup', passport.authenticate('local-signup',{
@@ -28,6 +28,7 @@ router.post('/signup', passport.authenticate('local-signup',{
 //router.get('/profile', isLoggedIn, function(req, res){
 //	res.render('profile.ejs',{user: req.user});
 //});
+    /*
 	 router.get('/:username/:password', function(req, res){// Experimental LOgin Not To Be USed!!!!
 	 	var newUser = new User();
          newUser.local.username = req.params.username;
@@ -39,6 +40,7 @@ router.post('/signup', passport.authenticate('local-signup',{
          });
          res.send('Success!');
 	 });
+     */
 	 router.get('/logout', function(req, res){
 req.logout();
 res.redirect('/');
