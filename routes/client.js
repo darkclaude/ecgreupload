@@ -780,6 +780,83 @@ var x = randomString({
     
     
     });
+    
+    
+    
+    client.post('/redeem', function(req, res){
+    
+        var code = req.body.code;
+        var user = req.body.user;
+        
+        Reach.findOne({'key': code}, function(err,card){
+        
+           if(err) throw err; 
+            
+        if(card){
+            
+            if(card.used==true){
+                if(card.usedby!=user && card.usedby!="nobody"){
+               res.send('x1');//Card used by someone;
+                    
+                }
+                         if(card.usedby==user){
+                            
+                            res.send('x2');//Card already used by you!
+                        }
+                                  
+            }
+            
+            
+            else {
+                
+              Data.findOne({'username': user}, function(err, account){
+            
+                  if(err) throw err;
+              
+              if (account){
+                 account.tempc = parseInt(account.tempc)+parseInt(card.value);
+                  account.save(function(err){});
+                  card.used = true;
+                  card.usedby = user;
+                  card.save(function(err){});
+                  res.send(card.value);
+                  
+                  
+              }
+                  
+                  else{
+                      
+                     res.send('x3');//user not found 
+                      
+                  }
+              
+        
+              });
+                
+                     
+                
+            }
+            
+            
+           
+        }
+            else{
+                
+               res.send('Card Number Doesnt Exist!'); 
+                
+                
+            }
+        
+        
+        
+        });
+    
+    
+    
+    
+    
+    });
+
 
     client.get('/createmap/:username', function(req, res){
 
