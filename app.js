@@ -31,6 +31,7 @@ app.use(flash());
 app.use('/auth',express.static(__dirname + '/views'));
 app.use('/auth/login',express.static(__dirname + '/views'));
 app.use('/auth/signup',express.static(__dirname + '/views'));
+app.use('/favicon',express.static(__dirname + '/views'));
 app.use('/portal',express.static(__dirname + '/views'));
 app.use('/map', express.static(__dirname+ '/views'));
 app.use('/dashboard', express.static(__dirname + '/views'));
@@ -43,14 +44,13 @@ app.use('/', express.static(__dirname + 'views'));
 //mongoose.connect("mongodb://"+connection_string+"/ecg");
 datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
 
-/*
 reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges");
-mapdb = mongoose.createConnection("mongodb://"+connection_string+"/map");
-*/
+//mapdb = mongoose.createConnection("mongodb://"+connection_string+"/map");
+
 var client = express.Router();
 var device = express.Router();
 var stat = express.Router();
-//pp.use(favicon(__dirname + '/views/favicon.ico'));
+app.use(favicon(__dirname + '/views/favicon.ico'));
 
 var secure = express.Router();
 var auth= express.Router();
