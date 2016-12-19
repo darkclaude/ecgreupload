@@ -8,6 +8,10 @@ var Reach = require('./config/models/recharge');
 var MapData = require('./config/models/map');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var pasport = require('passport');
+var flash = require('connect-flash');
+
 
 //var port = 2000;
 var port  = process.env.OPENSHIFT_NODEJS_PORT;
@@ -18,6 +22,10 @@ var connection_string = ' ';
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
  extended: true })); 
+app.use(session({secret: 'sha256', saveUninitialized:true, resave: true, store: new MongoStore({  url:"mongodb://"+connection_string+"/sessions"})}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 app.use('/portal',express.static(__dirname + '/views'));
 app.use('/map', express.static(__dirname+ '/views'));
 //app.use('/*',express.static(__dirname + '/views'));
@@ -29,23 +37,29 @@ var client = express.Router();
 var device = express.Router();
 var stat = express.Router();
 //pp.use(favicon(__dirname + '/views/favicon.ico'));
+
+var secure = express.Router();
+var auth= express.Router();
+app.use('/auth',auth);
+
+require('./routes/secure.js')(secure,app, passport);
 app.set('view engine','ejs');
 app.use('/stat',stat);
 app.use('/device',device);
 app.use('/clientapp',client);
 
 require('./routes/stat')(stat);
+require('./routes/routes.js')(app,passport);
 require('./routes/client')(client);
 require('./routes/device')(device);
 
-
+app.get('/',function(req,res){
+    res.render('login.ejs');
+});
 app.get('/portal', function(req, res){
 
 res.render('portal.ejs');
 
-});
-app.get('/map', function(req,res){
-res.render('map.ejs');
 });
 
 

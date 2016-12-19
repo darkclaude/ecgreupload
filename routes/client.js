@@ -679,6 +679,7 @@ var x = randomString({
     
  client.get('/generatekey/:value', function(req, res){
   
+     ///MTN MOBILE MOBILE API HERE IS SUCCESFUL USER GETS RECHARGE CODE FOR ECCG UNITS VIA SMS OR CAN CREDIT DIRECTLY INTO HIS ACCOUNT .
   if(isNaN(req.params.value)==false){     
         
 var x = randomString({
