@@ -10,7 +10,7 @@ var userSchema = datadb.Schema({
         email: String,
         power: [Number],
         tempc: String,
-        transactions: [],
+        transactions: []
         
 		
 });
