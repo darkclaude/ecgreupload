@@ -83,27 +83,21 @@ app.all('/ussd', function(req,res){
    var userfone = req.body.Mobile;
    var msg = req.body.Message;
    if(req.body.Type=="Initiation"){
-    top.Message="Welcome to SmartECG-GH: \nNano Addo For 4 Life!";
-    top.Type="Release";
+    top.Message="Welcome to SmartECG-GH: \n1. Check Balance";
+    //top.Type="Release";
     res.json(top);
    }
-    /*
+    
    else{
-   Driver.findOne({'phonenumber':userfone}, function(err, account){
+   Data.findOne({'phonenumber':userfone}, function(err, account){
 if(err){
   throw err;
 }
 if(account){
- if(account.expired==true){
-                    haze = "Yes";
-                  }
-                  if(account.reneweda==true){
-                    raze1 = "Yes";
-                  }
-                  if(account.renewedb==true){
-                    raze2= "Yes";
-                  }
+    
+
          if(msg=="1"){
+             /*
       top.Message="Hello "+account.name+"\n"+"License Expired: "+haze+"\n"+"1st Renewal Done: "+raze1+"\n2nd Renewal Done: "+raze2;
       top.Type="Release";
       res.json(top);
@@ -126,29 +120,17 @@ var seconds = diff.seconds() % 60;
             toms="0"+toms;
            }
            infojson.lefts=toms;
-         }
-         else{
-        infojson.leftm="0";
-        infojson.lefts="0";
-         }
-                   //res.json(infojson);
-                   if(account.expired==true){
-                    haze = "Yes";
-                  }
-                  if(account.reneweda==true){
-                    raze1 = "Yes";
-                  }
-                  if(account.renewedb==true){
-                    raze2= "Yes";
-                  }
-      top.Message= "Hello "+account.name+"\n"+"License Expires On: "+exp.toString()+"\n(Min:Sec): "+infojson.leftm+" : "+infojson.lefts+"\nHas Expired: "+haze;
+         
+        
+                  */
+      top.Message= "Hello "+account.username+"/n Your Working Balance : "+account.balance+'\n Your Temp Balance : '+account.tempc+'Total Balance : '+parseFloat(account.balance)+parseFloat(account.tempc);
       top.Type="Release";
       res.json(top);
     }
     else{
     //top.Message="Welcome to DriverNoTIF-GH:\n;
-      top.Message="Sorry Invalid Option!\n1. Check Status\n2. Check Expiration";
-      top.Type="Response";
+      top.Message="Sorry Invalid Option! Try Again";
+      top.Type="Release";
       res.json(top);
     }
 
@@ -156,14 +138,14 @@ var seconds = diff.seconds() % 60;
 
 }
 else{
-  top.Message="Sorry This Number is Not Registered for DriverNoTIF-GH";
+  top.Message="Sorry This Number is Not Registered for Smart Ecg-GH";
   top.Type="Release";
   res.json(top);
 }
 
    });
   }
-  */
+  
 });
 
 

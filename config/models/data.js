@@ -4,10 +4,14 @@ var Schema = datadb.Schema;
 var userSchema = datadb.Schema({
 		username: String,
         password: String,
+        phonenumber: String,
         balance: String,
+        borrowedbalance: String,
         email: String,
-        power: String,
-        tempc: String
+        power: [Number],
+        tempc: String,
+        transactions: [],
+        
 		
 });
 

@@ -89,7 +89,12 @@ module.exports = function(passport) {
                 newData.username =username;
                 newData.email = req.body.email;
                 newData.password = newData.generateHash(password);
-
+                newData.phonenumber = req.body.phonenumber;
+                newData.balance = '0.0';
+                newData.borrowedbalance='0.0';
+                newData.power.push(0);
+                newData.transactions.push({date: nil, amount: 50});
+                newData.tempc ='0';
                
                    newData.save(function(err) {
                     if (err)
