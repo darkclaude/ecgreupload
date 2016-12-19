@@ -8,7 +8,7 @@ var userSchema = datadb.Schema({
         balance: String,
         borrowedbalance: String,
         email: String,
-        power: [Number],
+        power: [],
         tempc: String,
         transactions: []
         

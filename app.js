@@ -50,7 +50,6 @@ reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges")
 var client = express.Router();
 var device = express.Router();
 var stat = express.Router();
-app.use(favicon(__dirname + '/views/favicon.ico'));
 
 var secure = express.Router();
 var auth= express.Router();
