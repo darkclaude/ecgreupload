@@ -23,7 +23,7 @@ var connection_string = ' ';
 // if OPENSHIFT env variables are present, use the available connection info:
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":"+process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +process.env.OPENSHIFT_APP_NAME;
 //mongoose.connect("mongodb://"+connection_string+"/ecg");
-mongoose.connect(configDB.url);
+mongoose.connect(configDB.url2);
 app.use('/auth',express.static(__dirname + '/views'));
 app.use('/auth/login',express.static(__dirname + '/views'));
 app.use('/auth/signup',express.static(__dirname + '/views'));
