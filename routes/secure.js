@@ -33,6 +33,11 @@ router.get('/dashboard', function(req, res){
 	//app.use('/profile', express.static(__dirname + '/views'));
 	res.render('topupr.ejs');
 });
+        router.get('/transactions', function(req, res){
+	console.log(req.session);
+	//app.use('/profile', express.static(__dirname + '/views'));
+	res.render('transactions.ejs');
+});
 router.get('/house', function(req, res){
 res.render('house.ejs');
 });

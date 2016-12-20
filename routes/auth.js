@@ -5,7 +5,7 @@ module.exports = function(router, passport, app) {
 	 });
 
 	 router.get('/login', function(req,res){
-	 	req.logout();
+	 	//req.logout();
 	 	res.render('login.ejs', {message: req.flash('loginMessage')})
 	 });
 

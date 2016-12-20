@@ -29,7 +29,7 @@
 
 </head>
 
-<body>
+<body ng-controller="mainController">
 
     <div id="wrapper">
 
@@ -128,7 +128,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{displayname}}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -141,7 +141,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -150,10 +150,10 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                        <a href="/charts"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
             <!--
                     <li>
@@ -161,7 +161,7 @@
                     </li>
             -->
                     <li class="active">
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> TopUp</a>
+                        <a href="/transactions"><i class="fa fa-fw fa-edit"></i> Transactions</a>
                     </li>
             <!--
                     <li>
@@ -170,18 +170,25 @@
                     <li>
                         <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
                     </li>
-
+        -->
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Purchases <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="/topup">TopUp Direct</a>
                             </li>
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="/topupr">Topup Recharge</a>
+                            </li>
+
+                            <li>
+                                <a href="/transfer">Transfer Credit</a>
                             </li>
                         </ul>
                     </li>
+
+                    <!--
                     <li>
                         <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
                     </li>
@@ -206,7 +213,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="/dashboard">Dashboard</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-edit"></i> TopUp Your Accounts
@@ -221,19 +228,13 @@
                 
 
   <!--the controller here-->                     
-                 <div class="row" ng-controller="mainController">
+                 <div class="row" >
                    <div class="col-md-2 topUpButtons">
                        <button class="btn btn-danger" ng-click="mpowerDirect"> mPower Direct Mobile</button>
-
-                       <button class="btn btn-danger">mPower Redirect </button>
-
-                       <button class="btn btn-danger"> Direct Pay</button>
-
-                       <button class="btn btn-danger"> Redeem/Recharge Code</button>
-                       
+                      
      
-    </div>
-  </div>
+                  </div>
+                </div>
 </div>
                         
                     
@@ -253,8 +254,11 @@
             <!-- /.container-fluid -->
 
 
-             
 
+
+
+
+                
         </div>
         <!-- /#page-wrapper -->
 
@@ -268,16 +272,9 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/angular.min.js"></script>
     <script src="js/angular-route.min.js"></script>
-     <script src="js/angularScript.js"></script>
+     <script src="js/DashboardCtrl.js"></script>
       <script src="js/sweetalert.min.js"></script>
-        <Script>
-            swal({
-  title: "Error!",
-  text: "Here's my error message!",
-  type: "error",
-  confirmButtonText: "Cool"
-});
-        </Script>
+       
 
 </body>
 

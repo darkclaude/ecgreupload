@@ -289,7 +289,13 @@ else if(account){
     
 });
 
-
+client.get('/getuserbyid/:id',function(req,res){
+    
+     Data.findOne({'_id': req.params.id}, function(err, user) {
+             res.json(user);
+      });
+    
+});
 
 client.post('/getinfo2/:user',function(req, res){  // Route for Getting User info
 
@@ -842,7 +848,7 @@ var x = randomString({
         }
             else{
                 
-               res.send('Card Number Doesnt Exist!'); 
+               res.send('x4'); // Card Number does not exist!
                 
                 
             }

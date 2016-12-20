@@ -9,9 +9,10 @@ var MapData = require('./config/models/map');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var MongoStore = require('connect-mongo/es5')(session);
+var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var flash = require('connect-flash');
+var cookieParser = require('cookie-parser');
 
 require('./config/passport')(passport);
 //var port = 2500;
@@ -21,41 +22,6 @@ var connection_string = ' ';
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":"+process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +process.env.OPENSHIFT_APP_NAME;
 //mongoose.connect("mongodb://"+connection_string+"/ecg");
 mongoose.connect(configDB.url2);
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
- extended: true })); 
- var MongoDBStore = require('connect-mongodb-session')(session);
- 
-   
-    var store = new MongoDBStore(
-      {
-        uri: 'mongodb://'+connection_string+'/sessions',
-        collection: 'mySessions'
-      });
- 
-    // Catch errors 
-    store.on('error', function(error) {
-      assert.ifError(error);
-      assert.ok(false);
-    });
-app.use(require('express-session')({
-      secret: 'debussy',
-      cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 2 // 1 week 
-      },
-      store: store,
-      // Boilerplate options, see: 
-      // * https://www.npmjs.com/package/express-session#resave 
-      // * https://www.npmjs.com/package/express-session#saveuninitialized 
-      resave: true,
-      saveUninitialized: true
-    }));
-/*
-app.use(session({secret: 'sha256512', saveUninitialized:true, resave: true, store: new MongoStore({  url:"mongodb://"+connection_string+"/sessions"})}));
-*/
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
 app.use('/auth',express.static(__dirname + '/views'));
 app.use('/auth/login',express.static(__dirname + '/views'));
 app.use('/auth/signup',express.static(__dirname + '/views'));
@@ -67,14 +33,28 @@ app.use('/topup', express.static(__dirname + '/views'));
 app.use('/topupr', express.static(__dirname + '/views'));
 app.use('/dash', express.static(__dirname + '/views'));
 app.use('/', express.static(__dirname + 'views'));
+
+app.use(cookieParser());
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+ extended: true })); 
+
+
+
+app.use(session({secret: 'debussy', saveUninitialized:true, resave: true,  cookie : { secure : false, maxAge : (7*24 * 60 * 60 * 1000) },store: new MongoStore({  url:"mongodb://"+connection_string+"/sessions"})}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
 //app.use('/*',express.static(__dirname + '/views'));
 //mongoose.connect(configDB.url);
 //datadb = mongoose.createConnection("mongodb://127.0.0.1:27017/data");
 
 //mongoose.connect("mongodb://"+connection_string+"/ecg");
 datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
-
 reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges");
+//reachdb = mongoose.createConnection("mongodb://"+'127.0.0.1'+"/recharges");
 //mapdb = mongoose.createConnection("mongodb://"+connection_string+"/map");
 
 var client = express.Router();
@@ -185,6 +165,7 @@ res.render('portal.ejs');
 });
 
 app.use('/',secure);
+
 app.get('/*',function(req, res){
    res.redirect('/auth'); 
     
