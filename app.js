@@ -13,7 +13,9 @@ var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
-
+var restler = require('restler');
+var Client = require('node-rest-client').Client;
+ 
 require('./config/passport')(passport);
 //var port = 2500;
 var port  = process.env.OPENSHIFT_NODEJS_PORT;
@@ -21,7 +23,7 @@ var connection_string = ' ';
 // if OPENSHIFT env variables are present, use the available connection info:
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":"+process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +process.env.OPENSHIFT_APP_NAME;
 //mongoose.connect("mongodb://"+connection_string+"/ecg");
-mongoose.connect(configDB.url2);
+mongoose.connect(configDB.url);
 app.use('/auth',express.static(__dirname + '/views'));
 app.use('/auth/login',express.static(__dirname + '/views'));
 app.use('/auth/signup',express.static(__dirname + '/views'));
@@ -32,6 +34,7 @@ app.use('/dashboard', express.static(__dirname + '/views'));
 app.use('/topup', express.static(__dirname + '/views'));
 app.use('/topupr', express.static(__dirname + '/views'));
 app.use('/dash', express.static(__dirname + '/views'));
+app.use('/testmpower', express.static(__dirname + '/views'));
 app.use('/', express.static(__dirname + 'views'));
 
 app.use(cookieParser());
@@ -54,7 +57,7 @@ app.use(flash());
 //mongoose.connect("mongodb://"+connection_string+"/ecg");
 datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
 reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges");
-//reachdb = mongoose.createConnection("mongodb://"+'127.0.0.1'+"/recharges");
+//reachdb = mongoose.createConnection("mongodb://"+'127.0.0.1:27017'+"/recharges");
 //mapdb = mongoose.createConnection("mongodb://"+connection_string+"/map");
 
 var client = express.Router();
@@ -92,7 +95,7 @@ app.all('/ussd', function(req,res){
    var userfone = req.body.Mobile;
    var msg = req.body.Message;
    if(req.body.Type=="Initiation"){
-    top.Message="Welcome to SmartECG-GH: \n1. Check Balance";
+    top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Buy Credit MM";
     //top.Type="Release";
     res.json(top);
    }
@@ -136,6 +139,29 @@ var seconds = diff.seconds() % 60;
       top.Type="Release";
       res.json(top);
     }
+    else if(msg='2'){
+                       
+      top.Message= 'Enter Amount Below';
+      top.Type="Response";
+      res.json(top);
+    }
+    else if(parseInt(msg)>=0 && top.Sequence==2){
+            top.Type="Release";
+            res.json(top);
+        var args = {
+    data: {  "customer_name" : account.username, "customer_phone" : userfone, "customer_email" : "littletheprogrammer@gmail.com", "wallet_provider" : "MTN", "merchant_name" : "Smart ECg Ent.", "amount" : msg },
+headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
+};
+ var client = new Client();
+ 
+
+client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, function (data, response) {
+    // parsed response body as js object 
+    console.log(data);
+    // raw response 
+   // console.log(response);
+});
+}
     else{
     //top.Message="Welcome to DriverNoTIF-GH:\n;
       top.Message="Sorry Invalid Option! Try Again";
@@ -162,6 +188,26 @@ app.get('/portal', function(req, res){
 
 res.render('portal.ejs');
 
+});
+app.get('/testmpower', function(req, res){
+
+// set content-type header and data as json in args parameter 
+var args = {
+    data: {  "customer_name" : "Frimpong tachie evans", "customer_phone" : "0543892565", "customer_email" : "littletheprogrammer@gmail.com", "wallet_provider" : "MTN", "merchant_name" : "Smart ECg Ent.", "amount" : "0.1" },
+    
+    headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
+};
+ var client = new Client();
+ 
+
+client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, function (data, response) {
+    // parsed response body as js object 
+    console.log(data);
+    // raw response 
+   // console.log(response);
+});
+
+res.send('done');
 });
 
 app.use('/',secure);
