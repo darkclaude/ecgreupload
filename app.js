@@ -24,7 +24,35 @@ mongoose.connect(configDB.url2);
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
  extended: true })); 
+ var MongoDBStore = require('connect-mongodb-session')(session);
+ 
+   
+    var store = new MongoDBStore(
+      {
+        uri: 'mongodb://'+connection_string+'/sessions',
+        collection: 'mySessions'
+      });
+ 
+    // Catch errors 
+    store.on('error', function(error) {
+      assert.ifError(error);
+      assert.ok(false);
+    });
+app.use(require('express-session')({
+      secret: 'debussy',
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 2 // 1 week 
+      },
+      store: store,
+      // Boilerplate options, see: 
+      // * https://www.npmjs.com/package/express-session#resave 
+      // * https://www.npmjs.com/package/express-session#saveuninitialized 
+      resave: true,
+      saveUninitialized: true
+    }));
+/*
 app.use(session({secret: 'sha256512', saveUninitialized:true, resave: true, store: new MongoStore({  url:"mongodb://"+connection_string+"/sessions"})}));
+*/
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
