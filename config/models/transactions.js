@@ -8,6 +8,7 @@ var transactionSchema = transactionsdb.Schema({
            amount: String,
            dateCreated: Date,
            status: String,
+           token : String,
            dateCompleted: Date
 	
 });
