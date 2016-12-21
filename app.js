@@ -108,7 +108,7 @@ if(err){
   throw err;
 }
 if(account){
-    if(top.Sequence==2){
+    if(top.Sequence==1){
 
          if(msg=="1"){
              /*
@@ -150,7 +150,7 @@ var seconds = diff.seconds() % 60;
     }
       
     }
-    else if(top.Sequence==3){
+    else if(top.Sequence==2){
         
             if(isNaN(msg) == false && parseInt(msg)>=0){
         top.Message='Transaction in Progress please Wait.....';
