@@ -299,9 +299,11 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, 
   
 
     });
+        }
+        }
+        });
 
-
-},1000 * 60);
+},60000);
 
         
  
