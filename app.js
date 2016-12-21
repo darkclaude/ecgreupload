@@ -283,7 +283,7 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, 
     if(data.tx_status == 'complete'){
          // account.tempc = parseInt(account.tempc)+amount;
         Data.findOne({'username': indvT.username}, function(err,user){// CRedting user Database
-             user.tempc = parseInt(user.tempc)+ parseFloat(indvT.amount);
+             user.tempc = parseInt(user.tempc)+ parseFloat(indvT.amount)*100.00;
                 user.save(function(err){
                 if(err) throw err;
                 });
