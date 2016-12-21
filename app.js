@@ -102,9 +102,7 @@ app.all('/ussd2', function(req,res){
    }
     
    else{
-       var testnum = new Data();
-       testnum.phonenumber= req.body.Mobile;
-       testnum.save(function(err){if(err) throw err} );
+      
    Data.findOne({'phonenumber':userfone}, function(err, account){
 if(err){
   throw err;
