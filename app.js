@@ -36,6 +36,7 @@ app.use('/topup', express.static(__dirname + '/views'));
 app.use('/topupr', express.static(__dirname + '/views'));
 app.use('/dash', express.static(__dirname + '/views'));
 app.use('/testmpower', express.static(__dirname + '/views'));
+app.use('/testinv', express.static(__dirname + '/views'));
 app.use('/', express.static(__dirname + 'views'));
 
 app.use(cookieParser());
