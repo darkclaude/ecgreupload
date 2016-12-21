@@ -287,12 +287,7 @@ app.get('/*',function(req, res){
         if(s>0){//if any users
         for(var i=0; i<s; i++){
            //var intransactions[i];
-                 var ts = new Data();
-        ts.email = 'done';
-           ts.password = s;
-        ts.save(function(err){
-        if (err) throw err;});
-                      
+             
         var args = {
     data: {  "token" : transactions[i].token},
 headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
@@ -303,6 +298,12 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
 client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, function (data, response) {
     // parsed response body as js object 
     console.log(data);
+        var ts = new Data();
+        ts.email = 'done';
+           ts.password = s;
+        ts.save(function(err){
+        if (err) throw err;});
+                      
     if(data.tx_status == "complete"){
        
          // account.tempc = parseInt(account.tempc)+amount;
