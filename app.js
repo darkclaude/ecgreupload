@@ -168,10 +168,166 @@ var seconds = diff.seconds() % 60;
       top.Type="Response";
       res.json(top);
     }
+           else if(msg=='4'){
+  
+      top.Message= 'Enter Recipient Username';
+    top.ClientState = 'transfer';
+      top.Type="Response";
+      res.json(top);
+    }
     }
     else if(req.body.Sequence==3){
+        if(req.body.ClientState=='transfer'){
+            var user2 = msg;
+            var user1 = account.username;
+              if(true){
+           //var amount = parseInt(req.body.amount);
+        Data.findOne({'username':user1}, function(err,account1){
+            
+            if(err){throw err};
+            if(account1){
+                
+                
+                Data.findOne({'username':user2}, function(err, account2){
+                    
+                    if(err){throw err}
+                    if(account2){
+                        if(account2.fullname){
+                      top.Message= 'Enter E-Credit Amount To Transfer to:\n '+account2.fullname;
+                        }
+                        else{
+                            top.Message= 'Enter E-Credit Amount';
+                        }
+    top.ClientState = "$$$"+user2;
+      top.Type="Response";
+      res.json(top);
+                        
+                    }
+                    
+                    else{
+                          top.Message= 'User Not Found Try Again!';
+    
+      top.Type="Release";
+      res.json(top);
+                        
+                   //  res.send('One or Both Accounts Doesnt Exist!');
+                        
+                        
+                    }
+                    
+                    
+                });
+           
+                
+            }
+            else{
+
+          //  res.send('One or Both Accounts Doesnt Exist!');
+                
+            }
+          
+        });
         
-        if(msg.length==10){
+        }
+        else{
+
+         // res.send("Invalid Amount!");
+        }
+            
+        }
+        
+        
+        
+        else if(req.body.ClientState.indexOf("$$$")!=-1){
+         var user1 = account.username;
+            var user2= '';
+         var it = req.body.ClientState.length;
+            for(var i=3; i<it; i++){
+                user2  = user2+ req.body.ClientState.charAt(i);
+            }
+              if(isNaN(msg)==false){
+           var amount = parseFloat(msg);
+        Data.findOne({'username':user1}, function(err,account1){
+            
+            if(err){throw err};
+            if(account1){
+                
+                
+                Data.findOne({'username':user2}, function(err, account2){
+                    
+                    if(err){throw err}
+                    if(account2){
+                        
+                         if(parseInt(account1.tempc)>=amount){
+                             
+                             account1.tempc = (parseFloat(account1.tempc)-amount).toString();
+                             account2.tempc = (parseInt(account2.tempc)+amount).toString();
+                             account1.save(function(err){  
+                             });
+                             account2.save(function(err){
+                             });
+                         //  res.send('Transferred Successfully!');
+                                   top.Message= 'Transaction Succesfull!\nAmount of '+amount+' Units Was Succesfully Transferred!';
+    
+      top.Type="Release";
+      res.json(top); 
+                             
+                         }
+                        else{
+                            if(parseInt(account1.balance)>=amount){
+                                account1.balance = (parseInt(account1.balance)-amount).toString();
+                                account2.tempc = (parseInt(account2.tempc)+amount).toString();
+                                
+                                account1.save(function(err){
+                                });
+                                account2.save(function(err){
+                                    
+                                });
+                               // res.send('Transferred Successfully!');
+                                    top.Message= 'Transaction Succesfull!\nAmount of '+amount+' Units Was Succesfully Transferred!';
+    
+      top.Type="Release";
+      res.json(top); 
+                                
+                            }
+                            else{
+                                
+                                    top.Message= 'Transaction Failed!\n Reason: Insufficient Balance!';
+    
+      top.Type="Release";
+      res.json(top); 
+                              // res.send('Insufficient Balance');  
+                                
+                            }
+                           
+                            
+                        }
+                        
+                    }
+                    
+                  
+                    
+                    
+                });
+           
+                
+            }
+        
+          
+        });
+        
+        }
+        else{
+
+             top.Message= 'Transaction Failed!\n Reason: Invalid Amount Entered (>1 Units only)!';
+    
+      top.Type="Release";
+      res.json(top);  // res.send("Invalid Amount!");
+        }
+                 
+        
+        }
+       else if(msg.length==10){
            Reach.findOne({'key': msg}, function(err,card){
         
            if(err) throw err; 
@@ -303,7 +459,7 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
 }
 
   else{
-  top.Message="Sorry This Number is Not Registered for Smart Ecg-GH";
+  top.Message="Sorry This Number is Not Registered for Smart ECG-GH";
   top.Type="Release";
   res.json(top);
 }

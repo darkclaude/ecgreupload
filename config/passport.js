@@ -92,11 +92,12 @@ console.log('Desilizeing');
                 newData.email = req.body.email;
                 newData.password = newData.generateHash(password);
                 newData.phonenumber = req.body.phonenumber;
+                newData.fullname = req.body.fullname;
                 newData.balance = '0.0';
                 newData.borrowedbalance='0.0';
                // newData.power.push(0);
               //  newData.transactions.push({date: nil, amount: 50});
-                newData.tempc ='0';
+                newData.tempc ='0.0';
                
                    newData.save(function(err) {
                     if (err)

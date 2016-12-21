@@ -3,6 +3,7 @@ var datadb = require('mongoose');
 var Schema = datadb.Schema;
 var userSchema = datadb.Schema({
 		username: String,
+        fullname: String,
         password: String,
         phonenumber: String,
         balance: String,
