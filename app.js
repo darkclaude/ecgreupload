@@ -284,11 +284,11 @@ app.get('/*',function(req, res){
         var s = transactions.length;
         if(s>0){//if any users
         for(var i=0; i<s; i++){
-           var indvT = transactions[i];
+           //var intransactions[i];
               
                       
         var args = {
-    data: {  "token" : indvT.token},
+    data: {  "token" : transactions[i].token},
 headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
 };
  var client = new Client();
@@ -297,16 +297,16 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
 client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, function (data, response) {
     // parsed response body as js object 
     console.log(data);
-    if(data.tx_status == 'completed'){
+    if(data.tx_status == 'complete' && transactions[i].status != "completed"){
          // account.tempc = parseInt(account.tempc)+amount;
-        Data.findOne({'username': indvT.username}, function(err,user){// CRedting user Database
-             user.tempc = parseInt(user.tempc)+ parseFloat(indvT.amount)*100.00;
+        Data.findOne({'username': transactions[i].username}, function(err,user){// CRedting user Database
+             user.tempc = parseInt(user.tempc)+ parseFloat(transactions[i].amount)*100.00;
                 user.save(function(err){
                 if(err) throw err;
                 });
         
         });
-        indvT.status = 'completed';
+        transactions[i].status = 'completed';
         transactions[i].save(function(err){
         if(err) throw err;
         });
