@@ -18,13 +18,13 @@ var restler = require('restler');
 var Client = require('node-rest-client').Client;
  
 require('./config/passport')(passport);
-var port = 2500;
-//var port  = process.env.OPENSHIFT_NODEJS_PORT;
+//var port = 2500;
+var port  = process.env.OPENSHIFT_NODEJS_PORT;
 var connection_string = ' ';
 // if OPENSHIFT env variables are present, use the available connection info:
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":"+process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +process.env.OPENSHIFT_APP_NAME;
 //mongoose.connect("mongodb://"+connection_string+"/ecg");
-mongoose.connect(configDB.url);
+mongoose.connect(configDB.url2);
 app.use('/auth',express.static(__dirname + '/views'));
 app.use('/auth/login',express.static(__dirname + '/views'));
 app.use('/auth/signup',express.static(__dirname + '/views'));
@@ -46,7 +46,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 
 
-app.use(session({secret: 'debussy', saveUninitialized:true, resave: true,  cookie : { secure : false, maxAge : (7*24 * 60 * 60 * 1000) },store: new MongoStore({  url:"mongodb://"+'127.0.0.1:27017'+"/sessions"})}));
+app.use(session({secret: 'debussy', saveUninitialized:true, resave: true,  cookie : { secure : false, maxAge : (7*24 * 60 * 60 * 1000) },store: new MongoStore({  url:"mongodb://"+connection_string+"/sessions"})}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -54,13 +54,13 @@ app.use(flash());
 
 //app.use('/*',express.static(__dirname + '/views'));
 //mongoose.connect(configDB.url);
-datadb = mongoose.createConnection("mongodb://127.0.0.1:27017/data");
+//datadb = mongoose.createConnection("mongodb://127.0.0.1:27017/data");
 
 //mongoose.connect("mongodb://"+connection_string+"/ecg");
-//datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
-//reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges");
-transactionsdb = mongoose.createConnection("mongodb://"+'127.0.0.1:27017'+"/transactions");
-reachdb = mongoose.createConnection("mongodb://"+'127.0.0.1:27017'+"/recharges");
+datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
+reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges");
+transactionsdb = mongoose.createConnection("mongodb://"+connection_string+"/transactions");
+//reachdb = mongoose.createConnection("mongodb://"+'127.0.0.1:27017'+"/recharges");
 //mapdb = mongoose.createConnection("mongodb://"+connection_string+"/map");
 
 var client = express.Router();
