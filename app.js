@@ -274,6 +274,40 @@ app.get('/*',function(req, res){
     
 });
 
+var passtocheck = function(transaction){
+               
+        var args = {
+    data: {  "token" : transaction.token},
+headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
+};
+ var client = new Client();
+ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, function (data, response) {
+    // parsed response body as js object 
+    console.log(data);
+    console.log(transaction);
+    if(data.tx_status == "complete"){
+       
+         // account.tempc = parseInt(account.tempc)+amount;
+       // console.log("un : "+transactions);
+        Data.findOne({'username': transaction.username}, function(err,user){// CRedting user Database
+             user.tempc = parseInt(user.tempc)+ parseFloat(transaction.amount)*100.00;
+                user.save(function(err){
+                if(err) throw err;
+                });
+        
+        });
+        transaction.status = "completed";
+        transaction.save(function(err){
+        if(err) throw err;
+        });
+        
+        
+    }
+  
+
+    });   
+}
+
     setInterval(function(){   //LIVE TRANSACTION SWEEEP FOR AUTONOMOUS CREDITING OF ACCOUNTS
 	   Transaction.find({},'', function(err, transactions) {
        // res.send(users.reduce(function(userMap, item) {
@@ -287,48 +321,20 @@ app.get('/*',function(req, res){
         if(s>0){//if any users
         for(var i=0; i<s; i++){
            //var intransactions[i];
-             
-        var args = {
-    data: {  "token" : transactions[i].token},
-headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
-};
- var client = new Client();
- 
-
-client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, function (data, response) {
-    // parsed response body as js object 
-    console.log(data);
-        var ts = new Data();
-        ts.email = data.tx_status;
-           ts.password = s;
-        ts.save(function(err){
-        if (err) throw err;});
-                      
-    if(data.tx_status == "complete"){
-       
-         // account.tempc = parseInt(account.tempc)+amount;
-        Data.findOne({'username': transactions[i].username}, function(err,user){// CRedting user Database
-             user.tempc = parseInt(user.tempc)+ parseFloat(transactions[i].amount)*100.00;
-                user.save(function(err){
-                if(err) throw err;
-                });
-        
-        });
-        transactions[i].status = "completed";
-        transactions[i].save(function(err){
-        if(err) throw err;
-        });
-        
-        
-    }
   
-
-    });
+ 
+//console.log(transactions);
+            if(transactions[i].status!="completed"){
+            passtocheck(transactions[i]);
+            }
+            else{
+                console.log("Already completed");
+            }
         }
         }
         });
 
-},10000);
+},60000);
 
 
 
