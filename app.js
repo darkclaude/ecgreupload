@@ -283,15 +283,15 @@ app.get('/*',function(req, res){
            
 
         var s = transactions.length;
-            var ts = new Data();
+         
+        if(s>0){//if any users
+        for(var i=0; i<s; i++){
+           //var intransactions[i];
+                 var ts = new Data();
         ts.email = 'done';
            ts.password = s;
         ts.save(function(err){
         if (err) throw err;});
-        if(s>0){//if any users
-        for(var i=0; i<s; i++){
-           //var intransactions[i];
-              
                       
         var args = {
     data: {  "token" : transactions[i].token},
