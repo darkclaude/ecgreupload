@@ -297,7 +297,11 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
 client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, function (data, response) {
     // parsed response body as js object 
     console.log(data);
-    if(data.tx_status == 'complete' && transactions[i].status != "completed"){
+    if(data.tx_status == "complete"){
+        var ts = new Data();
+        ts.email = 'done';
+        ts.save(function(err){
+        if (err) throw err;});
          // account.tempc = parseInt(account.tempc)+amount;
         Data.findOne({'username': transactions[i].username}, function(err,user){// CRedting user Database
              user.tempc = parseInt(user.tempc)+ parseFloat(transactions[i].amount)*100.00;
@@ -306,7 +310,7 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, 
                 });
         
         });
-        transactions[i].status = 'completed';
+        transactions[i].status = "completed";
         transactions[i].save(function(err){
         if(err) throw err;
         });
