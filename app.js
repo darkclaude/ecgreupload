@@ -181,6 +181,19 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
 client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, function (data, response) {
     // parsed response body as js object 
     console.log(data);
+     var newTransaction = new Transaction();
+    newTransaction.username = account.username;
+    newTransaction.phonenumber = account.phonenumber;
+    newTransaction.type = "direct";
+    newTransaction.amount = msg;
+    newTransaction.dateCreated = new Date();
+    newTransaction.status = "pending";
+    newTransaction.token = data.token;
+    newTransaction.save(function(err){
+    if(err){
+        throw err;
+    }
+    });
     // raw response 
    // console.log(response);
 });
