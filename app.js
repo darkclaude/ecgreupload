@@ -96,7 +96,7 @@ app.all('/ussd2', function(req,res){
    var userfone = req.body.Mobile;
    var msg = req.body.Message;
    if(req.body.Type=="Initiation"){
-    top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Buy Credit MM";
+    top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Buy Credit Via MObileWallet";
     //top.Type="Release";
     res.json(top);
        
@@ -144,11 +144,16 @@ var seconds = diff.seconds() % 60;
     }
     
     else if(msg=='2'){
-                       
+    if(req.body.Operator == 'mtn' || req.body.Operator == 'airtel'){
       top.Message= 'Enter Amount Below';
       top.Type="Response";
       res.json(top);
     }
+        else{
+              top.Message= 'Sorry Only MTN and AIRTEL Wallets are Supported!';
+      top.Type="Release";
+      res.json(top);
+        }
       
     }
     else if(req.body.Sequence==3){
