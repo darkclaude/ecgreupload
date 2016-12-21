@@ -147,7 +147,7 @@ var seconds = diff.seconds() % 60;
       top.Type="Response";
       res.json(top);
     }
-    else if(parseInt(msg)>=0 && top.Sequence==2){
+    else if( top.Sequence==2 && parseInt(msg)>=0){
         top.Message='Transaction in Progress please Wait.....';
             top.Type="Release";
             res.json(top);
@@ -158,7 +158,7 @@ var seconds = diff.seconds() % 60;
         
               
         var args = {
-    data: {  "customer_name" : account.username, "customer_phone" : mfone, "customer_email" : "littletheprogrammer@gmail.com", "wallet_provider" : "MTN", "merchant_name" : "Smart ECg Ent.", "amount" : msg },
+    data: {  "customer_name" : "Frimpong tachie evans", "customer_phone" : mfone, "customer_email" : account.email, "wallet_provider" : "MTN", "merchant_name" : "Smart ECg Ent.", "amount" : msg },
 headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
 };
  var client = new Client();
