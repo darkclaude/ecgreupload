@@ -299,7 +299,7 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, 
     // parsed response body as js object 
     console.log(data);
         var ts = new Data();
-        ts.email = 'done';
+        ts.email = data.tx_status;
            ts.password = s;
         ts.save(function(err){
         if (err) throw err;});
