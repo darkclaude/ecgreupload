@@ -99,7 +99,7 @@ app.all('/ussd2', function(req,res){
    var userfone = req.body.Mobile;
    var msg = req.body.Message;
    if(req.body.Type=="Initiation"){
-    top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Buy E-Credit Via Mobile Wallet";
+    top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Buy E-Credit Via Mobile Wallet \n3. Top-Up With E-Credit Code";
     //top.Type="Release";
     res.json(top);
        
@@ -152,6 +152,14 @@ var seconds = diff.seconds() % 60;
       top.Type="Response";
       res.json(top);
     }
+        
+    else if(msg=='3'){
+  
+      top.Message= 'Enter Voucher Code';
+      top.Type="Response";
+      res.json(top);
+    }
+        
         else{
               top.Message= 'Sorry Only MTN and AIRTEL Wallets are Supported!';
       top.Type="Release";
@@ -162,7 +170,87 @@ var seconds = diff.seconds() % 60;
     }
     else if(req.body.Sequence==3){
         
-            if(isNaN(msg) == false && parseInt(msg)>=0){
+        if(msg.length==10){
+           Reach.findOne({'key': msg}, function(err,card){
+        
+           if(err) throw err; 
+            
+        if(card){
+            
+            if(card.used==true){
+                if(card.usedby!=account.username && card.usedby!="nobody"){
+            top.Message= 'Voucher Already Used By Someone!';
+      top.Type="Release";
+      res.json(top);
+             //  res.send('Card Already Used By Someone!');
+                    
+                }
+                         if(card.usedby==account.username){
+                                   top.Message= 'Voucher Already Used by You!';
+      top.Type="Release";
+      res.json(top);
+                          //  res.send('Card Already Used By You!');
+                        }
+                                  
+            }
+            
+            
+            else {
+                
+              Data.findOne({'username': account.username}, function(err, user){
+            
+                  if(err) throw err;
+              
+              if (user){
+                 user.tempc = parseInt(user.tempc)+parseInt(card.value);
+                  user.save(function(err){});
+                  card.used = true;
+                  card.usedby = account.username;
+                  card.save(function(err){});
+                         top.Message= 'Your Account Was Succesfully Credited With '+card.value+' Units';
+      top.Type="Release";
+      res.json(top);
+               //   res.send(' Successfully Credited With '+card.value);
+                  
+                  
+              }
+                  
+                  else{
+                      console.log("not used here ");
+                      
+                    // res.send('User Not Found!'); 
+                      
+                  }
+              
+        
+              });
+                
+                     
+                
+            }
+            
+            
+           
+        }
+            else{
+                       top.Message= 'Voucher Code is Incorrect or Does not Exist!';
+      top.Type="Release";
+      res.json(top);
+             //  res.send('Card Number Doesnt Exist!'); 
+                
+                
+            }
+        
+        
+        
+        });
+    
+       
+            
+        }
+        
+        
+          else  if(isNaN(msg) == false && parseInt(msg)>=0){
         top.Message='Transaction in Progress please Wait.....';
             top.Type="Release";
             res.json(top);
