@@ -154,6 +154,7 @@ var seconds = diff.seconds() % 60;
       top.Type="Release";
       res.json(top);
         }
+    }
       
     }
     else if(req.body.Sequence==3){
