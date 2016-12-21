@@ -280,7 +280,7 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
 client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, function (data, response) {
     // parsed response body as js object 
     console.log(data);
-    if(data.tx_status == 'complete'){
+    if(data.tx_status == 'completed'){
          // account.tempc = parseInt(account.tempc)+amount;
         Data.findOne({'username': indvT.username}, function(err,user){// CRedting user Database
              user.tempc = parseInt(user.tempc)+ parseFloat(indvT.amount)*100.00;
