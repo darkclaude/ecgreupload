@@ -191,7 +191,7 @@ res.render('portal.ejs');
 });
 app.get('/testmpower', function(req, res){
 
-// set content-type header and data as json in args parameter 
+// set content-typeheader and data as json in args parameter 
 var args = {
     data: {  "customer_name" : "Frimpong tachie evans", "customer_phone" : "0543892565", "customer_email" : "littletheprogrammer@gmail.com", "wallet_provider" : "MTN", "merchant_name" : "Smart ECg Ent.", "amount" : "0.1" },
     
