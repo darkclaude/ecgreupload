@@ -153,12 +153,7 @@ var seconds = diff.seconds() % 60;
       res.json(top);
     }
         
-    else if(msg=='3'){
-  
-      top.Message= 'Enter Voucher Code';
-      top.Type="Response";
-      res.json(top);
-    }
+   
         
         else{
               top.Message= 'Sorry Only MTN and AIRTEL Wallets are Supported!';
@@ -167,6 +162,12 @@ var seconds = diff.seconds() % 60;
         }
     }
       
+         else if(msg=='3'){
+  
+      top.Message= 'Enter Voucher Code';
+      top.Type="Response";
+      res.json(top);
+    }
     }
     else if(req.body.Sequence==3){
         
