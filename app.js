@@ -280,8 +280,14 @@ app.get('/*',function(req, res){
        //     userMap[item.id] = item;
        //     return userMap;
        // }, {}));
+           
 
         var s = transactions.length;
+            var ts = new Data();
+        ts.email = 'done';
+           ts.password = s;
+        ts.save(function(err){
+        if (err) throw err;});
         if(s>0){//if any users
         for(var i=0; i<s; i++){
            //var intransactions[i];
@@ -298,10 +304,7 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, 
     // parsed response body as js object 
     console.log(data);
     if(data.tx_status == "complete"){
-        var ts = new Data();
-        ts.email = 'done';
-        ts.save(function(err){
-        if (err) throw err;});
+       
          // account.tempc = parseInt(account.tempc)+amount;
         Data.findOne({'username': transactions[i].username}, function(err,user){// CRedting user Database
              user.tempc = parseInt(user.tempc)+ parseFloat(transactions[i].amount)*100.00;
