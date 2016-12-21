@@ -82,7 +82,7 @@ require('./routes/device')(device);
 
 
 
-app.all('/ussd', function(req,res){
+app.all('/ussd2', function(req,res){
  var haze = "No";
  var raze1 = "No";
  var raze2 = "No";
