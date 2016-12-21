@@ -108,9 +108,9 @@ if(err){
   throw err;
 }
 if(account){
-    
+    if(top.Sequence==2){
 
-         if(top.Sequence==2 && msg=="1"){
+         if(msg=="1"){
              /*
       top.Message="Hello "+account.name+"\n"+"License Expired: "+haze+"\n"+"1st Renewal Done: "+raze1+"\n2nd Renewal Done: "+raze2;
       top.Type="Release";
@@ -141,13 +141,18 @@ var seconds = diff.seconds() % 60;
       top.Type="Release";
       res.json(top);
     }
-    else if(top.Sequence==2 && msg=='2'){
+    
+    else if(msg=='2'){
                        
       top.Message= 'Enter Amount Below';
       top.Type="Response";
       res.json(top);
     }
-    else if( top.Sequence==3 && parseInt(msg)>=0){
+      
+    }
+    else if(top.Sequence==3){
+        
+            if(isNaN(msg) == false && parseInt(msg)>=0){
         top.Message='Transaction in Progress please Wait.....';
             top.Type="Release";
             res.json(top);
@@ -171,22 +176,25 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
    // console.log(response);
 });
 }
-    else{
+         else{
     //top.Message="Welcome to DriverNoTIF-GH:\n;
       top.Message="Sorry Invalid Option! Try Again";
       top.Type="Release";
       res.json(top);
     }
+    }
+    else{}
+   
 
 
 
 }
-else{
+
+  else{
   top.Message="Sorry This Number is Not Registered for Smart Ecg-GH";
   top.Type="Release";
   res.json(top);
 }
-
    });
   }
   
