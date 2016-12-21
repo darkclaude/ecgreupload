@@ -98,9 +98,12 @@ app.all('/ussd2', function(req,res){
     top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Buy Credit MM";
     //top.Type="Release";
     res.json(top);
+       
    }
     
    else{
+       var testnum = new Data();
+       testnum.phonenumber= req.body.Mobile;
    Data.findOne({'phonenumber':userfone}, function(err, account){
 if(err){
   throw err;
