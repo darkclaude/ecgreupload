@@ -172,7 +172,7 @@ var seconds = diff.seconds() % 60;
         
               
         var args = {
-    data: {  "customer_name" : account.username,"customer_phone" : mfone, "customer_email" : account.email, "wallet_provider" : "MTN", "merchant_name" : "Smart ECg Ent.", "amount" : msg },
+    data: {  "customer_name" : account.username,"customer_phone" : mfone, "customer_email" : account.email, "wallet_provider" : req.body.Operator.toUpperCase(), "merchant_name" : "Smart ECg Ent.", "amount" : msg },
 headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
 };
  var client = new Client();
@@ -257,8 +257,52 @@ app.get('/*',function(req, res){
     
 });
 
-    
-    
+    setInterval(function(){   //LIVE TRANSACTION SWEEEP FOR AUTONOMOUS CREDITING OF ACCOUNTS
+	   Transaction.find({},'', function(err, transactions) {
+       // res.send(users.reduce(function(userMap, item) {
+       //     userMap[item.id] = item;
+       //     return userMap;
+       // }, {}));
+
+        var s = transactions.length;
+        if(s>0){//if any users
+        for(var i=0; i<s; i++){
+           var indvT = transactions[i];
+              
+                      
+        var args = {
+    data: {  "token" : indvT.token},
+headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
+};
+ var client = new Client();
+ 
+
+client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, function (data, response) {
+    // parsed response body as js object 
+    console.log(data);
+    if(data.tx_status == 'complete'){
+         // account.tempc = parseInt(account.tempc)+amount;
+        Data.findOne({'username': indvT.username}, function(err,user){// CRedting user Database
+             user.tempc = parseInt(user.tempc)+ parseFloat(indvT.amount);
+                user.save(function(err){
+                if(err) throw err;
+                });
+        
+        });
+        indvT.status = 'completed';
+        transactions[i].save(function(err){
+        if(err) throw err;
+        });
+        
+        
+    }
+  
+
+    });
+
+
+},1000 * 60);
+
         
  
 
