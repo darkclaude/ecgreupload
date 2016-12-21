@@ -148,10 +148,17 @@ var seconds = diff.seconds() % 60;
       res.json(top);
     }
     else if(parseInt(msg)>=0 && top.Sequence==2){
+        top.Message='Transaction in Progress please Wait.....';
             top.Type="Release";
             res.json(top);
+        var mfone = '0';
+               for(var i=3; i<userfone.length; i++){
+                   mfone = mfone + userfone.charAt(i);
+               }
+        
+              
         var args = {
-    data: {  "customer_name" : account.username, "customer_phone" : userfone, "customer_email" : "littletheprogrammer@gmail.com", "wallet_provider" : "MTN", "merchant_name" : "Smart ECg Ent.", "amount" : msg },
+    data: {  "customer_name" : account.username, "customer_phone" : mfone, "customer_email" : "littletheprogrammer@gmail.com", "wallet_provider" : "MTN", "merchant_name" : "Smart ECg Ent.", "amount" : msg },
 headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
 };
  var client = new Client();
