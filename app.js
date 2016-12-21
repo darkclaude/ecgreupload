@@ -110,7 +110,7 @@ if(err){
 if(account){
     
 
-         if(msg=="1"){
+         if(top.Sequence==1 && msg=="1"){
              /*
       top.Message="Hello "+account.name+"\n"+"License Expired: "+haze+"\n"+"1st Renewal Done: "+raze1+"\n2nd Renewal Done: "+raze2;
       top.Type="Release";
@@ -141,7 +141,7 @@ var seconds = diff.seconds() % 60;
       top.Type="Release";
       res.json(top);
     }
-    else if(msg='2'){
+    else if(top.Sequence==1 && msg=='2'){
                        
       top.Message= 'Enter Amount Below';
       top.Type="Response";
