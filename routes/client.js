@@ -689,7 +689,7 @@ var x = randomString({
   if(isNaN(req.params.value)==false){     
         
 var x = randomString({
-  length: 12,
+  length: 10,
   numeric: true,
   letters: false,
   special: false
