@@ -92,6 +92,7 @@ app.all('/ussd2', function(req,res){
   var top = {};
   top.Type="Response";
   //top.Message="Welcome!";
+   
    var userfone = req.body.Mobile;
    var msg = req.body.Message;
    if(req.body.Type=="Initiation"){
@@ -108,7 +109,7 @@ if(err){
   throw err;
 }
 if(account){
-    if(top.Sequence==1){
+    if(req.body.Sequence==2){
 
          if(msg=="1"){
              /*
@@ -150,7 +151,7 @@ var seconds = diff.seconds() % 60;
     }
       
     }
-    else if(top.Sequence==2){
+    else if(req.body.Sequence==3){
         
             if(isNaN(msg) == false && parseInt(msg)>=0){
         top.Message='Transaction in Progress please Wait.....';
@@ -163,7 +164,7 @@ var seconds = diff.seconds() % 60;
         
               
         var args = {
-    data: {  "customer_name" : "Frimpong tachie evans", "customer_phone" : mfone, "customer_email" : account.email, "wallet_provider" : "MTN", "merchant_name" : "Smart ECg Ent.", "amount" : msg },
+    data: {  "customer_name" : account.username,"customer_phone" : mfone, "customer_email" : account.email, "wallet_provider" : "MTN", "merchant_name" : "Smart ECg Ent.", "amount" : msg },
 headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
 };
  var client = new Client();
