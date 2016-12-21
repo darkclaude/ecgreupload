@@ -178,7 +178,7 @@ var seconds = diff.seconds() % 60;
     }
     else if(req.body.Sequence==3){
         if(req.body.ClientState=='transfer'){
-            var user2 = msg.concat("$");
+            var user2 = msg;
             var user1 = account.username;
               if(true){
            //var amount = parseInt(req.body.amount);
@@ -198,7 +198,7 @@ var seconds = diff.seconds() % 60;
                         else{
                             top.Message= 'Enter E-Credit Amount';
                         }
-    top.ClientState = user2;
+    top.ClientState = user2.concat("!");
       top.Type="Response";
       res.json(top);
                         
@@ -238,7 +238,7 @@ var seconds = diff.seconds() % 60;
         
         
         
-        else if(req.body.ClientState.includes("$")==true){
+        else if(req.body.ClientState.includes("!")==true){
          var user1 = account.username;
             var user2= '';
          var it = req.body.ClientState.length;
