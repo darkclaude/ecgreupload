@@ -5,6 +5,7 @@ var app = express();
 var configDB = require('./config/database.js');
 var Data = require('./config/models/data').Data;
 var Reach = require('./config/models/recharge');
+var Transaction = require('./config/models/transactions');
 var MapData = require('./config/models/map');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
@@ -57,6 +58,7 @@ app.use(flash());
 //mongoose.connect("mongodb://"+connection_string+"/ecg");
 datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
 reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges");
+transactionsdb = mongoose.createConnection("mongodb://"+connection_string+"/transactions");
 //reachdb = mongoose.createConnection("mongodb://"+'127.0.0.1:27017'+"/recharges");
 //mapdb = mongoose.createConnection("mongodb://"+connection_string+"/map");
 
