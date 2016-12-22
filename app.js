@@ -140,7 +140,7 @@ var seconds = diff.seconds() % 60;
          
         
                   */
-      top.Message= "Hello "+account.username+"\n Working Balance : "+account.balance+'\n Temp Balance : '+account.tempc+'\n Total Balance : '+parseFloat(account.balance)+parseFloat(account.tempc);
+      top.Message= "Hello "+account.username+"\n Working Balance : "+account.balance+'\n Temp Balance : '+account.tempc+'\n Total Balance : '+(parseFloat(account.balance)+parseFloat(account.tempc)).toString();
       top.Type="Release";
       res.json(top);
     }
