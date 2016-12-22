@@ -16,6 +16,7 @@ var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var restler = require('restler');
 var Client = require('node-rest-client').Client;
+var moment = require('moment');
 require('./config/passport')(passport);
 //var port = 2500;
 var port  = process.env.OPENSHIFT_NODEJS_PORT;
@@ -89,12 +90,7 @@ require('./routes/stat')(stat);
 require('./routes/client')(client);
 require('./routes/device')(device);
 
-var utmodel = {
-         tdate: '',
-         ttime: '',
-         ttype: '',
-         tamount: '',
-};
+
 
 
 
