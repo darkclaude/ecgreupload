@@ -20,7 +20,7 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
     });
   
 	$http.post('/clientapp/allusertransactions/'+userid).success(function(response){
-		$scope.v = "!a";
+	//	$scope.v = "!a";
 		//$scope.expired=false;
 	
 		$scope.transactionname="";
@@ -28,6 +28,8 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
 		    console.log("GOT IT BIT");
         var t    = new Array;
         t = response.transactions;
+        console.log(response.transactions[0]);
+           console.log(response[0].trasanctions);
 		    console.log(response.transactions);
     $scope.transactionlist = t.reverse();
     $scope.activeBtn=0;
