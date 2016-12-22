@@ -327,8 +327,18 @@ var seconds = diff.seconds() % 60;
                   utmodel.tamount = card.value;
                   utmodel.ttype= 'Voucher Code'; 
                   user.transactions.push(utmodel);
-                 user.tempc = parseInt(user.tempc)+parseInt(card.value);
+                  if(user.borrowedbalance<0){
+                    var newval = (parseInt(card.value)+parseInt(user.borrowedbalance)).toString();
+                      if(parseInt(newval)>=0){
+                            user.tempc = parseInt(user.tempc)+parseInt(newval);
+                       user.borrowedbalance = "0";   
+                      }
+                      else{
+                          user.borrowedbalance = newval;
+                      }
+               
                   user.save(function(err){});
+                  }
                   card.used = true;
                   card.usedby = account.username;
                   card.save(function(err){});
