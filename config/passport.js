@@ -6,9 +6,15 @@ var jwt = require('jsonwebtoken');
 var LocalStrategy   = require('passport-local').Strategy;
 
 var Data = require('./models/data').Data;
+var utmodel = {
+         tdate: '',
+         ttime: '',
+         ttype: '',
+         tamount: '',
+};
 //var sendgrid  = require('sendgrid')('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');
 
-// expose this function to our app using module.exports
+// expose this function to  our app using module.exports
 module.exports = function(passport) {
 
     // =========================================================================
@@ -93,6 +99,7 @@ console.log('Desilizeing');
                 newData.password = newData.generateHash(password);
                 newData.phonenumber = req.body.phonenumber;
                 newData.fullname = req.body.fullname;
+                newDate.transactions.push(utmodel);
                 newData.balance = '0.0';
                 newData.borrowedbalance='0.0';
                // newData.power.push(0);

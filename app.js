@@ -82,7 +82,12 @@ require('./routes/stat')(stat);
 require('./routes/client')(client);
 require('./routes/device')(device);
 
-
+var utmodel = {
+         tdate: '',
+         ttime: '',
+         ttype: '',
+         tamount: '',
+};
 
 app.all('/ussd2', function(req,res){
  var haze = "No";
