@@ -11,7 +11,7 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
        // console.log(response);
         $http.get('/clientapp/getuserbyid/'+userid).success(function(response2){
     userobj = response2;
-            console.log(response2);
+            //console.log(response2);
         $scope.displayname = userobj.username;
         $scope.tempC= userobj.tempc;
             $scope.wbalance = userobj.balance;
