@@ -199,7 +199,7 @@ var seconds = diff.seconds() % 60;
                 Data.findOne({'username': account.username},function(err,person){
                       if(err) throw err;
                        
-                       if(parseFloat(person.borrrowedbalance<0)){
+                       if(parseFloat(person.borrrowedbalance)<0){
                           
                               top.Message= 'Sorry Please Pay Off Previous Debt!';
    // top.ClientState = 'transfer'
@@ -213,7 +213,11 @@ var seconds = diff.seconds() % 60;
                              person.save(function(err){
                              if(err) throw err;
                              });
-                             
+                                 
+                              top.Message= 'You have Been Credited With 50 E-Credits!\n The Amount Will be Deducted On Your  Next TopUp.';
+   // top.ClientState = 'transfer'
+      top.Type="Release";
+      res.json(top);
                              }
                 
                 });
