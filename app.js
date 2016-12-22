@@ -374,7 +374,7 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
                  
               user2 = user2 + req.body.ClientState.charAt(i);   
              }
-              if(isNaN(msg)==false){
+              if(isNaN(msg)==false && msg.includes("-")==false){
            var amount = parseFloat(msg);
         Data.findOne({'username':user1}, function(err,account1){
             
@@ -448,7 +448,7 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
         }
         else{
 
-             top.Message= 'Transaction Failed!\n Reason: Invalid Amount Entered (>1 Units only)!';
+             top.Message= 'Transaction Failed!\n Reason: Invalid Amount Entered >1 Units only!';
     
       top.Type="Release";
       res.json(top);  // res.send("Invalid Amount!");
