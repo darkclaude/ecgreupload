@@ -307,7 +307,7 @@ var seconds = diff.seconds() % 60;
         }
             
         }
-        
+        }
         
         /*
         else if(req.body.ClientState.length>0){
