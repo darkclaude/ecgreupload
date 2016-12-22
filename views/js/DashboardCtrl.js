@@ -18,6 +18,23 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
             $scope.borrowed = userobj.borrowedbalance;
             $scope.totalAccounts = (parseFloat(userobj.tempc)+parseFloat(userobj.balance))-parseFloat(userobj.borrowedbalance);
     });
+  
+	$http.post('/clientapp/alltransactions').success(function(response){
+		$scope.v = "!a";
+		//$scope.expired=false;
+	
+		$scope.transactionname="";
+		$scope.transactionid="";
+		    console.log("GOT IT BIT");
+		    console.log(response);
+    $scope.transactionlist = response.reverse();
+    $scope.activeBtn=0;
+
+    $scope.transaction="";
+
+	});
+
+ 
     });}
                             onload();// CALLING ONLOAD TO START /EXEC
             $interval(function () {// Global Data Update . INT 3 Seconds

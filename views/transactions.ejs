@@ -9,11 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NodeKeyz ECG Smart System</title>
+    <title>User Transactions</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-     <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
@@ -30,7 +29,7 @@
 
 </head>
 
-<body>
+<body ng-controller="mainController">
 
     <div id="wrapper">
 
@@ -44,7 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">User Info</a>
+                <a class="navbar-brand" href="index.html">SB Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -58,10 +57,10 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong>NodeKeyz</strong>
+                                        <h5 class="media-heading"><strong>John Smith</strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>new messages awaiting ur attention</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
                                     </div>
                                 </div>
                             </a>
@@ -73,10 +72,10 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong>NodeKeyz</strong>
+                                        <h5 class="media-heading"><strong>John Smith</strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Continue reading here .....</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
                                     </div>
                                 </div>
                             </a>
@@ -88,10 +87,10 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong>NodeKeyz</strong>
+                                        <h5 class="media-heading"><strong>John Smith</strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>New Messages</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
                                     </div>
                                 </div>
                             </a>
@@ -104,7 +103,6 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
-                    <!--
                         <li>
                             <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
                         </li>
@@ -123,7 +121,6 @@
                         <li>
                             <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
                         </li>
-                    -->
                         <li class="divider"></li>
                         <li>
                             <a href="#">View All</a>
@@ -131,7 +128,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> NodeKeyz <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -158,8 +155,7 @@
                     <li>
                         <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
-            <!--
-                    <li>
+                    <li class="active">
                         <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
                     <li>
@@ -168,33 +164,26 @@
                     <li>
                         <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
                     </li>
-            -->
-                    <li class="active">
-                        <a href="transactions.html"><i class="fa fa-fw fa-wrench"></i> TRANSACTIONS</a>
+                    <li>
+                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Purchases <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="topup.html">Top Up</a>
+                                <a href="#">Dropdown Item</a>
                             </li>
                             <li>
-                                <a href="">Borrow Credit</a>
-                            </li>
-
-                             <li>
-                                <a href="#">Transfer Credit</a>
+                                <a href="#">Dropdown Item</a>
                             </li>
                         </ul>
                     </li>
-            <!--
                     <li>
                         <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
                     </li>
                     <li>
                         <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
                     </li>
-            -->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -208,19 +197,48 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Your Purchases Here
+                            Tables
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-wrench"></i>Transactions
+                                <i class="fa fa-table"></i> Tables
                             </li>
                         </ol>
                     </div>
                 </div>
- 
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2>Contextual Classes</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Page</th>
+                                        <th>Visits</th>
+                                        <th>% New Visits</th>
+                                        <th>Revenue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+     <tr class="success" style="overflow-y: auto; height:50px;" ng-repeat="transaction in transactionlist"  >
+                                      
+                                    </tr>
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h2>Bootstrap Docs</h2>
+                        <p>For complete documentation, please visit <a target="_blank" href="http://getbootstrap.com/css/#tables">Bootstrap's Tables Documentation</a>.</p>
+                    </div>
+                </div>
+                <!-- /.row -->
 
             </div>
             <!-- /.container-fluid -->
@@ -232,15 +250,15 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+   <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
     <script src="js/angular.min.js"></script>
     <script src="js/angular-route.min.js"></script>
-    <script src="js/DashboardCtrl.js"></script>
-    <script src="js/sweetalert.min.js"></script>
+     <script src="js/DashboardCtrl.js"></script>
+      <script src="js/sweetalert.min.js"></script>
+
 </body>
 
 </html>

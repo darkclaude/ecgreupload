@@ -178,6 +178,14 @@ else{
 });
     
     
+client.post("/alltransactions",function(req, res){
+  var k10 = [{}];
+  Transaction.find({}, function(err, trans) {
+
+     res.json(trans);
+   });
+});
+
 client.get('/createaccount/:username/:id/:atype', function(req, res){   // For Creating User
     
     //res.send(req.body.atype);
@@ -835,7 +843,7 @@ var x = randomString({
               
               if (account){
                   var now = new Date();
-                  utmodel.fulldate =  now;
+                  utmodel.tfulldate =  now;
                   utmodel.ttime =  moment(now).format('hh:mm a');
                   utmodel.tdate = getFormattedDate(now);
                   utmodel.tamount=card.value;
