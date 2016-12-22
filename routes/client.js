@@ -3,7 +3,7 @@ var Data = require('../config/models/data').Data;
 var MapData = require('../config/models/map');
 var randomString = require('random-string');
 var moment = require('moment');
-var Transaction = ('../config/models/transactions')
+//var Transaction = ('../config/models/transactions')
 var CryptoJS = require("crypto-js"); 
  var utmodel = {
          tfulldate: '',
@@ -179,11 +179,11 @@ else{
 });
     
     
-client.all("/alltransactions",function(req, res){
+client.all("/allusertransactions/:id",function(req, res){
   //var k10 = [{}];
-  Transaction.find({},'', function(err, trans) {
-
-     res.json(trans);
+Data.find({'_id': req.params.id}, function(err, user) {
+ 
+     res.json(user.transactions);
    });
 });
 
