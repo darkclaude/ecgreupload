@@ -19,7 +19,7 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
             $scope.totalAccounts = (parseFloat(userobj.tempc)+parseFloat(userobj.balance))-parseFloat(userobj.borrowedbalance);
     });
   
-	$http.post('/clientapp/alltransactions/'+userid).success(function(response){
+	$http.post('/clientapp/allusertransactions/'+userid).success(function(response){
 		$scope.v = "!a";
 		//$scope.expired=false;
 	
