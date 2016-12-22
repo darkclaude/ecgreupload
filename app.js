@@ -198,7 +198,7 @@ var seconds = diff.seconds() % 60;
                         else{
                             top.Message= 'Enter E-Credit Amount';
                         }
-    top.ClientState = user2.concat("!");
+    top.ClientState = account2.username;
       top.Type="Response";
       res.json(top);
                         
@@ -238,7 +238,7 @@ var seconds = diff.seconds() % 60;
         
         
         
-        else if(req.body.ClientState.includes("!")==true){
+        else if(req.body.ClientState.length>0){
          var user1 = account.username;
             var user2= '';
          var it = req.body.ClientState.length;
