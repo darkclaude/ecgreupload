@@ -26,7 +26,8 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
 		$scope.transactionname="";
 		$scope.transactionid="";
 		    console.log("GOT IT BIT");
-        var t = response.transactions;
+        var t    = new Array;
+        t = response.transactions;
 		    console.log(response.transactions);
     $scope.transactionlist = t.reverse();
     $scope.activeBtn=0;
