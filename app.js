@@ -374,7 +374,7 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
                  
               user2 = user2 + req.body.ClientState.charAt(i);   
              }
-              if(isNaN(msg)==false && msg.includes("-")==false){
+              if(isNaN(msg)==false && msg[0] != '-'){
            var amount = parseFloat(msg);
         Data.findOne({'username':user1}, function(err,account1){
             
