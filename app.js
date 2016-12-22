@@ -420,22 +420,21 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
                   utmodel.ttime =  moment(now).format('hh:mm a');
                   utmodel.tdate = getFormattedDate(now);
                   utmodel.tamount=amount.toString();
-                  utmodel.ttype = 'Transfer Out';
+               //   utmodel.ttype = 'Transfer Out';
                                account1.tempc = (parseFloat(account1.tempc)-amount).toString();
                              account2.tempc = (parseInt(account2.tempc)+amount).toString();
-                  account1.transactions.push(utmodel);
-                              //  utmodel.ttype = 'Transfer In';
-                         
-                     
-                 var tp = utmodel;
-                             tp.ttype = 'Transfer In';
-                  account2.transactions.push(tp);
+                                utmodel.ttype = 'Transfer In';
+                  account2.transactions.push(utmodel);
                              account2.save(function(err){
-                             });
-                                 account1.save(function(err){ 
                                  if(err) throw err;
-                                
+                                      account1.transactions.push(utmodel);
+                                      account1.transactions[account1.transactions.length-1].ttype = 'Transfer Out'; 
+                                    account1.save(function(err){
+                                 if(err) throw err;
+                                 
                              });
+                             });
+                               
                            
                          //  res.send('Transferred Successfully!');
                                    top.Message= 'Transaction Succesfull!\nAmount of '+amount.toString()+' Units Was Succesfully Transferred!';
@@ -450,22 +449,26 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
                   utmodel.ttime =  moment(now).format('hh:mm a');
                   utmodel.tdate = getFormattedDate(now);
                   utmodel.tamount=amount.toString();
-                  utmodel.ttype = 'Transfer Out';
+                 
                                account1.balance = (parseFloat(account1.balance)-amount).toString();
                              account2.tempc = (parseInt(account2.tempc)+amount).toString();
-                  account1.transactions.push(utmodel);
+      
                                  
-                 var tp = utmodel;
-                             tp.ttype = 'Transfer In'; 
+                //// var tp = utmodel;
+                     //        tp.ttype = 'Transfer In'; 
                  // utmodel.ttype = 'Transfer In';
-                                
-                  account2.transactions.push(tp);
+                                 utmodel.ttype = 'Transfer In';
+                  account2.transactions.push(utmodel);
                              account2.save(function(err){
-                             });
-                                  account1.save(function(err){
+                                 if(err) throw err;
+                                      account1.transactions.push(utmodel);
+                                      account1.transactions[account1.transactions.length-1].ttype = 'Transfer Out'; 
+                                    account1.save(function(err){
                                  if(err) throw err;
                                  
                              });
+                             });
+                               
                      
                            
                                // res.send('Transferred Successfully!');
