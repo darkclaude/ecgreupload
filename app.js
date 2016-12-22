@@ -16,7 +16,6 @@ var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var restler = require('restler');
 var Client = require('node-rest-client').Client;
- var user2='';
 require('./config/passport')(passport);
 //var port = 2500;
 var port  = process.env.OPENSHIFT_NODEJS_PORT;
@@ -177,13 +176,13 @@ var seconds = diff.seconds() % 60;
     }
     }
     else if(req.body.Sequence==3){
-        if(req.body.ClientState=='transfer' || req.body.ClientState=='transfer2'){
+        if(req.body.ClientState=='transfer'){
             
             var user1 = account.username;
             var trex = req.body.ClientState;
             
               if(trex=='transfer'){
-                  user2 = msg;
+               var   user2 = msg;
            //var amount = parseInt(req.body.amount);
         Data.findOne({'username':user1}, function(err,account1){
             
@@ -201,7 +200,7 @@ var seconds = diff.seconds() % 60;
                         else{
                             top.Message= 'Enter E-Credit Amount';
                         }
-    top.ClientState = 'transfer2';
+    top.ClientState = "$".concat(user2);
       top.Type="Response";
       res.json(top);
                         
@@ -238,97 +237,7 @@ var seconds = diff.seconds() % 60;
             
         }
         }
-        
-        
-        else if(req.body.ClientState=='transfer2'){
-         var user1 = account.username;
-                top.Message= 'Transaction Succesfull!\nAmount of '+msg+' Units Was Succesfully Transferred!';
-    
-      top.Type="Release";
-      res.json(top); 
-          /*
-              if(isNaN(msg)==false){
-           var amount = parseFloat(msg);
-        Data.findOne({'username':user1}, function(err,account1){
-            
-            if(err){throw err};
-            if(account1){
-                
-                
-                Data.findOne({'username':user2}, function(err, account2){
-                    
-                    if(err){throw err}
-                    if(account2){
-                        user2='';
-                         if(parseInt(account1.tempc)>=amount){
-                             
-                             account1.tempc = (parseFloat(account1.tempc)-amount).toString();
-                             account2.tempc = (parseInt(account2.tempc)+amount).toString();
-                             account1.save(function(err){  
-                             });
-                             account2.save(function(err){
-                             });
-                         //  res.send('Transferred Successfully!');
-                                   top.Message= 'Transaction Succesfull!\nAmount of '+amount+' Units Was Succesfully Transferred!';
-    
-      top.Type="Release";
-      res.json(top); 
-                             
-                         }
-                        else{
-                            if(parseInt(account1.balance)>=amount){
-                                account1.balance = (parseInt(account1.balance)-amount).toString();
-                                account2.tempc = (parseInt(account2.tempc)+amount).toString();
-                                
-                                account1.save(function(err){
-                                });
-                                account2.save(function(err){
-                                    
-                                });
-                               // res.send('Transferred Successfully!');
-                                    top.Message= 'Transaction Succesfull!\nAmount of '+amount+' Units Was Succesfully Transferred!';
-    
-      top.Type="Release";
-      res.json(top); 
-                                
-                            }
-                            else{
-                                
-                                    top.Message= 'Transaction Failed!\n Reason: Insufficient Balance!';
-    
-      top.Type="Release";
-      res.json(top); 
-                              // res.send('Insufficient Balance');  
-                                
-                            }
-                           
-                            
-                        }
-                        
-                    }
-                    
-                  
-                    
-                    
-                });
-           
-                
-            }
-        
-          
-        });
-        
-        }
-        else{
-
-             top.Message= 'Transaction Failed!\n Reason: Invalid Amount Entered (>1 Units only)!';
-    
-      top.Type="Release";
-      res.json(top);  // res.send("Invalid Amount!");
-        }
-            */     
-        
-        }
+       
         
        else if(msg.length==10){
            Reach.findOne({'key': msg}, function(err,card){
@@ -453,6 +362,100 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
       top.Type="Release";
       res.json(top);
     }
+    }
+    else if(req.body.Sequence == 4){
+        
+         
+        
+         if(req.body.ClientState.includes("$")==true){
+         var user1 = account.username;
+          var user2;
+             for(var i=1; i<req.body.ClientState.length; i++){
+                 
+              user2 = user2 + req.body.ClientState.charAt(i);   
+             }
+              if(isNaN(msg)==false){
+           var amount = parseFloat(msg);
+        Data.findOne({'username':user1}, function(err,account1){
+            
+            if(err){throw err};
+            if(account1){
+                
+                
+                Data.findOne({'username':user2}, function(err, account2){
+                    
+                    if(err){throw err}
+                    if(account2){
+                        user2='';
+                         if(parseInt(account1.tempc)>=amount){
+                             
+                             account1.tempc = (parseFloat(account1.tempc)-amount).toString();
+                             account2.tempc = (parseInt(account2.tempc)+amount).toString();
+                             account1.save(function(err){  
+                             });
+                             account2.save(function(err){
+                             });
+                         //  res.send('Transferred Successfully!');
+                                   top.Message= 'Transaction Succesfull!\nAmount of '+amount+' Units Was Succesfully Transferred!';
+    
+      top.Type="Release";
+      res.json(top); 
+                             
+                         }
+                        else{
+                            if(parseInt(account1.balance)>=amount){
+                                account1.balance = (parseInt(account1.balance)-amount).toString();
+                                account2.tempc = (parseInt(account2.tempc)+amount).toString();
+                                
+                                account1.save(function(err){
+                                });
+                                account2.save(function(err){
+                                    
+                                });
+                               // res.send('Transferred Successfully!');
+                                    top.Message= 'Transaction Succesfull!\nAmount of '+amount+' Units Was Succesfully Transferred!';
+    
+      top.Type="Release";
+      res.json(top); 
+                                
+                            }
+                            else{
+                                
+                                    top.Message= 'Transaction Failed!\n Reason: Insufficient Balance!';
+    
+      top.Type="Release";
+      res.json(top); 
+                              // res.send('Insufficient Balance');  
+                                
+                            }
+                           
+                            
+                        }
+                        
+                    }
+                    
+                  
+                    
+                    
+                });
+           
+                
+            }
+        
+          
+        });
+        
+        }
+        else{
+
+             top.Message= 'Transaction Failed!\n Reason: Invalid Amount Entered (>1 Units only)!';
+    
+      top.Type="Release";
+      res.json(top);  // res.send("Invalid Amount!");
+        }
+                
+        
+        }
     }
     else{}
    
