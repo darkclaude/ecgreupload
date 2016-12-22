@@ -424,11 +424,12 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
                                account1.tempc = (parseFloat(account1.tempc)-amount).toString();
                              account2.tempc = (parseInt(account2.tempc)+amount).toString();
                   account1.transactions.push(utmodel);
-                                utmodel.ttype = 'Transfer In';
+                              //  utmodel.ttype = 'Transfer In';
                          
                      
-                
-                  account2.transactions.push(utmodel);
+                 var tp = utmodel;
+                             tp.ttype = 'Transfer In';
+                  account2.transactions.push(tp);
                              account2.save(function(err){
                              });
                                  account1.save(function(err){ 
@@ -453,10 +454,12 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
                                account1.balance = (parseFloat(account1.balance)-amount).toString();
                              account2.tempc = (parseInt(account2.tempc)+amount).toString();
                   account1.transactions.push(utmodel);
-                           
-                  utmodel.ttype = 'Transfer In';
+                                 
+                 var tp = utmodel;
+                             tp.ttype = 'Transfer In'; 
+                 // utmodel.ttype = 'Transfer In';
                                 
-                  account2.transactions.push(utmodel);
+                  account2.transactions.push(tp);
                              account2.save(function(err){
                              });
                                   account1.save(function(err){
