@@ -607,6 +607,7 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
                   utmodel.tamount = transaction.amount;
                   utmodel.type= 'Mobile Money Topup'; 
                   user.transactions.push(utmodel);
+            user.transactions[user.transactions.length-1].ttype = 'Mobile Money Topup';
              user.tempc = parseInt(user.tempc)+ parseFloat(transaction.amount)*100.00;
                 user.save(function(err){
                 if(err) throw err;
