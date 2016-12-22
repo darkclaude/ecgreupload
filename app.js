@@ -44,7 +44,13 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
  extended: true })); 
 
-
+ var utmodel = {
+         tfulldate: '',
+         tdate: '',
+         ttime: '',
+         ttype: '',
+         tamount: '',
+};
 
 app.use(session({secret: 'debussy', saveUninitialized:true, resave: true,  cookie : { secure : false, maxAge : (7*24 * 60 * 60 * 1000) },store: new MongoStore({  url:"mongodb://"+connection_string+"/sessions"})}));
 
@@ -89,6 +95,18 @@ var utmodel = {
          ttype: '',
          tamount: '',
 };
+
+
+
+ function getFormattedDate(date) {
+  var year = date.getFullYear();
+  var month = (1 + date.getMonth()).toString();
+  month = month.length > 1 ? month : '0' + month;
+  var day = date.getDate().toString();
+  day = day.length > 1 ? day : '0' + day;
+  return month + '/' + day + '/' + year;
+}
+
 
 app.all('/ussd2', function(req,res){
  var haze = "No";
@@ -277,6 +295,13 @@ var seconds = diff.seconds() % 60;
                   if(err) throw err;
               
               if (user){
+             var nownow = new Date();
+                     utmodel.tfulldate = nownow;
+                  utmodel.ttdate = getFormattedDate(nownow);
+                  utmodel.ttime =   moment(nownow).format('hh:mm a');
+                  utmodel.tamount = card.value;
+                  utmodel.type= 'Voucher Code'; 
+                  user.transactions.push(utmodel);
                  user.tempc = parseInt(user.tempc)+parseInt(card.value);
                   user.save(function(err){});
                   card.used = true;
@@ -393,14 +418,24 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
                     if(err){throw err}
                     if(account2){
                         user2='';
+                        var now = new Date();
                          if(parseInt(account1.tempc)>=amount){
-                             
-                             account1.tempc = (parseFloat(account1.tempc)-amount).toString();
+                                utmodel.tfulldate =  now;
+                  utmodel.ttime =  moment(now).format('hh:mm a');
+                  utmodel.tdate = getFormattedDate(now);
+                  utmodel.tamount=amount.toString();
+                  utmodel.ttype = 'Transfer Out';
+                               account1.tempc = (parseFloat(account1.tempc)-amount).toString();
                              account2.tempc = (parseInt(account2.tempc)+amount).toString();
+                  account1.transactions.push(utmodel);
                              account1.save(function(err){  
                              });
+                     
+                  utmodel.ttype = 'Transfer In';
+                  account2.transactions.push(utmodel);
                              account2.save(function(err){
                              });
+                           
                          //  res.send('Transferred Successfully!');
                                    top.Message= 'Transaction Succesfull!\nAmount of '+amount.toString()+' Units Was Succesfully Transferred!';
     
@@ -410,14 +445,22 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
                          }
                         else{
                             if(parseInt(account1.balance)>=amount){
-                                account1.balance = (parseInt(account1.balance)-amount).toString();
-                                account2.tempc = (parseInt(account2.tempc)+amount).toString();
-                                
-                                account1.save(function(err){
-                                });
-                                account2.save(function(err){
-                                    
-                                });
+                                      utmodel.tfulldate =  now;
+                  utmodel.ttime =  moment(now).format('hh:mm a');
+                  utmodel.tdate = getFormattedDate(now);
+                  utmodel.tamount=amount.toString();
+                  utmodel.ttype = 'Transfer Out';
+                               account1.balance = (parseFloat(account1.balance)-amount).toString();
+                             account2.tempc = (parseInt(account2.tempc)+amount).toString();
+                  account1.transactions.push(utmodel);
+                             account1.save(function(err){  
+                             });
+                     
+                  utmodel.ttype = 'Transfer In';
+                  account2.transactions.push(utmodel);
+                             account2.save(function(err){
+                             });
+                           
                                // res.send('Transferred Successfully!');
                                     top.Message= 'Transaction Succesfull!\nAmount of '+amount.toString()+' Units Was Succesfully Transferred!';
     
@@ -547,6 +590,13 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
          // account.tempc = parseInt(account.tempc)+amount;
        // console.log("un : "+transactions);
         Data.findOne({'username': transaction.username}, function(err,user){// CRedting user Database
+             var nownow = new Date();
+                     utmodel.tfulldate = nownow;
+                  utmodel.ttdate = getFormattedDate(nownow);
+                  utmodel.ttime =   moment(nownow).format('hh:mm a');
+                  utmodel.tamount = transaction.amount;
+                  utmodel.type= 'Mobile Money Topup'; 
+                  user.transactions.push(utmodel);
              user.tempc = parseInt(user.tempc)+ parseFloat(transaction.amount)*100.00;
                 user.save(function(err){
                 if(err) throw err;

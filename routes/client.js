@@ -535,11 +535,20 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
                     if(account2){
                         
                          if(parseInt(account1.balance)>=amount){
-                             
+                             var now = new Date();
                              account1.balance = (parseInt(account1.balance)-amount).toString();
                              account2.tempc = (parseInt(account2.tempc)+amount).toString();
+                               utmodel.tfulldate =  now;
+                  utmodel.ttime =  moment(now).format('hh:mm a');
+                  utmodel.tdate = getFormattedDate(now);
+                  utmodel.tamount=amount.toString();
+                  utmodel.ttype = 'Transfer Out';
+                  account1.transactions.push(utmodel);
                              account1.save(function(err){  
                              });
+                     
+                  utmodel.ttype = 'Transfer In';
+                  account2.transactions.push(utmodel);
                              account2.save(function(err){
                              });
                            res.send('Transferred Successfully!');
@@ -551,11 +560,19 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
                                 account1.tempc = (parseInt(account1.tempc)-amount).toString();
                                 account2.tempc = (parseInt(account2.tempc)+amount).toString();
                                 
-                                account1.save(function(err){
-                                });
-                                account2.save(function(err){
-                                    
-                                });
+                                utmodel.tfulldate =  now;
+                  utmodel.ttime =  moment(now).format('hh:mm a');
+                  utmodel.tdate = getFormattedDate(now);
+                  utmodel.tamount=amount.toString();
+                  utmodel.ttype = 'Transfer Out';
+                  account1.transactions.push(utmodel);
+                             account1.save(function(err){  
+                             });
+                     
+                  utmodel.ttype = 'Transfer In';
+                  account2.transactions.push(utmodel);
+                             account2.save(function(err){
+                             });
                                 res.send('Transferred Successfully!');
                                 
                                 
