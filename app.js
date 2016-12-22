@@ -118,7 +118,7 @@ app.all('/ussd2', function(req,res){
    var userfone = req.body.Mobile;
    var msg = req.body.Message;
    if(req.body.Type=="Initiation"){
-    top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Buy E-Credit Via Mobile Wallet \n3. Top-Up With E-Credit Code\n4. Transfer E-Credit";
+    top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Buy E-Credit Via Mobile Wallet \n3. Top-Up With E-Credit Code\n4. Transfer E-Credit\n5. Borrow E-Credit";
     //top.Type="Release";
     res.json(top);
        
@@ -193,6 +193,31 @@ var seconds = diff.seconds() % 60;
     top.ClientState = 'transfer';
       top.Type="Response";
       res.json(top);
+    }
+           else if(msg=='5'){
+  
+                Data.findOne({'username': account.username},function(err,person){
+                      if(err) throw err;
+                       
+                       if(parseFloat(person.borrrowedbalance<0){
+                          
+                              top.Message= 'Sorry Please Pay Off Previous Debt!';
+   // top.ClientState = 'transfer'
+      top.Type="Release";
+      res.json(top);
+                          }
+                             else{
+                             
+                             person.borrowedbalance = "-50";
+                             person.tempc = (parseFloat(person.tempc) + 50.00).toString();
+                             person.save(function(err){
+                             if(err) throw err;
+                             });
+                             
+                             }
+                
+                });
+  
     }
     }
     else if(req.body.Sequence==3){
@@ -600,10 +625,10 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
          // account.tempc = parseInt(account.tempc)+amount;
        // console.log("un : "+transactions);
         Data.findOne({'username': transaction.username}, function(err,user){// CRedting user Database
-             var nownow = new Date();
-                     utmodel.tfulldate = nownow;
-                  utmodel.ttdate = getFormattedDate(nownow);
-                  utmodel.ttime =   moment(nownow).format('hh:mm a');
+             var nownow2 = new Date();
+                     utmodel.tfulldate = nownow2;
+                  utmodel.ttdate = getFormattedDate(nownow2);
+                  utmodel.ttime =   moment(nownow2).format('hh:mm a');
                   utmodel.tamount = transaction.amount;
                   utmodel.type= 'Mobile Money Topup'; 
                   user.transactions.push(utmodel);
