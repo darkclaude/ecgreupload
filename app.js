@@ -325,7 +325,7 @@ var seconds = diff.seconds() % 60;
                  
         
         }
-        */
+        
        else if(msg.length==10){
            Reach.findOne({'key': msg}, function(err,card){
         
