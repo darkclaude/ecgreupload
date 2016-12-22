@@ -183,7 +183,7 @@ client.all("/allusertransactions/:id",function(req, res){
   //var k10 = [{}];
 Data.find({'_id': req.params.id}, function(err, user) {
  
-     res.json( JSON.stringify(user.transactions));
+     res.json( user);
    });
 });
 
