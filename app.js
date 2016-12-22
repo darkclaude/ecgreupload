@@ -293,10 +293,10 @@ var seconds = diff.seconds() % 60;
               if (user){
              var nownow = new Date();
                      utmodel.tfulldate = nownow;
-                  utmodel.ttdate = getFormattedDate(nownow);
+                  utmodel.tdate = getFormattedDate(nownow);
                   utmodel.ttime =   moment(nownow).format('hh:mm a');
                   utmodel.tamount = card.value;
-                  utmodel.type= 'Voucher Code'; 
+                  utmodel.ttype= 'Voucher Code'; 
                   user.transactions.push(utmodel);
                  user.tempc = parseInt(user.tempc)+parseInt(card.value);
                   user.save(function(err){});
