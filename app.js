@@ -234,90 +234,15 @@ var seconds = diff.seconds() % 60;
         }
         else{
 
-            if(isNaN(msg)==false){
-           var amount = parseFloat(msg);
-        Data.findOne({'username':user1}, function(err,account1){
-            
-            if(err){throw err};
-            if(account1){
-                
-                
-                Data.findOne({'username':user2}, function(err, account2){
-                    
-                    if(err){throw err}
-                    if(account2){
-                        
-                         if(parseInt(account1.tempc)>=amount){
-                             
-                             account1.tempc = (parseFloat(account1.tempc)-amount).toString();
-                             account2.tempc = (parseInt(account2.tempc)+amount).toString();
-                             account1.save(function(err){  
-                             });
-                             account2.save(function(err){
-                             });
-                         //  res.send('Transferred Successfully!');
-                                   top.Message= 'Transaction Succesfull!\nAmount of '+amount+' Units Was Succesfully Transferred!';
-    
-      top.Type="Release";
-      res.json(top); 
-                             
-                         }
-                        else{
-                            if(parseInt(account1.balance)>=amount){
-                                account1.balance = (parseInt(account1.balance)-amount).toString();
-                                account2.tempc = (parseInt(account2.tempc)+amount).toString();
-                                
-                                account1.save(function(err){
-                                });
-                                account2.save(function(err){
-                                    
-                                });
-                               // res.send('Transferred Successfully!');
-                                    top.Message= 'Transaction Succesfull!\nAmount of '+amount+' Units Was Succesfully Transferred!';
-    
-      top.Type="Release";
-      res.json(top); 
-                                
-                            }
-                            else{
-                                
-                                    top.Message= 'Transaction Failed!\n Reason: Insufficient Balance!';
-    
-      top.Type="Release";
-      res.json(top); 
-                              // res.send('Insufficient Balance');  
-                                
-                            }
-                           
-                            
-                        }
-                        
-                    }
-                    
-                  
-                    
-                    
-                });
-           
-                
-            }
-        
           
-        });
-        }
             
         }
         }
         
-        /*
-        else if(req.body.ClientState.length>0){
+        
+        else if(user2.length>0){
          var user1 = account.username;
-            var user2= '';
-         var it = req.body.ClientState.length;
-            var cs = req.body.ClientState;
-            for(var i=0; i<it-1; i++){
-                user2  = user2 + cs.charAt(i);
-            }
+          
               if(isNaN(msg)==false){
            var amount = parseFloat(msg);
         Data.findOne({'username':user1}, function(err,account1){
@@ -330,7 +255,7 @@ var seconds = diff.seconds() % 60;
                     
                     if(err){throw err}
                     if(account2){
-                        
+                        user2='';
                          if(parseInt(account1.tempc)>=amount){
                              
                              account1.tempc = (parseFloat(account1.tempc)-amount).toString();
