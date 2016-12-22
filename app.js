@@ -448,7 +448,7 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
         }
         else{
 
-             top.Message= 'Transaction Failed!\n Reason: Invalid Amount Entered >1 Units only!';
+             top.Message= 'Transaction Failed!\n Reason: Invalid Amount Entered \n Must be >1 Units only!';
     
       top.Type="Release";
       res.json(top);  // res.send("Invalid Amount!");
