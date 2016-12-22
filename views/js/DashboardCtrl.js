@@ -27,7 +27,7 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
 		$scope.transactionid="";
 		    console.log("GOT IT BIT");
         var t    = new Array;
-        t = response.transactions;
+        t = response[0].transactions;
       //  console.log(response.transactions[0]);
            console.log(response[0].transactions);
 		    console.log(response.transactions);
