@@ -240,9 +240,13 @@ var seconds = diff.seconds() % 60;
         }
         
         
-        else if(user2.length>0){
+        else if(req.body.ClientState=='transfer2'){
          var user1 = account.username;
-          
+                top.Message= 'Transaction Succesfull!\nAmount of '+msg+' Units Was Succesfully Transferred!';
+    
+      top.Type="Release";
+      res.json(top); 
+          /*
               if(isNaN(msg)==false){
            var amount = parseFloat(msg);
         Data.findOne({'username':user1}, function(err,account1){
@@ -322,7 +326,7 @@ var seconds = diff.seconds() % 60;
       top.Type="Release";
       res.json(top);  // res.send("Invalid Amount!");
         }
-                 
+            */     
         
         }
         
