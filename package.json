@@ -25,6 +25,7 @@
     "express-session": "^1.11.3",
     "js-base64": "^2.1.9",
     "jsonwebtoken": "^7.2.1",
+    "moment-timezone": "^0.5.10",
     "mongoose": "^4.2.3",
     "mongoose-delete": "^0.3.4",
     "node-rest-client": "^2.0.1",

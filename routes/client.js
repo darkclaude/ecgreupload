@@ -2,12 +2,19 @@ var Reach = require('../config/models/recharge');
 var Data = require('../config/models/data').Data;
 var MapData = require('../config/models/map');
 var randomString = require('random-string');
+var moment = require('moment');
 var CryptoJS = require("crypto-js"); 
- 
+ var utmodel = {
+         tfulldate: '',
+         tdate: '',
+         ttime: '',
+         ttype: '',
+         tamount: '',
+};
 module.exports = function (client) {
   
     /*
-    as in dick
+
     client.get('/createaccount/:user/:id/:atype', function(req, res){   // For Creating User
 var  user = req.params.user;
 //var bytes  = CryptoJS.AES.decrypt(ent, 'secret key 123');
@@ -788,7 +795,14 @@ var x = randomString({
     });
     
     
-    
+    function getFormattedDate(date) {
+  var year = date.getFullYear();
+  var month = (1 + date.getMonth()).toString();
+  month = month.length > 1 ? month : '0' + month;
+  var day = date.getDate().toString();
+  day = day.length > 1 ? day : '0' + day;
+  return month + '/' + day + '/' + year;
+}
     client.post('/redeem', function(req, res){
     
         var code = req.body.code;
@@ -820,6 +834,13 @@ var x = randomString({
                   if(err) throw err;
               
               if (account){
+                  var now = new Date();
+                  utmodel.fulldate =  now;
+                  utmodel.ttime =  moment(now).format('hh:mm a');
+                  utmodel.tdate = getFormattedDate(now);
+                  utmodel.tamount=card.value;
+                  utmodel.ttype = 'Load Voucher';
+                  account.transactions.push(utmodel);
                  account.tempc = parseInt(account.tempc)+parseInt(card.value);
                   account.save(function(err){});
                   card.used = true;

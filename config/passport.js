@@ -7,6 +7,7 @@ var LocalStrategy   = require('passport-local').Strategy;
 
 var Data = require('./models/data').Data;
 var utmodel = {
+         tfulldate: '',
          tdate: '',
          ttime: '',
          ttype: '',
