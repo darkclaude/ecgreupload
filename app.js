@@ -200,7 +200,7 @@ var seconds = diff.seconds() % 60;
                         else{
                             top.Message= 'Enter E-Credit Amount';
                         }
-    top.ClientState = "$".concat(user2);
+    top.ClientState = "$"+account2.username;
       top.Type="Response";
       res.json(top);
                         
@@ -367,9 +367,9 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
         
          
         
-         if(req.body.ClientState.includes("$")==true){
+         if(true){
          var user1 = account.username;
-          var user2;
+          var user2='';
              for(var i=1; i<req.body.ClientState.length; i++){
                  
               user2 = user2 + req.body.ClientState.charAt(i);   
@@ -396,7 +396,7 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
                              account2.save(function(err){
                              });
                          //  res.send('Transferred Successfully!');
-                                   top.Message= 'Transaction Succesfull!\nAmount of '+amount+' Units Was Succesfully Transferred!';
+                                   top.Message= 'Transaction Succesfull!\nAmount of '+amount.toString()+' Units Was Succesfully Transferred!';
     
       top.Type="Release";
       res.json(top); 
@@ -413,7 +413,7 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
                                     
                                 });
                                // res.send('Transferred Successfully!');
-                                    top.Message= 'Transaction Succesfull!\nAmount of '+amount+' Units Was Succesfully Transferred!';
+                                    top.Message= 'Transaction Succesfull!\nAmount of '+amount.toString()+' Units Was Succesfully Transferred!';
     
       top.Type="Release";
       res.json(top); 
