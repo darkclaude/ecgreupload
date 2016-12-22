@@ -218,15 +218,20 @@
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Page</th>
-                                        <th>Visits</th>
-                                        <th>% New Visits</th>
-                                        <th>Revenue</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Amount (Cedis)</th>
+                                        <th>Type</th>
                                     </tr>
                                 </thead>
                                 <tbody>
      <tr class="success" style="overflow-y: auto; height:50px;" ng-repeat="transaction in transactionlist"  >
-                                      
+                                    <!--   <td>{{ $index + 1+ pageSize*currentPage}}</td>-->
+    <td>{{transaction.tdate}}</td>
+    <td>{{transaction.ttime}}</td>
+     <td>{{transaction.tamount}}</td>
+<td>{{transaction.ttype}}</td>
+
                                     </tr>
                                    
                                 </tbody>

@@ -3,6 +3,7 @@ var Data = require('../config/models/data').Data;
 var MapData = require('../config/models/map');
 var randomString = require('random-string');
 var moment = require('moment');
+var Transaction = ('../config/models/transactions.js')
 var CryptoJS = require("crypto-js"); 
  var utmodel = {
          tfulldate: '',
