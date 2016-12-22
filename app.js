@@ -199,7 +199,7 @@ var seconds = diff.seconds() % 60;
                 Data.findOne({'username': account.username},function(err,person){
                       if(err) throw err;
                        
-                       if(parseFloat(person.borrrowedbalance)<0){
+                       if(person.borrrowedbalance.indexOf("-")!=-1){
                           
                               top.Message= 'Sorry Please Pay Off Previous Debt!';
    // top.ClientState = 'transfer'
