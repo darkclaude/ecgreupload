@@ -23,6 +23,15 @@ router.get('/dashboard', function(req, res){
 	//app.use('/profile', express.static(__dirname + '/views'));
 	res.render('dashboard.ejs');
 });
+     router.get('/borrow', function(req, res){
+	//app.use('/dash', express.static(__dirname + '/views'));
+	res.render('borrow.ejs');
+});
+router.get('/transfer', function(req, res){
+	console.log(req.session);
+	//app.use('/profile', express.static(__dirname + '/views'));
+	res.render('transfer.ejs');
+});
      router.get('/topup', function(req, res){
 	console.log(req.session);
 	//app.use('/profile', express.static(__dirname + '/views'));
