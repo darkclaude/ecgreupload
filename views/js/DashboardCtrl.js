@@ -104,7 +104,12 @@ var route = "/clientapp/redeem";
 
    }
 
-	$scope.doSomething = function(){
-		console.log('you have clicked on this button');
+	$scope.borrow = function(){
+    swal("Error!", "I dont see the borrow in Dashboard", "error");
+		
 	}
+
+  $scope.mpowerDirect = function(){
+    
+  }
 }])

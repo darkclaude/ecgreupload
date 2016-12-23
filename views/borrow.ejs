@@ -9,14 +9,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>TopUp</title>
+    <title>Borrow Credits</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
-   <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -43,7 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">User Info</a>
+                <a class="navbar-brand" href="index.html">Transactions</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -103,7 +103,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
-                    <!--
+                        <!--
                         <li>
                             <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
                         </li>
@@ -122,7 +122,7 @@
                         <li>
                             <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
                         </li>
-                        -->
+                -->
                         <li class="divider"></li>
                         <li>
                             <a href="#">View All</a>
@@ -130,7 +130,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{displayname}}<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{displayname}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -143,7 +143,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -157,48 +157,31 @@
                     <li>
                         <a href="/charts"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
-            <!--
-                    <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-                    </li>
-            -->
                     <li >
-                        <a href="/transactions"><i class="fa fa-fw fa-edit"></i>My Transactions</a>
+                        <a href="/transactions"><i class="fa fa-fw fa-table"></i> My Transactions</a>
                     </li>
-            <!--
-                    <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                    </li>
-        -->
+                   
                     <li class="active">
-
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Purchases <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
+                    
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Purchases<i class="fa fa-fw fa-caret-down"></i></a>
+                       
+                            <ul id="demo" class="collapse">
                             <li>
-                                <a href="/borrow">Borrow Credit</a>
+                                <a href="/topup">Top Up Direct</a>
                             </li>
                             <li>
-                                <a href="/topupr">Topup Recharge</a>
+                                <a href="/topupr">TopUp  ReCharge</a>
                             </li>
+                              
 
-                            <li>
+                             <li>
                                 <a href="/transfer">Transfer Credit</a>
                             </li>
                         </ul>
+                        
                     </li>
-
-                    <!--
-                    <li>
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                    </li>
-                    <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                    </li>
+                    
                 </ul>
-                -->
             </div>
             <!-- /.navbar-collapse -->
         </nav>
@@ -211,33 +194,34 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            TopUp Direct
+                           Borrow
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="/dashboard">Dashboard</a>
                             </li>
-                            <li class="active">
-                                <i class="fa fa-edit"></i> TopUp Your Accounts
+                            <li >
+                                <i class="fa fa-table"></i> Borrow
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
-
-               
-                <p class="info-color"> You can <b>Top Up</b>  your account by using any of the following payment systems:
                 
-
                 
-
-
-                 <div class="littlepage-wrapper">
+                
+                
+                
+                
+            </div>
+            <!-- /.container-fluid -->
+            
+            <div class="littlepage-wrapper">
                      
                         <div class="spaceUp text-center">
                         
-                            <button  ng-click="mpowerDirect()" class="btn btn-large  btn-positive  color">
-                              mPower Direct Mobile
+                            <button  ng-click="borrow()" class="btn btn-large  btn-positive  color">
+                                Click To Borrow Credit
                                 
                             </button>
                             
@@ -249,30 +233,6 @@
                 </div>
                
  
-</div>
-                        
-                    
-                            
-                    </div>
-
-                   </div>
-                        
-
-                    </div>
-                
-                <!-- /.row -->
-
-
-                
-            </div>
-            <!-- /.container-fluid -->
-
-
-
-
-
-
-                
         </div>
         <!-- /#page-wrapper -->
 
@@ -280,7 +240,7 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+   <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
@@ -288,7 +248,6 @@
     <script src="js/angular-route.min.js"></script>
      <script src="js/DashboardCtrl.js"></script>
       <script src="js/sweetalert.min.js"></script>
-       
 
 </body>
 
