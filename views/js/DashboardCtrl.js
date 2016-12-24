@@ -153,7 +153,7 @@ var route = "/clientapp/transfer";
 	}
 
   $scope.mpowerCheck = function(){
-      var route = "/clientapp/mpowercheckout";
+      var route = "/clientapp/mpowerCheckout";
  var parameter = JSON.stringify({user: userobj.username,amount: $scope.amount});
  console.log("it verks");
     $http.post(route, parameter).

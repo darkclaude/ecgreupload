@@ -4,7 +4,7 @@ var MapData = require('../config/models/map');
 var randomString = require('random-string');
 var Client = require('node-rest-client').Client;
 var moment = require('moment');
-var Transaction = ('../config/models/transactions');
+//var Transaction = ('../config/models/transactions');
 var CryptoJS = require("crypto-js"); 
  var utmodel = {
          tfulldate: '',
@@ -13,7 +13,7 @@ var CryptoJS = require("crypto-js");
          ttype: '',
          tamount: '',
 };
-module.exports = function (client) {
+module.exports = function (client,Transaction) {
   
     /*
 

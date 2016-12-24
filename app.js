@@ -89,7 +89,7 @@ app.use('/clientapp',client);
 
 require('./routes/stat')(stat);
 //require('./routes/routes.js')(app,passport);
-require('./routes/client')(client);
+require('./routes/client')(client,Transaction);
 require('./routes/device')(device);
 
 
