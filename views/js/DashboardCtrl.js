@@ -152,7 +152,16 @@ var route = "/clientapp/transfer";
       });
 	}
 
-  $scope.mpowerDirect = function(){
-    
+  $scope.mpowerCheck = function(){
+      var route = "/clientapp/mpowercheckout";
+ var parameter = JSON.stringify({user: userobj.username,amount: $scope.amount});
+ console.log("it verks");
+    $http.post(route, parameter).
+    success(function(response, status, headers, config) {
+           window.location= response;
+      }).
+      error(function(data, status, headers, config) {
+ swal("Error!", "Server/Connection Problem Try Again!", "error");
+      });
   }
 }])

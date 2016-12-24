@@ -2,8 +2,9 @@ var Reach = require('../config/models/recharge');
 var Data = require('../config/models/data').Data;
 var MapData = require('../config/models/map');
 var randomString = require('random-string');
+var Client = require('node-rest-client').Client;
 var moment = require('moment');
-//var Transaction = ('../config/models/transactions')
+var Transaction = ('../config/models/transactions');
 var CryptoJS = require("crypto-js"); 
  var utmodel = {
          tfulldate: '',
@@ -246,6 +247,37 @@ var name = req.body.name;
 res.send("Hello "+name);
 });
 
+client.post('/mpowerCheckout',function(req,res){
+         
+        var args = {
+    data: {"invoice": {"total_amount": req.body.amount, "description": "Smart ECG E-Credits"},"store": {"name": "Smart ECG GH"},"actions": {
+  "return_url": "http://ecg-ninjax.rhcloud.com/dashboard"
+}
+},
+headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
+};
+ var client = new Client();
+ 
+
+client.post("https://app.mpowerpayments.com/api/v1/checkout-invoice/create", args, function (data, response) {
+    // parsed response body as js object 
+    console.log(data);
+     var newTransaction = new Transaction();
+    newTransaction.username = req.body.user;
+  //  newTransaction.phonenumber = account.phonenumber;
+    newTransaction.type = "direct";
+    newTransaction.amount = req.body.amount;
+    newTransaction.dateCreated = new Date();
+    newTransaction.status = "pending";
+    newTransaction.token = data.token;
+    newTransaction.save(function(err){
+    if(err){
+        throw err;
+    }
+    });
+    res.send(data.response_text);
+
+});
    
 client.post('/getinfo',function(req, res){  // Route for Getting User info
 
