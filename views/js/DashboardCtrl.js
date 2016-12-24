@@ -105,9 +105,22 @@ var route = "/clientapp/redeem";
    }
 
 	$scope.borrow = function(){
-        console.log('works');
-    swal("Error!", "I dont see the borrow in Dashboard", "error");
-		
+     var route = "/clientapp/borrow";
+ var parameter = JSON.stringify({user: userobj.username});
+ console.log("it verks");
+    $http.post(route, parameter).
+    success(function(response, status, headers, config) {
+            if(response=="e1"){//cannot borrow
+               swal("Error!", "Please Pay Off Previous Debt!", "error");
+            }
+               
+           else{
+           	  swal("Success!", "Borrow Succesfull! You have been Credited with 50  Unit(s)", "success");
+           }
+      }).
+      error(function(data, status, headers, config) {
+ swal("Error!", "Server/Connection Problem Try Again!", "error");
+      });
 	}
 
   $scope.mpowerDirect = function(){

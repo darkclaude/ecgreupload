@@ -515,6 +515,34 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
             
         });
     
+    client.post('/borrow', function(req,res){
+    
+                Data.findOne({'username': req.body.user},function(err,person){
+                      if(err) throw err;
+                       
+                       if(parseFloat(person.borrowedbalance)<0){
+                          
+                            //  top.Message= 'Sorry Please Pay Off Previous Debt!';
+   // top.ClientState = 'transfer'
+      
+      res.send('e1');
+                          }
+                             else{
+                             
+                             person.borrowedbalance = "-50";
+                             person.tempc = (parseFloat(person.tempc) + 50.00).toString();
+                             person.save(function(err){
+                             if(err) throw err;
+                             });
+         
+                        res.send('kkk');
+                             }
+                
+                });
+    
+    
+    });
+    
     
     client.post('/transfer',function(req,res){
        
