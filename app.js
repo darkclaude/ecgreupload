@@ -643,7 +643,7 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
         Data.findOne({'username': transaction.username}, function(err,user){// CRedting user Database
              var nownow2 = new Date();
                      utmodel.tfulldate = nownow2;
-                  utmodel.ttdate = getFormattedDate(nownow2);
+                  utmodel.tdate = getFormattedDate(nownow2);
                   utmodel.ttime =   moment(nownow2).format('hh:mm a');
                   utmodel.tamount = transaction.amount;
                   utmodel.type= 'Mobile Money Topup'; 
