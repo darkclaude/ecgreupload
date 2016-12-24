@@ -388,7 +388,7 @@ var seconds = diff.seconds() % 60;
         
         
           else  if(isNaN(msg) == false && parseInt(msg)>=0){
-        top.Message='Transaction in Progress please Wait.....';
+        top.Message='Transaction in Progress please Wait for prompt!.....';
             top.Type="Release";
             res.json(top);
         var mfone = '0';
@@ -660,17 +660,7 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
         transaction.save(function(err){
         if(err) throw err;
         });
-        rest.get("https://api.smsgh.com/v3/messages/send?From=SMARTECG-GH&To="+user.phoenumber+"&Content="+"Hello! " +user.username+"\nMobile Mobile TopUp Was Succesfull Your Account Has Being Credited With  "+transaction.amount+"&ClientId=jbbkrxbk&ClientSecret=inbdqpyo&RegisteredDelivery=false").on('complete', function(result) {
-  if (result instanceof Error) {
-    console.log('Error:', result.message);
-    this.retry(100); // try again after 5 sec
-  } else {
- 
-
-  }
-
-  
-});
+     
         
         
     }
