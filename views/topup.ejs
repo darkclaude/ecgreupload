@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>TopUp</title>
+    <title>TopUp Online</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -211,7 +211,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            TopUp Direct
+                            TopUp Online Via mPower Checkout
                         </h1>
                         <ol class="breadcrumb">
                             <li>
@@ -235,12 +235,22 @@
                  <div class="littlepage-wrapper">
                      
                         <div class="spaceUp text-center">
-                        
-                            <button  ng-click="mpowerDirect()" class="btn btn-large  btn-positive  color">
-                              mPower Direct Mobile
+
+                          <form class=" " >
+                           <span class="size"> Enter Amount In  Cedis: </span><br/>
+                            <input type="text" class="inputBox" ng-model="eAmount" placeholder=""><br/><br/>
+
+                      
+
+
+                               
+
+                            <button  ng-click="mpowerDirect()" class="btn btn-large  btn-positive  color bigSize">
+                             Click To TopUp Via mPower 
                                 
                             </button>
                             
+                          </form>
                           
                     
                   
