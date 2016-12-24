@@ -627,7 +627,7 @@ app.get('/*',function(req, res){
 });
 
 var passtocheck = function(transaction){
-    if(transaction.isOnline==false){
+    if(transaction.iso=="false"){
         var args = {
     data: {  "token" : transaction.token},
 headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
