@@ -117,6 +117,9 @@ var route = "/clientapp/transfer";
                 else if(response=='inb'){//Card used by yourself
                 swal("Error!", "Insufficient Balance!", "error");
            }
+        else if(response=='inv'){
+                            swal("Error!", "Invalid Amount!", "error");
+        }
         
            else{
            	  swal("Success!", "Transfer Succesfull! "+$scope.rname+" has been Credited with "+$scope.amount+' Unit(s)', "success");

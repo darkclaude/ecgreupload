@@ -657,7 +657,7 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
         }
         else{
 
-          res.send("Invalid Amount!");
+          res.send("inv");
         }
     });
     
