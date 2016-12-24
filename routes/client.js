@@ -560,49 +560,65 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
                 Data.findOne({'username':user2}, function(err, account2){
                     
                     if(err){throw err}
-                    if(account2){
-                        
-                         if(parseInt(account1.balance)>=amount){
-                             var now = new Date();
-                             account1.balance = (parseInt(account1.balance)-amount).toString();
-                             account2.tempc = (parseInt(account2.tempc)+amount).toString();
-                               utmodel.tfulldate =  now;
-                  utmodel.ttime =  moment(now).format('hh:mm a');
-                  utmodel.tdate = getFormattedDate(now);
-                  utmodel.tamount=amount.toString();
-                  utmodel.ttype = 'Transfer Out';
-                  account1.transactions.push(utmodel);
-                             account1.save(function(err){  
-                             });
-                     
-                  utmodel.ttype = 'Transfer In';
-                  account2.transactions.push(utmodel);
-                             account2.save(function(err){
-                             });
-                           res.send('t1');
-                            
-                             
-                         }
-                        else{
-                            if(parseInt(account1.tempc)>=amount){
-                                account1.tempc = (parseInt(account1.tempc)-amount).toString();
-                                account2.tempc = (parseInt(account2.tempc)+amount).toString();
-                                
+                     if(account2){
+                        user2='';
+                        var now = new Date();
+                         if(parseInt(account1.tempc)>=amount){
                                 utmodel.tfulldate =  now;
                   utmodel.ttime =  moment(now).format('hh:mm a');
                   utmodel.tdate = getFormattedDate(now);
                   utmodel.tamount=amount.toString();
-                  utmodel.ttype = 'Transfer Out';
-                  account1.transactions.push(utmodel);
-                             account1.save(function(err){  
-                             });
-                     
-                  utmodel.ttype = 'Transfer In';
+               //   utmodel.ttype = 'Transfer Out';
+                               account1.tempc = (parseFloat(account1.tempc)-amount).toString();
+                             account2.tempc = (parseInt(account2.tempc)+amount).toString();
+                                utmodel.ttype = 'Transfer In';
                   account2.transactions.push(utmodel);
                              account2.save(function(err){
+                                 if(err) throw err;
+                                      account1.transactions.push(utmodel);
+                                      account1.transactions[account1.transactions.length-1].ttype = 'Transfer Out'; 
+                                    account1.save(function(err){
+                                 if(err) throw err;
+                                 
                              });
-                                res.send('t1');
-                                
+                             });
+                               
+                           
+                          res.send('Transferred Successfully!');
+   
+    //  res.json(top); 
+                             
+                         }
+                        else{
+                            if(parseInt(account1.balance)>=amount){
+                                      utmodel.tfulldate =  now;
+                  utmodel.ttime =  moment(now).format('hh:mm a');
+                  utmodel.tdate = getFormattedDate(now);
+                  utmodel.tamount=amount.toString();
+                 
+                               account1.balance = (parseFloat(account1.balance)-amount).toString();
+                             account2.tempc = (parseInt(account2.tempc)+amount).toString();
+      
+                                 
+                //// var tp = utmodel;
+                     //        tp.ttype = 'Transfer In'; 
+                 // utmodel.ttype = 'Transfer In';
+                                 utmodel.ttype = 'Transfer In';
+                  account2.transactions.push(utmodel);
+                             account2.save(function(err){
+                                 if(err) throw err;
+                                      account1.transactions.push(utmodel);
+                                      account1.transactions[account1.transactions.length-1].ttype = 'Transfer Out'; 
+                                    account1.save(function(err){
+                                 if(err) throw err;
+                                 
+                             });
+                             });
+                               
+                     
+                           
+                                res.send("t1ll");
+    //  res.json(top); 
                                 
                             }
                             else{
