@@ -105,6 +105,7 @@ var route = "/clientapp/redeem";
    }
 
 	$scope.borrow = function(){
+        console.log('works')';
     swal("Error!", "I dont see the borrow in Dashboard", "error");
 		
 	}
