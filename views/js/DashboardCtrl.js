@@ -103,6 +103,32 @@ var route = "/clientapp/redeem";
 
 
    }
+   
+     $scope.transfer = function(){
+
+var route = "/clientapp/transfer";
+ var parameter = JSON.stringify({user1: userobj.username, user2: $scope.rname, amount: $scope.amount});
+ console.log("it verks");
+    $http.post(route, parameter).
+    success(function(response, status, headers, config) {
+            if(response=="dne"){//Used by someone
+               swal("Error!", "Recepient Does Not Exist Try Again!", "error");
+            }
+                else if(response=='inb'){//Card used by yourself
+                swal("Error!", "Insufficient Balance!", "error");
+           }
+        
+           else{
+           	  swal("Success!", "Transfer Succesfull! "+$scope.rname+" has been Credited with "+$scope.amount+' Unit(s)', "success");
+           }
+      }).
+      error(function(data, status, headers, config) {
+ swal("Error!", "Server/Connection Problem Try Again!", "error");
+      });
+
+
+
+   }
 
 	$scope.borrow = function(){
      var route = "/clientapp/borrow";

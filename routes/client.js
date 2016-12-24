@@ -546,8 +546,8 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
     
     client.post('/transfer',function(req,res){
        
-        var user1 = req.body.sender;
-        var user2 = req.body.receiver;
+        var user1 = req.body.user1;
+        var user2 = req.body.user2;
         var checkpass = false;
         if(isNaN(req.body.amount)==false){
            var amount = parseInt(req.body.amount);
@@ -579,7 +579,7 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
                   account2.transactions.push(utmodel);
                              account2.save(function(err){
                              });
-                           res.send('Transferred Successfully!');
+                           res.send('t1');
                             
                              
                          }
@@ -601,14 +601,14 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
                   account2.transactions.push(utmodel);
                              account2.save(function(err){
                              });
-                                res.send('Transferred Successfully!');
+                                res.send('t1');
                                 
                                 
                             }
                             else{
                                 
                                 
-                               res.send('Insufficient Balance');  
+                               res.send('inb');  
                                 
                             }
                            
@@ -620,7 +620,7 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
                     else{
                         
                         
-                     res.send('One or Both Accounts Doesnt Exist!');
+                     res.send('dne');
                         
                         
                     }
