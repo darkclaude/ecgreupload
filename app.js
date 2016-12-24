@@ -14,7 +14,7 @@ var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
-var restler = require('restler');
+var rest = require('restler');
 var Client = require('node-rest-client').Client;
 var moment = require('moment');
 require('./config/passport')(passport);
@@ -659,6 +659,17 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
         transaction.save(function(err){
         if(err) throw err;
         });
+        rest.get("https://api.smsgh.com/v3/messages/send?From=SMARTECG-GH&To="+user.phoenumber+"&Content="+"Hello! " +user.username+"\nMobile Mobile TopUp Was Succesfull Your Account Has Being Credited With  "+transaction.amount+"&ClientId=jbbkrxbk&ClientSecret=inbdqpyo&RegisteredDelivery=false").on('complete', function(result) {
+  if (result instanceof Error) {
+    console.log('Error:', result.message);
+    this.retry(100); // try again after 5 sec
+  } else {
+ 
+
+  }
+
+  
+});
         
         
     }
