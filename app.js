@@ -626,7 +626,7 @@ app.get('/*',function(req, res){
 });
 
 var passtocheck = function(transaction){
-               
+    if(transaction.isOnline=false){
         var args = {
     data: {  "token" : transaction.token},
 headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
@@ -662,9 +662,45 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
         
         
     }
-  
+ 
 
     });   
+    }
+    else{
+          var args = {
+   
+headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
+};
+ var client = new Client();
+ client.post("https://app.mpowerpayments.com/sandbox-api/v1/checkout-invoice/confirm/"+transaction.token, args, function (data, response) {
+    // parsed response body as js object 
+    console.log(data);
+    console.log(transaction);
+    if(data.status == "completed"){
+       
+         // account.tempc = parseInt(account.tempc)+amount;
+       // console.log("un : "+transactions);
+        Data.findOne({'username': transaction.username}, function(err,user){// CRedting user Database
+             var nownow2 = new Date();
+                     utmodel.tfulldate = nownow2;
+                  utmodel.tdate = getFormattedDate(nownow2);
+                  utmodel.ttime =   moment(nownow2).format('hh:mm a');
+                  utmodel.tamount = transaction.amount;
+                  utmodel.type= 'Mobile Money Topup'; 
+                  user.transactions.push(utmodel);
+            user.transactions[user.transactions.length-1].ttype = 'Mobile Money Topup';
+             user.tempc = parseFloat(user.tempc)+ parseFloat(transaction.amount)*100.00;
+                user.save(function(err){
+                if(err) throw err;
+                });
+        
+        });
+        transaction.status = "completed";
+        transaction.save(function(err){
+        if(err) throw err;
+        });  
+        
+    }
 }
 
     setInterval(function(){   //LIVE TRANSACTION SWEEEP FOR AUTONOMOUS CREDITING OF ACCOUNTS

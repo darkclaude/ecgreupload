@@ -9,6 +9,7 @@ var transactionSchema = transactionsdb.Schema({
            dateCreated: Date,
            status: String,
            token : String,
+           isOnline: Boolean,
            dateCompleted: Date
 	
 });
