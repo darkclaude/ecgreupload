@@ -414,6 +414,7 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
     newTransaction.amount = msg;
     newTransaction.dateCreated = new Date();
     newTransaction.status = "pending";
+    newTransaction.isOnline = false;
     newTransaction.token = data.token;
     newTransaction.save(function(err){
     if(err){
