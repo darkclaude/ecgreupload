@@ -12,6 +12,11 @@ var userSchema = datadb.Schema({
         email: String,
         power: [],
         tempc: String,
+        noofussd: Number,
+        noofonline: Number,
+        noofrecharge: Number,
+        noofnodereq: Number,
+        
         transactions: []
         
 		

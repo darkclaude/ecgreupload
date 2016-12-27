@@ -94,7 +94,7 @@ console.log('Desilizeing');
               var newData = new Data();
 
                 // set the user's local credentials
-             
+               
                 newData.username =req.body.username;
                 newData.email = req.body.email;
                 newData.password = newData.generateHash(password);
@@ -103,6 +103,10 @@ console.log('Desilizeing');
                 newDate.transactions.push(utmodel);
                 newData.balance = '0.0';
                 newData.borrowedbalance='0.0';
+                newData.noofussd = 0;
+                newData.noofonline=0;
+                newData.noofrecharge = 0;
+                newData.noofnodereq=0;
                // newData.power.push(0);
               //  newData.transactions.push({date: nil, amount: 50});
                 newData.tempc ='0.0';
