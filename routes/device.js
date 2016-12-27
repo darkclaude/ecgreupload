@@ -13,18 +13,14 @@ module.exports = function(device){
                
                
                 
-                   var total = parseInt(account.tempc)+parseInt(account.balance);
-                   account.tempc=0;
-                   account.save(function(err){
-                       if(err) throw err;
-                   });
-                   
-                   account.balance = total.toString();
+                   var total = parseInt(account.dbalance);
+                   account.dbalance=0;
+                   //account.dbalance = total.toString();
                    account.save(function(err){
                        if(err) throw err;
                        
                    });
-               res.send(account.balance);
+               res.send(total);
                    
                    
                }
@@ -68,6 +64,7 @@ module.exports = function(device){
 
     device.post('/getbalance/:user',function(req,res){
         
+       
         var user = req.params.user;
           Data.findOne({'username': user}, function(err,account){
            
@@ -75,18 +72,14 @@ module.exports = function(device){
                
                
                 
-                   var total = parseInt(account.tempc)+parseInt(account.balance);
-                   account.tempc=0;
-                   account.save(function(err){
-                       if(err) throw err;
-                   });
-                   
-                   account.balance = total.toString();
+                   var total = parseInt(account.dbalance);
+                   account.dbalance=0;
+                   //account.dbalance = total.toString();
                    account.save(function(err){
                        if(err) throw err;
                        
                    });
-               res.send(account.balance);
+               res.send(total);
                    
                    
                }
@@ -95,8 +88,6 @@ module.exports = function(device){
                      
                
            });
-      
-        
     });
     
    device.post('/update/:user/:ubalance/:power',function(req, res){
