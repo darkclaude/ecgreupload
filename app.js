@@ -120,7 +120,7 @@ app.all('/ussd2', function(req,res){
    var userfone = req.body.Mobile;
    var msg = req.body.Message;
    if(req.body.Type=="Initiation"){
-    top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Buy E-Credit Via Mobile Wallet \n3. Top-Up With E-Credit Code\n4. Transfer E-Credit\n5. Borrow E-Credit";
+    top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Top-up E-Credit Via Mobile Wallet \n3. Top-Up With E-Credit Code\n4. Transfer E-Credit\n5. Borrow E-Credit\n6. Buy E-Credit Code via Mobile Wallet";
     //top.Type="Release";
     res.json(top);
        
@@ -171,6 +171,23 @@ var seconds = diff.seconds() % 60;
     if(req.body.Operator.toLowerCase() == 'mtn' || req.body.Operator.toLowerCase() == 'airtel'){
       top.Message= 'Enter Amount Below';
       top.Type="Response";
+        top.ClientState="d1";
+      res.json(top);
+    }
+        
+   
+        
+        else{
+              top.Message= 'Sorry Only MTN and AIRTEL Wallets are Supported!';
+      top.Type="Release";
+      res.json(top);
+        }
+    }
+         else if(msg=='6'){
+    if(req.body.Operator.toLowerCase() == 'mtn' || req.body.Operator.toLowerCase() == 'airtel'){
+      top.Message= 'Enter Amount Below';
+      top.Type="Response";
+        top.ClientState="d2";
       res.json(top);
     }
         
@@ -387,7 +404,7 @@ var seconds = diff.seconds() % 60;
         }
         
         
-          else  if(isNaN(msg) == false && parseInt(msg)>=0){
+          else  if(isNaN(msg) == false && parseInt(msg)>=0 && req.body.ClientState=="d1"){
         top.Message='Transaction in Progress please Wait for prompt!.....';
             top.Type="Release";
             res.json(top);
@@ -411,6 +428,44 @@ client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, 
     newTransaction.username = account.username;
     newTransaction.phonenumber = account.phonenumber;
     newTransaction.type = "direct";
+    newTransaction.amount = msg;
+    newTransaction.dateCreated = new Date();
+    newTransaction.status = "pending";
+    newTransaction.iso = "false";
+    newTransaction.token = data.token;
+    newTransaction.save(function(err){
+    if(err){
+        throw err;
+    }
+    });
+    // raw response 
+   // console.log(response);
+});
+}
+           else  if(isNaN(msg) == false && parseInt(msg)>=0 && req.body.ClientState=="d2"){
+        top.Message='Transaction in Progress please Wait for prompt!.....';
+            top.Type="Release";
+            res.json(top);
+        var mfone = '0';
+               for(var i=3; i<userfone.length; i++){
+                   mfone = mfone + userfone.charAt(i);
+               }
+        
+              
+        var args = {
+    data: {  "customer_name" : account.username,"customer_phone" : mfone, "customer_email" : account.email, "wallet_provider" : req.body.Operator.toUpperCase(), "merchant_name" : "Smart ECg Ent.", "amount" : msg },
+headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
+};
+ var client = new Client();
+ 
+
+client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, function (data, response) {
+    // parsed response body as js object 
+    console.log(data);
+     var newTransaction = new Transaction();
+    newTransaction.username = account.username;
+    newTransaction.phonenumber = account.phonenumber;
+    newTransaction.type = "code";
     newTransaction.amount = msg;
     newTransaction.dateCreated = new Date();
     newTransaction.status = "pending";
