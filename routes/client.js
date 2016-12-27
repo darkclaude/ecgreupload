@@ -139,7 +139,7 @@ var atype =atb.toString(CryptoJS.enc.Utf8);
     */
     
     var  user = req.body.username;
-    var email - = req.body.email;
+    var email  = req.body.email;
     var password = req.body.password;
     var phonenumber = req.body.phonenumber;
     var fullname = req.body.fullname;
