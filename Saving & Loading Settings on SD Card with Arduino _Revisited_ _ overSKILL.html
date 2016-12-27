@@ -1,0 +1,2729 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+																		
+		<title>Saving &amp; Loading Settings on SD Card with Arduino *Revisited* | overSKILL</title>
+				
+				 
+		<link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="overSKILL » Feed" href="http://overskill.alexshu.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="overSKILL » Comments Feed" href="http://overskill.alexshu.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="overSKILL » Saving &amp; Loading Settings on SD Card with Arduino *Revisited* Comments Feed" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/overskill.alexshu.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.6.1"}};
+			!function(a,b,c){function d(a){var c,d,e,f,g,h=b.createElement("canvas"),i=h.getContext&&h.getContext("2d"),j=String.fromCharCode;if(!i||!i.fillText)return!1;switch(i.textBaseline="top",i.font="600 32px Arial",a){case"flag":return i.fillText(j(55356,56806,55356,56826),0,0),!(h.toDataURL().length<3e3)&&(i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,65039,8205,55356,57096),0,0),c=h.toDataURL(),i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,55356,57096),0,0),d=h.toDataURL(),c!==d);case"diversity":return i.fillText(j(55356,57221),0,0),e=i.getImageData(16,16,1,1).data,f=e[0]+","+e[1]+","+e[2]+","+e[3],i.fillText(j(55356,57221,55356,57343),0,0),e=i.getImageData(16,16,1,1).data,g=e[0]+","+e[1]+","+e[2]+","+e[3],f!==g;case"simple":return i.fillText(j(55357,56835),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode8":return i.fillText(j(55356,57135),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode9":return i.fillText(j(55358,56631),0,0),0!==i.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity","unicode9"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/wp-emoji-release.min.js.download" type="text/javascript"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="prettify-css" href="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/sons-of-obsidian.css" type="text/css" media="all">
+<link rel="stylesheet" id="baskerville_googleFonts-css" href="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="baskerville_style-css" href="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/style.css" type="text/css" media="all">
+<script type="text/javascript" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/jquery.js.download"></script>
+<script type="text/javascript" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/jquery-migrate.min.js.download"></script>
+<link rel="https://api.w.org/" href="http://overskill.alexshu.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://overskill.alexshu.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://overskill.alexshu.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Repairing an Arduino Clone – Replacing a diode" href="http://overskill.alexshu.com/repairing-an-arduino-clone-replacing-a-diode/">
+<link rel="next" title="Cheap pH meter hack for Arduino" href="http://overskill.alexshu.com/cheap-ph-meter-hack-for-arduino/">
+<meta name="generator" content="WordPress 4.6.1">
+<link rel="canonical" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/">
+<link rel="shortlink" href="http://overskill.alexshu.com/?p=107">
+<link rel="alternate" type="application/json+oembed" href="http://overskill.alexshu.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Foverskill.alexshu.com%2Fsaving-loading-settings-on-sd-card-with-arduino%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://overskill.alexshu.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Foverskill.alexshu.com%2Fsaving-loading-settings-on-sd-card-with-arduino%2F&amp;format=xml">
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #dd9933; }
+</style>
+	
+	</head>
+	
+	<body class="single single-post postid-107 single-format-standard custom-background has-featured-image">
+	
+		<div class="header section small-padding bg-dark bg-image" style="background-image: url(http://overskill.alexshu.com/wp-content/uploads/2014/12/cropped-omg.jpg);">
+		
+			<div class="cover"></div>
+			
+			<div class="header-search-block bg-graphite hidden">
+			
+				<form method="get" class="searchform" action="http://overskill.alexshu.com/">
+	<input type="search" value="" placeholder="Search form" name="s" class="s"> 
+	<input type="submit" class="searchsubmit" value="Search">
+</form>			
+			</div> <!-- /header-search-block -->
+					
+			<div class="header-inner section-inner">
+			
+								
+					<div class="blog-logo">
+					
+				        <a class="logo" href="http://overskill.alexshu.com/" title="overSKILL — just create!" rel="home">
+				        	<img src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/logo.png" alt="overSKILL">
+				        </a>
+			        
+					</div>
+			
+											
+			</div> <!-- /header-inner -->
+						
+		</div> <!-- /header -->
+		
+		<div class="navigation section no-padding bg-dark">
+		
+			<div class="navigation-inner section-inner">
+			
+				<div class="nav-toggle fleft hidden">
+					
+					<div class="bar"></div>
+					<div class="bar"></div>
+					<div class="bar"></div>
+					
+					<div class="clear"></div>
+					
+				</div>
+						
+				<ul class="main-menu">
+				
+					<li id="menu-item-140" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-140"><a href="http://overskill.alexshu.com/">Home</a></li>
+<li id="menu-item-143" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-143"><a href="http://overskill.alexshu.com/category/arduino/">Arduino</a></li>
+<li id="menu-item-142" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-142"><a href="http://overskill.alexshu.com/category/aqua-tank-control-v2/">AquaTank Control V2</a></li>
+											
+				 </ul> <!-- /main-menu -->
+				 
+				 <a class="search-toggle fright" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#"></a>
+				 
+				 <div class="clear"></div>
+				 
+			</div> <!-- /navigation-inner -->
+			
+		</div> <!-- /navigation -->
+		
+		<div class="mobile-navigation section bg-graphite no-padding hidden">
+					
+			<ul class="mobile-menu">
+			
+				<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-140"><a href="http://overskill.alexshu.com/">Home</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-143"><a href="http://overskill.alexshu.com/category/arduino/">Arduino</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-142"><a href="http://overskill.alexshu.com/category/aqua-tank-control-v2/">AquaTank Control V2</a></li>
+										
+			 </ul> <!-- /main-menu -->
+		
+		</div> <!-- /mobile-navigation -->
+<div class="wrapper section medium-padding">
+										
+	<div class="section-inner">
+	
+		<div class="content fleft">
+												        
+									
+				<div id="post-107" class="post-107 post type-post status-publish format-standard has-post-thumbnail hentry category-aqua-tank-control-v2 category-arduino">
+				
+									
+					<div class="post-header">
+						
+					    <h2 class="post-title"><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/" rel="bookmark" title="Saving &amp; Loading Settings on SD Card with Arduino *Revisited*">Saving &amp; Loading Settings on SD Card with Arduino *Revisited*</a></h2>
+					    
+					</div> <!-- /post-header -->
+					
+										
+						<div class="featured-media">
+						
+							<img width="600" height="304" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/sku_142121_3-e1417594943547.jpg" class="attachment-post-image size-post-image wp-post-image" alt="sku_142121_3" srcset="http://overskill.alexshu.com/wp-content/uploads/2014/06/sku_142121_3-e1417594943547.jpg 600w, http://overskill.alexshu.com/wp-content/uploads/2014/06/sku_142121_3-e1417594943547-300x152.jpg 300w" sizes="(max-width: 600px) 100vw, 600px">							
+																
+						</div> <!-- /featured-media -->
+					
+																			                                    	    
+					<div class="post-content">
+						    		            			            	                                                                                            
+						<p><span style="color: #ff0000;"><strong>Revisited</strong> <span style="color: #000000;">– Fixed some bugs, improved stability, changed the file structure for mistake-proof reading, added Long integer support.</span></span></p>
+<p>For my AquaTank project I needed the ability to change settings of the system and I needed them to stay after power loss.<br>
+There is an option to use Arduinos built-in EEPROM to pemanently store data, but they have read/write cycle limit and its messy.<br>
+So for my Project I decided to use an external SD card and store the values inside a file – in my case its SETTINGS.TXT</p>
+<h2><strong>SETTINGS.TXT</strong></h2>
+<p>The structure of the file goes like this:<br>
+[parameter_name1=value1]<br>
+[parameter_name2=value2]<br>
+[parameter_name3=value3]</p>
+<p><strong>In my example its:</strong><br>
+[exINT=15]<br>
+[exFloat=1.12345]<br>
+[exBoolean=1]<br>
+[exLong=2123456789]</p>
+<p><strong>The brackets “[” and “]” were added in the revisit, according to&nbsp;Gregor van Egdom, some text editors have different formatting and it was messing with the new line detection,</strong><br>
+<strong>now the code reads only within the brackets, so its more solid and won’t get confused by anything.</strong></p>
+<p><strong>The code was even tested with the following file and worked flawlessly (whatever is outside of the brackets is not read by the code):</strong><br>
+<strong>[exINT=15] THIS IS NOT READ</strong><br>
+<strong>[exFloat=1.12345] BLAH BLAH</strong><br>
+<strong>[exBoolean=1] This is a comment</strong><br>
+<strong>[exLong=2123456789] LOL</strong></p>
+<p>This sums all my needs storing integers,long integers, floats, and boolean variables to specify if some feature is on or off</p>
+<h2><strong>The Setup</strong></h2>
+<p>Using any available Arduino SD Card Shield even a DIY one (will be soon),<br>
+You have 2 general functions that you use :</p>
+<p><strong><code>readSDSettings</code></strong> – opens the file, and going line by line separating the parameter name and the value into 2 strings, using another function, <code>applySetting</code> that gets both strings with a simple if functions converts it to the right type (int,float,boolean,long) and applies to the right parameter.</p>
+<p><strong><code>writeSDSettings</code></strong> – first thing deletes the SETTINGS.TXT file and creates a new one, using the current parameters in the arduinos memory</p>
+<h3></h3>
+<h2><strong>The Code:</strong></h2>
+<p><script src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/embed_js.php"></script><style>		div.embedPastebin { text-align:left; padding: 0; color: #000; margin: 0; font-family: monospace; background: #F7F7F7; border: 1px solid ddd; border-radius:3px; }		div.embedPastebin {  }		div.embedPastebin div.embedFooter { background: #F7F7F7; color: #333; font-size: 100%; padding: 6px 12px; border-bottom: 1px solid #ddd; text-transform:uppercase; }		div.embedPastebin div.embedFooter a,		div.embedPastebin div.embedFooter a:visited { color: #336699; text-decoration:none; }		div.embedPastebin div.embedFooter a:hover { color: red; }		.noLines ol { list-style-type: none; padding-left: 0.5em; }		.embedPastebin{background-color:#F8F8F8;border:1px solid #ddd;font-size:12px;overflow:auto;margin: 0 0 0 0;padding:0 0 0 0;line-height:21px}		.embedPastebin div { line-height:21px; font-family:Consolas, Menlo, Monaco, Lucida Console,'Bitstream Vera Sans Mono','Courier',monospace; }		ol { margin:0; padding: 0 0 0 55px}		ol li { border:0; margin:0;padding:0; }		li.ln-xtra .de1, li.ln-xtra .de2 {background:#F8F8CE;}		.embedPastebin ol li.li1 { margin: 0; }		.embedPastebin ol li.li2 { margin: 0; }.c .de1, .c .de2 {-moz-user-select: text;-khtml-user-select: text;-webkit-user-select: text;-ms-user-select: text;user-select: text;margin:0; padding: 0 8px; background:none; vertical-align:top;color:#000;border-left: 1px solid #ddd; margin: 0 0 0 -7px; position: relative; background: #ffffff;}.c  {color:#ACACAC;}.c .imp {font-weight: bold; color: red;}.c li, .c .li1 {-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;-ms-user-select: none;user-select: none;}.c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}.c .kw1 {color: #b1b100;}.c .kw2 {color: #000000; font-weight: bold;}.c .kw3 {color: #000066;}.c .kw4 {color: #993333;}.c .co1 {color: #666666; font-style: italic;}.c .co2 {color: #339933;}.c .coMULTI {color: #808080; font-style: italic;}.c .es0 {color: #000099; font-weight: bold;}.c .es1 {color: #000099; font-weight: bold;}.c .es2 {color: #660099; font-weight: bold;}.c .es3 {color: #660099; font-weight: bold;}.c .es4 {color: #660099; font-weight: bold;}.c .es5 {color: #006699; font-weight: bold;}.c .br0 {color: #009900;}.c .sy0 {color: #339933;}.c .st0 {color: #ff0000;}.c .nu0 {color: #0000dd;}.c .nu6 {color: #208080;}.c .nu8 {color: #208080;}.c .nu12 {color: #208080;}.c .nu16 {color:#800080;}.c .nu17 {color:#800080;}.c .nu18 {color:#800080;}.c .nu19 {color:#800080;}.c .me1 {color: #202020;}.c .me2 {color: #202020;}.c .ln-xtra, .c li.ln-xtra, .c div.ln-xtra {background:#FFFF88;}.c span.xtra { display:block; }	</style>	</p><div class="embedPastebin">		<div class="embedFooter">Data hosted with ♥ by <a href="http://pastebin.com/" target="_blank">Pastebin.com</a> - <a href="http://pastebin.com/raw/2jyCDHcf" target="_blank">Download Raw</a> - <a href="http://pastebin.com/2jyCDHcf" target="_blank">See Original</a></div><div class="c"><ol><li class="li1"><div class="de1"><span class="coMULTI">/*</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp; Saving &amp; Loading Settings on SD Card with Arduino by Alex Shu</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp; http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp; </span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp; SD card connections:</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;** MOSI - pin 11</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;** MISO - pin 12</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;** CLK - pin 13</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;** CS - pin 4</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;*/</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">&nbsp;<span class="co2">#include &lt;SPI.h&gt;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="co2">#include &lt;SD.h&gt;</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li class="li1"><div class="de1">&nbsp;File myFile<span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw4">int</span> exINT <span class="sy0">=</span> <span class="nu0">15</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw4">float</span> exFloat <span class="sy0">=</span> <span class="nu16">1.12345</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;boolean exBoolean <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw4">long</span> exLong <span class="sy0">=</span> <span class="nu0">2123456789</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li class="li1"><div class="de1">&nbsp;<span class="kw4">void</span> setup<span class="br0">(</span><span class="br0">)</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="co1">// Open serial communications and wait for port to open:</span></div></li><li class="li2"><div class="de2">&nbsp;Serial.<span class="me1">begin</span><span class="br0">(</span><span class="nu0">9600</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw1">while</span> <span class="br0">(</span><span class="sy0">!</span>Serial<span class="br0">)</span> <span class="br0">{</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="sy0">;</span> <span class="co1">// wait for serial port to connect. Needed for Leonardo only</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="br0">}</span></div></li><li class="li2"><div class="de2">&nbsp;Serial.<span class="me1">print</span><span class="br0">(</span><span class="st0">"Initializing SD card..."</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="co1">// On the Ethernet Shield, CS is pin 4. It's set as an output by default.</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="co1">// Note that even if it's not used as the CS pin, the hardware SS pin</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="co1">// (10 on most Arduino boards, 53 on the Mega) must be left as an output</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="co1">// or the SD library functions will not work.</span></div></li><li class="li1"><div class="de1">&nbsp;pinMode<span class="br0">(</span><span class="nu0">10</span><span class="sy0">,</span> OUTPUT<span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw1">if</span> <span class="br0">(</span><span class="sy0">!</span>SD.<span class="me1">begin</span><span class="br0">(</span><span class="nu0">4</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;Serial.<span class="me1">println</span><span class="br0">(</span><span class="st0">"initialization failed!"</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw1">return</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="br0">}</span></div></li><li class="li2"><div class="de2">&nbsp;Serial.<span class="me1">println</span><span class="br0">(</span><span class="st0">"initialization done."</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;writeSDSettings<span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;readSDSettings<span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">&nbsp;<span class="coMULTI">/*</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;//Debuuging Printing</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;Serial.println("In RAM Memory");</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;Serial.print("exINT=");</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;Serial.println(exINT);</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;Serial.print("exFloat=");</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;Serial.println(exFloat,10);</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;Serial.print("exBoolean=");</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;Serial.println(exBoolean);</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;Serial.print("exLong=");</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;Serial.println(exLong); </span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;*/</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">}</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">&nbsp;<span class="kw4">void</span> loop<span class="br0">(</span><span class="br0">)</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="br0">{</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">}</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">&nbsp;<span class="kw4">void</span> readSDSettings<span class="br0">(</span><span class="br0">)</span><span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw4">char</span> character<span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;String settingName<span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;String settingValue<span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;myFile <span class="sy0">=</span> SD.<span class="me1">open</span><span class="br0">(</span><span class="st0">"settings.txt"</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw1">if</span> <span class="br0">(</span>myFile<span class="br0">)</span> <span class="br0">{</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw1">while</span> <span class="br0">(</span>myFile.<span class="me1">available</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;character <span class="sy0">=</span> myFile.<span class="me1">read</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw1">while</span><span class="br0">(</span><span class="br0">(</span>myFile.<span class="me1">available</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>character <span class="sy0">!=</span> <span class="st0">'['</span><span class="br0">)</span><span class="br0">)</span><span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;character <span class="sy0">=</span> myFile.<span class="me1">read</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">}</span></div></li><li class="li1"><div class="de1">&nbsp;character <span class="sy0">=</span> myFile.<span class="me1">read</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw1">while</span><span class="br0">(</span><span class="br0">(</span>myFile.<span class="me1">available</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>character <span class="sy0">!=</span> <span class="st0">'='</span><span class="br0">)</span><span class="br0">)</span><span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;settingName <span class="sy0">=</span> settingName <span class="sy0">+</span> character<span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;character <span class="sy0">=</span> myFile.<span class="me1">read</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="br0">}</span></div></li><li class="li2"><div class="de2">&nbsp;character <span class="sy0">=</span> myFile.<span class="me1">read</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw1">while</span><span class="br0">(</span><span class="br0">(</span>myFile.<span class="me1">available</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span> <span class="sy0">&amp;&amp;</span> <span class="br0">(</span>character <span class="sy0">!=</span> <span class="st0">']'</span><span class="br0">)</span><span class="br0">)</span><span class="br0">{</span></div></li><li class="li2"><div class="de2">&nbsp;settingValue <span class="sy0">=</span> settingValue <span class="sy0">+</span> character<span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;character <span class="sy0">=</span> myFile.<span class="me1">read</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">}</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw1">if</span><span class="br0">(</span>character <span class="sy0">==</span> <span class="st0">']'</span><span class="br0">)</span><span class="br0">{</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li class="li1"><div class="de1">&nbsp;<span class="coMULTI">/*</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;//Debuuging Printing</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;Serial.print("Name:");</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;Serial.println(settingName);</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;Serial.print("Value :");</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;Serial.println(settingValue);</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;*/</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li class="li1"><div class="de1">&nbsp;<span class="co1">// Apply the value to the parameter</span></div></li><li class="li2"><div class="de2">&nbsp;applySetting<span class="br0">(</span>settingName<span class="sy0">,</span>settingValue<span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="co1">// Reset Strings</span></div></li><li class="li2"><div class="de2">&nbsp;settingName <span class="sy0">=</span> <span class="st0">""</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;settingValue <span class="sy0">=</span> <span class="st0">""</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">}</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="br0">}</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="co1">// close the file:</span></div></li><li class="li1"><div class="de1">&nbsp;myFile.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="co1">// if the file didn't open, print an error:</span></div></li><li class="li2"><div class="de2">&nbsp;Serial.<span class="me1">println</span><span class="br0">(</span><span class="st0">"error opening settings.txt"</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="br0">}</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">}</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">&nbsp;<span class="coMULTI">/* Apply the value to the parameter by searching for the parameter name</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;Using String.toInt(); for Integers</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;toFloat(string); for Float</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;toBoolean(string); for Boolean</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">&nbsp;toLong(string); for Long</span></div></li><li class="li1"><div class="de1"><span class="coMULTI">&nbsp;*/</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw4">void</span> applySetting<span class="br0">(</span>String settingName<span class="sy0">,</span> String settingValue<span class="br0">)</span> <span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw1">if</span><span class="br0">(</span>settingName <span class="sy0">==</span> <span class="st0">"exINT"</span><span class="br0">)</span> <span class="br0">{</span></div></li><li class="li2"><div class="de2">&nbsp;exINT<span class="sy0">=</span>settingValue.<span class="me1">toInt</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="br0">}</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw1">if</span><span class="br0">(</span>settingName <span class="sy0">==</span> <span class="st0">"exFloat"</span><span class="br0">)</span> <span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;exFloat<span class="sy0">=</span>toFloat<span class="br0">(</span>settingValue<span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">}</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw1">if</span><span class="br0">(</span>settingName <span class="sy0">==</span> <span class="st0">"exBoolean"</span><span class="br0">)</span> <span class="br0">{</span></div></li><li class="li2"><div class="de2">&nbsp;exBoolean<span class="sy0">=</span>toBoolean<span class="br0">(</span>settingValue<span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="br0">}</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw1">if</span><span class="br0">(</span>settingName <span class="sy0">==</span> <span class="st0">"exLong"</span><span class="br0">)</span> <span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;exLong<span class="sy0">=</span>toLong<span class="br0">(</span>settingValue<span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">}</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="br0">}</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li class="li1"><div class="de1">&nbsp;<span class="co1">// converting string to Float</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw4">float</span> toFloat<span class="br0">(</span>String settingValue<span class="br0">)</span><span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw4">char</span> floatbuf<span class="br0">[</span>settingValue.<span class="me1">length</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">+</span><span class="nu0">1</span><span class="br0">]</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;settingValue.<span class="me1">toCharArray</span><span class="br0">(</span>floatbuf<span class="sy0">,</span> <span class="kw4">sizeof</span><span class="br0">(</span>floatbuf<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw4">float</span> f <span class="sy0">=</span> <span class="kw3">atof</span><span class="br0">(</span>floatbuf<span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw1">return</span> f<span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="br0">}</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li class="li1"><div class="de1">&nbsp;<span class="kw4">long</span> toLong<span class="br0">(</span>String settingValue<span class="br0">)</span><span class="br0">{</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw4">char</span> longbuf<span class="br0">[</span>settingValue.<span class="me1">length</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">+</span><span class="nu0">1</span><span class="br0">]</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;settingValue.<span class="me1">toCharArray</span><span class="br0">(</span>longbuf<span class="sy0">,</span> <span class="kw4">sizeof</span><span class="br0">(</span>longbuf<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw4">long</span> l <span class="sy0">=</span> <span class="kw3">atol</span><span class="br0">(</span>longbuf<span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw1">return</span> l<span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">}</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">&nbsp;<span class="co1">// Converting String to integer and then to boolean</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="co1">// 1 = true</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="co1">// 0 = false</span></div></li><li class="li1"><div class="de1">&nbsp;boolean toBoolean<span class="br0">(</span>String settingValue<span class="br0">)</span> <span class="br0">{</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw1">if</span><span class="br0">(</span>settingValue.<span class="me1">toInt</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">==</span><span class="nu0">1</span><span class="br0">)</span><span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="br0">}</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="br0">}</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li class="li1"><div class="de1">&nbsp;<span class="co1">// Writes A Configuration file</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="kw4">void</span> writeSDSettings<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="co1">// Delete the old One</span></div></li><li class="li2"><div class="de2">&nbsp;SD.<span class="kw3">remove</span><span class="br0">(</span><span class="st0">"settings.txt"</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="co1">// Create new one</span></div></li><li class="li2"><div class="de2">&nbsp;myFile <span class="sy0">=</span> SD.<span class="me1">open</span><span class="br0">(</span><span class="st0">"settings.txt"</span><span class="sy0">,</span> FILE_WRITE<span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="co1">// writing in the file works just like regular print()/println() function</span></div></li><li class="li2"><div class="de2">&nbsp;myFile.<span class="me1">print</span><span class="br0">(</span><span class="st0">"["</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;myFile.<span class="me1">print</span><span class="br0">(</span><span class="st0">"exINT="</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;myFile.<span class="me1">print</span><span class="br0">(</span>exINT<span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;myFile.<span class="me1">println</span><span class="br0">(</span><span class="st0">"]"</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;myFile.<span class="me1">print</span><span class="br0">(</span><span class="st0">"["</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;myFile.<span class="me1">print</span><span class="br0">(</span><span class="st0">"exFloat="</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;myFile.<span class="me1">print</span><span class="br0">(</span>exFloat<span class="sy0">,</span><span class="nu0">5</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;myFile.<span class="me1">println</span><span class="br0">(</span><span class="st0">"]"</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;myFile.<span class="me1">print</span><span class="br0">(</span><span class="st0">"["</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;myFile.<span class="me1">print</span><span class="br0">(</span><span class="st0">"exBoolean="</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;myFile.<span class="me1">print</span><span class="br0">(</span>exBoolean<span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;myFile.<span class="me1">println</span><span class="br0">(</span><span class="st0">"]"</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;myFile.<span class="me1">print</span><span class="br0">(</span><span class="st0">"["</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;myFile.<span class="me1">print</span><span class="br0">(</span><span class="st0">"exLong="</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;myFile.<span class="me1">print</span><span class="br0">(</span>exLong<span class="br0">)</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;myFile.<span class="me1">println</span><span class="br0">(</span><span class="st0">"]"</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="co1">// close the file:</span></div></li><li class="li1"><div class="de1">&nbsp;myFile.<span class="me1">close</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;<span class="co1">//Serial.println("Writing done.");</span></div></li><li class="li1"><div class="de1">&nbsp;<span class="br0">}</span></div></li></ol></div></div><p></p>
+<p>The code last tested on Arduino IDE 1.6.3 of Arduino.cc</p>
+<p>Hope it helps you with your project <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"></p>
+								
+												
+						<div class="clear"></div>
+									        
+					</div> <!-- /post-content -->
+					            					
+					<div class="post-meta-container">
+						
+						<div class="post-author">
+						
+							<div class="post-author-content">
+							
+								<h4>AlexShu</h4>
+								
+								<p></p>
+								
+																
+								<div class="author-links">
+									
+									<a class="author-link-posts" title="Author archive" href="http://overskill.alexshu.com/author/alexshu/">Author archive</a>
+									
+																		
+								</div> <!-- /author-links -->
+							
+							</div> <!-- /post-author-content -->
+						
+						</div> <!-- /post-author -->
+						
+						<div class="post-meta">
+						
+							<p class="post-date">06/06/2014</p>
+							
+														
+							<p class="post-categories"><a href="http://overskill.alexshu.com/category/aqua-tank-control-v2/" rel="category tag">AquaTank Control V2</a>, <a href="http://overskill.alexshu.com/category/arduino/" rel="category tag">Arduino</a></p>
+							
+														
+							<div class="clear"></div>
+							
+							<div class="post-nav">
+							
+																
+									<a class="post-nav-prev" title="Previous post: Repairing an Arduino Clone – Replacing a diode" href="http://overskill.alexshu.com/repairing-an-arduino-clone-replacing-a-diode/">Previous post</a>
+							
+																
+																	
+									<a class="post-nav-next" title="Next post: Cheap pH meter hack for Arduino" href="http://overskill.alexshu.com/cheap-ph-meter-hack-for-arduino/">Next post</a>
+							
+																
+																	
+								<div class="clear"></div>
+							
+							</div>
+						
+						</div> <!-- /post-meta -->
+						
+						<div class="clear"></div>
+							
+					</div> <!-- /post-meta-container -->
+																		
+					
+		
+		<div class="comments">
+		
+			<a name="comments"></a>
+			
+			<div class="comments-title-container">
+				
+				<h2 class="comments-title fleft">
+				
+					46 Comments					
+				</h2>
+				
+								
+					<h2 class="add-comment-title fright"><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#respond">Add yours</a></h2>
+				
+								
+				<div class="clear"></div>
+			
+			</div> <!-- /comments-title-container -->
+	
+			<ol class="commentlist">
+			    	<li class="comment even thread-even depth-1" id="li-comment-113">
+	
+		<div id="comment-113" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/bfd96d9e4a538561a444c44307cced6c" srcset="http://2.gravatar.com/avatar/bfd96d9e4a538561a444c44307cced6c?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn"><a href="http://www.krekr.nl/" rel="external nofollow" class="url">Gregor van Egdom</a></cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-113">13/02/2015 at 15:11</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=113#respond" onclick="return addComment.moveForm( &quot;comment-113&quot;, &quot;113&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Gregor van Egdom">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Thanks for this, really helpful. When trying to use this, I found it ate up the least significant number of a float. Not really a problem for you since your float was 10+ characters long, but I had a float like “0.5” that was interpreted as “0”.</p>
+<p>Here’s the fix (notice the “+ 1”):</p>
+<p>// converting string to Float<br>
+float toFloat(String settingValue){<br>
+  char floatbuf[settingValue.length() + 1];<br>
+  settingValue.toCharArray(floatbuf, sizeof(floatbuf));<br>
+  float f = atof(floatbuf);<br>
+  return f;<br>
+}</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=113#respond" onclick="return addComment.moveForm( &quot;comment-113&quot;, &quot;113&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Gregor van Egdom">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-2" id="li-comment-123">
+	
+		<div id="comment-123" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-123">18/02/2015 at 13:57</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=123#respond" onclick="return addComment.moveForm( &quot;comment-123&quot;, &quot;123&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi Gregor,<br>
+Thanks for the little bug report, I have edited the post and fixed it.</p>
+<p><img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"></p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=123#respond" onclick="return addComment.moveForm( &quot;comment-123&quot;, &quot;123&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment even depth-3" id="li-comment-124">
+	
+		<div id="comment-124" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/bfd96d9e4a538561a444c44307cced6c" srcset="http://2.gravatar.com/avatar/bfd96d9e4a538561a444c44307cced6c?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn"><a href="http://www.krekr.nl/" rel="external nofollow" class="url">Gregor van Egdom</a></cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-124">19/02/2015 at 16:18</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=124#respond" onclick="return addComment.moveForm( &quot;comment-124&quot;, &quot;124&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Gregor van Egdom">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Cool, thanks. I just had a call from the user, exposing something else. When the settings file is edited on a windows-machine, the line-endings are different (\r\n in stead of \n). This means the code skips over the settings.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=124#respond" onclick="return addComment.moveForm( &quot;comment-124&quot;, &quot;124&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Gregor van Egdom">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-4" id="li-comment-136">
+	
+		<div id="comment-136" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-136">27/02/2015 at 11:04</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=136#respond" onclick="return addComment.moveForm( &quot;comment-136&quot;, &quot;136&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hmmm, I guess I designed it to work on the arduino only.<br>
+But there is a difference with what software you edit the file, notepad and notepad++ have different formatting.</p>
+<p>There is a quick fix for that, you can define special characters for “home” and “end”, for example home is $ and end is *,<br>
+Build the file like $exINT=42*, and change the code to look for them and in-between add a little while loop that will just advance after * skipping all the /r/n until a $ is reached -new line.</p>
+<p>I don’t have the rig for it now so I can’t test, but I will revisit this and try to make it more mistake-proof in the future.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=136#respond" onclick="return addComment.moveForm( &quot;comment-136&quot;, &quot;136&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-179">
+	
+		<div id="comment-179" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/184b2c3a356f89949455948f31eedcde" srcset="http://1.gravatar.com/avatar/184b2c3a356f89949455948f31eedcde?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Todd</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-179">19/03/2015 at 18:34</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=179#respond" onclick="return addComment.moveForm( &quot;comment-179&quot;, &quot;179&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Todd">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi Alex,<br>
+This is by far the cleanest approach I’ve seen to accomplish this. Very nicely done!</p>
+<p>Question for you, would it be difficult to also create a setting for a long variable? Say your config file contained the following setting as well. long exLong=50000.</p>
+<p>To my understanding an int can only have a max value of 32,767.</p>
+<p>Thanks for your thoughts on this.</p>
+<p>Todd</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=179#respond" onclick="return addComment.moveForm( &quot;comment-179&quot;, &quot;179&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Todd">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-2" id="li-comment-220">
+	
+		<div id="comment-220" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-220">09/04/2015 at 09:58</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=220#respond" onclick="return addComment.moveForm( &quot;comment-220&quot;, &quot;220&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi Todd,</p>
+<p>Thank you very much <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"><br>
+You are right, an int variable is limited to a range of -32,768 to 32,767.</p>
+<p>I have revisited the code, fixed some bugs and added support for a “Long” integer which is limited to a range of -2,147,483,648 to 2,147,483,647.</p>
+<p>Alex.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=220#respond" onclick="return addComment.moveForm( &quot;comment-220&quot;, &quot;220&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-195">
+	
+		<div id="comment-195" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/f581b72845834720964371e6c795c83e" srcset="http://0.gravatar.com/avatar/f581b72845834720964371e6c795c83e?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">takiz</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-195">25/03/2015 at 08:41</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=195#respond" onclick="return addComment.moveForm( &quot;comment-195&quot;, &quot;195&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to takiz">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>how can we read a value for Byte ? example to read a mac address or ip from file ?<br>
+byte mac[]={ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; or DeviceAddress which is also a byte?</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=195#respond" onclick="return addComment.moveForm( &quot;comment-195&quot;, &quot;195&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to takiz">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-2" id="li-comment-221">
+	
+		<div id="comment-221" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-221">09/04/2015 at 10:19</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=221#respond" onclick="return addComment.moveForm( &quot;comment-221&quot;, &quot;221&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi takiz,</p>
+<p>A fast approach would be converting the byte to int storing it as int, and when reading converting it back to byte<br>
+simply by doing<br>
+int octate1 = mac[1];<br>
+int octate2 = mac[2];<br>
+int octate3 = mac[3];<br>
+int octate4 = mac[4];<br>
+int octate5 = mac[5];<br>
+int octate6 = mac[6];</p>
+<p>save the parameters<br>
+and when loading:<br>
+byte mac[];<br>
+mac[1] = octate1;<br>
+mac[2] = octate2;<br>
+an so on …</p>
+<p>Hope it helped a bit.<br>
+Alex.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=221#respond" onclick="return addComment.moveForm( &quot;comment-221&quot;, &quot;221&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-223">
+	
+		<div id="comment-223" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/789ffb63cf365085ce001d74ce23052f" srcset="http://1.gravatar.com/avatar/789ffb63cf365085ce001d74ce23052f?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Jonas</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-223">09/04/2015 at 19:46</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=223#respond" onclick="return addComment.moveForm( &quot;comment-223&quot;, &quot;223&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Jonas">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>There’s a way to edit a value inside a settings.txt file?</p>
+<p>Like…</p>
+<p>[exINT=15]</p>
+<p>Run the Arduino, the value is know exINT=26.  And edit that value and save in the settings.txt file?</p>
+<p>settings.txt<br>
+[exINT=26]<br>
+[exFloat=1.12345]<br>
+[exBoolean=1]<br>
+[exLong=2123456789]</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=223#respond" onclick="return addComment.moveForm( &quot;comment-223&quot;, &quot;223&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Jonas">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-2" id="li-comment-228">
+	
+		<div id="comment-228" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-228">10/04/2015 at 16:03</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=228#respond" onclick="return addComment.moveForm( &quot;comment-228&quot;, &quot;228&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi Jonas,</p>
+<p>The function writeSDSettings() writes the values from the Arduino RAM to the settings.txt file, so you can simply execute the following code:</p>
+<p>exINT = 26;<br>
+writeSDSettings();</p>
+<p>And this will result the settings.txt content to be:</p>
+<p>[exINT=26]<br>
+[exFloat…..</p>
+<p>Alex.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=228#respond" onclick="return addComment.moveForm( &quot;comment-228&quot;, &quot;228&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-446">
+	
+		<div id="comment-446" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/2f0b4f51b37814cdc8a0bd5794e9022f" srcset="http://2.gravatar.com/avatar/2f0b4f51b37814cdc8a0bd5794e9022f?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn"><a href="http://www.dmkmediastudios.com/" rel="external nofollow" class="url">mike aspinall</a></cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-446">19/07/2015 at 22:12</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=446#respond" onclick="return addComment.moveForm( &quot;comment-446&quot;, &quot;446&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to mike aspinall">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>hi i have just come across your example from google and it looks like something i need but i have tried it and i’m having problems</p>
+<p>i want to save phone numbers and names but i cant seem to make it happen<br>
+if i try long<br>
+exLong = 7795966648;<br>
+i get returned<br>
+exLong=-793967944</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=446#respond" onclick="return addComment.moveForm( &quot;comment-446&quot;, &quot;446&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to mike aspinall">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-2" id="li-comment-453">
+	
+		<div id="comment-453" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-453">28/07/2015 at 07:58</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=453#respond" onclick="return addComment.moveForm( &quot;comment-453&quot;, &quot;453&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi Mike,<br>
+You get this error because 7795966648 is way bigger than long variable, which can store a number from -2,147,483,648 to 2,147,483,647, or unsigned long which is from 0 to 4,294,967,295.<br>
+If you don’t actually need it as a number you can store it as a string or an array of integers.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=453#respond" onclick="return addComment.moveForm( &quot;comment-453&quot;, &quot;453&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-477">
+	
+		<div id="comment-477" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/ebad796b4860679bef40030b47101b12" srcset="http://2.gravatar.com/avatar/ebad796b4860679bef40030b47101b12?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn"><a href="http://virtualmagic.com.br/" rel="external nofollow" class="url">Andre Matos</a></cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-477">16/09/2015 at 18:35</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=477#respond" onclick="return addComment.moveForm( &quot;comment-477&quot;, &quot;477&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Andre Matos">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hello, thanks for your work and share.</p>
+<p>I try configure / test sd card module, but it is conflicting with communication board when the module is connected, the USB port does not work.</p>
+<p>Any sugestions ? I use a genuine arduino duemilanove board.</p>
+<p>Thanks</p>
+<p>Andre</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=477#respond" onclick="return addComment.moveForm( &quot;comment-477&quot;, &quot;477&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Andre Matos">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-2" id="li-comment-485">
+	
+		<div id="comment-485" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-485">27/09/2015 at 14:48</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=485#respond" onclick="return addComment.moveForm( &quot;comment-485&quot;, &quot;485&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi Andre,</p>
+<p>It sounds like you might have a faulty board, maybe it has a short somewhere, if you have both 5V and 3.3V connections on the module, try to use only one of them, just 5V or just 3.3V.<br>
+If you have a “LC Studio” Module, I have heard they had a bad batch where some pins were shorted and it caused many problems, you can check this with a multimeter with continuity mode – e.g. <a href="https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter/continuity" rel="nofollow">https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter/continuity</a>.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=485#respond" onclick="return addComment.moveForm( &quot;comment-485&quot;, &quot;485&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-478">
+	
+		<div id="comment-478" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/d615f95ea84742499795ef61c4d370bb" srcset="http://1.gravatar.com/avatar/d615f95ea84742499795ef61c4d370bb?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Carlos</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-478">19/09/2015 at 13:32</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=478#respond" onclick="return addComment.moveForm( &quot;comment-478&quot;, &quot;478&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Carlos">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi Alex. Great Work!</p>
+<p>Say for example I wished to control a Tri-colour LED using PWM values stored in a look up table. How would I change your code to load the values to an array rather than a single variable?</p>
+<p>Say for example:</p>
+<p>{myarray[9]= 255, 128, 64, 32, 16, 8, 4, 2, 1}</p>
+<p>Thanks<br>
+Carlos</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=478#respond" onclick="return addComment.moveForm( &quot;comment-478&quot;, &quot;478&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Carlos">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-2" id="li-comment-486">
+	
+		<div id="comment-486" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-486">27/09/2015 at 15:01</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=486#respond" onclick="return addComment.moveForm( &quot;comment-486&quot;, &quot;486&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi Carlos,</p>
+<p>Thank you very much!<br>
+It can be done, but it requires some coding.<br>
+as is, if you have just one array with 9 integers, you could store them as 9 independent integers and then when you read them just inject them into the array, but if you have a lot.. its ineffective. </p>
+<p>at first I would think of a way to store the data as text e.g. [myArray=9;255, 128, 64, 32, 16, 8, 4, 2, 1]<br>
+then code it to recognize the “;” as a definition to an array and do accordingly.</p>
+<p>May be I will have some time the next few weeks to add a feature like this.<br>
+Alex Shu.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=486#respond" onclick="return addComment.moveForm( &quot;comment-486&quot;, &quot;486&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-498">
+	
+		<div id="comment-498" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/cf232b5e465caf323fb3a95d3e7ddd46" srcset="http://0.gravatar.com/avatar/cf232b5e465caf323fb3a95d3e7ddd46?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Mike D</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-498">02/10/2015 at 11:48</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=498#respond" onclick="return addComment.moveForm( &quot;comment-498&quot;, &quot;498&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Mike D">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Alex,</p>
+<p>I am also looking for a solution for reading from an array data in a config file on an SD card, so would really like to see this feature added to your code.</p>
+<p>Best wishes,<br>
+Mike</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=498#respond" onclick="return addComment.moveForm( &quot;comment-498&quot;, &quot;498&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Mike D">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-2" id="li-comment-501">
+	
+		<div id="comment-501" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-501">03/10/2015 at 17:05</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=501#respond" onclick="return addComment.moveForm( &quot;comment-501&quot;, &quot;501&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi Mike,</p>
+<p>I see there is a lot of interest in an array feature, I will try to add it ASAP.</p>
+<p>Alex.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=501#respond" onclick="return addComment.moveForm( &quot;comment-501&quot;, &quot;501&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-508">
+	
+		<div id="comment-508" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/cf232b5e465caf323fb3a95d3e7ddd46" srcset="http://0.gravatar.com/avatar/cf232b5e465caf323fb3a95d3e7ddd46?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Mike D</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-508">06/10/2015 at 12:06</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=508#respond" onclick="return addComment.moveForm( &quot;comment-508&quot;, &quot;508&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Mike D">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Thanks Alex,</p>
+<p>I look forward to seeing your solution.</p>
+<p>Regards,<br>
+Mike</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=508#respond" onclick="return addComment.moveForm( &quot;comment-508&quot;, &quot;508&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Mike D">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-522">
+	
+		<div id="comment-522" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/7aa3d7bd9cc92ab7571bb4f7908632ba" srcset="http://1.gravatar.com/avatar/7aa3d7bd9cc92ab7571bb4f7908632ba?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Bono M.</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-522">14/10/2015 at 21:38</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=522#respond" onclick="return addComment.moveForm( &quot;comment-522&quot;, &quot;522&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Bono M.">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi Alex,<br>
+Thank you for this post !<br>
+Not only it helped  me with my SD difficulties,<br>
+Your clean and simple approach helped me  tie many loose ends i had (still have plenty  <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg">  ).</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=522#respond" onclick="return addComment.moveForm( &quot;comment-522&quot;, &quot;522&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Bono M.">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-525">
+	
+		<div id="comment-525" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/77b56c2fce8d34e45d0f92a63401f58d" srcset="http://1.gravatar.com/avatar/77b56c2fce8d34e45d0f92a63401f58d?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">cafejones</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-525">16/10/2015 at 22:05</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=525#respond" onclick="return addComment.moveForm( &quot;comment-525&quot;, &quot;525&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to cafejones">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>array, array, array !!!!:)</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=525#respond" onclick="return addComment.moveForm( &quot;comment-525&quot;, &quot;525&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to cafejones">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-570">
+	
+		<div id="comment-570" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/fe03eb77638c342e2f1454f2d980a72e" srcset="http://0.gravatar.com/avatar/fe03eb77638c342e2f1454f2d980a72e?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Oystein Bruin</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-570">29/10/2015 at 21:59</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=570#respond" onclick="return addComment.moveForm( &quot;comment-570&quot;, &quot;570&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Oystein Bruin">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi Alex,</p>
+<p>Thank you for this contribution! Really what I need for my project. In your example sketch Saving &amp; Loading Settings on SD Card, you run the write function, and than the read function. I am just trying to figure out if I understand this. In my case I have my setting variables given an initial value as global variables, and read from the loop a menu printed to lcd where settings can be adjusted with buttons. So for my application I would just have the readSDSettings(); in setup() and use the writeSDSettings(); in my code where values are adjusted. So they are stored whenever I change them, I reloaded if powerloss or reset?</p>
+<p>Best regards<br>
+Oystein.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=570#respond" onclick="return addComment.moveForm( &quot;comment-570&quot;, &quot;570&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Oystein Bruin">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor even depth-2" id="li-comment-591">
+	
+		<div id="comment-591" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-591">04/11/2015 at 20:09</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=591#respond" onclick="return addComment.moveForm( &quot;comment-591&quot;, &quot;591&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Exactly! <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"></p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=591#respond" onclick="return addComment.moveForm( &quot;comment-591&quot;, &quot;591&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-794">
+	
+		<div id="comment-794" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/4bff8e99f014aad3a3e03ee43012118a" srcset="http://1.gravatar.com/avatar/4bff8e99f014aad3a3e03ee43012118a?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">StudentSA</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-794">03/01/2016 at 22:29</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=794#respond" onclick="return addComment.moveForm( &quot;comment-794&quot;, &quot;794&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to StudentSA">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Thank you, your post has helped me a lot, the only small improvement for the perfectionist would be in the applySetting procedure to use if, else if, else if structure. this will slightly make the code more efficient.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=794#respond" onclick="return addComment.moveForm( &quot;comment-794&quot;, &quot;794&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to StudentSA">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor even depth-2" id="li-comment-854">
+	
+		<div id="comment-854" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-854">03/02/2016 at 10:19</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=854#respond" onclick="return addComment.moveForm( &quot;comment-854&quot;, &quot;854&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Yes <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"></p>
+<p>Will do in the next revision <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"></p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=854#respond" onclick="return addComment.moveForm( &quot;comment-854&quot;, &quot;854&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-850">
+	
+		<div id="comment-850" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/69d93b89845e75e7e04fd237e023abd5" srcset="http://0.gravatar.com/avatar/69d93b89845e75e7e04fd237e023abd5?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Nils</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-850">03/02/2016 at 08:45</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=850#respond" onclick="return addComment.moveForm( &quot;comment-850&quot;, &quot;850&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Nils">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hey,</p>
+<p>this sounds very great. But where can I get the code/library from?</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=850#respond" onclick="return addComment.moveForm( &quot;comment-850&quot;, &quot;850&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Nils">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor even depth-2" id="li-comment-853">
+	
+		<div id="comment-853" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-853">03/02/2016 at 10:14</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=853#respond" onclick="return addComment.moveForm( &quot;comment-853&quot;, &quot;853&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Its embedded in the page, maybe you have an ad block that blocks it..<br>
+Here is a link <a href="http://pastebin.com/2jyCDHcf" rel="nofollow">http://pastebin.com/2jyCDHcf</a></p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=853#respond" onclick="return addComment.moveForm( &quot;comment-853&quot;, &quot;853&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-864">
+	
+		<div id="comment-864" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/137f44e44ba5eac8f0ada81dc7e71e66" srcset="http://1.gravatar.com/avatar/137f44e44ba5eac8f0ada81dc7e71e66?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Thomas</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-864">05/02/2016 at 10:51</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=864#respond" onclick="return addComment.moveForm( &quot;comment-864&quot;, &quot;864&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Thomas">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hey,<br>
+thanks for the code <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"> I’m quite new to programming but I defenetly need a SD card working. </p>
+<p>Unfortunately I don’t really get how to use this. What’s the difference between applySetting and readSDSetting?</p>
+<p>How do I use applySetting? I don’t get what those variables are good for. I just want to read ohne Variable… </p>
+<p>Does the readSDSetting apply all Variables?</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=864#respond" onclick="return addComment.moveForm( &quot;comment-864&quot;, &quot;864&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Thomas">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment even depth-2" id="li-comment-865">
+	
+		<div id="comment-865" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/137f44e44ba5eac8f0ada81dc7e71e66" srcset="http://1.gravatar.com/avatar/137f44e44ba5eac8f0ada81dc7e71e66?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Thomas</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-865">05/02/2016 at 11:00</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=865#respond" onclick="return addComment.moveForm( &quot;comment-865&quot;, &quot;865&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Thomas">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Yes I’m feeling kind of stupid, but… could you post a very small example of just how to use those functions in a Code?<br>
+like just reading out all variables, and maybe change them and then safe them? </p>
+<p>I defenetly wouldn’t use the damn SD Card if I didn’t really had to ^^</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=865#respond" onclick="return addComment.moveForm( &quot;comment-865&quot;, &quot;865&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Thomas">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-3" id="li-comment-866">
+	
+		<div id="comment-866" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-866">05/02/2016 at 11:16</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=866#respond" onclick="return addComment.moveForm( &quot;comment-866&quot;, &quot;866&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi, Thomas</p>
+<p>Understanding someones code could be tricky at first.<br>
+What kind of variable do you want to save (int, float..)?</p>
+<p>I’ll write an example for a single variable for you <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"></p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=866#respond" onclick="return addComment.moveForm( &quot;comment-866&quot;, &quot;866&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment even depth-4" id="li-comment-867">
+	
+		<div id="comment-867" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/137f44e44ba5eac8f0ada81dc7e71e66" srcset="http://1.gravatar.com/avatar/137f44e44ba5eac8f0ada81dc7e71e66?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Thomas</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-867">05/02/2016 at 11:31</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=867#respond" onclick="return addComment.moveForm( &quot;comment-867&quot;, &quot;867&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Thomas">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>I’d need to safe some ints. One for an example is enough, I also know how to edit this code for my Variables, at least I think I can <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"> I just don’t get how to use the functions. </p>
+<p>Also I’ve just run the program with a few lines for testing purposes. That’s what I’ve wirtten in the loop:<br>
+exINT=30;<br>
+writeSDSettings();<br>
+exINT=22;<br>
+Serial.println(exINT);<br>
+delay(2000);<br>
+readSDSettings();<br>
+Serial.println(exINT);<br>
+delay(2000);</p>
+<p>Just for testing… But when I read the Serial Monitor this happens:<br>
+Initializing SD card…initialization done.<br>
+22<br>
+30<br>
+22<br>
+error opening settings.txt</p>
+<p>and this just repeats. </p>
+<p>When I plug the SD to a PC and try to open it it says something like “Data or directory corrupted, and not able to be read” (I think it means that translatet, it’s a German message)<br>
+Got an Idea why this could happen?</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=867#respond" onclick="return addComment.moveForm( &quot;comment-867&quot;, &quot;867&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Thomas">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-5" id="li-comment-868">
+	
+		<div id="comment-868" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-868">05/02/2016 at 12:03</a></p>
+					
+					<div class="comment-actions">
+					
+												
+												
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Looks like it fails on the second loop reading the file, could you paste the whole code in <a href="http://pastebin.com/" rel="nofollow">http://pastebin.com/</a> and give a link?</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+										
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+	<li class="comment even depth-5" id="li-comment-869">
+	
+		<div id="comment-869" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/137f44e44ba5eac8f0ada81dc7e71e66" srcset="http://1.gravatar.com/avatar/137f44e44ba5eac8f0ada81dc7e71e66?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Thomas</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-869">05/02/2016 at 12:22</a></p>
+					
+					<div class="comment-actions">
+					
+												
+												
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Nevermind my error…. </p>
+<p>I think the SPI Bus of the Arduino Mega I wanted to use is defekt. I’ve tried with my Arduino Uno and it worked well. </p>
+<p>I got problems with other SD Card codes on the Mega, too (For Example if a Text file got bigger than 16 KB the code stoped working, not the case with an Uno). So yeah my new Mega has a defekt SPI Port I guess (in all my codes i used the right Pins for SPI and changed the SS pin of course) I’m going to send it back… </p>
+<p>well I’m testing on my Uno again now ^^ So since i gues i figuerd out what readSDSettings does, it reads all Values from the SD and change the Variables, right?</p>
+<p>Now I only don’t get what applySetting does and how to use it. </p>
+<p>And thank you very much for your support and that wonderfull piece of code <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"></p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+										
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-5" id="li-comment-870">
+	
+		<div id="comment-870" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-870">05/02/2016 at 12:37</a></p>
+					
+					<div class="comment-actions">
+					
+												
+												
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p><img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"> actually sd/spi/lib was my second guess<br>
+When I get some free time on my hands I will try this on my MEGA.</p>
+<p>You don’t use applySetting directly<br>
+applySetting is an internal function that takes the data read from the SD and applies it to the actual variables in arduino RAM<br>
+You can see that readSDSettings calls it after each piece of data read with applySetting(settingName,settingValue);</p>
+<p>You are welcome <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"></p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+										
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+	<li class="comment even depth-5" id="li-comment-871">
+	
+		<div id="comment-871" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/137f44e44ba5eac8f0ada81dc7e71e66" srcset="http://1.gravatar.com/avatar/137f44e44ba5eac8f0ada81dc7e71e66?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Thomas</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-871">05/02/2016 at 12:43</a></p>
+					
+					<div class="comment-actions">
+					
+												
+												
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Tanks for all your help and explanation <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"></p>
+<p>Just a last second since i got how to use the code: in general every (SPI based) code an Uno is able to run, the Mega should so, too, right? Of Course when using the right spi pins, since those are different on the two boards. </p>
+<p>and again: Thank you much for your help and the code.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+										
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-5" id="li-comment-872">
+	
+		<div id="comment-872" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-872">05/02/2016 at 13:05</a></p>
+					
+					<div class="comment-actions">
+					
+												
+												
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Yes, it should work on both.</p>
+<p>There may be a bug in the arduino core code or a hardware fault.<br>
+<img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"></p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+										
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even depth-4" id="li-comment-954">
+	
+		<div id="comment-954" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/137f44e44ba5eac8f0ada81dc7e71e66" srcset="http://1.gravatar.com/avatar/137f44e44ba5eac8f0ada81dc7e71e66?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Thomas</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-954">22/03/2016 at 15:44</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=954#respond" onclick="return addComment.moveForm( &quot;comment-954&quot;, &quot;954&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Thomas">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi,<br>
+the new Mega arrived and everything is working great now. That defect SPI Port killed me <img draggable="false" class="emoji" alt="😀" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f600.svg"> </p>
+<p>I’ve got another two questions for you…<br>
+I’m having to build a project for my graduation. And it has to save data.. Can I use this code in this prject? I’d give you credit in the code of course and also paste a link to this website, so anyone knows you have done the code for SD Card. </p>
+<p>Another question: will there be Support for Arrays in the near future? I have 24 Variables in one Array that need to be saved, it would work without an Array of course, but it wouldn’t look very professional <img draggable="false" class="emoji" alt="😀" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f600.svg"></p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=954#respond" onclick="return addComment.moveForm( &quot;comment-954&quot;, &quot;954&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Thomas">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment odd alt depth-5" id="li-comment-955">
+	
+		<div id="comment-955" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/137f44e44ba5eac8f0ada81dc7e71e66" srcset="http://1.gravatar.com/avatar/137f44e44ba5eac8f0ada81dc7e71e66?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Thomas</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-955">22/03/2016 at 17:28</a></p>
+					
+					<div class="comment-actions">
+					
+												
+												
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>I’ve tried to implement that feautre now by myself, but I don’t get it to work. </p>
+<p>I’m able to let it write an Array to to the SD succesfully, and I also changed the”[” and “]” to “/” and “\” so it won’t be confused by the braclets in the Array. </p>
+<p>But I haven’t even got it reading one single Number of the Array. I’ve tried, for example:<br>
+ if(settingName==”exARR[4]”)<br>
+  {<br>
+  Serial.print(“found something”);<br>
+  }</p>
+<p>Of course I switched [ with / and ] with \ in the readSDSettings Function… it should at least read exARR[4], or at least detect, that it’s there, but it doesnt, and I don’t know why… </p>
+<p>Here is the code with everything i changed:<br>
+<a href="http://www2.zippyshare.com/v/gIEhxxGp/file.html" rel="nofollow">http://www2.zippyshare.com/v/gIEhxxGp/file.html</a></p>
+<p>Maybe you know what’s wrong with my tries…</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+										
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-926">
+	
+		<div id="comment-926" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/baf32b94e492f3cc597a2bfc2e14e521" srcset="http://2.gravatar.com/avatar/baf32b94e492f3cc597a2bfc2e14e521?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Ryandude</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-926">11/03/2016 at 05:37</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=926#respond" onclick="return addComment.moveForm( &quot;comment-926&quot;, &quot;926&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Ryandude">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi alexshu, i find your code very helpful on my project  energy monitoring. Im using the EEPROM for saving my data on energy consumption  just every 1kw to save the write/read cycle of EEPROM. I also have an SD card module for data logging. I want to use your idea in saving data(but this time in float)  and loading it back after power loss. Can i ask a sample code from you on how will my code looks like. Thank you man for replying me as soon as possible.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=926#respond" onclick="return addComment.moveForm( &quot;comment-926&quot;, &quot;926&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Ryandude">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor odd alt depth-2" id="li-comment-947">
+	
+		<div id="comment-947" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-947">20/03/2016 at 13:26</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=947#respond" onclick="return addComment.moveForm( &quot;comment-947&quot;, &quot;947&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Here you go:</p>
+<p><a href="http://pastebin.com/pD6geZ6S" rel="nofollow">http://pastebin.com/pD6geZ6S</a><br>
+Please note the code is not tested, please confirm that its working <img draggable="false" class="emoji" alt="🙂" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/1f642.svg"></p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=947#respond" onclick="return addComment.moveForm( &quot;comment-947&quot;, &quot;947&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-956">
+	
+		<div id="comment-956" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/137f44e44ba5eac8f0ada81dc7e71e66" srcset="http://1.gravatar.com/avatar/137f44e44ba5eac8f0ada81dc7e71e66?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Thomas</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-956">23/03/2016 at 09:47</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=956#respond" onclick="return addComment.moveForm( &quot;comment-956&quot;, &quot;956&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Thomas">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Ok so I really needed Arraysto be stored to a SD Card.. And read.. </p>
+<p>After a while of thinking and a trial and error, I’ve managed it! The code will handle arrays now as well as the other Data Types. </p>
+<p>Greetings from Thomas Bußer, and have fun with the Arrays!<br>
+Here is the code: </p>
+<p> #include<br>
+ #include </p>
+<p> File myFile;<br>
+ int exINT = 15;<br>
+ float exFloat = 1.12345;<br>
+ boolean exBoolean = true;<br>
+ long exLong = 2123456789;<br>
+ int exARR[24]; //Declare your Array here<br>
+ int ArrayDigits=24; //Number of how many Numbers you store in the Array </p>
+<p> void setup()<br>
+ {<br>
+ // Open serial communications and wait for port to open:<br>
+ Serial.begin(9600);<br>
+ while (!Serial) {<br>
+ ; // wait for serial port to connect. Needed for Leonardo only<br>
+ }<br>
+ Serial.print(“Initializing SD card…”);<br>
+ // On the Ethernet Shield, CS is pin 4. It’s set as an output by default.<br>
+ // Note that even if it’s not used as the CS pin, the hardware SS pin<br>
+ // (10 on most Arduino boards, 53 on the Mega) must be left as an output<br>
+ // or the SD library functions will not work.<br>
+ pinMode(53, OUTPUT);<br>
+ if (!SD.begin(53)) {<br>
+ Serial.println(“initialization failed!”);<br>
+ return;<br>
+ }<br>
+ Serial.println(“initialization done.”);</p>
+<p> writeSDSettings();<br>
+ readSDSettings();</p>
+<p> /*<br>
+ //Debuuging Printing<br>
+ Serial.println(“In RAM Memory”);<br>
+ Serial.print(“exINT=”);<br>
+ Serial.println(exINT);<br>
+ Serial.print(“exFloat=”);<br>
+ Serial.println(exFloat,10);<br>
+ Serial.print(“exBoolean=”);<br>
+ Serial.println(exBoolean);<br>
+ Serial.print(“exLong=”);<br>
+ Serial.println(exLong);<br>
+ */<br>
+ }</p>
+<p> void loop(){</p>
+<p> }<br>
+  void applySetting(String settingName, String settingValue) {<br>
+ if(settingName == “exINT”) {<br>
+ exINT=settingValue.toInt();<br>
+ }</p>
+<p>//some strings needed<br>
+String stringa = String(“exARR[“), stringb = String(“]”), stringGes = String();<br>
+for (int y = 0; y &lt; ArrayDigits; y++)<br>
+{<br>
+  stringGes = stringa + y + stringb; //create a string with the name of the single Arrays<br>
+  if(settingName==stringGes)<br>
+  {</p>
+<p>    exARR[y]=settingValue.toInt();<br>
+  //  Serial.println(exARR[y]);<br>
+  }<br>
+}</p>
+<p> //}</p>
+<p> if(settingName == "exFloat") {<br>
+ exFloat=toFloat(settingValue);<br>
+ }<br>
+ if(settingName == "exBoolean") {<br>
+ exBoolean=toBoolean(settingValue);<br>
+ }<br>
+ if(settingName == "exLong") {<br>
+ exLong=toLong(settingValue);<br>
+ }<br>
+ }</p>
+<p> // converting string to Float<br>
+ float toFloat(String settingValue){<br>
+ char floatbuf[settingValue.length()+1];<br>
+ settingValue.toCharArray(floatbuf, sizeof(floatbuf));<br>
+ float f = atof(floatbuf);<br>
+ return f;<br>
+ }</p>
+<p> long toLong(String settingValue){<br>
+ char longbuf[settingValue.length()+1];<br>
+ settingValue.toCharArray(longbuf, sizeof(longbuf));<br>
+ long l = atol(longbuf);<br>
+ return l;<br>
+ }</p>
+<p> // Converting String to integer and then to boolean<br>
+ // 1 = true<br>
+ // 0 = false<br>
+ boolean toBoolean(String settingValue) {<br>
+ if(settingValue.toInt()==1){<br>
+ return true;<br>
+ } else {<br>
+ return false;<br>
+ }<br>
+ }</p>
+<p> // Writes A Configuration file</p>
+<p> void readSDSettings(){<br>
+ char character;<br>
+ String settingName;<br>
+ String settingValue;<br>
+ myFile = SD.open("settings.txt");<br>
+ if (myFile) {<br>
+ while (myFile.available()) {<br>
+ character = myFile.read();<br>
+ while((myFile.available()) &amp;&amp; (character != '/')){<br>
+ character = myFile.read();<br>
+ }<br>
+ character = myFile.read();<br>
+ while((myFile.available()) &amp;&amp; (character != '=')){<br>
+ settingName = settingName + character;<br>
+ character = myFile.read();<br>
+ }<br>
+ character = myFile.read();<br>
+ while((myFile.available()) &amp;&amp; (character != '\\')){<br>
+ settingValue = settingValue + character;<br>
+ character = myFile.read();<br>
+ }<br>
+ if(character == '\\'){</p>
+<p> //Debuuging Printing<br>
+/* Serial.print("Name:");<br>
+ Serial.println(settingName);<br>
+ Serial.print("Value :");<br>
+ Serial.println(settingValue);<br>
+ */</p>
+<p> // Apply the value to the parameter<br>
+ applySetting(settingName,settingValue);<br>
+ // Reset Strings<br>
+ settingName = "";<br>
+ settingValue = "";<br>
+ }<br>
+ }<br>
+ // close the file:<br>
+ myFile.close();<br>
+ } else {<br>
+ // if the file didn't open, print an error:<br>
+ Serial.println("error opening settings.txt");<br>
+ }<br>
+ }</p>
+<p> /* Apply the value to the parameter by searching for the parameter name<br>
+ Using String.toInt(); for Integers<br>
+ toFloat(string); for Float<br>
+ toBoolean(string); for Boolean<br>
+ toLong(string); for Long<br>
+ */<br>
+ void writeSDSettings() {<br>
+ // Delete the old One<br>
+ SD.remove("settings.txt");<br>
+ // Create new one<br>
+ myFile = SD.open("settings.txt", FILE_WRITE);<br>
+ // writing in the file works just like regular print()/println() function<br>
+ myFile.print("/");<br>
+ myFile.print("exINT=");<br>
+ myFile.print(exINT);<br>
+ myFile.println("\\");</p>
+<p>for (int o=0; o&lt;ArrayDigits; o++)<br>
+{<br>
+ myFile.print("/");<br>
+ myFile.print("exARR[");<br>
+ myFile.print(o);<br>
+ myFile.print("]=");<br>
+ myFile.print(exARR[o]);<br>
+ myFile.println("\\");<br>
+}</p>
+<p> myFile.print("/");<br>
+ myFile.print("exFloat=");<br>
+ myFile.print(exFloat,5);<br>
+ myFile.println("\\");<br>
+ myFile.print("/");<br>
+ myFile.print("exBoolean=");<br>
+ myFile.print(exBoolean);<br>
+ myFile.println("\\");<br>
+ myFile.print("/");<br>
+ myFile.print("exLong=");<br>
+ myFile.print(exLong);<br>
+ myFile.println("\\");<br>
+ // close the file:<br>
+ myFile.close();<br>
+ //Serial.println("Writing done.");<br>
+ }</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=956#respond" onclick="return addComment.moveForm( &quot;comment-956&quot;, &quot;956&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Thomas">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-973">
+	
+		<div id="comment-973" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/35df44cbceb733b5d488fd703a4fd2bd" srcset="http://0.gravatar.com/avatar/35df44cbceb733b5d488fd703a4fd2bd?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">Paul B</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-973">06/04/2016 at 03:01</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=973#respond" onclick="return addComment.moveForm( &quot;comment-973&quot;, &quot;973&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Paul B">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Is it possible to store characters ie project location etc and cell phone numbers beginning with +………..?</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=973#respond" onclick="return addComment.moveForm( &quot;comment-973&quot;, &quot;973&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to Paul B">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor even depth-2" id="li-comment-1005">
+	
+		<div id="comment-1005" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-1005">01/05/2016 at 19:35</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=1005#respond" onclick="return addComment.moveForm( &quot;comment-1005&quot;, &quot;1005&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>That would be like storing a string, I plan working on that in the future.</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=1005#respond" onclick="return addComment.moveForm( &quot;comment-1005&quot;, &quot;1005&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-1109">
+	
+		<div id="comment-1109" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/e41a2105e9f7f488238f2252c971a338" srcset="http://2.gravatar.com/avatar/e41a2105e9f7f488238f2252c971a338?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">matthieu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-1109">01/06/2016 at 15:56</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=1109#respond" onclick="return addComment.moveForm( &quot;comment-1109&quot;, &quot;1109&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to matthieu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>Hi,<br>
+your post helped me a lot but at some point, I don’t understand the program : line 68/72/77. At these line I understand that the program is reading the values in the text file, but I don’t understand where did the program stop reading. (character != ‘[‘) what does that mean ? read until this ‘[‘ character ? Can you show me the settings.txt file that you are using ? It will help me undersand.</p>
+<p>Thank’s</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=1109#respond" onclick="return addComment.moveForm( &quot;comment-1109&quot;, &quot;1109&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to matthieu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-alexshu bypostauthor even depth-2" id="li-comment-1114">
+	
+		<div id="comment-1114" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/6028128c83e003e9efeead702f80a2d0" srcset="http://0.gravatar.com/avatar/6028128c83e003e9efeead702f80a2d0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">AlexShu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-1114">02/06/2016 at 10:21</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=1114#respond" onclick="return addComment.moveForm( &quot;comment-1114&quot;, &quot;1114&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>The piece of code you are talking about is skipping everything after “]” until the next bracket “[”<br>
+that means your file can look like this:<br>
+[exINT=15] <strong>THIS IS NOT READ</strong><br>
+[exFloat=1.12345]<strong> BLAH BLAH</strong></p>
+<p>and everything outside the brackets will be ignored <strong>(text in bold)</strong></p>
+<p>my file looks like this:<br>
+[exINT=15]<br>
+[exFloat=1.12345]<br>
+[exBoolean=1]<br>
+[exLong=2123456789]</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=1114#respond" onclick="return addComment.moveForm( &quot;comment-1114&quot;, &quot;1114&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to AlexShu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	<ul class="children">
+	<li class="comment odd alt depth-3" id="li-comment-1115">
+	
+		<div id="comment-1115" class="comment">
+		
+			<img alt="" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/e41a2105e9f7f488238f2252c971a338" srcset="http://2.gravatar.com/avatar/e41a2105e9f7f488238f2252c971a338?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		
+			<div class="comment-inner">
+
+				<div class="comment-header">
+											
+					<cite class="fn">matthieu</cite>					
+					<p><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#comment-1115">02/06/2016 at 12:03</a></p>
+					
+					<div class="comment-actions">
+					
+												
+						<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=1115#respond" onclick="return addComment.moveForm( &quot;comment-1115&quot;, &quot;1115&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to matthieu">Reply</a>						
+						<div class="clear"></div>
+					
+					</div> <!-- /comment-actions -->
+					
+				</div> <!-- /comment-header -->
+
+				<div class="comment-content">
+				
+									
+					<p>OK !!<br>
+Thank you for the fast answer !!</p>
+					
+				</div><!-- /comment-content -->
+				
+				<div class="comment-actions-below hidden">
+					
+										
+					<a rel="nofollow" class="comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/?replytocom=1115#respond" onclick="return addComment.moveForm( &quot;comment-1115&quot;, &quot;1115&quot;, &quot;respond&quot;, &quot;107&quot; )" aria-label="Reply to matthieu">Reply</a>					
+					<div class="clear"></div>
+				
+				</div> <!-- /comment-actions -->
+				
+			</div> <!-- /comment-inner -->
+
+		</div><!-- /comment-## -->
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+			</ol>
+			
+							
+						
+		</div><!-- /comments -->
+		
+		
+		
+					<div id="respond" class="comment-respond">
+			<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#respond" style="display:none;">Cancel reply</a></small></h3>				<form action="http://overskill.alexshu.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+					<p class="comment-notes">Your email address will not be published.</p><p class="comment-form-comment"><textarea id="comment" name="c845c-comment" cols="45" rows="6" required=""></textarea><textarea name="comment" style="display:none" rows="1" cols="1"></textarea></p><p class="comment-form-author"><input id="author" name="author" type="text" placeholder="Name" value="" size="30"><label for="author">Author</label> <span class="required">*</span></p>
+<p class="comment-form-email"><input id="email" name="email" type="text" placeholder="Email" value="" size="30"><label for="email">Email</label> <span class="required">*</span></p>
+<p class="comment-form-url"><input id="url" name="url" type="text" placeholder="Website" value="" size="30"><label for="url">Website</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="107" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p>				</form>
+					</div><!-- #respond -->
+														                        
+			   	    
+		
+			</div> <!-- /post -->
+		
+		</div> <!-- /content -->
+		
+				
+	<div class="sidebar fright" role="complementary">
+	
+		<div id="search" class="widget widget_search">
+		
+			<div class="widget-content">
+			
+	            <form method="get" class="searchform" action="http://overskill.alexshu.com/">
+	<input type="search" value="" placeholder="Search form" name="s" class="s"> 
+	<input type="submit" class="searchsubmit" value="Search">
+</form>	            
+			</div>
+			
+	    </div> <!-- /widget_search -->
+	    
+	    <div class="widget widget_recent_entries">
+	    
+	        <div class="widget-content">
+	        
+	            <h3 class="widget-title">Latest posts</h3>
+	            
+	            <ul>
+					<li><a href="http://overskill.alexshu.com/cheaphack-a-2-5-chinese-mp3-player-for-its-128x64-mini-lcd/" title="[Cheap][Hack] a 2.50$ Chinese MP3 Player for its 128x64 mini LCD">[Cheap][Hack] a 2.50$ Chinese MP3 Player for its 128x64 mini LCD</a> </li> <li><a href="http://overskill.alexshu.com/cheap-ph-meter-hack-for-arduino/" title="Cheap pH meter hack for Arduino">Cheap pH meter hack for Arduino</a> </li> <li><a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/" title="Saving &amp; Loading Settings on SD Card with Arduino *Revisited*">Saving &amp; Loading Settings on SD Card with Arduino *Revisited*</a> </li> <li><a href="http://overskill.alexshu.com/repairing-an-arduino-clone-replacing-a-diode/" title="Repairing an Arduino Clone - Replacing a diode">Repairing an Arduino Clone - Replacing a diode</a> </li> <li><a href="http://overskill.alexshu.com/ds1302-real-time-clock-w-arduino/" title="DS1302 Real Time Clock /w Arduino">DS1302 Real Time Clock /w Arduino</a> </li> 				</ul>
+				
+			</div>
+			
+			<div class="clear"></div>
+			
+		</div> <!-- /widget_recent_entries -->
+		
+		<div class="widget widget_text">
+	    
+	        <div class="widget-content">
+	        
+	        	<h3 class="widget-title">Text widget</h3>
+	        
+	        	<div class="textwidget">
+	        	
+	        		<p>These widgets are displayed because you haven't added any widgets of your own yet. You can do so at Appearance &gt; Widgets in the WordPress settings.</p>
+				
+				</div>	
+				
+			</div>
+			
+			<div class="clear"></div>
+			
+		</div> <!-- /widget_recent_entries -->
+								
+	</div> <!-- /sidebar -->
+
+		
+		<div class="clear"></div>
+		
+	</div> <!-- /section-inner -->
+
+</div> <!-- /wrapper -->
+		
+<div class="footer section medium-padding bg-graphite">
+	
+	<div class="section-inner row">
+	
+				
+			<div class="column column-1 one-third">
+			
+				<div class="widgets">
+		
+					<div class="widget widget_meta"><div class="widget-content"><h3 class="widget-title">Meta</h3>			<ul>
+						<li><a href="http://overskill.alexshu.com/wp-login.php">Log in</a></li>
+			<li><a href="http://overskill.alexshu.com/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://overskill.alexshu.com/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+			</div><div class="clear"></div></div>										
+				</div>
+				
+			</div>
+			
+		 <!-- /footer-a -->
+			
+				
+			<div class="column column-2 one-third">
+			
+				<div class="widgets">
+		
+					<div class="widget widget_categories"><div class="widget-content"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-2"><a href="http://overskill.alexshu.com/category/aqua-tank-control-v2/" title="Aquarium control box. Controlled by arduino board.">AquaTank Control V2</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://overskill.alexshu.com/category/arduino/">Arduino</a>
+</li>
+		</ul>
+</div><div class="clear"></div></div>										
+				</div> <!-- /widgets -->
+				
+			</div>
+			
+		 <!-- /footer-b -->
+							
+				
+			<div class="column column-3 one-third">
+		
+				<div class="widgets">
+		
+							<div class="widget widget_recent_entries"><div class="widget-content">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+					<li>
+				<a href="http://overskill.alexshu.com/cheaphack-a-2-5-chinese-mp3-player-for-its-128x64-mini-lcd/">[Cheap][Hack] a 2.50$ Chinese MP3 Player for its 128×64 mini LCD</a>
+						</li>
+					<li>
+				<a href="http://overskill.alexshu.com/cheap-ph-meter-hack-for-arduino/">Cheap pH meter hack for Arduino</a>
+						</li>
+					<li>
+				<a href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/">Saving &amp; Loading Settings on SD Card with Arduino *Revisited*</a>
+						</li>
+					<li>
+				<a href="http://overskill.alexshu.com/repairing-an-arduino-clone-replacing-a-diode/">Repairing an Arduino Clone – Replacing a diode</a>
+						</li>
+					<li>
+				<a href="http://overskill.alexshu.com/ds1302-real-time-clock-w-arduino/">DS1302 Real Time Clock /w Arduino</a>
+						</li>
+				</ul>
+		</div><div class="clear"></div></div>												
+				</div> <!-- /widgets -->
+				
+			</div>
+			
+		 <!-- /footer-c -->
+		
+		<div class="clear"></div>
+	
+	</div> <!-- /footer-inner -->
+
+</div> <!-- /footer -->
+
+<div class="credits section bg-dark small-padding">
+
+	<div class="credits-inner section-inner">
+
+		<p class="credits-left fleft">
+		
+			© 2016 <a href="http://overskill.alexshu.com/" title="overSKILL">overSKILL</a><span> — Powered by <a href="http://www.wordpress.org/">WordPress</a></span>
+		
+		</p>
+		
+		<p class="credits-right fright">
+			
+			<span>Theme by <a href="http://www.andersnoren.se/">Anders Noren</a> — </span><a class="tothetop" title="To the top" href="http://overskill.alexshu.com/saving-loading-settings-on-sd-card-with-arduino/#">Up ↑</a>
+			
+		</p>
+		
+		<div class="clear"></div>
+	
+	</div> <!-- /credits-inner -->
+	
+</div> <!-- /credits -->
+
+<script type="text/javascript" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/comment-reply.min.js.download"></script>
+<script type="text/javascript" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/prettify.js.download"></script>
+<script type="text/javascript" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/load.js.download"></script>
+<script type="text/javascript" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/imagesloaded.min.js.download"></script>
+<script type="text/javascript" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/masonry.min.js.download"></script>
+<script type="text/javascript" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/imagesloaded.pkgd.js.download"></script>
+<script type="text/javascript" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/mediaelement-and-player.min.js.download"></script>
+<script type="text/javascript" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/flexslider.min.js.download"></script>
+<script type="text/javascript" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/global.js.download"></script>
+<script type="text/javascript" src="./Saving &amp; Loading Settings on SD Card with Arduino _Revisited_ _ overSKILL_files/wp-embed.min.js.download"></script>
+
+
+</body></html>

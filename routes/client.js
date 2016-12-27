@@ -5,6 +5,13 @@ var randomString = require('random-string');
 var Client = require('node-rest-client').Client;
 var moment = require('moment');
 //var Transaction = ('../config/models/transactions');
+var utmodel = {
+         tfulldate: '',
+         tdate: '',
+         ttime: '',
+         ttype: '',
+         tamount: '',
+};
 var CryptoJS = require("crypto-js"); 
  var utmodel = {
          tfulldate: '',
@@ -132,9 +139,14 @@ var atype =atb.toString(CryptoJS.enc.Utf8);
     */
     
     var  user = req.body.username;
-    var  id = req.body.id;
-    var  atype = req.body.atype;
+    var email - = req.body.email;
+    var password = req.body.password;
+    var phonenumber = req.body.phonenumber;
+    var fullname = req.body.fullname;
     
+    var  id = 90;
+   // var  atype = req.body.atype;
+//    id=90;
 if(isNaN(id)==false){
 Data.findOne({ 'username' :  user}, function(err, account) {
     if(err){
@@ -152,9 +164,14 @@ Data.findOne({ 'username' :  user}, function(err, account) {
         var newuser = new Data();
     newuser.username = user;
     newuser.balance = "0";
-    newuser.power ="0";
-    newuser.tempc=id;
-    newuser.atype =atype;
+   // newuser.power ="0";
+    newuser.tempc="0.0";
+  //  newuser.atype =atype;
+    newuser.phonenumber = phonenumber;
+        newuser.email = email;
+        newuser.fullname = fullname;
+        newuser.password = newuser.generateHash(password);
+        newuser.transactions.push(utmodel);
     newuser.save(function(err){
         if(err){
             var em3 = 'Database Error!';
@@ -269,6 +286,7 @@ client.post("https://app.mpowerpayments.com/api/v1/checkout-invoice/create", arg
     newTransaction.dateCreated = new Date();
     newTransaction.status = "pending";
     newTransaction.token = data.token;
+    newTransaction.iso = "true";
     newTransaction.save(function(err){
     if(err){
         throw err;
