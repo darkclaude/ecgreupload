@@ -1002,14 +1002,23 @@ var x = randomString({
                   utmodel.tamount=card.value;
                   utmodel.ttype = 'Load Voucher';
                   account.transactions.push(utmodel);
-                 account.tempc = parseInt(account.tempc)+parseInt(card.value);
+                   if(1){
+                    var newval = (parseInt(card.value)+parseInt(account.borrowedbalance)).toString();
+                      if(parseInt(newval)>=0){
+                            account.tempc = parseInt(account.tempc)+parseInt(newval);
+                       account.borrowedbalance = "0";   
+                      }
+                      else{
+                          account.borrowedbalance = newval;
+                      }
+                 //account.tempc = parseInt(account.tempc)+parseInt(card.value);
                   account.save(function(err){});
                   card.used = true;
                   card.usedby = user;
                   card.save(function(err){});
                   res.send(card.value);
                   
-                  
+                   }
               }
                   
                   else{

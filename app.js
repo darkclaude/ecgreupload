@@ -387,7 +387,7 @@ var seconds = diff.seconds() % 60;
                   utmodel.tdate = getFormattedDate(nownow);
                   utmodel.ttime =   moment(nownow).format('hh:mm a');
                   utmodel.tamount = card.value;
-                  utmodel.ttype= 'Voucher Code'; 
+                  utmodel.ttype= 'Load Voucher'; 
                   user.transactions.push(utmodel);
                   if(user.borrowedbalance<0){
                     var newval = (parseInt(card.value)+parseInt(user.borrowedbalance)).toString();
@@ -748,7 +748,17 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
                   utmodel.type= 'Mobile Money Topup'; 
                   user.transactions.push(utmodel);
             user.transactions[user.transactions.length-1].ttype = 'Mobile Money Topup';
-             user.tempc = parseInt(user.tempc)+ parseFloat(transaction.amount)*100.00;
+            if(1){
+                    var newval = ((parseFloat(transaction.amount)*100.00)+parseInt(user.borrowedbalance)).toString();
+                      if(parseInt(newval)>=0){
+                            user.tempc = parseInt(user.tempc)+parseInt(newval);
+                       user.borrowedbalance = "0";   
+                      }
+                      else{
+                          user.borrowedbalance = newval;
+                      }
+            }
+             //user.tempc = parseInt(user.tempc)+ parseFloat(transaction.amount)*100.00;
                 user.save(function(err){
                 if(err) throw err;
                 });
@@ -789,7 +799,17 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
                   utmodel.type= 'Mobile Money Topup'; 
                   user.transactions.push(utmodel);
             user.transactions[user.transactions.length-1].ttype = 'Mobile Money Topup';
-             user.tempc = parseFloat(user.tempc)+ parseFloat(transaction.amount)*100.00;
+             //user.tempc = parseFloat(user.tempc)+ parseFloat(transaction.amount)*100.00;
+               if(1){
+                    var newval = ((parseFloat(transaction.amount)*100.00)+parseInt(user.borrowedbalance)).toString();
+                      if(parseInt(newval)>=0){
+                            user.tempc = parseInt(user.tempc)+parseInt(newval);
+                       user.borrowedbalance = "0";   
+                      }
+                      else{
+                          user.borrowedbalance = newval;
+                      }
+            }
                 user.save(function(err){
                 if(err) throw err;
                 });
