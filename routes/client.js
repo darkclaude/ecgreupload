@@ -605,7 +605,7 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
                 Data.findOne({'username': req.body.user},function(err,person){
                       if(err) throw err;
                        if(isNaN(req.body.amount)==false){
-                       if(parseFloat(person.tempc)<=0){
+                       if(parseFloat(person.tempc)<parseFloat(req.body.amount)){
                           
                             //  top.Message= 'Sorry Please Pay Off Previous Debt!';
    // top.ClientState = 'transfer'
