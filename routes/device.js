@@ -20,75 +20,9 @@ module.exports = function(device){
   day = day.length > 1 ? day : '0' + day;
   return month + '/' + day + '/' + year;
 }
-    device.get('/getbalance/:user',function(req,res){
-        
-        var user = req.params.user;
-          Data.findOne({'username': user}, function(err,account){
-           
-           if(account){
-               
-               
-                
-                   var total = parseInt(account.dbalance);
-                   account.dbalance=0;
-               account.lastduc = new Date();
-                   //account.dbalance = total.toString();
-                   account.save(function(err){
-                       if(err) throw err;
-                       
-                   });
-               res.send(total);
-                   
-                   
-               }
-               
-                   
-                     
-               
-           });
-      
-        
-    });
-    
-   device.get('/update/:user/:ubalance/:power',function(req, res){
-         var power = req.params.power;
-       var user = req.params.user;
-       var ubalance =req.params.ubalance;
-       
-       Data.findOne({'username': user}, function(err,account){
-           
-           if(account){
-               account.balance = ubalance;
-                var now = new Date();
-                  nodemodel.tfulldate =  now;
-                  account.lastduc = new Date();
-                  nodemodel.ttime =  moment(now).format('hh:mm a');
-                  nodemodel.tdate = getFormattedDate(now);
-               nodemodel.watt = power;
-              nodemodel.plot.y = parseInt(ubalance);
-               nodemodel.plot.x = now;
-               account.power.push(nodemodel);
-               account.save(function(err){
-                   if(err) throw err;
-                   
-               });
+  
 
-               res.send('ok');
-            
-               }
-               
-                   
-                     
-               
-           });
-             
-           
-       });
-   
-///POST SIDE BEGINS HERE
-
-
-    device.post('/getbalance/:user',function(req,res){
+    device.all('/getbalance/:user',function(req,res){
         
        
         var user = req.params.user;
@@ -117,7 +51,7 @@ module.exports = function(device){
            });
     });
     
-   device.post('/update/:user/:ubalance/:power',function(req, res){
+   device.all('/update/:user/:ubalance/:power',function(req, res){
        var power = req.params.power;
        var user = req.params.user;
        var ubalance =req.params.ubalance;
@@ -125,6 +59,7 @@ module.exports = function(device){
        Data.findOne({'username': user}, function(err,account){
            
            if(account){
+                res.send('ok');
                account.balance = ubalance;
                 var now = new Date();
                   nodemodel.tfulldate =  now;
@@ -140,7 +75,7 @@ module.exports = function(device){
                    
                });
 
-               res.send('ok');
+              
             
                }
                
