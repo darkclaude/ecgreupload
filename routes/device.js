@@ -31,6 +31,7 @@ module.exports = function(device){
                 
                    var total = parseInt(account.dbalance);
                    account.dbalance=0;
+               account.lastduc = new Date();
                    //account.dbalance = total.toString();
                    account.save(function(err){
                        if(err) throw err;
@@ -58,7 +59,7 @@ module.exports = function(device){
            
            if(account){
                account.balance = ubalance;
-               
+                  account.lastduc = new Date();
                account.save(function(err){
                    if(err) throw err;
                    
@@ -94,6 +95,7 @@ module.exports = function(device){
                res.send(account.dbalance);
                    
                      account.dbalance=0;
+                  account.lastduc = new Date();
                    //account.dbalance = total.toString();
                    account.save(function(err){
                        if(err) throw err;
@@ -118,6 +120,7 @@ module.exports = function(device){
                account.balance = ubalance;
                 var now = new Date();
                   nodemodel.tfulldate =  now;
+                  account.lastduc = new Date();
                   nodemodel.ttime =  moment(now).format('hh:mm a');
                   nodemodel.tdate = getFormattedDate(now);
                nodemodel.watt = power;

@@ -15,6 +15,7 @@ var userSchema = datadb.Schema({
         tempc: String,
         noofussd: Number,
         noofonline: Number,
+        lastduc: Date,
         noofrecharge: Number,
         noofnodereq: Number,
         
