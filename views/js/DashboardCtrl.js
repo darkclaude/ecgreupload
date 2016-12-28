@@ -229,9 +229,9 @@ var route = "/clientapp/transfer";
      
      	$scope.uploadtometer = function(){
      var route = "/clientapp/uploadtometer";
- var parameter = JSON.stringify({amount: $scope.mtom, user: userobj.username});
+ var parameter = JSON.stringify({amount: $scope.uploadamount, user: userobj.username});
  console.log("it verks");
-            console.log($scope.mtom);
+            console.log($scope.uploadamount);
     $http.post(route, parameter).
     success(function(response, status, headers, config) {
             if(response=="e1"){//cannot borrow
