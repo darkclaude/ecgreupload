@@ -1,0 +1,880 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0037)http://tskit.co.kr/zbxe/download/2983 -->
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- META -->
+		<meta name="Generator" content="XpressEngine">
+<!-- TITLE -->
+	<title>자료실 - ESP8266 ADC with ACS712(5A)</title>
+<!-- CSS -->
+	<link rel="stylesheet" href="./자료실 - ESP8266 ADC with ACS712(5A)_files/xe.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="./자료실 - ESP8266 ADC with ACS712(5A)_files/default.css" type="text/css" media="all">
+	<link rel="stylesheet" href="./자료실 - ESP8266 ADC with ACS712(5A)_files/common.css" type="text/css" media="all">
+	<link rel="stylesheet" href="./자료실 - ESP8266 ADC with ACS712(5A)_files/cyan.css" type="text/css" media="all">
+	<link rel="stylesheet" href="./자료실 - ESP8266 ADC with ACS712(5A)_files/style.css" type="text/css" media="all">
+	<link rel="stylesheet" href="./자료실 - ESP8266 ADC with ACS712(5A)_files/default(1).css" type="text/css" media="all">
+	<link rel="stylesheet" href="./자료실 - ESP8266 ADC with ACS712(5A)_files/layout.css" type="text/css" media="all">
+<!-- JS -->
+	<script type="text/javascript" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/jquery.min.js.download"></script>
+	<script type="text/javascript" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/x.min.js.download"></script>
+	<script type="text/javascript" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/xe.min.js.download"></script>
+	<script type="text/javascript" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/board.js.download"></script>
+	<script type="text/javascript" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/xe_official.js.download"></script>
+	<script type="text/javascript" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/login.js.download"></script>
+	<script type="text/javascript" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/fd9df27fd00d986c76af3b6485e2837f.ko.js.download"></script>
+	<!-- RSS -->
+		<!-- ICON -->
+	<link rel="shortcut icon" href="http://tskit.co.kr/zbxe/download/modules/admin/tpl/img/faviconSample.png">	<link rel="apple-touch-icon" href="http://tskit.co.kr/zbxe/download/modules/admin/tpl/img/mobiconSample.png">
+
+<style type="text/css"> .xe_content { font-family:"arial";font-size:12px; }</style></head>
+<body>
+	<script type="text/javascript">
+	//<![CDATA[
+	var current_url = "http://tskit.co.kr/zbxe/?mid=download&document_srl=2983";
+	var request_uri = "http://tskit.co.kr/zbxe/";
+var current_mid = "download";
+var waiting_message = "서버에 요청 중입니다. 잠시만 기다려주세요.";
+var ssl_actions = new Array();
+var default_url = "";
+	//]]>
+	</script>
+		<div class="xe">
+	<div class="header">
+		<h1>
+			<a href="http://tskit.co.kr/zbxe/"><img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/tskit.gif" alt="logo" border="0" class="iePngFix"></a>					</h1>
+		<div class="language">
+			<strong title="ko">한국어</strong> <button type="button" class="toggle"><img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/buttonLang.gif" alt="Select Language" width="87" height="15"></button>
+			<ul class="selectLang">
+				<li><button type="button" onclick="doChangeLangType(&#39;en&#39;);return false;">English</button></li><li><button type="button" onclick="doChangeLangType(&#39;jp&#39;);return false;">日本語</button></li><li><button type="button" onclick="doChangeLangType(&#39;zh-CN&#39;);return false;">中文(中国)</button></li><li><button type="button" onclick="doChangeLangType(&#39;zh-TW&#39;);return false;">中文(臺灣)</button></li><li><button type="button" onclick="doChangeLangType(&#39;fr&#39;);return false;">Français</button></li><li><button type="button" onclick="doChangeLangType(&#39;ru&#39;);return false;">Русский</button></li><li><button type="button" onclick="doChangeLangType(&#39;es&#39;);return false;">Español</button></li>			</ul>
+		</div>
+		<div class="gnb">
+			<ul>
+				<li class="active first"><a href="http://tskit.co.kr/zbxe/devel">Home</a>
+					<ul style="display: none;">
+						<li><a href="http://tskit.co.kr/zbxe/board">자유게시판</a></li><li><a href="http://tskit.co.kr/zbxe/qna">질문게시판</a></li><li><a href="http://tskit.co.kr/zbxe/gallery">갤러리</a></li><li class="active"><a href="http://tskit.co.kr/zbxe/download">Download</a></li><li><a href="http://tskit.co.kr/zbxe/tip">유용한팁</a></li><li><a href="http://tskit.co.kr/zbxe/link">링크</a></li><li><a href="http://tskit.co.kr/zbxe/Android">안드로이드</a></li>					</ul>				</li><li><a href="http://tskit.co.kr/zbxe/about">About</a>
+									</li><li><a href="http://tskit.co.kr/zbxe/download/2983"></a>
+									</li>			</ul>
+		</div>
+		<form action="http://tskit.co.kr/zbxe/" method="post" class="iSearch"><input type="hidden" name="error_return_url" value="/zbxe/download/2983">
+						<input type="hidden" name="mid" value="download">
+			<input type="hidden" name="act" value="IS">
+			<input type="hidden" name="search_target" value="title_content">
+			<input name="is_keyword" type="text" class="iText" title="keyword">
+			<input type="image" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/buttonSearch.gif" alt="검색" class="submit">
+		</form>
+	</div>
+	<div class="body">
+		<div class="lnb">
+			<div style="overflow:hidden;"><div style="*zoom:1;padding:0px 0px 0px 0px !important; padding:none !important;">    <form id="fo_login_widget" action="http://tskit.co.kr/zbxe/index.php?act=procMemberLogin" method="post" class="login_default"><input type="hidden" name="error_return_url" value="/zbxe/download/2983"><input type="hidden" name="mid" value="download"><input type="hidden" name="vid" value=""><input type="hidden" name="ruleset" value="@login">
+	<fieldset>
+		<input type="hidden" name="act" value="procMemberLogin">
+		<input type="hidden" name="success_return_url" value="/zbxe/download/2983">
+		<div class="idpwWrap">
+			<div class="idpw">
+				<input name="user_id" type="text" title="아이디">
+				<input name="password" type="password" title="비밀번호">
+				<p class="keep">
+					<input type="checkbox" name="keep_signed" id="keep_signed" value="Y">
+					<label for="keep_signed">로그인 유지</label>
+				</p>
+			</div>
+			<input type="image" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/buttonLogin.gif" alt="login" class="login">					</div>
+				<p class="keep_msg" style="display: none;">브라우저를 닫더라도 로그인이 계속 유지될 수 있습니다. 로그인 유지 기능을 사용할 경우 다음 접속부터는 로그인을 하실 필요가 없습니다. 단, 게임방, 학교 등 공공장소에서 이용 시 개인정보가 유출될 수 있으니 꼭 로그아웃을 해주세요.</p>
+		<ul class="help">
+			<li><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;document_srl=2983&amp;act=dispMemberSignUpForm">회원 가입</a></li>
+			<li><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;document_srl=2983&amp;act=dispMemberFindAccount">아이디/비밀번호 찾기</a></li>
+			<li><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;document_srl=2983&amp;act=dispMemberResendAuthMail">인증 메일 재발송</a></li>
+		</ul>
+	</fieldset>
+</form> 
+</div></div>
+			<h2><a href="http://tskit.co.kr/zbxe/devel">Home</a></h2>			<ul class="locNav">
+				<li><a href="http://tskit.co.kr/zbxe/board">자유게시판</a>
+									</li><li><a href="http://tskit.co.kr/zbxe/qna">질문게시판</a>
+									</li><li><a href="http://tskit.co.kr/zbxe/gallery">갤러리</a>
+									</li><li class="active"><a href="http://tskit.co.kr/zbxe/download">Download</a>
+									</li><li><a href="http://tskit.co.kr/zbxe/tip">유용한팁</a>
+									</li><li><a href="http://tskit.co.kr/zbxe/link">링크</a>
+									</li><li><a href="http://tskit.co.kr/zbxe/Android">안드로이드</a>
+									</li>			</ul><p align="center">
+<!-- donate -->
+</p><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="error_return_url" value="/zbxe/download/2983"><input type="hidden" name="act" value=""><input type="hidden" name="mid" value="download"><input type="hidden" name="vid" value="">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1" style="display: none !important;">
+</form>
+<!-- donate end -->
+<script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" style="display: none !important;"></script>
+<!-- minileft -->
+<ins class="adsbygoogle" style="display: none !important; width: 120px; height: 240px;" data-ad-client="ca-pub-4401759065398108" data-ad-slot="0365124750"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p></p>
+		</div>
+		<div class="content xe_content">
+			                                                                         <script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" style="display: none !important;"></script>
+<!-- banner-in -->
+<ins class="adsbygoogle" style="display: none !important; width: 728px; height: 90px;" data-ad-client="ca-pub-4401759065398108" data-ad-slot="7841654293"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><!-- display skin title/description -->
+    <!-- skin description -->
+    <!-- board information -->
+    <div class="boardInformation">
+        <!-- article number -->
+                <div class="articleNum">글 수 <strong>53</strong></div>
+                <!-- login information -->
+        <ul class="accountNavigation">
+        
+                    <li class="join"><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;document_srl=2983&amp;act=dispMemberSignUpForm">회원 가입</a></li>
+            <li class="loginAndLogout"><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;document_srl=2983&amp;act=dispMemberLoginForm">로그인...</a></li>
+                            <li class="skin_info"><a href="http://tskit.co.kr/zbxe/index.php?module=module&amp;act=dispModuleSkinInfo&amp;selected_module=board&amp;skin=xe_board" onclick="popopen(this.href,&#39;skinInfo&#39;); return false;"><img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/buttonHelp.gif" alt="Skin Info" width="13" height="13"></a></li>
+            <li class="tag_info"><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;document_srl=2983&amp;act=dispBoardTagList"><img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/iconAllTags.gif" alt="Tag list" width="13" height="13"></a></li>
+        
+                        <li class="listType"><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;listStyle=list"><img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/typeList.gif" border="0" width="13" height="13" alt="List"></a></li>
+            <li class="listType"><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;listStyle=webzine"><img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/typeWebzine.gif" border="0" width="13" height="13" alt="Webzine"></a></li>
+            <li class="listType"><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;listStyle=gallery"><img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/typeGallery.gif" border="0" width="13" height="13" alt="Gallery"></a></li>
+                    </ul>
+    </div>
+        <div class="viewDocument">
+        <!-- display the document contents -->
+<div class="boardRead">
+    <div class="originalContent">
+        <div class="readHeader">
+            <div class="titleAndUser">
+                <div class="title">
+                    <h1><a href="http://tskit.co.kr/zbxe/2983">ESP8266 ADC with ACS712(5A)</a></h1>
+                </div>
+                                <div class="userInfo">
+                                            <div class="author"><span class="member_4">tskit</span></div>
+                                    </div>
+                                
+            </div>
+            <div class="dateAndCount">
+                <div class="uri" title="게시글 주소"><a href="http://tskit.co.kr/zbxe/2983">http://tskit.co.kr/zbxe/2983</a></div>
+                <div class="date" title="등록일">
+                    <strong>2015.04.09</strong> 16:04:27                 </div>
+                <div class="readedCount" title="조회 수">7533</div>
+                                <div class="replyAndTrackback">
+                                                        </div>
+                                
+            </div>
+            
+        </div>
+        
+                <div class="readBody">
+            <div class="contentBody">
+                                    <!--BeforeDocument(2983,4)--><div class="document_2983_4 xe_content"><p><span style="FONT-FAMILY: arial; COLOR: #ff0000; BACKGROUND-COLOR: rgb(255,255,255)">Do it at your own risk.</span></p>
+<p>&nbsp;</p>
+<p><span style="FONT-SIZE: x-small">ROM v1.1(2015.05.02) : I deleted&nbsp;iot server access routine. - <span class="hps">I think</span> <span class="hps">this is</span> <span class="hps">not</span> <span class="hps">necessary for this</span>.</span></p>
+<p>&nbsp;</p>
+<p>It will be&nbsp;a last esp8266 project.</p>
+<p>App:</p>
+<p><a href="https://play.google.com/store/apps/details?id=kr.co.tskit.ESP8266ACS712">https://play.google.com/store/apps/details?id=kr.co.tskit.ESP8266ACS712</a></p>
+<p>&nbsp;</p>
+<p>Video:</p>
+<p><a href="https://www.youtube.com/watch?v=RUSSV3ZKiW8">https://www.youtube.com/watch?v=RUSSV3ZKiW8</a></p>
+<p>&nbsp;</p>
+<p><img style="HEIGHT: 532px; WIDTH: 349px" alt="Screenshot_2015-04-16-18-52-51.png" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/223988c495de407557fd7a614f2f1b31.png" width="720" height="1280">&nbsp;</p>
+<p>I'm not a hardware engineer, So I don't have a oscilloscope.</p>
+<p>Now I changed 0.1uF to 1uF.</p>
+<p>I changed 1uF to 47uF.</p>
+<p>&nbsp;</p>
+<p>&nbsp;<img alt="acs712-filter.png" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/2e81fc86c9f476db1bd7e51862ebeeaa.png" width="650" height="377"></p>
+<p>&nbsp;</p>
+<p style="TEXT-ALIGN: center">Circuit</p>
+<p><span style="COLOR: #0000ff">Adjust 10k resistor to 0.5v/0A</span></p>
+<p>&nbsp;</p>
+<p>ACS712&nbsp;&nbsp;&nbsp;: 2.5V -&gt; 0A | 3.5V -&gt; 5A</p>
+<p>ESP8266&nbsp;: 0.5V -&gt; 0A | 0.7V - &gt; 5A</p>
+<p>220V 5A = 1100W</p>
+<p><img style="HEIGHT: 401px; WIDTH: 672px" alt="20150409_121822.jpg" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/33f794e7bae3374c6ee4e46771e5477a.jpg" width="2048" height="1152">&nbsp;</p>
+<p>&nbsp;</p>
+<p>I went to&nbsp;my n<span class="hps">eighborhood.</span></p>
+<p><img style="HEIGHT: 421px; WIDTH: 674px" alt="20150416_111542.jpg" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/b8c3c81962dfd94d89dd12cf5eab0cd7.jpg" width="2048" height="1152"></p>
+<p style="TEXT-ALIGN: center">acs712 normal out wave</p>
+<p>&nbsp;</p>
+<p>&nbsp;<img style="HEIGHT: 417px; WIDTH: 673px" alt="20150416_113503.jpg" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/a5daacd621ab106d255eaf45578f660e.jpg" width="2048" height="1152"></p>
+<p style="TEXT-ALIGN: center">Test and changed to 47uF</p>
+<p style="TEXT-ALIGN: center">&nbsp;</p>
+<p>1. Referrence : <a href="http://tskit.co.kr/zbxe/download/2777">http://tskit.co.kr/zbxe/download/2777</a></p>
+<p>&nbsp;&nbsp;&nbsp; download my firmware.</p>
+<p>2. use XTCOM_UTIL</p>
+<p>&nbsp;baudrate 115200</p>
+<p>&nbsp;first dowload 0x00000.bin(eagle.app.v6.flash.bin)</p>
+<p>&nbsp;and taget reset.</p>
+<p>&nbsp;open and connect.</p>
+<p>&nbsp;second&nbsp;dowload 0x40000.bin(eagle.app.v6.irom0text.bin)</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p><div class="document_popup_menu"><a href="http://tskit.co.kr/zbxe/download/2983#popup_menu_area" class="document_2983" onclick="return false">이 게시물을...</a></div></div><!--AfterDocument(2983,4)-->                                <!-- display signature / profile image-->
+                            </div>
+        </div>
+                        <div class="tag">
+            <ul>
+                                                        <li><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;search_target=tag&amp;search_keyword=esp8266" rel="tag">esp8266</a>,&nbsp;</li>
+                                                        <li><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;search_target=tag&amp;search_keyword=acs712" rel="tag">acs712</a></li>
+                            </ul>
+        </div>
+                        <div class="fileAttached">
+                        <ul>
+                                <li><a href="http://tskit.co.kr/zbxe/?module=file&amp;act=procFileDownload&amp;file_srl=2992&amp;sid=a608b16d757e38c108a97ced258c1782">20150409_121822.jpg (530.8KB)(178)</a></li>
+                                <li><a href="http://tskit.co.kr/zbxe/?module=file&amp;act=procFileDownload&amp;file_srl=3013&amp;sid=d3c01b8c06ef32a7163bf8dcbd5233c1">acs712-filter.png (11.2KB)(299)</a></li>
+                                <li><a href="http://tskit.co.kr/zbxe/?module=file&amp;act=procFileDownload&amp;file_srl=3014&amp;sid=a0fa2e51ba1d919eed24f0c099430c77">20150416_111542.jpg (587.8KB)(118)</a></li>
+                                <li><a href="http://tskit.co.kr/zbxe/?module=file&amp;act=procFileDownload&amp;file_srl=3015&amp;sid=f1580e735b445440bf6e73f18753412f">20150416_113503.jpg (643.9KB)(126)</a></li>
+                                <li><a href="http://tskit.co.kr/zbxe/?module=file&amp;act=procFileDownload&amp;file_srl=3027&amp;sid=5465156cfb81b287a1d5dfdd757074ca">Screenshot_2015-04-16-18-52-51.png (98.3KB)(116)</a></li>
+                                <li><a href="http://tskit.co.kr/zbxe/?module=file&amp;act=procFileDownload&amp;file_srl=3034&amp;sid=de12a677757189a3f2a677c7554d7b72">esp_acs712_rom(v10).zip (138.2KB)(143)</a></li>
+                                <li><a href="http://tskit.co.kr/zbxe/?module=file&amp;act=procFileDownload&amp;file_srl=3089&amp;sid=6f2d8ecd5cee07d8208084d709b0ba52">acs712rom(v11).zip (138.2KB)(172)</a></li>
+                            </ul>
+            
+        </div>
+            </div>
+    <!-- list, modify/delete button -->
+    <div class="btnArea">
+                <span class="btn"><a href="http://tskit.co.kr/zbxe/download">목록</a></span>
+                    </div>
+</div>
+<!-- trackback -->
+    <!-- display trackback -->
+<div class="trackbackBox">
+    <div class="trackbackUrl"><a name="trackback" href="http://tskit.co.kr/zbxe/2983/696/trackback" onclick="return false;">엮인글 주소 : http://tskit.co.kr/zbxe/2983/696/trackback</a></div>
+    </div>
+<!-- comments -->
+<a name="comment"></a>
+<!-- comments form -->
+    </div>
+                <!-- display list -->
+<form action="http://tskit.co.kr/zbxe/download/" method="get"><input type="hidden" name="error_return_url" value="/zbxe/download/2983"><input type="hidden" name="act" value=""><input type="hidden" name="mid" value="download"><input type="hidden" name="vid" value="">
+    <table cellspacing="0" summary="" class="boardList">
+    <thead>
+    <tr>
+        
+            
+                
+                                    
+                    
+                            <th scope="col" class="no_line"><div>번호</div></th>
+                    
+                            
+                                    
+                    
+                            <th scope="col" class="title ">
+                    <div>
+                                        제목                                        </div>
+                </th>
+                    
+                            
+                                    
+                    
+                            <th class="author" scope="col"><div>글쓴이</div></th>
+                    
+                            
+                                    
+                    
+                            <th scope="col" class="date "><div><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;document_srl=2983&amp;sort_index=regdate&amp;order_type=desc">날짜</a></div></th>
+                    
+                            
+                                    
+                    
+                            <th class="reading" scope="col"><div><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;document_srl=2983&amp;sort_index=readed_count&amp;order_type=desc">조회 수</a></div></th>
+                    
+                        </tr>
+    </thead>
+    <tbody>
+    
+            
+                
+                <tr class="bg1">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">53</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3576">The Next Station</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2016-06-08</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">221</td>
+                                    
+                                            </tr><tr class="bg2">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">52</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3502">Calculator with dice.</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2016-04-18</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">184</td>
+                                    
+                                            </tr><tr class="bg1">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">51</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3467">Esp8266 smart switch for iPhone</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2016-01-21</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">1169</td>
+                                    
+                                            </tr><tr class="bg2">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">50</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3396">ABC Keyboard</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-11-29</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">620</td>
+                                    
+                                            </tr><tr class="bg1">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">49</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3271">Digital calendar DIY</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-09-22</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">713</td>
+                                    
+                                            </tr><tr class="bg2">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">48</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3224">Daytrading Calculator</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-08-30</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">753</td>
+                                    
+                                            </tr><tr class="bg1">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">47</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3193">Baduk calculator</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-06-28</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">940</td>
+                                    
+                                            </tr><tr class="bg2">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">46</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3160">MineSweeper Onetouch</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-06-01</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">456</td>
+                                    
+                                            </tr><tr class="bg1">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">45</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3142">AVR calc bad ladybug</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-05-23</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">588</td>
+                                    
+                                            </tr><tr class="bg2">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">44</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3117">4th dimesion maze(real maze3)</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-05-10</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">528</td>
+                                    
+                                            </tr><tr class="bg1">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">43</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3076">Esp8266 Manager</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-04-25</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">2887</td>
+                                    
+                                            </tr><tr class="bg2">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">42</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3061">Brush teeth 3 times in a day.</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-04-21</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">820</td>
+                                    
+                                            </tr><tr class="bg1">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">41</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3050">Lucky dice buff.</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-04-20</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">763</td>
+                                    
+                                            </tr><tr class="bg2">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">40</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3019">Let's learn multiplication tables.(19x19)</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-04-16</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">823</td>
+                                    
+                                            </tr><tr class="bg1">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">39</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/3002">Beep every 30 minutes.(Striking clock)</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-04-13</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">1072</td>
+                                    
+                                            </tr><tr class="bg2">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num"><img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/iconArrowD8.gif" border="0" alt=""></td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/2983">ESP8266 ADC with ACS712(5A)</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-04-09</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">7533</td>
+                                    
+                                            </tr><tr class="bg1">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">37</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/2964">How many times touch the phone, today?</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-03-13</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">1082</td>
+                                    
+                                            </tr><tr class="bg2">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">36</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/2955">Today phone usage</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-03-09</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">1212</td>
+                                    
+                                            </tr><tr class="bg1">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">35</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/2947">Simple daily calorie</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-03-04</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">937</td>
+                                    
+                                            </tr><tr class="bg2">
+        
+            
+                        
+                            
+                                    
+                                            <td class="num">34</td>
+                                    
+                                            
+                                    
+                                            <td class="title">
+                                                        <a href="http://tskit.co.kr/zbxe/download/2896">ESP8266 DHT11 Interface</a>
+                            
+                                                                                    <img src="./자료실 - ESP8266 ADC with ACS712(5A)_files/file.gif" alt="file" title="file" style="margin-right:2px;">                        </td>
+                                    
+                                            
+                                    
+                                            <td class="author"><div class="member_4">tskit</div></td>
+                                    
+                                            
+                                    
+                                            <td class="date">2015-01-31</td>
+                                    
+                                            
+                                    
+                                            <td class="reading">12400</td>
+                                    
+                                            </tr>
+        </tbody>
+    </table>
+</form>
+        <div class="boardBottom">
+    <!-- write document, list button -->
+        <div class="btnArea">
+			<span class="btn"><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;act=dispBoardWrite">쓰기...</a></span>
+			<span class="etc">
+												<span class="btn"><a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;page=1">목록</a></span>
+							</span>
+        </div>
+    <!-- page navigation -->
+        <div class="pagination a1">
+            <a href="http://tskit.co.kr/zbxe/download" class="prevEnd">첫 페이지</a> 
+                                                <strong>1</strong> 
+                                                                <a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;page=2">2</a>
+                                                                <a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;page=3">3</a>
+                                        <a href="http://tskit.co.kr/zbxe/index.php?mid=download&amp;page=3" class="nextEnd">끝 페이지</a>
+        </div>
+    <!-- search -->
+                <div class="boardSearch">
+            <form action="http://tskit.co.kr/zbxe/" method="get" onsubmit="return procFilter(this, search)" id="fo_search"><input type="hidden" name="act" value="">
+                                <input type="hidden" name="mid" value="download">
+                <input type="hidden" name="category" value="">
+                <select name="search_target">
+                                        <option value="title">제목</option>
+                                        <option value="content">내용</option>
+                                        <option value="title_content">제목+내용</option>
+                                        <option value="comment">댓글</option>
+                                        <option value="user_name">이름</option>
+                                        <option value="nick_name">닉네임</option>
+                                        <option value="user_id">아이디</option>
+                                        <option value="tag">태그</option>
+                                    </select>
+                <input type="text" name="search_keyword" value="" class="iText">
+                                <span class="btn"><input type="submit" value="검색"></span>
+                <span class="btn"><a href="http://tskit.co.kr/zbxe/download">취소</a></span>
+            </form>
+        </div>
+            </div>
+<!-- display the text on footer -->
+		</div>
+	</div>
+	<div class="footer">
+		<p><a href="http://xpressengine.com/" target="_blank">Powered by <strong>XE</strong></a></p>
+                        <p align="left"><font size="1" color="#999999" style="font-style: normal; font-size: 8pt;">본 웹사이트는 개인정보 보호법에 의거하여 비실명제로 운영됩니다.<br>
+	</font></p></div><font size="1" color="#999999" style="font-style: normal; font-size: 8pt;">
+</font></div><font size="1" color="#999999" style="font-style: normal; font-size: 8pt;">	<!-- ETC -->
+	<div class="wfsr"></div>
+	<script type="text/javascript" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/d046d1841b9c79c545b82d3be892699d.ko.compiled.js.download"></script>	<script type="text/javascript" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/1bdc15d63816408b99f674eb6a6ffcea.ko.compiled.js.download"></script>	<script type="text/javascript" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/9b007ee9f2af763bb3d35e4fb16498e9.ko.compiled.js.download"></script>	<script type="text/javascript" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/4006728d092c905c4152deb39ecd3db9.ko.compiled.js.download"></script>	<script type="text/javascript" src="./자료실 - ESP8266 ADC with ACS712(5A)_files/fc924830b7502c413da5ffaa0f2f5deb.ko.compiled.js.download"></script>
+
+</font><div id="popup_menu_area" style="display:none;z-index:9999"></div></body></html>

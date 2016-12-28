@@ -1,9 +1,22 @@
 
 var Data = require('../config/models/data').Data;
-
+var nodemodel = {
+         tfulldate: '',
+         tdate: '',
+         ttime: '',
+         watt: ''
+};
 module.exports = function(device){
     
     
+    function getFormattedDate(date) {
+  var year = date.getFullYear();
+  var month = (1 + date.getMonth()).toString();
+  month = month.length > 1 ? month : '0' + month;
+  var day = date.getDate().toString();
+  day = day.length > 1 ? day : '0' + day;
+  return month + '/' + day + '/' + year;
+}
     device.get('/getbalance/:user',function(req,res){
         
         var user = req.params.user;
@@ -42,6 +55,7 @@ module.exports = function(device){
            
            if(account){
                account.balance = ubalance;
+               
                account.save(function(err){
                    if(err) throw err;
                    
@@ -99,7 +113,11 @@ module.exports = function(device){
            
            if(account){
                account.balance = ubalance;
-               account.power = power;
+                var now = new Date();
+                  nodemodel.tfulldate =  now;
+                  nodemodel.ttime =  moment(now).format('hh:mm a');
+                  nodemodel.tdate = getFormattedDate(now);
+               account.power.push(nodemodel);
                account.save(function(err){
                    if(err) throw err;
                    

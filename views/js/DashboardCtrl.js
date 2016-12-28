@@ -16,7 +16,7 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
         $scope.tempC= userobj.tempc;
             $scope.wbalance = userobj.balance;
             $scope.borrowed = userobj.borrowedbalance;
-            $scope.totalAccounts = (parseFloat(userobj.tempc)+parseFloat(userobj.balance))-parseFloat(userobj.borrowedbalance);
+            $scope.totalAccounts = ((parseFloat(userobj.tempc)+parseFloat(userobj.balance))-parseFloat(userobj.borrowedbalance)).toFixed(2);
     });
   
 	$http.post('/clientapp/allusertransactions/'+userid).success(function(response){
