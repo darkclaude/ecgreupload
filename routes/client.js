@@ -209,7 +209,7 @@ client.all("/alluserpowers/:id",function(req, res){
   //var k10 = [{}];
 Data.find({'_id': req.params.id}, function(err, user) {
  
-     res.json(user[0].powers);
+     res.json(user[0].power);
    });
 });
  
