@@ -75,7 +75,8 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
 	//	$scope.v = "!a";
 		//$scope.expired=false;
 	
-		
+		 console.log("powers:");
+                      console.log(response);
        var chart = new CanvasJS.Chart("chartContainer",
     {
       title:{
