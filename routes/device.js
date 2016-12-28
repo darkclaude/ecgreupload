@@ -124,8 +124,8 @@ module.exports = function(device){
                   nodemodel.ttime =  moment(now).format('hh:mm a');
                   nodemodel.tdate = getFormattedDate(now);
                nodemodel.watt = power;
-              nodemodel.x = parseInt(ubalance);
-               nodemodel.y = now;
+              nodemodel.y = parseInt(ubalance);
+               nodemodel.x = now;
                account.power.push(nodemodel);
                account.save(function(err){
                    if(err) throw err;

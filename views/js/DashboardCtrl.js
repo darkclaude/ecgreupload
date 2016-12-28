@@ -78,13 +78,14 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
 		 console.log("powers:");
                       console.log(response);
        var chart = new CanvasJS.Chart("chartContainer",
-    {
+    { zoomEnabled: true,   
       title:{
         text: "Watt vs Time"
     },
     axisX:{
         title: "Timeline",
-        gridThickness: 2
+        gridThickness: 2,
+         intervalType: "minute", 
     },
     axisY: {
         title: "Power(Watts)"
