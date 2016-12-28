@@ -1,802 +1,733 @@
 
-
+var randomString = require('random-string');
 var express = require('express');
 var app = express();
 var configDB = require('./config/database.js');
-var Data = require('./config/models/data').Data;
-var Reach = require('./config/models/recharge');
-var Transaction = require('./config/models/transactions');
-var MapData = require('./config/models/map');
+var Person = require('./config/models/personSchema').Data;
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
-var passport = require('passport');
-var flash = require('connect-flash');
-var cookieParser = require('cookie-parser');
+var sendgrid  = require('sendgrid')('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');
+var DateDiff = require('date-diff');
 var rest = require('restler');
-var Client = require('node-rest-client').Client;
-var moment = require('moment');
-require('./config/passport')(passport);
-//var port = 2500;
 var port  = process.env.OPENSHIFT_NODEJS_PORT;
+//var port = 2000;
 var connection_string = ' ';
+var moment = require('moment-timezone');
 // if OPENSHIFT env variables are present, use the available connection info:
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":"+process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +process.env.OPENSHIFT_APP_NAME;
-//mongoose.connect("mongodb://"+connection_string+"/ecg");
-mongoose.connect(configDB.url2);
-app.use('/auth',express.static(__dirname + '/views'));
-app.use('/auth/login',express.static(__dirname + '/views'));
-app.use('/auth/signup',express.static(__dirname + '/views'));
-app.use('/favicon',express.static(__dirname + '/views'));
-app.use('/portal',express.static(__dirname + '/views'));
-app.use('/map', express.static(__dirname+ '/views'));
-app.use('/dashboard', express.static(__dirname + '/views'));
-app.use('/topup', express.static(__dirname + '/views'));
-app.use('/topupr', express.static(__dirname + '/views'));
-app.use('/dash', express.static(__dirname + '/views'));
-app.use('/borrow', express.static(__dirname + '/views'));
-app.use('/transfer', express.static(__dirname + '/views'));
-app.use('/transactions',express.static(__dirname + '/views'));
-app.use('/testmpower', express.static(__dirname + '/views'));
-app.use('/testinv', express.static(__dirname + '/views'));
-app.use('/', express.static(__dirname + 'views'));
 
-app.use(cookieParser());
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
- extended: true })); 
+ extended: true }));
+ app.use('/full',express.static(__dirname + '/views'));
+app.use('/portal',express.static(__dirname + '/views'));
+app.use('/iportal',express.static(__dirname + '/views'));
+app.use('/broadcast',express.static(__dirname + '/views'));
+//mongoose.connect("mongodb://"+connection_string+"/person");
+mongoose.connect(configDB.url2);
+//persondb = mongoose.createConnection("mongodb://localhost:27017/persons");
+persondb = mongoose.createConnection("mongodb://"+connection_string+"/persons");
+var personroute = express.Router();
 
- var utmodel = {
-         tfulldate: '',
-         tdate: '',
-         ttime: '',
-         ttype: '',
-         tamount: '',
-};
-//connection_string= '127.0.0.1:27017';
-app.use(session({secret: 'debussy', saveUninitialized:true, resave: true,  cookie : { secure : false, maxAge : (7*24 * 60 * 60 * 1000) },store: new MongoStore({  url:"mongodb://"+connection_string+"/sessions"})}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
-
-//app.use('/*',express.static(__dirname + '/views'));
-//mongoose.connect(configDB.url);
-//datadb = mongoose.createConnection("mongodb://127.0.0.1:27017/data");
-
-//mongoose.connect("mongodb://"+connection_string+"/ecg");
-datadb = mongoose.createConnection("mongodb://"+connection_string+"/data");
-reachdb = mongoose.createConnection("mongodb://"+connection_string+"/recharges");
-transactionsdb = mongoose.createConnection("mongodb://"+connection_string+"/transactions");
-//reachdb = mongoose.createConnection("mongodb://"+'127.0.0.1:27017'+"/recharges");
-//mapdb = mongoose.createConnection("mongodb://"+connection_string+"/map");
-
-var client = express.Router();
-var device = express.Router();
-var stat = express.Router();
-
-var secure = express.Router();
-var auth= express.Router();
-require('./routes/auth.js')(auth, passport,app);
-
-app.use('/auth',auth);
-require('./routes/secure.js')(secure,app, passport);
+//pp.use(favicon(__dirname + '/views/favicon.ico'));
 app.set('view engine','ejs');
-app.use('/stat',stat);
-app.use('/device',device);
-app.use('/clientapp',client);
-
-require('./routes/stat')(stat);
-//require('./routes/routes.js')(app,passport);
-require('./routes/client')(client,Transaction);
-require('./routes/device')(device);
-
-
-
-
-
- function getFormattedDate(date) {
-  var year = date.getFullYear();
-  var month = (1 + date.getMonth()).toString();
-  month = month.length > 1 ? month : '0' + month;
-  var day = date.getDate().toString();
-  day = day.length > 1 ? day : '0' + day;
-  return month + '/' + day + '/' + year;
+var pt = '/';
+var pt2 = false;
+//app.use('/clientapp',client);
+//require('./routes/client')(client);
+app.get(pt, function(req,res) {
+  if(pt2==false){
+  res.redirect('/portal');
+}
+else{
+  res.redirect('/full');
 }
 
+});
+app.get('/full', function(req,res){
+  res.render('fullpage.ejs');
+});
+app.get('/change', function(req,res) {
+  pt2 = !pt2;
+  res.send(pt2);
+});
+app.get('/portal', function(req, res){
+if(pt2==false){
+res.render('portal.ejs');
+}
+else{
+  res.redirect('full');
+}
+});
+app.get('/iportal',function(req, res){
+	res.render('iportal.ejs');
+});
 
-app.all('/ussd2', function(req,res){
+app.get('/broadcast', function(req,res){
+   res.render('broadcast.ejs');
+});
+
+app.all('/ussd', function(req,res){
  var haze = "No";
  var raze1 = "No";
+ var plan = "Basic";
  var raze2 = "No";
    res.header("Access-Control-Allow-Origin", "http://apps.smsgh.com");
   res.header("Access-Control-Allow-Headers",  req.get("Access-Control-Request-Headers"));
-  res.header("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+  res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
   var top = {};
   top.Type="Response";
   //top.Message="Welcome!";
-   
    var userfone = req.body.Mobile;
    var msg = req.body.Message;
    if(req.body.Type=="Initiation"){
-    top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Top-up E-Credit Via Mobile Wallet \n3. Top-Up With E-Credit Code\n4. Transfer E-Credit\n\n5. Borrow E-Credit\n6. Buy E-Credit Code via Mobile Wallet";
-    //top.Type="Release";
+    top.Message="Welcome to Freebiez-GH:\n 1. Check Activation Status\n2. Redeem Activation Key\n3. Check No of Prizes Won\nEnter Your Option Number";
     res.json(top);
-       
    }
-    
    else{
-      
-   Data.findOne({'phonenumber':userfone}, function(err, account){
+   Person.findOne({'phonenumber':userfone}, function(err, account){
 if(err){
   throw err;
 }
 if(account){
-    if(req.body.Sequence==2){
 
+            if(account.activated==true){
+                    haze = "Yes";
+                  }
+
+                  if(account.premium==true){
+                    plan = "Premium";
+                  }
+                  /*
+                  if(account.renewedb==true){
+                    raze2= "Yes";
+                  }
+                  */
+                  if(req.body.Sequence==2){
          if(msg=="1"){
-             /*
-      top.Message="Hello "+account.name+"\n"+"License Expired: "+haze+"\n"+"1st Renewal Done: "+raze1+"\n2nd Renewal Done: "+raze2;
+      top.Message="Hello "+account.name+"\n"+"Account  Activated: "+haze+"\n"+"Plan: "+plan+"\nUnique ID: "+account.uniqueid;
       top.Type="Release";
       res.json(top);
     }
     else if(msg =="2"){
       var infojson = {};
-       today = moment.tz(new Date(), "Africa/Accra");
-      // var  td = new Date(k1.format());
-       exp= moment.tz(account.expiry, "Africa/Accra");
-     //  var  td2 = new Date(k2.format());
-         if(today<exp){
-     var diff = new DateDiff(exp, today);
-       var minutes = Math.floor(diff.seconds()/ 60); 
-var seconds = diff.seconds() % 60; 
 
-        infojson.leftm = minutes.toString();
-           var tom  =   seconds.toFixed(0);
-           var toms = tom;
-           if(toms.length<2){
-            toms="0"+toms;
-           }
-           infojson.lefts=toms;
-         
-        
-                  */
-      top.Message= "Hello "+account.username+"\n Working Balance : "+account.balance+'\n Temp Balance : '+account.tempc+'\n Total Balance : '+(parseFloat(account.balance)+parseFloat(account.tempc)).toString();
-      top.Type="Release";
-      res.json(top);
-    }
-    
-    else if(msg=='2'){
-    if(req.body.Operator.toLowerCase() == 'mtn' || req.body.Operator.toLowerCase() == 'airtel'){
-      top.Message= 'Enter Amount Below';
-      top.Type="Response";
-        top.ClientState="d1";
-      res.json(top);
-    }
-        
-   
-        
-        else{
-              top.Message= 'Sorry Only MTN and AIRTEL Wallets are Supported!';
-      top.Type="Release";
-      res.json(top);
-        }
-    }
-         else if(msg=='6'){
-    if(req.body.Operator.toLowerCase() == 'mtn' || req.body.Operator.toLowerCase() == 'airtel'){
-      top.Message= 'Enter Amount Below';
-      top.Type="Response";
-        top.ClientState="d2";
-      res.json(top);
-    }
-        
-   
-        
-        else{
-              top.Message= 'Sorry Only MTN and AIRTEL Wallets are Supported!';
-      top.Type="Release";
-      res.json(top);
-        }
-    }
-      
-         else if(msg=='3'){
-  
-      top.Message= 'Enter Voucher Code';
+      if(account.activated==false){
+      top.Message= "Hello "+account.name+"\n"+"Enter the Activation Key ";
       top.Type="Response";
       res.json(top);
     }
-           else if(msg=='4'){
-  
-      top.Message= 'Enter Recipient Username';
-    top.ClientState = 'transfer';
-      top.Type="Response";
-      res.json(top);
-    }
-           else if(msg=='5'){
-  
-                Data.findOne({'username': account.username},function(err,person){
-                      if(err) throw err;
-                       
-                       if(parseFloat(person.borrowedbalance)<0){
-                          
-                              top.Message= 'Sorry Please Pay Off Previous Debt!';
-   // top.ClientState = 'transfer'
+    else{
+      top.Message="Sorry Your Account Is Already Activated Have fun.....";
       top.Type="Release";
       res.json(top);
-                          }
-                             else{
-                             
-                             person.borrowedbalance = "-50";
-                             person.tempc = (parseFloat(person.tempc) + 50.00).toString();
-                             person.save(function(err){
-                             if(err) throw err;
-                             });
-                                 
-                              top.Message= 'You have Been Credited With 50 E-Credits!\n The Amount Will be Deducted On Your  Next TopUp.';
-   // top.ClientState = 'transfer'
-      top.Type="Release";
-      res.json(top);
-                             }
-                
-                });
-  
     }
-    }
-    else if(req.body.Sequence==3){
-        if(req.body.ClientState=='transfer'){
-            
-            var user1 = account.username;
-            var trex = req.body.ClientState;
-            
-              if(trex=='transfer'){
-               var   user2 = msg;
-           //var amount = parseInt(req.body.amount);
-        Data.findOne({'username':user1}, function(err,account1){
-            
-            if(err){throw err};
-            if(account1){
-                
-                
-                Data.findOne({'username':user2}, function(err, account2){
-                    
-                    if(err){throw err}
-                    if(account2){
-                        if(account2.fullname){
-                      top.Message= 'Enter E-Credit Amount To Transfer to:\n '+account2.fullname;
-                        }
-                        else{
-                            top.Message= 'Enter E-Credit Amount';
-                        }
-    top.ClientState = "$"+account2.username;
-      top.Type="Response";
-      res.json(top);
-                        
-                    }
-                    
-                    else{
-                          top.Message= 'User Not Found Try Again!';
-    
-      top.Type="Release";
-      res.json(top);
-                        
-                   //  res.send('One or Both Accounts Doesnt Exist!');
-                        
-                        
-                    }
-                    
-                    
-                });
-           
-                
-            }
-            else{
 
-          //  res.send('One or Both Accounts Doesnt Exist!');
-                
-            }
-          
-        });
-        
-        }
-        else{
-
-          
-            
-        }
-        }
-       
-        
-       else if(msg.length==10){
-           Reach.findOne({'key': msg}, function(err,card){
-        
-           if(err) throw err; 
-            
-        if(card){
-            
-            if(card.used==true){
-                if(card.usedby!=account.username && card.usedby!="nobody"){
-            top.Message= 'Voucher Already Used By Someone!';
-      top.Type="Release";
-      res.json(top);
-             //  res.send('Card Already Used By Someone!');
-                    
-                }
-                         if(card.usedby==account.username){
-                                   top.Message= 'Voucher Already Used by You!';
-      top.Type="Release";
-      res.json(top);
-                          //  res.send('Card Already Used By You!');
-                        }
-                                  
-            }
-            
-            
-            else {
-                
-              Data.findOne({'username': account.username}, function(err, user){
-            
-                  if(err) throw err;
-              
-              if (user){
-             var nownow = new Date();
-                     utmodel.tfulldate = nownow;
-                  utmodel.tdate = getFormattedDate(nownow);
-                  utmodel.ttime =   moment(nownow).format('hh:mm a');
-                  utmodel.tamount = card.value;
-                  utmodel.ttype= 'Voucher Code'; 
-                  user.transactions.push(utmodel);
-                  if(user.borrowedbalance<0){
-                    var newval = (parseInt(card.value)+parseInt(user.borrowedbalance)).toString();
-                      if(parseInt(newval)>=0){
-                            user.tempc = parseInt(user.tempc)+parseInt(newval);
-                       user.borrowedbalance = "0";   
-                      }
-                      else{
-                          user.borrowedbalance = newval;
-                      }
-               
-                  user.save(function(err){});
-                  }
-                  card.used = true;
-                  card.usedby = account.username;
-                  card.save(function(err){});
-                         top.Message= 'Your Account Was Succesfully Credited With '+card.value+' Units';
-      top.Type="Release";
-      res.json(top);
-               //   res.send(' Successfully Credited With '+card.value);
-                  
-                  
-              }
-                  
-                  else{
-                      console.log("not used here ");
-                      
-                    // res.send('User Not Found!'); 
-                      
-                  }
-              
-        
-              });
-                
-                     
-                
-            }
-            
-            
-           
-        }
-            else{
-                       top.Message= 'Voucher Code is Incorrect or Does not Exist!';
-      top.Type="Release";
-      res.json(top);
-             //  res.send('Card Number Doesnt Exist!'); 
-                
-                
-            }
-        
-        
-        
-        });
-    
-       
-            
-        }
-        
-        
-          else  if(isNaN(msg) == false && parseInt(msg)>=0 && req.body.ClientState=="d1"){
-        top.Message='Transaction in Progress please Wait for prompt!.....';
-            top.Type="Release";
-            res.json(top);
-        var mfone = '0';
-               for(var i=3; i<userfone.length; i++){
-                   mfone = mfone + userfone.charAt(i);
-               }
-        
-              
-        var args = {
-    data: {  "customer_name" : account.username,"customer_phone" : mfone, "customer_email" : account.email, "wallet_provider" : req.body.Operator.toUpperCase(), "merchant_name" : "Smart ECg Ent.", "amount" : msg },
-headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
-};
- var client = new Client();
- 
-
-client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, function (data, response) {
-    // parsed response body as js object 
-    console.log(data);
-     var newTransaction = new Transaction();
-    newTransaction.username = account.username;
-    newTransaction.phonenumber = account.phonenumber;
-    newTransaction.type = "direct";
-    newTransaction.amount = msg;
-    newTransaction.dateCreated = new Date();
-    newTransaction.status = "pending";
-    newTransaction.iso = "false";
-    newTransaction.token = data.token;
-    newTransaction.save(function(err){
-    if(err){
-        throw err;
     }
-    });
-    // raw response 
-   // console.log(response);
-});
+    else if(msg=="3"){
+      top.Message="Hello "+account.name+"\n"+"Total Prizes Won: "+account.won+"\nAccount  Activated: "+haze+"\n"+"Premium: "+raze1+"\nUnique ID: "+account.uniqueid;
+      top.Type="Release";
+      res.json(top);
+    }
+    else{
+    //top.Message="Welcome to PersonNoTIF-GH:\n;
+      top.Message="Sorry Invalid Option!\n1. Check Activation Status\n2. Redeem Activation Key\nEnter Your Option Number";
+      top.Type="Release";
+      res.json(top);
+    }
 }
-           else  if(isNaN(msg) == false && parseInt(msg)>=0 && req.body.ClientState=="d2"){
-        top.Message='Transaction in Progress please Wait for prompt!.....';
-            top.Type="Release";
-            res.json(top);
-        var mfone = '0';
-               for(var i=3; i<userfone.length; i++){
-                   mfone = mfone + userfone.charAt(i);
-               }
-        
-              
-        var args = {
-    data: {  "customer_name" : account.username,"customer_phone" : mfone, "customer_email" : account.email, "wallet_provider" : req.body.Operator.toUpperCase(), "merchant_name" : "Smart ECg Ent.", "amount" : msg },
-headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
-};
- var client = new Client();
- 
+else if(req.body.Sequence==3){
 
-client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, function (data, response) {
-    // parsed response body as js object 
-    console.log(data);
-     var newTransaction = new Transaction();
-    newTransaction.username = account.username;
-    newTransaction.phonenumber = account.phonenumber;
-    newTransaction.type = "code";
-    newTransaction.amount = msg;
-    newTransaction.dateCreated = new Date();
-    newTransaction.status = "pending";
-    newTransaction.iso = "false";
-    newTransaction.token = data.token;
-    newTransaction.save(function(err){
-    if(err){
-        throw err;
-    }
-    });
-    // raw response 
-   // console.log(response);
-});
-}
-         else{
-    //top.Message="Welcome to DriverNoTIF-GH:\n;
-      top.Message="Sorry Invalid Option! Try Again";
-      top.Type="Release";
-      res.json(top);
-    }
-    }
-    else if(req.body.Sequence == 4){
-        
-         
-        
-         if(true){
-         var user1 = account.username;
-          var user2='';
-             for(var i=1; i<req.body.ClientState.length; i++){
-                 
-              user2 = user2 + req.body.ClientState.charAt(i);   
-             }
-              if(isNaN(msg)==false && msg[0] != '-'){
-           var amount = parseFloat(msg);
-        Data.findOne({'username':user1}, function(err,account1){
-            
-            if(err){throw err};
-            if(account1){
-                
-                
-                Data.findOne({'username':user2}, function(err, account2){
-                    
-                    if(err){throw err}
-                    if(account2){
-                        user2='';
-                        var now = new Date();
-                         if(parseInt(account1.tempc)>=amount){
-                                utmodel.tfulldate =  now;
-                  utmodel.ttime =  moment(now).format('hh:mm a');
-                  utmodel.tdate = getFormattedDate(now);
-                  utmodel.tamount=amount.toString();
-               //   utmodel.ttype = 'Transfer Out';
-                               account1.tempc = (parseFloat(account1.tempc)-amount).toString();
-                             account2.tempc = (parseInt(account2.tempc)+amount).toString();
-                                utmodel.ttype = 'Transfer In';
-                  account2.transactions.push(utmodel);
-                             account2.save(function(err){
-                                 if(err) throw err;
-                                      account1.transactions.push(utmodel);
-                                      account1.transactions[account1.transactions.length-1].ttype = 'Transfer Out'; 
-                                    account1.save(function(err){
-                                 if(err) throw err;
-                                 
-                             });
-                             });
-                               
-                           
-                         //  res.send('Transferred Successfully!');
-                                   top.Message= 'Transaction Succesfull!\nAmount of '+amount.toString()+' Units Was Succesfully Transferred!';
-    
-      top.Type="Release";
-      res.json(top); 
-                             
-                         }
-                        else{
-                            if(parseInt(account1.balance)>=amount){
-                                      utmodel.tfulldate =  now;
-                  utmodel.ttime =  moment(now).format('hh:mm a');
-                  utmodel.tdate = getFormattedDate(now);
-                  utmodel.tamount=amount.toString();
-                 
-                               account1.balance = (parseFloat(account1.balance)-amount).toString();
-                             account2.tempc = (parseInt(account2.tempc)+amount).toString();
-      
-                                 
-                //// var tp = utmodel;
-                     //        tp.ttype = 'Transfer In'; 
-                 // utmodel.ttype = 'Transfer In';
-                                 utmodel.ttype = 'Transfer In';
-                  account2.transactions.push(utmodel);
-                             account2.save(function(err){
-                                 if(err) throw err;
-                                      account1.transactions.push(utmodel);
-                                      account1.transactions[account1.transactions.length-1].ttype = 'Transfer Out'; 
-                                    account1.save(function(err){
-                                 if(err) throw err;
-                                 
-                             });
-                             });
-                               
-                     
-                           
-                               // res.send('Transferred Successfully!');
-                                    top.Message= 'Transaction Succesfull!\nAmount of '+amount.toString()+' Units Was Succesfully Transferred!';
-    
-      top.Type="Release";
-      res.json(top); 
-                                
-                            }
-                            else{
-                                
-                                    top.Message= 'Transaction Failed!\n Reason: Insufficient Balance!';
-    
-      top.Type="Release";
-      res.json(top); 
-                              // res.send('Insufficient Balance');  
-                                
-                            }
-                           
-                            
-                        }
-                        
-                    }
-                    
-                  
-                    
-                    
-                });
-           
-                
-            }
-        
-          
-        });
-        
-        }
-        else{
-
-             top.Message= 'Transaction Failed!\n Reason: Invalid Amount Entered \n Must be >1 Units only!';
-    
-      top.Type="Release";
-      res.json(top);  // res.send("Invalid Amount!");
-        }
-                
-        
-        }
-    }
-    else{}
-   
-
-
-
-}
-
-  else{
-  top.Message="Sorry This Number is Not Registered for Smart ECG-GH";
+//if(account.activated==)
+if(account.activated==true){
+  top.Message="Sorry Account Already Activated!";
   top.Type="Release";
   res.json(top);
 }
-   });
+else{
+if(account.token==msg){
+  var idp ='';
+  top.Message="Congratulations Account Activated!\nYou will receive an Activation Bonus shortly.The fun now beings....";
+  top.Type="Release";
+  account.activated = true;
+  account.save(function(err){
+    if(err) throw err;
+  });
+  res.json(top);
+  var mapperN = ["AIRTEL",'VODAFONE','MTN','TIGO'];
+  var mapperID = ["62006","62002","62001","62003"];
+  for(var i =0; i<=3; i++){
+    if(account.provider.toUpperCase()==mapperN[i]){
+      idp = mapperID[i];
+      break;
+    }
   }
-  
-});
+var data = {
+      network: idp,
+      amount: 1,
+      phone: account.phonenumber,
+      token: "58523f16-c68a-45c8-aba4-f48ec050192b"
 
+  };
+    rest.postJson('https://api.smsgh.com/usp/airtime',  data, {headers : { Authorization:"Basic amJia3J4Yms6aW5iZHFweW8=" }}).on('complete', function(result) {
+      if (result instanceof Error) {
+        console.log('Error:', result.message);
+        this.retry(100); // try again after 5 sec
+      } else {
+           console.log(result);
 
-app.get('/portal', function(req, res){
-
-res.render('portal.ejs');
-
-});
-app.get('/testinv',function(req,res){
-       var args = {
-    data: {  "token" : "e5f9599f57a8694d2078dce9"},
-headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
-};
- var client = new Client();
- 
-
-client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, function (data, response) {
-    // parsed response body as js object 
-    console.log(data);
-   res.json(data);
-  
-
+      }
     });
-});
-app.get('/testmpower', function(req, res){
 
-// set content-typeheader and data as json in args parameter 
-var args = {
-    data: {  "customer_name" : "Frimpong tachie evans", "customer_phone" : "0543892565", "customer_email" : "littletheprogrammer@gmail.com", "wallet_provider" : "MTN", "merchant_name" : "Smart ECg Ent.", "amount" : "0.1" },
-    
-    headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
-};
- var client = new Client();
- 
-
-client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/charge", args, function (data, response) {
-    // parsed response body as js object 
-    console.log(data);
-    // raw response 
-   // console.log(response);
-});
-
-res.send('done');
-});
-
-app.use('/',secure);
-
-app.get('/*',function(req, res){
-   res.redirect('/auth'); 
-    
-    
-});
-
-var passtocheck = function(transaction){
-    if(transaction.iso=="false"){
-        var args = {
-    data: {  "token" : transaction.token},
-headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
-};
- var client = new Client();
- client.post("https://app.mpowerpayments.com/api/v1/direct-mobile/status", args, function (data, response) {
-    // parsed response body as js object 
-    console.log(data);
-    console.log(transaction);
-    if(data.tx_status == "complete"){
-       
-         // account.tempc = parseInt(account.tempc)+amount;
-       // console.log("un : "+transactions);
-        Data.findOne({'username': transaction.username}, function(err,user){// CRedting user Database
-             var nownow2 = new Date();
-                     utmodel.tfulldate = nownow2;
-                  utmodel.tdate = getFormattedDate(nownow2);
-                  utmodel.ttime =   moment(nownow2).format('hh:mm a');
-                  utmodel.tamount = transaction.amount;
-                  utmodel.type= 'Mobile Money Topup'; 
-                  user.transactions.push(utmodel);
-            user.transactions[user.transactions.length-1].ttype = 'Mobile Money Topup';
-             user.tempc = parseInt(user.tempc)+ parseFloat(transaction.amount)*100.00;
-                user.save(function(err){
-                if(err) throw err;
-                });
-        
-        });
-        transaction.status = "completed";
-        transaction.save(function(err){
-        if(err) throw err;
-        });
-     
-        
-        
-    }
- 
-
-    });   
-    }
-    else{
-          var args = {
-   
-headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a5-889c-293b44fac12c","MP-Private-Key": "live_private_fVFxmJNaYaFj9-K8v_3Adp9mns4","MP-Token": "68eb51998ffc04b47acd" }
-};
- var client = new Client();
- client.get("https://app.mpowerpayments.com/api/v1/checkout-invoice/confirm/"+transaction.token, args, function (data, response) {
-    // parsed response body as js object 
-    console.log(data);
-    console.log(transaction);
-    if(data.status == "completed"){
-       
-         // account.tempc = parseInt(account.tempc)+amount;
-       // console.log("un : "+transactions);
-        Data.findOne({'username': transaction.username}, function(err,user){// CRedting user Database
-             var nownow2 = new Date();
-                     utmodel.tfulldate = nownow2;
-                  utmodel.tdate = getFormattedDate(nownow2);
-                  utmodel.ttime =   moment(nownow2).format('hh:mm a');
-                  utmodel.tamount = transaction.amount;
-                  utmodel.type= 'Mobile Money Topup'; 
-                  user.transactions.push(utmodel);
-            user.transactions[user.transactions.length-1].ttype = 'Mobile Money Topup';
-             user.tempc = parseFloat(user.tempc)+ parseFloat(transaction.amount)*100.00;
-                user.save(function(err){
-                if(err) throw err;
-                });
-        
-        });
-        transaction.status = "completed";
-        transaction.save(function(err){
-        if(err) throw err;
-        });  
-        
-    }
- });
-    }
+}
+else{
+  top.Message="Sorry Activation Key Invalid!";
+  account.activated = false;
+  account.save(function(err){
+    if(err) throw err;
+  });
+  top.Type="Release";
+  res.json(top);
+}
 }
 
-    setInterval(function(){   //LIVE TRANSACTION SWEEEP FOR AUTONOMOUS CREDITING OF ACCOUNTS
-	   Transaction.find({},'', function(err, transactions) {
+}
+
+}
+else{
+  top.Message="Sorry This Number is Not Registered On FreeBies-GH!";
+  top.Type="Release";
+  res.json(top);
+}
+
+   });
+  }
+});
+
+var x = false;
+/*
+setInterval(function(){
+if(x==false){
+	   Person.find({},'', function(err, persons) {
        // res.send(users.reduce(function(userMap, item) {
        //     userMap[item.id] = item;
        //     return userMap;
        // }, {}));
-           
 
-        var s = transactions.length;
-         
+        var s = persons.length;
         if(s>0){//if any users
         for(var i=0; i<s; i++){
-           //var intransactions[i];
-  
- 
-//console.log(transactions);
-            if(transactions[i].status!="completed"){
-            passtocheck(transactions[i]);
-            }
-            else{
-                console.log("Already completed");
-            }
-        }
-        }
-        });
-
-},60000);
+              if(persons[i].rm1==false){
+                   today = moment.tz(new Date(), "Africa/Accra");
+                                // var diff = new DateDiff(persons[i].renewa, new Date(k1.format()));
+                                 renew1= moment.tz(persons[i].renewa, "Africa/Accra");
+                                 renew2 = moment.tz(persons[i].renewb, "Africa/Accra");
+                                  exp = moment.tz(persons[i].expiry, "Africa/Accra");
 
 
+                                 var diff = new DateDiff(renew1, today);
+                                 console.log("Difference is "+diff.minutes());
+                                 if(diff.minutes()<=0){
+
+                                     sendmsgr1(persons[i],persons[i].email,persons[i].name,persons[i].idn,exp.toString(),renew1.toString(),renew2.toString());
+                                 }
+              }
+
+              if(persons[i].rm2==false){
+                       today = moment.tz(new Date(), "Africa/Accra");
+                     renew1= moment.tz(persons[i].renewa, "Africa/Accra");
+                                 renew2 = moment.tz(persons[i].renewb, "Africa/Accra");
+                                  exp = moment.tz(persons[i].expiry, "Africa/Accra")
+                                 var diff = new DateDiff(renew2, today);
+                                 console.log("Difference is "+diff.minutes());
+                                 if(diff.minutes()<=0){
+
+                                     sendmsgr2(persons[i],persons[i].email,persons[i].name,persons[i].idn,exp.toString(),renew1.toString(),renew2.toString());
+                                 }
+              }
+
+        	if(persons[i].expired == false){
+             if(persons[i].emailb==false){
+                                  today = moment.tz(new Date(), "Africa/Accra");
+
+                                  exp = moment.tz(persons[i].expiry, "Africa/Accra");
+
+                                 var diff = new DateDiff(exp, today);
+                                 console.log("Difference is "+diff.minutes());
+                                 if(diff.minutes()>=3&& diff.minutes() <=4){
+
+                              sendmsgb(persons[i],persons[i].email,persons[i].name,persons[i].idn,exp.toString());
+                                 }
+                         }
+                         else{
+        		var statusemail = false;
+        	//	console.log(persons[i].name)
+		    today = moment.tz(new Date(), "Africa/Accra");
+
+                                  exp = moment.tz(persons[i].expiry, "Africa/Accra")
+                                // var diff = new DateDiff(new Date(renew2.format()), new Date(today.format()));
+                 if(today>=exp){
+
+                 persons[i].expired = true;
+                var returned = true;
+                 sendmsgc(persons[i],persons[i].email,persons[i].name,persons[i].idn,exp.toString());
+             //   console.log("REturned: "+x.outer);
 
 
-        
- 
+                 }
 
-//app.listen(2500);
+               }
+             }
+               else{
+               	//var emailas = false;
+             //  	console.log(persons[i].name);
+             //  	console.log(persons[i].emailc);
+	    now = moment.tz(new Date(), "Africa/Accra");
+
+                                  exp = moment.tz(persons[i].expiry, "Africa/Accra")
+                              //   var diff = new DateDiff(new Date(renew2.format()), new Date(today.format()));
+
+             //  var diff = new DateDiff(persons[i].expiry, td);
+
+                         if(persons[i].emailb==false){
+
+                                 var diff = new DateDiff(exp, now);
+                                 if(diff.minutes()>=3&& diff.minutes() <=4){
+                                    sendmsgb(persons[i],persons[i].email,persons[i].name,persons[i].idn,exp.toString());
+                                 }
+                         }
+                         else{
+               	if(persons[i].emailc == false){
+
+               		sendmsgc(persons[i],persons[i].email,persons[i].name,persons[i].idn,exp.toString());
+               		//persons[i].save(function(err){ if(err) throw err;});
+               	}
+               	else{
+               		console.log('Expired But Email Already sent!');
+               	}
+
+
+               }
+           }
+
+    }
+
+    }
+
+
+    });
+	}
+},10000);
+*/
+app.get('/testcredit', function (req,res) {
+var mapperN = ["AIRTEL",'VODAFONE','MTN','TIGO'];
+var mapperID = ["62006","62002","62001","62003"];
+var data={
+    network: "62003",
+    amount: 1,
+    phone: "0270413417",
+    token: "58523f16-c68a-45c8-aba4-f48ec050192b"
+
+};
+  rest.postJson('https://api.smsgh.com/usp/airtime',  data, {headers : { Authorization:"Basic amJia3J4Yms6aW5iZHFweW8=" }}).on('complete', function(result) {
+    if (result instanceof Error) {
+      console.log('Error:', result.message);
+      this.retry(100); // try again after 5 sec
+    } else {
+         console.log(result);
+
+    }
+  });
+  res.send("ok");
+});
+
+app.post('/newaccount',function(req, res){
+	Person.findOne({'phonenumber': req.body.pnumber}, function(err,pers){
+	 if(err) throw err;
+
+		if(pers){
+			res.send("already");
+		}
+		else{
+			var person = new Person();
+ person.name=req.body.name;
+ person.email = req.body.email;
+ person.phonenumber = req.body.pnumber;
+ person.address = req.body.address;
+ person.provider = req.body.provider;
+ person.premium = false;
+ person.activated = false;
+ person.firstimebonus=false;
+ person.token="none";
+ person.won = "0";
+
+var x = randomString({
+length: 6,
+numeric: true,
+letters: true,
+special: false
+});
+person.uniqueid = x;
+person.save(function(err) {
+  if(err) throw err;
+});
+res.send(person.uniqueid);
+rest.get("https://api.smsgh.com/v3/messages/send?From=FREEBIEZ-GH&To="+person.phonenumber+"&Content="+"Hello! " +person.name+",\n Welcome to Freebiez-Ghana Enjoying Free Stuff Simplified!\n Your Unique ID  is "+person.uniqueid+"\nGet Free Signup Bonus Airtime after you Activate your Account!"+"&ClientId=jbbkrxbk&ClientSecret=inbdqpyo&RegisteredDelivery=false").on('complete', function(result) {
+  if (result instanceof Error) {
+    console.log('Error:', result.message);
+    this.retry(100); // try again after 5 sec
+  } else {
+  if(result.toString().indexOf("1400@") !== -1){
+    console.log(result);
+    success=true;
+    if(success==true){
+//    person.emaila=true;
+  }
+
+  }
+
+  }
+});
+if(person.email != "none@none"){
+ sendgrid.send({
+                  to:       person.email,
+                  from:     'Admin@FreebieZ-GH',
+                  subject:  'Freebiez-GH Signup',
+                  text:   "Hello! " +person.name+",\n Welcome to Freebiez-Ghana! Prepare Yourself to Enjoy loads of free stuff!\n Your Unique ID  is "+person.uniqueid+"\nGet Free Signup Bonus  Worth 1 Cedi of Airtime after you Activate your Account! "
+                }, function(err, json) {
+                  if (err) {
+
+                   return console.error(err);
+
+                    }
+                  console.log(json);
+                  if(json.message=='success'){
+
+  }
+
+
+                  else{
+                  //	console.log("Didnt end well");
+
+                  }
+
+                });
+ 	}
+
+
+		}
+
+
+    });
+
+
+
+});
+
+app.post('/activate', function(req, res){
+
+var id = req.body.idn;
+var type = req.body.type;
+var account = {};
+ Person.findOne({'uniqueid' : id}, function(err,person){
+     if(err) throw err;
+     if(person){
+      account=person;
+          if(person.activated==true){
+           res.send("already");
+         }
+         else{
+          // var x;
+            var activekey ="";
+           for(var i=0; i<=2; i++){
+
+        var x = randomString({
+           length: 4,
+           numeric: true,
+           letters: true,
+           special: false
+           });
+           if(i<2){
+           activekey = activekey+ x + "-";
+         }
+         else{
+           activekey=activekey+x;
+           person.token=activekey;
+           person.save(function(err){
+             if(err) throw err;
+           });
+         }
+       }
+           if(type=="Yes"){
+             person.premium=true;
+             person.save(function(err){
+               if(err) throw err;
+             });
+
+            // res.send(activekey);
+            //  sendactivecode(person,activekey);
+           }
+           else{
+
+                person.premium=false;
+             person.save(function(err){
+               if(err) throw err;
+             });
+            // res.send(activekey);
+            //  sendactivecode(person,activekey);
+           }
+
+
+
+
+
+              res.send(activekey);
+              sendactivecode(account,activekey);
+         }
+
+
+     }
+     else{
+res.send('notfound');
+     }
+
+
+
+ });
+
+
+});
+var sendm = function(person,msg){
+  rest.get("https://api.smsgh.com/v3/messages/send?From=FREEBIEZ-GH&To="+person.phonenumber+"&Content="+"Hello! " +person.name+",\n Welcome to Freebiez-Ghana Enjoying Free Stuff Simplified!\n "+msg+"&ClientId=jbbkrxbk&ClientSecret=inbdqpyo&RegisteredDelivery=false").on('complete', function(result) {
+    if (result instanceof Error) {
+      console.log('Error:', result.message);
+      this.retry(100); // try again after 5 sec
+    }
+  });
+}
+app.post('/broadcast', function(req, res){
+
+var msg = req.body.msg;
+var infojson = {};
+
+ Person.find({},'',function(err,person){
+     if(err) throw err;
+    var total = person.length;
+    var failed = 0;
+    var passed = 0;
+
+     var success = false;
+     for(var i =0; i<total; i++){
+       sendm(person[i],msg);
+
+  }
+  res.send("")
+  //if(success==true){
+   // person.emaila=true;
+
+ // }
+
+
+
+
+
+
+
+
+
+ });
+
+
+});
+
+
+
+
+
+
+
+
+
+var sendmsgr1 = function(persons,email,name,idn,expiry,renewa,renewb){
+var success = false;
+  rest.get('http://api.smsonlinegh.com/sendsms.php?user=nkid299@gmail.com&password=ninjax12&message='+  "Hello " +name+"\n Your Driving license number  "+idn+"\n Is due for First(1st) Renewal on "+ renewa+" .Please contact Fleet Manager to assist you to renew it. Treat as Urgent. Thank you"+'&type=0&sender=AdWIN-GH&destination='+persons.phonenumber).on('complete', function(result) {
+  if (result instanceof Error) {
+    console.log('Error:', result.message);
+    this.retry(100); // try again after 5 sec
+  } else {
+
+    console.log(result);
+    if(result.toString().indexOf("1400@") !== -1){
+      success=true;
+      persons.rm1=true;
+         persons.save(function(err){if (err) throw err; });
+    }
+
+  }
+});
+  if(email!="none@none"){
+
+    sendgrid.send({
+                  to:       email,
+                  from:     'Admin@PersonIDNotification',
+                  subject:  'Renewal Notification',
+                  text:   " Hello " +name+"\n Your Driving license number  "+idn+"\n Is due for First(1st) Renewal On "+renewa+" .Please contact Fleet Manager to assist you to renew it. Treat as Urgent. Thank you"
+                }, function(err, json) {
+                  if (err) {
+                     //   setx(false);
+                      //     persons.emailb =   false;
+                    //d//rivers.save(function(err){if (err) throw err; });
+                     }
+                  console.log(json);
+                  if(json.message=='success'){
+                    success=true;
+                                //setx(true);
+                                   persons.rm1=true;
+         persons.save(function(err){if (err) throw err; });
+
+                                      }
+                  else{
+                    // setx(false);
+                     //   persons.emailb =   false;
+                   // persons.save(function(err){if (err) throw err; });
+                  }
+
+                });
+  }
+      //if(success==true){
+
+      //}
+
+
+
+}
+
+
+var sendmsgr2 = function(persons,email,name,idn,expiry,renewa,renewb){
+var success = false;
+  rest.get('http://api.smsonlinegh.com/sendsms.php?user=nkid299@gmail.com&password=ninjax12&message='+  "Hello " +name+"\n Your Driving license number  "+idn+"\n Is due for Second(2nd) Renewal on "+ renewb+" .Please contact Fleet Manager to assist you to renew it. Treat as Urgent. Thank you"+'&type=0&sender=AdWIN-GH&destination='+persons.phonenumber).on('complete', function(result) {
+  if (result instanceof Error) {
+    console.log('Error:', result.message);
+    this.retry(100); // try again after 5 sec
+  } else {
+
+    console.log(result);
+    if(result.toString().indexOf("1400@") !== -1){
+      success=true;
+      persons.rm2=true;
+         persons.save(function(err){if (err) throw err; });
+    }
+
+  }
+});
+  if(email!="none@none"){
+
+    sendgrid.send({
+                  to:       email,
+                  from:     'Admin@PersonIDNotification',
+                  subject:  'Renewal Notification',
+                  text:   " Hello " +name+"\n Your Driving license number  "+idn+"\n Is due for Second(2nd) Renewal On "+renewb+" .Please contact Fleet Manager to assist you to renew it. Treat as Urgent. Thank you"
+                }, function(err, json) {
+                  if (err) {
+                      //  setx(false);
+                      //  //   persons.emailb =   false;
+                    //persons.save(function(err){if (err) throw err; });
+                     }
+                  console.log(json);
+                  if(json.message=='success'){
+                    success=true;
+                                //setx(true);
+
+                   persons.rm2=true;
+         persons.save(function(err){if (err) throw err; });
+                                      }
+                  else{
+                    // setx(false);
+                     //   persons.emailb =   false;
+                   // persons.save(function(err){if (err) throw err; });
+                  }
+
+                });
+  }
+}
+
+
+var sendactivecode = function(person,activekey){
+var success = false;
+console.log(person);
+var ptype="";
+if(person.premium=true){
+  ptype = "Premium";
+}
+else{
+  ptype = "Basic";
+}
+var   code = "*714*100007-HASH";
+var rt2 = 'http://api.smsonlinegh.com/sendsms.php?user=nkid299@gmail.com&password=ninjax12&message='+"Hello! " +person.name + "\n Your Unique ID  is "+person.uniqueid+"\n Your Activation Code is : "+person.token+"\nActivation code Type: "+ptype+"\nDial "+code+" to Reedem Activation code on your account"+'&type=0&sender=FREEBIEZ-GH&destination='+person.phonenumber;
+
+var  rt = "http://api.smsgh.com/v3/messages/send?From=FREEBIES-GH&To="+person.phonenumber+"&Content="+"Hello! " +person.name + "\n Your Unique ID  is "+person.uniqueid+"\n Your Activation Code is : "+person.token+"\nActivation code Type: "+ptype+"\nDial "+code+" to Reedem Activation code on your account"+"&ClientId=jbbkrxbk&ClientSecret=inbdqpyo&RegisteredDelivery=false"
+console.log(rt2);
+  rest.get(rt2).on('complete', function(result) {
+  if (result instanceof Error) {
+    console.log('Error:', result.message);
+    this.retry(100); // try again after 5 sec
+  } else {
+
+    console.log(result);
+    if(result.toString().indexOf("1400@") !== -1){
+      success=true;
+
+    }
+
+  }
+});
+  if(person.email!="none@none"){
+
+    sendgrid.send({
+                  to:       person.email,
+                  from:     'Admin@Freebiez-Ghana',
+                  subject:  'Your Generated Activation Code',
+                  text:  "Hello! " +person.name+",\n Welcome to Freebiez-Ghana!. Please Activate your Account with the Key: "+activekey+"\nDial *714*100007# to get Started!"
+                }, function(err, json) {
+                  if (err) {
+                      //  setx(false);
+                      //  //   persons.emailb =   false;
+                    //persons.save(function(err){if (err) throw err; });
+                     }
+                  console.log(json);
+                  if(json.message=='success'){
+                    success=true;
+                                //setx(true);
+}
+                  else{
+                    // setx(false);
+                     //   persons.emailb =   false;
+                   // persons.save(function(err){if (err) throw err; });
+                  }
+
+                });
+  }
+}
+
+
+
+
+app.get('/*',function(req, res){
+   res.redirect('/');
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+//app.listen(port);
 console.log("started");
 app.listen(port, process.env.OPENSHIFT_NODEJS_IP);
-
