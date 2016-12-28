@@ -37,33 +37,7 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
     $scope.transaction="";
 
 	});
-    $http.post('/clientapp/alluserpowers/'+userid).success(function(response){
-	//	$scope.v = "!a";
-		//$scope.expired=false;
-	
-		
-       var chart = new CanvasJS.Chart("chartContainer",
-    {
-      title:{
-        text: "Watt vs Time"
-    },
-    axisX:{
-        title: "Timeline",
-        gridThickness: 2
-    },
-    axisY: {
-        title: "Power(Watts)"
-    },
-    data: [
-    {        
-        type: "area",
-        dataPoints: response
-    }
-    ]
-});
-
-    chart.render();
-    });
+   
 	});
 }
                             onload();// CALLING ONLOAD TO START /EXEC
@@ -97,6 +71,33 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
     $scope.transaction="";
 
 	});
+                 $http.post('/clientapp/alluserpowers/'+userid).success(function(response){
+	//	$scope.v = "!a";
+		//$scope.expired=false;
+	
+		
+       var chart = new CanvasJS.Chart("chartContainer",
+    {
+      title:{
+        text: "Watt vs Time"
+    },
+    axisX:{
+        title: "Timeline",
+        gridThickness: 2
+    },
+    axisY: {
+        title: "Power(Watts)"
+    },
+    data: [
+    {        
+        type: "area",
+        dataPoints: response
+    }
+    ]
+});
+
+    chart.render();
+    });
       
     }, 3000);
                            
