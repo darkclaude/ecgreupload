@@ -100,7 +100,7 @@ console.log('Desilizeing');
                 newData.password = newData.generateHash(password);
                 newData.phonenumber = req.body.phonenumber;
                 newData.fullname = req.body.fullname;
-                newDate.transactions.push(utmodel);
+                newData.transactions.push(utmodel);
                 newData.balance = '0.0';
                 newData.borrowedbalance='0.0';
                 newData.noofussd = 0;

@@ -51,7 +51,7 @@ module.exports = function(device){
     });
     
    device.get('/update/:user/:ubalance/:power',function(req, res){
-       var power = req.params.power;
+         var power = req.params.power;
        var user = req.params.user;
        var ubalance =req.params.ubalance;
        
@@ -59,11 +59,20 @@ module.exports = function(device){
            
            if(account){
                account.balance = ubalance;
+                var now = new Date();
+                  nodemodel.tfulldate =  now;
                   account.lastduc = new Date();
+                  nodemodel.ttime =  moment(now).format('hh:mm a');
+                  nodemodel.tdate = getFormattedDate(now);
+               nodemodel.watt = power;
+              nodemodel.plot.y = parseInt(ubalance);
+               nodemodel.plot.x = now;
+               account.power.push(nodemodel);
                account.save(function(err){
                    if(err) throw err;
                    
                });
+
                res.send('ok');
             
                }
@@ -73,7 +82,6 @@ module.exports = function(device){
                
            });
              
-           
            
        });
    
@@ -124,8 +132,8 @@ module.exports = function(device){
                   nodemodel.ttime =  moment(now).format('hh:mm a');
                   nodemodel.tdate = getFormattedDate(now);
                nodemodel.watt = power;
-              nodemodel.y = parseInt(ubalance);
-               nodemodel.x = now;
+              nodemodel.plot.y = parseInt(ubalance);
+               nodemodel.plot.x = now;
                account.power.push(nodemodel);
                account.save(function(err){
                    if(err) throw err;

@@ -1,10 +1,10 @@
  var app = angular.module('ECG', [])
-
+    //var chart;
 
 app.controller('mainController', ['$scope' ,'$sce','$http', '$interval','$timeout', '$window', function ($scope, $sce,$http, $interval,$timeout, $window) {
     var userid;
     var userobj;
-    
+ var chart;
     var onload = function(){
 $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page is first loaded and once
     userid = response;    
@@ -37,12 +37,39 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
     $scope.transaction="";
 
 	});
+         chart = new CanvasJS.Chart("chartContainer",
+    {
+      title:{
+        text: "Live Power Usage Chart"
+    },
+    axisX:{
+        zoomEnabled: true,
+   intervalType: "second",
+        title: "Time",
+        gridThickness: 0
+    },
+    axisY: {
+        title: "Power(Watt) ",
+         gridThickness: 0
+    },
+    data: [
+    {        
+        type: "line",
+        dataPoints: [//array
+      
+
+        ]
+    }
+    ]
+});
+//chart.options.data[0].dataPoints.push( { x: new Date(2012, 01, 28), y: 100});
+    chart.render();
    
 	});
 }
                             onload();// CALLING ONLOAD TO START /EXEC
             $interval(function () {// Global Data Update . INT 3 Seconds
-                $scope.lastduc = userobj.lastduc;
+                $scope.lastduc = new Date(userobj.lastduc).toString();
                   $http.get('/clientapp/getuserbyid/'+userid).success(function(response2){
     userobj = response2;
             console.log(response2);
@@ -74,10 +101,11 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
                  $http.post('/clientapp/alluserpowers/'+userid).success(function(response){
 	//	$scope.v = "!a";
 		//$scope.expired=false;
-	
+	            
 		 console.log("powers:");
                       console.log(response);
-       var chart = new CanvasJS.Chart("chartContainer",
+                     /*
+                   var      chart = new CanvasJS.Chart("chartContainer",
     { zoomEnabled: true,   
       title:{
         text: "Watt vs Time"
@@ -97,8 +125,39 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
     }
     ]
 });
-
+ chart.options.data[0].dataPoints.push(response[0].plot);
     chart.render();
+    
+    
+   */         ///  chart.options.data[0].dataPoints= response[0].plot[0];
+                     
+                 //             chart.render();
+                     console.log("testng 123");
+                     var plots=[];
+                     var len=0;
+                     if(response.length<=100){
+                         len = response.length;   
+                     }
+                     else {
+                      len = 100;   
+                     }
+                     for(var i =0; i<len; i++){
+                      plots.push({x: new Date(response[i].plot.x), y: response[i].plot.y});   
+                     }
+                     console.log(plots);
+                          chart.options.data[0].dataPoints= plots;
+                     chart.render();
+                     /*var be4 = 0;
+                     response = response.reverse();
+                     for(var i =0; i<response.length; i++){
+                         if(be4!=response[i].plot.y){
+                         be4 = response[i].plot.y;
+                         
+       chart.options.data[0].dataPoints.push({x:new  Date(response[i].plot.x), y:response[i].plot.y});
+                          //  chart.options.data[0].dataPoints.push(response[1].plot);
+          chart.render();             
+                         }                     }*/
+                                             
     });
       
     }, 3000);

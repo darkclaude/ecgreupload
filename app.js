@@ -54,7 +54,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
          ttype: '',
          tamount: '',
 };
-
+//connection_string= '127.0.0.1:27017';
 app.use(session({secret: 'debussy', saveUninitialized:true, resave: true,  cookie : { secure : false, maxAge : (7*24 * 60 * 60 * 1000) },store: new MongoStore({  url:"mongodb://"+connection_string+"/sessions"})}));
 
 app.use(passport.initialize());
@@ -796,7 +796,7 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
         
  
 
-//app.listen(port);
+//app.listen(2500);
 console.log("started");
 app.listen(port, process.env.OPENSHIFT_NODEJS_IP);
 
