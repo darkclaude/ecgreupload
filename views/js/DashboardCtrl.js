@@ -165,7 +165,7 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
                                              
     });
       
-    }, 3000);
+    }, 1000);
                            
    $scope.topup = function(){
 
