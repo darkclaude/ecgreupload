@@ -37,41 +37,47 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
     $scope.transaction="";
 
 	});
+    $http.post('/clientapp/alluserpowers/'+userid).success(function(response){
+	//	$scope.v = "!a";
+		//$scope.expired=false;
+	
+		$scope.transactionname="";
+		$scope.transactionid="";
+		    console.log("GOT IT BIT");
+        var t    = new Array;
+        t = response[0].transactions;
+      //  console.log(response.transactions[0]);
+           console.log(response[0].transactions);
+		   // console.log(response.transactions);
+    $scope.transactionlist = t.reverse();
+    $scope.activeBtn=0;
+
+    $scope.transaction="";
 
        var chart = new CanvasJS.Chart("chartContainer",
     {
       title:{
-        text: "Simple Date-Time Chart"
+        text: "Watt vs Time"
     },
     axisX:{
-        title: "timeline",
+        title: "Timeline",
         gridThickness: 2
     },
     axisY: {
-        title: "Downloads"
+        title: "Power(Watts)"
     },
     data: [
     {        
         type: "area",
-        dataPoints: [//array
-        { x: new Date(2012, 01, 1), y: 26},
-        { x: new Date(2012, 01, 3), y: 38},
-        { x: new Date(2012, 01, 5), y: 43},
-        { x: new Date(2012, 01, 7), y: 29},
-        { x: new Date(2012, 01, 11), y: 41},
-        { x: new Date(2012, 01, 13), y: 54},
-        { x: new Date(2012, 01, 20), y: 66},
-        { x: new Date(2012, 01, 21), y: 60},
-        { x: new Date(2012, 01, 25), y: 53},
-        { x: new Date(2012, 01, 27), y: 60}
-
-        ]
+        dataPoints: response
     }
     ]
 });
 
     chart.render();
-    });}
+    });
+	});
+}
                             onload();// CALLING ONLOAD TO START /EXEC
             $interval(function () {// Global Data Update . INT 3 Seconds
                   $http.get('/clientapp/getuserbyid/'+userid).success(function(response2){

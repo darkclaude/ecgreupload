@@ -3,6 +3,8 @@ var Data = require('../config/models/data').Data;
 var moment = require('moment');
 var nodemodel = {
          tfulldate: '',
+         x: '',
+         y: '',
          tdate: '',
          ttime: '',
          watt: ''
@@ -118,6 +120,9 @@ module.exports = function(device){
                   nodemodel.tfulldate =  now;
                   nodemodel.ttime =  moment(now).format('hh:mm a');
                   nodemodel.tdate = getFormattedDate(now);
+               nodemodel.watt = power;
+              nodemodel.x = power;
+               nodemodel.y = now;
                account.power.push(nodemodel);
                account.save(function(err){
                    if(err) throw err;

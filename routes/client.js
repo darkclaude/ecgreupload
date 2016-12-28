@@ -204,6 +204,15 @@ Data.find({'_id': req.params.id}, function(err, user) {
      res.json( user);
    });
 });
+       
+client.all("/alluserpowers/:id",function(req, res){
+  //var k10 = [{}];
+Data.find({'_id': req.params.id}, function(err, user) {
+ 
+     res.json(user[0].powers);
+   });
+});
+ 
 
 client.get('/createaccount/:username/:id/:atype', function(req, res){   // For Creating User
     
