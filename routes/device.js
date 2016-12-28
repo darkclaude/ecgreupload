@@ -72,16 +72,16 @@ module.exports = function(device){
                
                
                 
-                   var total = parseInt(account.dbalance);
-                   account.dbalance=0;
+                   //varaccount.dbalance);
+                 
+               res.send(account.dbalance);
+                   
+                     account.dbalance=0;
                    //account.dbalance = total.toString();
                    account.save(function(err){
                        if(err) throw err;
                        
                    });
-               res.send(total);
-                   
-                   
                }
                
                    
