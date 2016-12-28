@@ -4,6 +4,7 @@
 app.controller('mainController', ['$scope' ,'$sce','$http', '$interval','$timeout', '$window', function ($scope, $sce,$http, $interval,$timeout, $window) {
     var userid;
     var userobj;
+    
  var chart;
     var onload = function(){
 $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page is first loaded and once
