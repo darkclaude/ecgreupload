@@ -1,7 +1,9 @@
 
 
 var express = require('express');
+var express2 = require('express');
 var app = express();
+var app2 = express2();
 var configDB = require('./config/database.js');
 var Data = require('./config/models/data').Data;
 var Reach = require('./config/models/recharge');
@@ -85,7 +87,8 @@ app.use('/auth',auth);
 require('./routes/secure.js')(secure,app, passport);
 app.set('view engine','ejs');
 app.use('/stat',stat);
-app.use('/device',device);
+app.use('/device',app2);
+app2.use('/*',device);
 app.use('/clientapp',client);
 
 require('./routes/stat')(stat);
