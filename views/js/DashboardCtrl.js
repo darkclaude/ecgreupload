@@ -41,19 +41,7 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
 	//	$scope.v = "!a";
 		//$scope.expired=false;
 	
-		$scope.transactionname="";
-		$scope.transactionid="";
-		    console.log("GOT IT BIT");
-        var t    = new Array;
-        t = response[0].transactions;
-      //  console.log(response.transactions[0]);
-           console.log(response[0].transactions);
-		   // console.log(response.transactions);
-    $scope.transactionlist = t.reverse();
-    $scope.activeBtn=0;
-
-    $scope.transaction="";
-
+		
        var chart = new CanvasJS.Chart("chartContainer",
     {
       title:{
