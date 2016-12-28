@@ -1,72 +1,334 @@
-<!doctype html>
-<html ng-app ng-init="v='true'">
-<head>
-    <title>FreeBies Signup Portal</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="css/font-awesome.min.css"> <!-- load fontawesome -->
-    <link rel="stylesheet"  href="sweetalert/dist/sweetalert.css">
-  <script src="sweetalert/dist/sweetalert.min.js"></script>
-      <script src="js/angular.min.js"></script>
-      <script src="control.js"></script>
+<!DOCTYPE html>
+<html lang="en" ng-app ng-init="v='false'">
+  <head>
+    <meta charset="utf-8">
+   <title>PORTAL</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
-    <style>
-        body        { padding-top:80px; }
-    </style>
-</head>
-<body ng-controller="PersonCtrl">
-<div class="container">
+    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
 
-<div class="col-sm-6 col-sm-offset-3">
+    
+   
+<style>
 
-    <h1><span class="fa fa-sign-in"></span> FREEBIES-GH Signup - Support Contact(0279448831)</h1>
+</style>
+ 
+  </head>
 
-    <!-- show any messages that come back with authentication -->
+  <body ng-controller="AccountCtrl">
+
+<p  class="col-sm-12 styleModal" align=""><a href="javascript:;" data-toggle="modal" data-target="#loginModal">
+<button type="button" id="login_btn" class="btn btn-block bt-login" data-loading-text="Initiating Account....">Access Portal</button>
+</a></p>
 
 
-    <!-- LOGIN FORM -->
 
-    <div class="well">
-    <h1>Welcome!</h1>
-   	<div ng-bind-html="createalert"></div>
 
-    <div class="form-group">
-            <label>Person's Name:</label>
-            <input id="n" type="text" class="form-control" name="name" ng-model="name">
-        </div>
-        <div class="form-group">
-            <label>Address:</label>
-            <input id="idn" type="text" class="form-control" name="idn" ng-model="address">
-        </div>
-        <div class="form-group">
-            <label>Email(Skip if none):</label>
-            <input id="e" type="email" class="form-control" name="email"  ng-model="email">
-        </div>
 
-        <div class="form-group">
-            <label>Phone Number(+233)</label>
-            <input type="text" id="t" class="form-control" name="pnumber" placeholder="Please Dont Enter Leading (0) of your Number" ng-model="pnumber">
-        </div>
-         <div class="form-group">
-            <label>Provider:</label>
-            <select id="ss" class="form-control" ng-model="provider">
-     <option>Mtn</option>
-     <option>Tigo</option>
-     <option>Airtel</option>
-     <option>Vodafone</option>
-   </select>
-        </div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true" >
+		<div class="modal-dialog">
+	    	<div class="modal-content login-modal">
+	      		<div class="modal-header login-modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		<h4 class="modal-title text-center" id="loginModalLabel">Account Portal</h4>
+	      		</div>
+	      		<div class="modal-body">
+	      			<div class="text-center">
+		      			<div role="tabpanel" class="login-tab">
+						  	<!-- Nav tabs activation here -->
+						  	<ul class="nav nav-tabs" role="tablist">
+						    	<li  ng-click="clear()" role="presentation" class="active"><a id="signin-taba" href="#create" aria-controls="home" role="tab" data-toggle="tab"><b>Create</b></a></li>
+								<li ng-click="clear()" role="presentation"><a id="signin-taba" href="#credit" aria-controls="credit" role="tab" data-toggle="tab"><b>Credit</b></a></li>
+								<li   ng-click="clear()" role="presentation"><a id="signin-taba" href="#show_generated_key" aria-controls="show_generated_key" role="tab" data-toggle="tab"><b>Generate</b></a></li>
+						    	<li ng-click="clear()" role="presentation"><a id="signin-taba" href="#user_profile" aria-controls="profile" role="tab" data-toggle="tab"><b>User Profile</b></a></li>
+								<li ng-click="clear()" role="presentation"><a id="signup-taba" href="#transfer" aria-controls="transfer" role="tab" data-toggle="tab"><b>Transfer</b></a></li>
+								
+								<li ng-click="clear()" role="presentation"><a id="signin-taba" href="#delete_account" aria-controls="delete_account" role="tab" data-toggle="tab"><b>Delete Account</b></a></li>
+						
+						  	</ul>
+						
+						  	<!-- Tab panes /create account starts here -->
 
-            <div class="form-group">
-                    <label color="red">Unique ID:</label>
-                    <input id="unique" type="text" class="form-control" placeholder="Unique ID will be Generated here After Sign Up" ng-model="uniqueid">
-                </div>
 
-        <button ng-click="signup()" id="myBtn" class="btn btn-warning btn-lg">{{msgbt}}</button>  <button ng-click="clear()"  class="btn btn-info btn-lg">Clear</button>
+								 	<div class="tab-content">
+						    	<div role="tabpanel" class="tab-pane active text-center" id="create">
+						    		&nbsp;&nbsp;
+						    		<span id="login_fail" class="response_error" style="display: none;">Loggin failed, please try again.</span>
+						    		<div class="clearfix"></div>
+						    		<form>
+										<div class="form-group">
+										<div ng-bind-html="createalert"></div>
+
+									    	<div class="input-group">
+						 
+									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input  ng-model="username1" type="text" class="form-control" id="login_username" placeholder="Enter Your Username..">
+									    	</div>
+									    	<span class="help-block has-error" id="email-error"></span>
+									  	</div>
+										
+									  	<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="amount1" type="text" class="form-control" id="amount" placeholder="Amount">
+									    	</div>
+									    	<span class="help-block has-error" id="password-error"></span>
+									  	</div>
+                                        
+                                        <div class="dropdown">
+  <button class="btn btn-default dropdown-toggle btn btn-block" type="button" data-toggle="dropdown"><span class="caret"></span>&nbsp&nbsp Account Type
+<font color={{ct}}><b> <span class="glyphicon glyphicon-arrow-right"></span>{{type}}</b></font> </button>
+  <ul  class="dropdown-menu">
+      <li><a  ng-click="type1()" href="#"><font color="red"><b>Prepaid</b></font></a></li>
+      <li><a ng-click="type2()" href="#"><font color="blue"><b>Postpaid</b></font></a></li>
+
+  </ul>
 </div>
-    <hr>
+							  			<button type="button" id="login_btn" class="btn btn-block bt-login"  ng-click=" create()">Create Account</button>
+							  			
+										<div class="clearfix"></div>
+							  			<div class="login-modal-footer">
+							  				<div class="row">
+											<!--	<div class="col-xs-8 col-sm-8 col-md-8">
+									
+													<a href="javascript:;" class="signup-tab">User Profile</a>
+												
+												</div>
+										-->	
+												<div class="col-xs-4 col-sm-4 col-md-4">
+													<i class="fa fa-check"></i>
+													<a href="javascript:;" class="signup-tab">Transfer </a>
+												</div>
+											</div>
+							  			</div>
+									</form>
+						    	</div>
+					<!--Credit Starts here-->
+								<div role="tabpanel" class="tab-pane text-center" id="credit">
+						    		&nbsp;&nbsp;
+						    		<span id="login_fail" class="response_error" style="display: none;">Loggin failed, please try again.</span>
+						    		<div class="clearfix"></div>
+						    		<form>
+										<div class="form-group">
+										<div ng-bind-html="creditalert"></div>
 
-</div>
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input  ng-model="username2" type="text" class="form-control" id="login_username" placeholder="Username">
+									    	</div>
+									    	
+									  	</div>
+										
+									  	<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="amount2" type="text" class="form-control" id="amount" placeholder="Amount">
+									    	</div>
+									    	
+									  	</div>
+										
+									
+				<button type="button" id="login_btn" class="btn btn-block bt-login" ng-click="addCredit()" data-loading-text="Initiating Account....">Add Credit</button>
+			</form>
+			</div>
 
-</div>
-</body>
+			<!--GENERATE IS HERE-->
+
+						<div role="tabpanel" class="tab-pane text-center" id="show_generated_key">
+						    		&nbsp;&nbsp;
+						    		
+						    		<div class="clearfix"></div>
+						    		<form>
+										<div class="form-group">
+										<div ng-bind-html="genalert"></div>
+									    	
+									  	</div>
+										
+									  	<div  class=" form-group ">
+									    	<div class="input-group ">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="amount3" type="text" class="form-control" id="amount" placeholder="Amount">
+									    	</div>
+									    	
+									  	</div>
+										
+							
+				<button type="button" id="login_btn" class="btn btn-block bt-login" 
+				ng-click="generatekey()" data-loading-text="Initiating Account....">Generate</button>
+			</form>
+</div>				
+
+
+  		
+   <div role="tabpanel" class="tab-pane text-center" id="user_profile">
+						    		&nbsp;&nbsp;
+						    		
+						    		<div class="clearfix"></div>
+						    		<form>
+										<div class="form-group">
+										<div ng-bind-html="infoalert"></div>
+										<div>  <STRONG>Realtime: </STRONG> <input type="checkbox" name="favoriteColors" ng-model="realvalue" ng-click="realtime()"></div>
+									    	<div class="input-group">
+
+									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input  ng-model="username3" type="text" class="form-control" id="username" placeholder="Enter Username">
+									    	</div>
+									    	
+									  	</div>
+										
+							
+									<div class=" form-group ">
+									    	<div class="input-group ">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="balance1" contenteditable="false" ng-show="v" type="text" class="form-control" id="balance" placeholder="Balance">
+									    	</div>
+									    	
+									  	</div>
+										<div class=" form-group ">
+									    	<div class="input-group ">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="power1" contenteditable="false" ng-show="v" type="text" class="form-control" id="amount" placeholder="Power">
+									    	</div>
+                                        </div>
+                                            <div class=" form-group ">
+									    	<div class="input-group ">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="tempc1" contenteditable="false" ng-show="v" type="text" class="form-control" id="tempc" placeholder="Tempc">
+									    	</div>
+                                                </div>
+									    	
+									  	          <div class=" form-group ">
+                                                      <div class="input-group ">
+                                            	<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input ng-model="atype" contenteditable="false" ng-show="v" type="text" class="form-control" id="atype" placeholder="Atype">
+									    	</div>
+									    	
+									  	</div>
+							
+				<button type="button" id="login_btn" class="btn btn-block bt-login" ng-click="get_info()" data-loading-text="Initiating Account....">Get Info</button>
+					  			</form>
+								
+								</div>
+					
+									
+							
+						    	
+	
+						<!--delete account starts here-->
+					    	<div role="tabpanel" class="tab-pane text-center" id="delete_account">
+						    		&nbsp;&nbsp;
+						    	    <span id="reset_fail" class="response_error" style="display: none;"></span>
+										<div class="clearfix"></div>
+						    		<form>
+										<div class="form-group">
+										<div ng-bind-html="deletealert"></div>
+
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input ng-model="username5"  type="text" class="form-control" id="username" placeholder="Username">
+									    	</div>
+									    	<span class="help-block has-error" data-error='0' id=""></span>
+									  	</div>
+									  	
+							  			<button ng-click="delete_account()" type="button" id="reset_btn" class="btn btn-block bt-login" data-loading-text="Please wait....">Delete Account</button>
+										<div class="clearfix"></div>
+										
+										<div class="login-modal-footer">
+							  				<div class="row">
+												<div class="col-xs-6 col-sm-6 col-md-6">
+													<i class="fa fa-lock"></i>
+													<a href="javascript:;" class="signin-tab"> Create </a>
+												
+												</div>
+												
+												<div class="col-xs-6 col-sm-6 col-md-6">
+													<i class="fa fa-check"></i>
+													<a href="javascript:;" class="signup-tab">Transfer</a>
+												</div>
+											</div>
+							  			</div>
+									</form>
+						    	</div>
+								
+		<!----transfer account starts here---->
+		<div role="tabpanel" class="tab-pane text-center" id="transfer">
+						    		&nbsp;&nbsp;
+						    		<span id="login_fail" class="response_error" style="display: none;">Transferring failed, please try again.</span>
+						    		<div class="clearfix"></div>
+						    		<form>
+										<div class="form-group">
+										<div ng-bind-html="transferalert"></div>
+
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									      		<input ng-model="s_username" type="text" class="form-control" id="login_username" placeholder="Enter Your Username..">
+									    	</div>
+									    	<span class="help-block has-error" id="username-error"></span>
+									  	</div>
+									  	<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-lock"></i></div>
+									      		<input ng-model="r_username" type="text" class="form-control" id="r-username" placeholder="Receipient's Username">
+									    	</div>
+									    	<span class="help-block has-error" id="username-error"></span>
+									  	</div>
+										
+											<div class="form-group">
+									    	<div class="input-group">
+									      		<div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+									      		<input ng-model="amount4" type="text" class="form-control" id="amount" placeholder="Enter Amount">
+									    	</div>
+									    	<span class="help-block has-error" id="amount-error"></span>
+									  	</div>
+										
+										
+							  			<button ng-click="transfer()" type="button" id="login_btn" class="btn btn-block bt-login" data-loading-text="Transferring....">Transfer</button>
+							  			
+									</form>
+						    	</div>
+				</div><!--tab content-->				
+								
+								
+						  	</div>
+						</div>
+	      				
+	      			</div>
+	      		</div>
+	      		
+	    	</div>
+	   </div>
+ 	</div>
+ 	<!-- - Login Model Ends Here -->
+
+   <script   src="https://code.jquery.com/jquery-1.12.4.js"   integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="   crossorigin="anonymous"></script>
+    <script src="js/angular.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="bower_components/crypto-js/crypto-js.js"></script>
+    <script src="js/AccountCtrl.js"></script>
+
+	 <script>
+	    $(document).ready(function(){
+	    	$(document).on('click','.signup-tab',function(e){
+	    		 e.preventDefault();
+	    		 $('#signup-taba').tab('show');
+	    	});	
+	
+	    	$(document).on('click','.signin-tab',function(e){
+	    		 e.preventDefault();
+	    		 $('#signin-taba').tab('show');
+	    	});
+	    	
+	   	$(document).on('click','.signup-tab',function(e){
+	    		 e.preventDefault();
+	    		 $('#signup-taba').tab('show');
+	    	});
+			
+	    });	
+    </script> 
+    
+   
+  </body>
 </html>
