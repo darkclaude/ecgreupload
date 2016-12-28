@@ -59,7 +59,10 @@ module.exports = function(device){
        Data.findOne({'username': user}, function(err,account){
            
            if(account){
-                res.send('ok');
+               // res.send('ok');
+                   res.send(account.dbalance);
+                   
+                     account.dbalance=0;
                account.balance = ubalance;
                 var now = new Date();
                   nodemodel.tfulldate =  now;
