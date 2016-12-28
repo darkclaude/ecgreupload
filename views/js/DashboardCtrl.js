@@ -68,6 +68,7 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
 }
                             onload();// CALLING ONLOAD TO START /EXEC
             $interval(function () {// Global Data Update . INT 3 Seconds
+                $scope.lastduc = userobj.lastduc.toString();
                   $http.get('/clientapp/getuserbyid/'+userid).success(function(response2){
     userobj = response2;
             console.log(response2);
