@@ -253,7 +253,7 @@ var seconds = diff.seconds() % 60;
         if(req.body.ClientState=="loadm"){
             
            if(isNaN(msg)==false){
-                       if(parseFloat(account.tempc)<=0){
+                       if(parseFloat(account.tempc)<parseFloat(msg)){
                           
                             //  top.Message= 'Sorry Please Pay Off Previous Debt!';
    // top.ClientState = 'transfer'
