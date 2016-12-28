@@ -40,11 +40,12 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
 	});
          chart = new CanvasJS.Chart("chartContainer",
     {
+              zoomEnabled: true,
       title:{
         text: "Live Power Usage Chart"
     },
     axisX:{
-        zoomEnabled: true,
+       
    intervalType: "second",
         title: "Time",
         gridThickness: 0
