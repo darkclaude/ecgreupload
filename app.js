@@ -88,7 +88,7 @@ require('./routes/secure.js')(secure,app, passport);
 app.set('view engine','ejs');
 app.use('/stat',stat);
 app.use('/device',app2);
-app2.use('/*',device);
+app2.use('/',device);
 app.use('/clientapp',client);
 
 require('./routes/stat')(stat);
