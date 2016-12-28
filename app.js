@@ -120,7 +120,7 @@ app.all('/ussd2', function(req,res){
    var userfone = req.body.Mobile;
    var msg = req.body.Message;
    if(req.body.Type=="Initiation"){
-    top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Top-up E-Credit Via Mobile Wallet \n3. Top-Up With E-Credit Code\n4. Transfer E-Credit\n\n\n\n\n\n 5. Borrow E-Credit\n6. Buy E-Credit Code via Mobile Wallet";
+    top.Message="Welcome to SmartECG-GH: \n1. Check Balance \n2. Top-up E-Credit Via Mobile Wallet \n3. Top-Up With E-Credit Code\n4. Transfer E-Credit\n 5.Borrow E-Credit \n6. Buy E-Credit Code via Mobile Wallet";
     //top.Type="Release";
     res.json(top);
        
