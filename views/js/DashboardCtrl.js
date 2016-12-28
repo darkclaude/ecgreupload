@@ -241,7 +241,7 @@ var route = "/clientapp/transfer";
                   swal("Error!", "Invalid Balance!", "error");
             }
            else{
-           	  swal("Success!", "Succesfully Uploaded "+$scope.mtom+" E-Credits to Smart Meter TOP UP Acount", "success");
+           	  swal("Success!", "Succesfully Uploaded "+$scope.uploadamount+" E-Credits to Smart Meter TOP UP Acount", "success");
            }
       }).
       error(function(data, status, headers, config) {

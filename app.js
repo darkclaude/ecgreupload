@@ -40,6 +40,7 @@ app.use('/transfer', express.static(__dirname + '/views'));
 app.use('/transactions',express.static(__dirname + '/views'));
 app.use('/testmpower', express.static(__dirname + '/views'));
 app.use('/testinv', express.static(__dirname + '/views'));
+app.use('/device', express.static(__dirname + '/views'));
 app.use('/', express.static(__dirname + 'views'));
 
 app.use(cookieParser());
