@@ -250,7 +250,44 @@ var seconds = diff.seconds() % 60;
     }
     }
     else if(req.body.Sequence==3){
-        if(req.body.ClientState=='transfer'){
+        if(req.body.ClientState=="loadm"){
+            
+           if(isNaN(msg)==false){
+                       if(parseFloat(account.tempc)<=0){
+                          
+                            //  top.Message= 'Sorry Please Pay Off Previous Debt!';
+   // top.ClientState = 'transfer'
+      
+                                         top.Message= 'Insufficient E-Credit in Main Balance!';
+   // top.ClientState = 'transfer'
+      top.Type="Release";
+      res.json(top);
+                          }
+                             else{
+                             
+                             
+                             account.tempc = (parseFloat(account.tempc)-parseFloat(msg)).toString();
+                                 account.dbalance = (parseFloat(msg)).toString();
+                             account.save(function(err){
+                             if(err) throw err;
+                             });
+                                       top.Message= 'Succesfully Loaded '+msg+' E-credits To Meter!';
+   // top.ClientState = 'transfer'
+      top.Type="Release";
+      res.json(top);
+                        //res.send('kkk');
+                             }
+                       }
+                    else{
+                                                           top.Message= 'Invalid Amount!';
+   // top.ClientState = 'transfer'
+      top.Type="Release";
+      res.json(top);
+                     //res.send("e2");   
+                    }   
+            
+        }
+     else   if(req.body.ClientState=='transfer'){
             
             var user1 = account.username;
             var trex = req.body.ClientState;
