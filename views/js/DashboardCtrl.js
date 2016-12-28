@@ -138,13 +138,16 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
                      var len=0;
                      if(response.length<=100){
                          len = response.length;   
-                     }
-                     else {
-                      len = 100;   
-                     }
-                     for(var i =0; i<len; i++){
+                          for(var i =0; i<len; i++){
                       plots.push({x: new Date(response[i].plot.x), y: response[i].plot.y});   
                      }
+                     }
+                     else {
+                       for(var i =response.length-100; i<response.length; i++){
+                      plots.push({x: new Date(response[i].plot.x), y: response[i].plot.y});   
+                     }  
+                     }
+                    
                      console.log(plots);
                           chart.options.data[0].dataPoints= plots;
                      chart.render();
