@@ -3,8 +3,8 @@ var Data = require('../config/models/data').Data;
 var moment = require('moment');
 var nodemodel = {
          tfulldate: '',
-         x: '',
-         y: '',
+         plot: {y:0, x: new Date()   },
+         
          tdate: '',
          ttime: '',
          watt: ''

@@ -93,7 +93,7 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
     data: [
     {        
         type: "area",
-        dataPoints: response
+        dataPoints: response.plot
     }
     ]
 });
