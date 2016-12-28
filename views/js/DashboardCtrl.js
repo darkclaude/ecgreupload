@@ -226,6 +226,28 @@ var route = "/clientapp/transfer";
 
 
    }
+     
+     	$scope.uploadtometer = function(){
+     var route = "/clientapp/uploadtometer";
+ var parameter = JSON.stringify({amount: $scope.mtom, user: userobj.username});
+ console.log("it verks");
+    $http.post(route, parameter).
+    success(function(response, status, headers, config) {
+            if(response=="e1"){//cannot borrow
+               swal("Error!", "Insufficient Balance!", "error");
+            }
+            else if(response =="e2"){
+                  swal("Error!", "Invalid Balance!", "error");
+            }
+           else{
+           	  swal("Success!", "Succesfully Uploaded "+$scope.mtom+" E-Credits to Smart Meter TOP UP Acount", "success");
+           }
+      }).
+      error(function(data, status, headers, config) {
+ swal("Error!", "Server/Connection Problem Try Again!", "error");
+      });
+	}
+
 
 	$scope.borrow = function(){
      var route = "/clientapp/borrow";

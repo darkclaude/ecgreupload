@@ -600,6 +600,39 @@ client.post('/creditaccount', function(req, res){       //Route  to Credit User 
     
     
     });
+      client.post('/uploadtometer', function(req,res){
+    
+                Data.findOne({'username': req.body.user},function(err,person){
+                      if(err) throw err;
+                       if(isNaN(req.body.amount)==false){
+                       if(parseFloat(person.tempc)<=0){
+                          
+                            //  top.Message= 'Sorry Please Pay Off Previous Debt!';
+   // top.ClientState = 'transfer'
+      
+      res.send('e1');
+                          }
+                             else{
+                             
+                             
+                             person.tempc = (parseFloat(person.tempc)-parseFloat(req.body.amount)).toString();
+                                 person.dbalance = (parseFloat(req.body.amount)).toString();
+                             person.save(function(err){
+                             if(err) throw err;
+                             });
+         
+                        res.send('kkk');
+                             }
+                       }
+                    else{
+                     res.send("e2");   
+                    }
+                
+                });
+    
+    
+    });
+    
     
     
     client.post('/transfer',function(req,res){
