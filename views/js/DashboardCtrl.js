@@ -45,7 +45,7 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
         text: "Live Power Usage Chart"
     },
     axisX:{
-       
+interval: 60,
    intervalType: "second",
         title: "Time",
         gridThickness: 0

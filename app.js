@@ -802,7 +802,7 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
                   utmodel.tamount = transaction.amount;
                   utmodel.type= 'Mobile Money Topup'; 
                   user.transactions.push(utmodel);
-            user.transactions[user.transactions.length-1].ttype = 'Mobile Money Topup';
+            user.transactions[user.transactions.length-1].ttype = 'Online Topup';
              //user.tempc = parseFloat(user.tempc)+ parseFloat(transaction.amount)*100.00;
                if(1){
                     var newval = ((parseFloat(transaction.amount)*100.00)+parseInt(user.borrowedbalance)).toString();
