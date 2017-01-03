@@ -45,8 +45,8 @@ $http.get('/anggetuser').success(function(response){//Loads ALL DATA when page i
         text: "Live Power Usage Chart"
     },
     axisX:{
-interval: 60,
-   intervalType: "second",
+interval: 5,
+   intervalType: "minute",
         title: "Time",
         gridThickness: 0
     },
@@ -144,7 +144,7 @@ interval: 60,
                      }
                      }
                      else {
-                       for(var i =response.length-100; i<response.length; i++){
+                       for(var i =response.length-20; i<response.length; i++){
                       plots.push({x: new Date(response[i].plot.x), y: response[i].plot.y});   
                      }  
                      }
