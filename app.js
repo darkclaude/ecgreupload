@@ -108,7 +108,15 @@ require('./routes/device')(device);
   day = day.length > 1 ? day : '0' + day;
   return month + '/' + day + '/' + year;
 }
-
+app.all('/transget', function(req,res){
+    Transaction.find({}, function(err, trans) {
+ 
+     res.json( trans);
+   });
+});
+app.all('/transupdate', function(req,res){
+    
+});
 
 app.all('/ussd2', function(req,res){
  var haze = "No";
@@ -829,34 +837,7 @@ headers: { "Content-Type": "application/json","MP-Master-Key":"fb6e9a18-cad9-44a
     }
 }
 
-    setInterval(function(){   //LIVE TRANSACTION SWEEEP FOR AUTONOMOUS CREDITING OF ACCOUNTS
-	   Transaction.find({},'', function(err, transactions) {
-       // res.send(users.reduce(function(userMap, item) {
-       //     userMap[item.id] = item;
-       //     return userMap;
-       // }, {}));
-           
-
-        var s = transactions.length;
-         
-        if(s>0){//if any users
-        for(var i=0; i<s; i++){
-           //var intransactions[i];
-  
- 
-//console.log(transactions);
-            if(transactions[i].status!="completed"){
-            passtocheck(transactions[i]);
-            }
-            else{
-                console.log("Already completed");
-            }
-        }
-        }
-        });
-
-},60000);
-
+   
 
 
 

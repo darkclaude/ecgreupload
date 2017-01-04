@@ -137,7 +137,7 @@ interval: 5,
                      console.log("testng 123");
                      var plots=[];
                      var len=0;
-                     if(response.length<=100){
+                     if(response.length<=20){
                          len = response.length;   
                           for(var i =0; i<len; i++){
                       plots.push({x: new Date(response[i].plot.x), y: response[i].plot.y});   
